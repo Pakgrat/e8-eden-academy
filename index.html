@@ -644,9 +644,25 @@
 
     .welcome-card h2 {
       font-family: "Noto Serif Thai", serif;
-      font-size: clamp(28px, 5vw, 42px);
       color: #1f2632;
       line-height: 1.18;
+      margin-top: 8px;
+    }
+
+    .welcome-th {
+      display: block;
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 700;
+      letter-spacing: -0.4px;
+    }
+
+    .welcome-en {
+      display: block;
+      margin-top: 4px;
+      font-family: "Cinzel", "Noto Serif Thai", serif;
+      font-size: clamp(26px, 4.6vw, 40px);
+      font-weight: 700;
+      line-height: 1.1;
     }
 
     .welcome-card p {
@@ -762,9 +778,12 @@
     <section class="welcome-card" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle">
       <button class="close-modal" type="button" id="closeModal" aria-label="ปิดหน้าต่าง">×</button>
       <img src="eden.png" alt="E8’s Eden Academy">
-      <h2 id="welcomeTitle">ยินดีต้อนรับสู่ E8’s Eden Academy</h2>
+      <h2 id="welcomeTitle">
+        <span class="welcome-th">ยินดีต้อนรับสู่</span>
+        <span class="welcome-en">E8’s Eden Academy</span>
+      </h2>
       <p>
-        กรุณาสมัครสมาชิกเพื่อเข้าสู่ระบบนักเรียน และอย่าลืมสมัครสมาชิกเพื่อเช็คตารางเรียนของแต่ละโซน
+        กรุณาสมัครสมาชิกเพื่อเข้าสู่ระบบนักเรียน และกรุณาตรวจสอบตารางเรียนแต่ละโซนของท่านด้วยค่ะ
       </p>
       <div class="modal-actions">
         <a class="btn btn-primary" href="#member">สมัครสมาชิก</a>
