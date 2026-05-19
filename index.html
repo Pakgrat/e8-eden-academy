@@ -187,9 +187,9 @@
 
     .hero{
       display:grid;
-      grid-template-columns:minmax(0,.86fr) minmax(390px,1.14fr);
+      grid-template-columns:minmax(0,.95fr) minmax(360px,.78fr);
       gap:22px;
-      align-items:stretch;
+      align-items:start;
     }
 
     .hero-card{padding:42px;min-height:470px;display:flex;flex-direction:column;justify-content:center}
@@ -232,76 +232,72 @@
     .btn-primary{color:#fff4dc;background:linear-gradient(180deg,#172d4c,#09182b);border:1px solid rgba(226,194,136,.72);box-shadow:0 10px 24px rgba(8,18,32,.20)}
     .btn-soft{color:#62482f;background:rgba(246,236,222,.80);border:1px solid rgba(151,112,70,.30)}
 
-    .announcement-carousel{padding:24px;min-height:470px;display:grid;grid-template-rows:auto 1fr auto;gap:14px}
-    .carousel-top{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:14px}
-    .carousel-top h2{font-size:24px;color:#fff3db}
-    .carousel-top span{display:block;margin-top:3px;color:rgba(255,246,228,.68);font-size:13px}
+    .announcement-carousel{
+      width:fit-content;
+      max-width:100%;
+      justify-self:center;
+      padding:14px;
+      min-height:auto;
+      display:grid;
+      grid-template-rows:auto auto;
+      gap:10px;
+      align-self:start;
+      overflow:visible;
+    }
+    .carousel-top{display:none}
 
     .slide-window{
       position:relative;
       z-index:1;
-      min-height:365px;
+      width:fit-content;
+      max-width:100%;
+      min-height:0;
       border-radius:24px;
-      overflow:hidden;
+      overflow:visible;
       border:1px solid rgba(226,194,136,.36);
-      background:rgba(0,0,0,.18);
+      background:rgba(0,0,0,.10);
+      display:grid;
+      place-items:center;
     }
 
-    .slide-bg{
-      position:absolute;
-      inset:0;
-      background:center / cover no-repeat;
-      filter:blur(18px) brightness(.75);
-      transform:scale(1.08);
-      opacity:.55;
-    }
+    .slide-bg{display:none}
 
     .slide-img{
-      position:absolute;
-      inset:0;
-      width:100%;
-      height:100%;
+      position:relative;
+      display:block;
+      width:auto;
+      height:min(64vh,680px);
+      max-width:100%;
       object-fit:contain;
-      padding:12px;
+      padding:0;
       transition:.4s ease;
       animation:slideBreath 5s ease-in-out infinite;
+      border-radius:22px;
     }
 
-    .slide-info{
-      position:absolute;
-      left:18px;
-      right:18px;
-      bottom:18px;
-      padding:14px 16px;
-      border-radius:20px;
-      background:rgba(7,20,38,.78);
-      border:1px solid rgba(226,194,136,.28);
-      backdrop-filter:blur(12px);
-    }
-    .slide-info b{display:block;color:#ffe8b6;font-size:16px;margin-bottom:3px}
-    .slide-info small{color:rgba(255,246,228,.74);line-height:1.5}
+    .slide-info{display:none}
 
     .carousel-btn{
       position:absolute;
       top:50%;
       transform:translateY(-50%);
       z-index:5;
-      width:42px;
-      height:42px;
+      width:38px;
+      height:38px;
       border-radius:999px;
       border:1px solid rgba(226,194,136,.42);
       color:#ffe8b6;
-      background:rgba(7,20,38,.70);
+      background:rgba(7,20,38,.82);
       cursor:pointer;
       font-size:24px;
       display:grid;
       place-items:center;
       transition:.18s ease;
     }
-    .carousel-btn:hover{background:rgba(28,46,73,.95);transform:translateY(-50%) scale(1.05)}
-    .carousel-btn.prev{left:14px}.carousel-btn.next{right:14px}
+    .carousel-btn:hover{background:rgba(28,46,73,.92);transform:translateY(-50%) scale(1.05)}
+    .carousel-btn.prev{left:-20px}.carousel-btn.next{right:-20px}
 
-    .dots{position:relative;z-index:1;display:flex;justify-content:center;gap:7px}
+    .dots{position:relative;z-index:1;display:flex;justify-content:center;gap:7px;margin-top:2px}
     .dot{width:9px;height:9px;border-radius:999px;border:0;background:rgba(255,246,228,.30);cursor:pointer;transition:.2s ease}
     .dot.active{width:28px;background:#ffe0a3}
 
@@ -502,11 +498,11 @@
     @keyframes modalFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 
     @media(max-width:1120px){
-      .header-inner{grid-template-columns:1fr;gap:12px;padding:14px 0 18px}.main-nav{justify-content:flex-start}.header-apply{width:fit-content}.hero,.news-layout{grid-template-columns:1fr}.zone-row{grid-template-columns:repeat(4,1fr)}.tag-cloud{grid-template-columns:repeat(2,1fr)}
+      .header-inner{grid-template-columns:1fr;gap:12px;padding:14px 0 18px}.main-nav{justify-content:flex-start}.header-apply{width:fit-content}.hero,.news-layout{grid-template-columns:1fr}.announcement-carousel{max-width:100%;margin:0 auto}.slide-img{height:auto;max-height:720px;width:min(100%,520px)}.carousel-btn.prev{left:10px}.carousel-btn.next{right:10px}.zone-row{grid-template-columns:repeat(4,1fr)}.tag-cloud{grid-template-columns:repeat(2,1fr)}
     }
 
     @media(max-width:680px){
-      .header-inner,main{width:min(100% - 24px,1320px)}.brand-logo{width:78px;height:72px}.brand h1{font-size:24px;white-space:normal}.academy-word{letter-spacing:5px}.hero-card,.dark-card,.panel{border-radius:24px;padding:22px}.news-card{grid-template-columns:auto minmax(0,1fr)}.news-right{grid-column:1/-1;text-align:left;display:flex;gap:8px;align-items:center}.zone-row{grid-template-columns:repeat(2,1fr);padding:12px}.zone-card{min-height:145px}.shortcut-grid,.tag-cloud{grid-template-columns:1fr}.slide-window{min-height:330px}.section-title{display:block}
+      .header-inner,main{width:min(100% - 24px,1320px)}.brand-logo{width:78px;height:72px}.brand h1{font-size:24px;white-space:normal}.academy-word{letter-spacing:5px}.hero-card,.dark-card,.panel{border-radius:24px;padding:22px}.announcement-carousel{padding:12px}.slide-img{width:min(100%,420px);max-height:78vh}.carousel-btn{width:34px;height:34px}.carousel-btn.prev{left:8px}.carousel-btn.next{right:8px}.news-card{grid-template-columns:auto minmax(0,1fr)}.news-right{grid-column:1/-1;text-align:left;display:flex;gap:8px;align-items:center}.zone-row{grid-template-columns:repeat(2,1fr);padding:12px}.zone-card{min-height:145px}.shortcut-grid,.tag-cloud{grid-template-columns:1fr}.slide-window{min-height:0}.section-title{display:block}
     }
   </style>
 </head>
@@ -549,23 +545,11 @@
         </article>
 
         <aside class="dark-card announcement-carousel" aria-label="Announcement slides">
-          <div class="carousel-top">
-            <div>
-              <h2>ภาพประกาศจากสถาบัน</h2>
-              <span>เลื่อนอัตโนมัติ หรือกดลูกศรเพื่อดูรูป 1-8</span>
-            </div>
-            <span class="eyebrow" id="slideNumber" style="margin:0;">1 / 8</span>
-          </div>
-
           <div class="slide-window">
             <div class="slide-bg" id="slideBg"></div>
             <img id="slideImg" class="slide-img" src="./1.png" alt="announcement" />
             <button class="carousel-btn prev" type="button" id="prevSlide" aria-label="previous">‹</button>
             <button class="carousel-btn next" type="button" id="nextSlide" aria-label="next">›</button>
-            <div class="slide-info">
-              <b id="slideTitle">ประกาศหมายเลข 1</b>
-              <small id="slideDesc">ข่าวสารและภาพประกาศจาก E8’s Eden Academy</small>
-            </div>
           </div>
 
           <div class="dots" id="dots"></div>
@@ -765,9 +749,9 @@
       setTimeout(() => {
         slideImg.src = item.src;
         slideBg.style.backgroundImage = `url('${item.src}')`;
-        slideTitle.textContent = item.title;
-        slideDesc.textContent = item.desc;
-        slideNumber.textContent = `${currentSlide + 1} / ${slides.length}`;
+        if (slideTitle) slideTitle.textContent = item.title;
+        if (slideDesc) slideDesc.textContent = item.desc;
+        if (slideNumber) slideNumber.textContent = `${currentSlide + 1} / ${slides.length}`;
         document.querySelectorAll(".dot").forEach((dot, i) => dot.classList.toggle("active", i === currentSlide));
         slideImg.style.opacity = "1";
       }, 160);
