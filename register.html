@@ -22,6 +22,8 @@
       --zone-dark:#8f6a32;
       --zone-soft:#fff5de;
       --zone-ink:#5c3d20;
+      --zone-rgb:215,189,140;
+      --zone-dark-rgb:143,106,50;
     }
 
     *{box-sizing:border-box;margin:0;padding:0}
@@ -69,13 +71,23 @@
     .form-grid{display:grid;grid-template-columns:minmax(420px,1fr) minmax(340px,.72fr);gap:24px;align-items:start;margin-bottom:24px}.card,.upload{padding:26px}.form{display:grid;gap:15px}.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}label{display:grid;gap:7px;color:#654d58;font-weight:800;font-size:13px}input,select,textarea{width:100%;min-height:44px;border-radius:16px;border:1px solid rgba(186,112,137,.24);background:rgba(255,250,252,.74);color:#59424d;outline:none;padding:11px 13px;transition:.18s}textarea{min-height:104px;resize:vertical;line-height:1.7}input:focus,select:focus,textarea:focus{border-color:rgba(185,106,134,.68);box-shadow:0 0 0 4px rgba(185,106,134,.12);background:#fffafd}.counter{text-align:right;color:#a47d8c;font-size:12px;margin-top:-4px}.hint{font-size:12px;color:#92727f;line-height:1.6;font-weight:700}
     .upload-box{min-height:380px;border-radius:30px;display:grid;place-items:center;text-align:center;padding:22px;border:2px dashed rgba(183,122,146,.42);background:radial-gradient(circle,rgba(255,236,242,.78),rgba(255,250,252,.66));cursor:pointer;transition:.2s}.upload-box:hover{transform:translateY(-2px);background:rgba(255,246,250,.90)}.portrait-frame{width:210px;height:260px;border-radius:48% 48% 42% 42%;display:grid;place-items:center;margin:auto;border:2px solid rgba(183,122,146,.34);background:linear-gradient(180deg,rgba(255,255,255,.62),rgba(242,209,222,.54));overflow:hidden;box-shadow:inset 0 0 0 10px rgba(255,255,255,.24),0 18px 32px rgba(70,40,50,.12)}.portrait-frame img{width:100%;height:100%;object-fit:cover;display:none}.plus{font-size:58px;color:#9b5f76;line-height:1}.upload-box b{display:block;margin-top:18px;color:#70495a}.upload-box span{font-size:13px;color:#9a7484;line-height:1.7}#photoInput{display:none}
 
-    .id-preview{padding:26px;margin-top:24px}.student-card{position:relative;isolation:isolate;aspect-ratio:1.585/1;width:min(980px,100%);margin:0 auto;border-radius:34px;overflow:hidden;background:linear-gradient(135deg,#fffdf8,#f8e7ee 42%,var(--zone-soft));border:1px solid rgba(255,255,255,.55);box-shadow:0 26px 60px rgba(64,33,46,.20),inset 0 0 0 2px rgba(255,255,255,.34)}.student-card::before{content:"";position:absolute;inset:22px;border-radius:25px;border:1px solid color-mix(in srgb,var(--zone) 56%,transparent);box-shadow:inset 0 0 0 1px rgba(255,255,255,.45);z-index:1}.student-card::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 20%,rgba(255,255,255,.75),transparent 26%),repeating-linear-gradient(45deg,color-mix(in srgb,var(--zone) 14%,transparent) 0 2px,transparent 2px 18px),linear-gradient(120deg,color-mix(in srgb,var(--zone) 18%,transparent),transparent 38%,color-mix(in srgb,var(--zone-dark) 14%,transparent));opacity:.95;z-index:0}.watermark{position:absolute;right:7%;top:13%;width:35%;height:70%;object-fit:contain;opacity:.12;filter:grayscale(.1) saturate(1.12);z-index:1}.card-inner{position:relative;z-index:2;height:100%;padding:42px 48px;display:grid;grid-template-columns:34% 1fr;gap:34px}.card-left{display:grid;align-content:center;justify-items:center;gap:16px}.card-photo{width:70%;aspect-ratio:3/4;border-radius:28px;overflow:hidden;border:2px solid color-mix(in srgb,var(--zone-dark) 38%,white);background:rgba(255,255,255,.45);display:grid;place-items:center;box-shadow:inset 0 0 0 10px rgba(255,255,255,.22),0 14px 30px rgba(44,21,33,.14)}.card-photo img{width:100%;height:100%;object-fit:cover;display:none}.silhouette{font-size:64px;opacity:.35}.card-seal{width:92px;height:92px;object-fit:contain;filter:drop-shadow(0 10px 18px rgba(36,18,26,.20))}.card-right{display:flex;flex-direction:column;justify-content:center;min-width:0}.card-title{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:20px}.card-title h2{font-family:"Cinzel",serif;font-size:clamp(28px,4vw,52px);line-height:.95;color:#202a3a}.card-title span{display:block;margin-top:8px;letter-spacing:2.4px;font-size:12px;font-weight:900;color:#815f68}.mini-logo{width:90px;height:90px;object-fit:contain}.card-fields{display:grid;gap:13px}.field{display:grid;grid-template-columns:120px 1fr;gap:13px;align-items:center;color:#684f5a;font-size:13px;font-weight:900}.line{min-height:32px;border-bottom:1px dashed color-mix(in srgb,var(--zone-dark) 36%,transparent);display:flex;align-items:center;color:#2f2830;font-weight:900}.zone-signature{margin-top:22px;min-height:82px;border-radius:22px;display:grid;place-items:center;background:linear-gradient(90deg,color-mix(in srgb,var(--zone-dark) 88%,black),var(--zone));box-shadow:inset 0 0 0 1px rgba(255,255,255,.34);overflow:hidden;position:relative}.zone-signature::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 0 35%,rgba(255,255,255,.22),transparent 65%);transform:translateX(-30%)}.zone-script{position:relative;z-index:1;font-family:"Great Vibes",cursive;font-size:clamp(44px,7vw,82px);line-height:1;color:var(--signature-color,#fff7ec);text-shadow:0 2px 8px rgba(0,0,0,.18);letter-spacing:.5px}.card-foot{margin-top:18px;display:flex;justify-content:space-between;gap:18px;color:#806070;font-size:11px;font-weight:900}.barcode{width:132px;height:44px;background:repeating-linear-gradient(90deg,#2a2525 0 3px,transparent 3px 6px,#2a2525 6px 7px,transparent 7px 11px);opacity:.75}.download-row{margin-top:20px;display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+    .id-preview{padding:26px;margin-top:24px}.student-card{position:relative;isolation:isolate;aspect-ratio:1.585/1;width:min(980px,100%);margin:0 auto;border-radius:34px;overflow:hidden;background:linear-gradient(135deg,#fffdf8,#f8e7ee 42%,var(--zone-soft));border:1px solid rgba(255,255,255,.55);box-shadow:0 26px 60px rgba(64,33,46,.20),inset 0 0 0 2px rgba(255,255,255,.34)}.student-card::before{content:"";position:absolute;inset:22px;border-radius:25px;border:1px solid rgba(var(--zone-rgb),.56);box-shadow:inset 0 0 0 1px rgba(255,255,255,.45);z-index:1}.student-card::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 20%,rgba(255,255,255,.75),transparent 26%),repeating-linear-gradient(45deg,rgba(var(--zone-rgb),.14) 0 2px,transparent 2px 18px),linear-gradient(120deg,rgba(var(--zone-rgb),.18),transparent 38%,rgba(var(--zone-dark-rgb),.14));opacity:.95;z-index:0}.watermark{position:absolute;right:7%;top:13%;width:35%;height:70%;object-fit:contain;opacity:.12;filter:grayscale(.1) saturate(1.12);z-index:1}.card-inner{position:relative;z-index:2;height:100%;padding:42px 48px;display:grid;grid-template-columns:34% 1fr;gap:34px}.card-left{display:grid;align-content:center;justify-items:center;gap:16px}.card-photo{width:70%;aspect-ratio:3/4;border-radius:28px;overflow:hidden;border:2px solid rgba(var(--zone-dark-rgb),.38);background:rgba(255,255,255,.45);display:grid;place-items:center;box-shadow:inset 0 0 0 10px rgba(255,255,255,.22),0 14px 30px rgba(44,21,33,.14)}.card-photo img{width:100%;height:100%;object-fit:cover;display:none}.silhouette{font-size:64px;opacity:.35}.card-seal{width:92px;height:92px;object-fit:contain;filter:drop-shadow(0 10px 18px rgba(36,18,26,.20))}.card-right{display:flex;flex-direction:column;justify-content:center;min-width:0}.card-title{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:20px}.card-title h2{font-family:"Cinzel",serif;font-size:clamp(28px,4vw,52px);line-height:.95;color:#202a3a}.card-title span{display:block;margin-top:8px;letter-spacing:2.4px;font-size:12px;font-weight:900;color:#815f68}.mini-logo{width:90px;height:90px;object-fit:contain}.card-fields{display:grid;gap:13px}.field{display:grid;grid-template-columns:120px 1fr;gap:13px;align-items:center;color:#684f5a;font-size:13px;font-weight:900}.line{min-height:32px;border-bottom:1px dashed rgba(var(--zone-dark-rgb),.36);display:flex;align-items:center;color:#2f2830;font-weight:900}.zone-signature{margin-top:22px;min-height:82px;border-radius:22px;display:grid;place-items:center;background:linear-gradient(90deg,color-mix(in srgb,var(--zone-dark) 88%,black),var(--zone));box-shadow:inset 0 0 0 1px rgba(255,255,255,.34);overflow:hidden;position:relative}.zone-signature::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 0 35%,rgba(255,255,255,.22),transparent 65%);transform:translateX(-30%)}.zone-script{position:relative;z-index:1;font-family:"Great Vibes",cursive;font-size:clamp(44px,7vw,82px);line-height:1;color:var(--signature-color,#fff7ec);text-shadow:0 2px 8px rgba(0,0,0,.18);letter-spacing:.5px}.card-foot{margin-top:18px;display:flex;justify-content:space-between;gap:18px;color:#806070;font-size:11px;font-weight:900}.barcode{width:132px;height:44px;background:repeating-linear-gradient(90deg,#2a2525 0 3px,transparent 3px 6px,#2a2525 6px 7px,transparent 7px 11px);opacity:.75}.download-row{margin-top:20px;display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
 
     .submit-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;margin-top:24px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:12px 24px;border-radius:999px;border:0;cursor:pointer;font-size:14px;font-weight:900;transition:.18s}.btn:hover{transform:translateY(-2px)}.primary{color:#fff4dc;background:linear-gradient(180deg,#5b2c45,#09182b);border:1px solid rgba(249,208,221,.72);box-shadow:0 10px 24px rgba(8,18,32,.20)}.soft{color:#70485a;background:rgba(255,241,247,.84);border:1px solid rgba(186,112,137,.30)}.danger{color:#8e4b62;background:rgba(255,238,245,.80);border:1px solid rgba(183,122,146,.30)}
     .status-card{display:none;margin-top:24px;border-radius:28px;padding:22px;background:linear-gradient(180deg,rgba(91,44,69,.96),rgba(7,20,38,.96));color:#fff3db;border:1px solid rgba(249,208,221,.48);box-shadow:0 18px 42px rgba(7,20,38,.25)}.status-card.show{display:block;animation:pop .28s ease-out both}@keyframes pop{from{transform:translateY(10px);opacity:0}to{transform:translateY(0);opacity:1}}.status-card h3{font-size:28px;color:#fff8e9}.status-card p{margin-top:8px;color:rgba(255,246,250,.76);line-height:1.75}.status-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.footer{text-align:center;margin-top:42px;color:#806672;font-size:13px;line-height:1.8}
 
     @media(max-width:1260px){.header{grid-template-columns:1fr}.nav{justify-content:flex-start}.back{width:max-content}.hero{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.zone-grid{grid-template-columns:repeat(4,1fr)}}
     @media(max-width:860px){.wrap{width:min(100% - 24px,1500px)}.brand img{width:78px;height:72px}.brand h1{font-size:24px;white-space:normal}.panel,.card,.upload,.zone-section,.id-preview{border-radius:26px;padding:22px}.notice-list,.steps,.two{grid-template-columns:1fr}.zone-grid{grid-template-columns:repeat(2,1fr)}.student-card{aspect-ratio:auto}.card-inner{padding:30px 24px;grid-template-columns:1fr}.card-photo{width:190px}.field{grid-template-columns:95px 1fr}.side-status img{width:110px;height:110px}.mini-logo{width:70px;height:70px}}
+  
+    .web-modal{position:fixed;inset:0;z-index:80;display:none;place-items:center;padding:22px;background:rgba(20,10,18,.46);backdrop-filter:blur(10px)}
+    .web-modal.show{display:grid;animation:fadeIn .18s ease-out both}
+    .modal-card{width:min(520px,100%);border-radius:30px;padding:28px;background:linear-gradient(180deg,rgba(255,249,251,.98),rgba(247,224,232,.96));border:1px solid rgba(186,112,137,.34);box-shadow:0 30px 80px rgba(40,16,28,.38);position:relative;overflow:hidden}
+    .modal-card::before{content:"✦";position:absolute;right:24px;top:18px;color:rgba(185,106,134,.32);font-size:34px}
+    .modal-card h3{font-size:30px;color:#382631;margin-bottom:10px}
+    .modal-card p{color:#765e69;line-height:1.8;font-weight:700}
+    .modal-actions{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin-top:20px}
+    .modal-actions .btn{min-height:44px}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
   </style>
 </head>
 <body>
@@ -94,7 +106,7 @@
           <div class="eyebrow">E8 ADMISSION FORM</div>
           <h1>สมัครสมาชิกนักเรียนประจำสถาบัน</h1>
           <p>เลือกโซน อัปโหลดรูปหน้าตรง และสร้างบัตรนักเรียนเบื้องต้นของคุณ สีบัตร ลายน้ำ และลายเซ็นประจำโซนจะเปลี่ยนตามโซนที่เลือกทันที</p>
-          <div class="notice-list"><div class="notice"><b>YEAR 1</b><span>ระบบนี้สำหรับนักเรียนปี 1 เท่านั้น</span></div><div class="notice"><b>E2-E8</b><span>ปี 1 ยังไม่เปิดรับเลือก E1 Zone</span></div><div class="notice"><b id="memberCounter">000</b><span>จำนวนนักเรียนที่สมัครในเครื่องนี้</span></div></div>
+          <div class="notice-list"><div class="notice"><b>YEAR 1</b><span>ระบบนี้สำหรับนักเรียนปี 1 เท่านั้น</span></div><div class="notice"><b>E2-E8</b><span>ปี 1 ยังไม่เปิดรับเลือก E1 Zone</span></div><div class="notice"><b id="memberCounter">ID</b><span>เลขบัตรจะสุ่มตามโซน เพื่อลดการซ้ำ</span></div></div>
         </div>
         <aside class="panel side-status"><img src="./eden.png" alt="Eden Logo" /><h2>Admission Status</h2><p>เลือกโซนแล้วระบบจะเปลี่ยนสี ลายน้ำ และลายเซ็นบนบัตรนักเรียน</p></aside>
       </section>
@@ -111,13 +123,13 @@
         <p class="zone-intro">ในแต่ละโซนจะมีกิจกรรมที่แตกต่างกันอย่างสิ้นเชิง และเมื่อเลือกโซนแล้ว สีบัตร ลวดลาย ลายน้ำ และฟ้อนต์ลายเซ็นบนบัตรจะเปลี่ยนตามโซนนั้น</p>
         <div class="zone-grid">
           <article class="zone-box e1 disabled" title="E1 Zone ไม่เปิดรับสำหรับปี 1"><img src="./e1.png" alt="E1 Zone" /><h3>E1 ZONE</h3><p>ไม่เปิดสำหรับปีที่ 1 ต้องสมัครและไล่ระดับไปทีละโซนเท่านั้น</p><small>LOCKED</small></article>
-          <article class="zone-box e2" data-zone="E2 Zone" data-logo="./e2.png" data-color="#d7bd8c" data-dark="#8f6a32" data-soft="#fff5de" data-ink="#5c3d20" data-signature="#5f4422"><img src="./e2.png" alt="E2 Zone" /><h3>E2 ZONE</h3><small>AVAILABLE</small></article>
-          <article class="zone-box e3" data-zone="E3 Zone" data-logo="./e3.png" data-color="#b52337" data-dark="#650b18" data-soft="#ffe4e8" data-ink="#ffffff" data-signature="#fff1f3"><img src="./e3.png" alt="E3 Zone" /><h3>E3 ZONE</h3><p>รับทั้งนักเรียนทุนฟรี และนักเรียนแลกเปลี่ยนจากโรงเรียนอื่น</p><small>AVAILABLE</small></article>
-          <article class="zone-box e4" data-zone="E4 Zone" data-logo="./e4.png" data-color="#bad5ad" data-dark="#5d8453" data-soft="#edf6e9" data-ink="#33502d" data-signature="#315829"><img src="./e4.png" alt="E4 Zone" /><h3>E4 ZONE</h3><small>AVAILABLE</small></article>
-          <article class="zone-box e5" data-zone="E5 Zone" data-logo="./e5.png" data-color="#b99add" data-dark="#704eaa" data-soft="#f2e8ff" data-ink="#4b3171" data-signature="#41246a"><img src="./e5.png" alt="E5 Zone" /><h3>E5 ZONE</h3><small>AVAILABLE</small></article>
-          <article class="zone-box e6" data-zone="E6 Zone" data-logo="./e6.png" data-color="#eba0bb" data-dark="#b95b7f" data-soft="#ffe7ef" data-ink="#843653" data-signature="#8d2c52"><img src="./e6.png" alt="E6 Zone" /><h3>E6 ZONE</h3><small>AVAILABLE</small></article>
-          <article class="zone-box e7" data-zone="E7 Zone" data-logo="./e7.png" data-color="#a8d6ee" data-dark="#4d90b4" data-soft="#f4fbff" data-ink="#2f6b88" data-signature="#275d78"><img src="./e7.png" alt="E7 Zone" /><h3>E7 ZONE</h3><small>AVAILABLE</small></article>
-          <article class="zone-box e8" data-zone="E8 Zone" data-logo="./e8.png" data-color="#d0a245" data-dark="#8a641b" data-soft="#fff2c8" data-ink="#5c3e12" data-signature="#5a3b0f"><img src="./e8.png" alt="E8 Zone" /><h3>E8 ZONE</h3><small>AVAILABLE</small></article>
+          <article class="zone-box e2" data-zone="E2 Zone" data-logo="./e2.png" data-color="#d7bd8c" data-dark="#8f6a32" data-soft="#fff5de" data-ink="#5c3d20" data-signature="#5f4422" data-rgb="215,189,140" data-dark-rgb="143,106,50"><img src="./e2.png" alt="E2 Zone" /><h3>E2 ZONE</h3><small>AVAILABLE</small></article>
+          <article class="zone-box e3" data-zone="E3 Zone" data-logo="./e3.png" data-color="#b52337" data-dark="#650b18" data-soft="#ffe4e8" data-ink="#ffffff" data-signature="#fff1f3" data-rgb="181,35,55" data-dark-rgb="101,11,24"><img src="./e3.png" alt="E3 Zone" /><h3>E3 ZONE</h3><p>รับทั้งนักเรียนทุนฟรี และนักเรียนแลกเปลี่ยนจากโรงเรียนอื่น</p><small>AVAILABLE</small></article>
+          <article class="zone-box e4" data-zone="E4 Zone" data-logo="./e4.png" data-color="#bad5ad" data-dark="#5d8453" data-soft="#edf6e9" data-ink="#33502d" data-signature="#315829" data-rgb="186,213,173" data-dark-rgb="93,132,83"><img src="./e4.png" alt="E4 Zone" /><h3>E4 ZONE</h3><small>AVAILABLE</small></article>
+          <article class="zone-box e5" data-zone="E5 Zone" data-logo="./e5.png" data-color="#b99add" data-dark="#704eaa" data-soft="#f2e8ff" data-ink="#4b3171" data-signature="#41246a" data-rgb="185,154,221" data-dark-rgb="112,78,170"><img src="./e5.png" alt="E5 Zone" /><h3>E5 ZONE</h3><small>AVAILABLE</small></article>
+          <article class="zone-box e6" data-zone="E6 Zone" data-logo="./e6.png" data-color="#eba0bb" data-dark="#b95b7f" data-soft="#ffe7ef" data-ink="#843653" data-signature="#8d2c52" data-rgb="235,160,187" data-dark-rgb="185,91,127"><img src="./e6.png" alt="E6 Zone" /><h3>E6 ZONE</h3><small>AVAILABLE</small></article>
+          <article class="zone-box e7" data-zone="E7 Zone" data-logo="./e7.png" data-color="#a8d6ee" data-dark="#4d90b4" data-soft="#f4fbff" data-ink="#2f6b88" data-signature="#275d78" data-rgb="168,214,238" data-dark-rgb="77,144,180"><img src="./e7.png" alt="E7 Zone" /><h3>E7 ZONE</h3><small>AVAILABLE</small></article>
+          <article class="zone-box e8" data-zone="E8 Zone" data-logo="./e8.png" data-color="#d0a245" data-dark="#8a641b" data-soft="#fff2c8" data-ink="#5c3e12" data-signature="#5a3b0f" data-rgb="208,162,69" data-dark-rgb="138,100,27"><img src="./e8.png" alt="E8 Zone" /><h3>E8 ZONE</h3><small>AVAILABLE</small></article>
         </div>
       </section>
 
@@ -158,6 +170,16 @@
     </main>
   </div>
 
+  <div class="web-modal" id="webModal" aria-hidden="true">
+    <div class="modal-card">
+      <h3 id="modalTitle">แจ้งเตือน</h3>
+      <p id="modalMessage">ข้อความแจ้งเตือน</p>
+      <div class="modal-actions" id="modalActions">
+        <button class="btn primary" type="button" id="modalOk">ตกลง</button>
+      </div>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script>
     const root=document.documentElement;
@@ -183,26 +205,76 @@
     const downloadCardBtn=document.getElementById('downloadCardBtn');
     const memberCounter=document.getElementById('memberCounter');
     const zones=document.querySelectorAll('.zone-box[data-zone]');
+    const webModal=document.getElementById('webModal');
+    const modalTitle=document.getElementById('modalTitle');
+    const modalMessage=document.getElementById('modalMessage');
+    const modalActions=document.getElementById('modalActions');
+    const modalOk=document.getElementById('modalOk');
     let selectedZone='';
     let uploadedPhoto='';
 
-    function padNumber(num){return String(num).padStart(6,'0')}
+    function showModal(title,message){
+      modalTitle.textContent=title;
+      modalMessage.textContent=message;
+      modalActions.innerHTML='<button class="btn primary" type="button" id="modalOkDynamic">ตกลง</button>';
+      webModal.classList.add('show');
+      webModal.setAttribute('aria-hidden','false');
+      document.getElementById('modalOkDynamic').onclick=closeModal;
+    }
+    function closeModal(){
+      webModal.classList.remove('show');
+      webModal.setAttribute('aria-hidden','true');
+    }
+    function showConfirmModal(title,message,onConfirm){
+      modalTitle.textContent=title;
+      modalMessage.textContent=message;
+      modalActions.innerHTML='<button class="btn soft" type="button" id="modalCancelDynamic">ยกเลิก</button><button class="btn primary" type="button" id="modalConfirmDynamic">ตกลง</button>';
+      webModal.classList.add('show');
+      webModal.setAttribute('aria-hidden','false');
+      document.getElementById('modalCancelDynamic').onclick=closeModal;
+      document.getElementById('modalConfirmDynamic').onclick=()=>{closeModal();onConfirm();};
+    }
+    webModal.addEventListener('click',event=>{if(event.target===webModal)closeModal()});
+
     function getCurrentCount(){return Number(localStorage.getItem('e8ApplicationCount') || '0')}
     function updateCounter(){
       const count=getCurrentCount();
-      if(memberCounter) memberCounter.textContent=String(count).padStart(3,'0');
+      if(memberCounter) memberCounter.textContent=count ? String(count).padStart(3,'0') : 'ID';
     }
-    function createNextStudentId(){
+    function randomCode(length=4){
+      const chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+      const bytes=new Uint8Array(length);
+      if(window.crypto && crypto.getRandomValues){crypto.getRandomValues(bytes)}
+      else{for(let i=0;i<length;i++)bytes[i]=Math.floor(Math.random()*chars.length)}
+      return [...bytes].map(value=>chars[value % chars.length]).join('');
+    }
+    function zonePrefix(){
+      return selectedZone ? selectedZone.replace(' Zone','').toUpperCase() : 'E8';
+    }
+    function makeStudentId(){
+      const now=new Date();
+      const year=String(now.getFullYear()).slice(-2);
+      const month=String(now.getMonth()+1).padStart(2,'0');
+      const day=String(now.getDate()).padStart(2,'0');
+      const seq=String(getCurrentCount()+1).padStart(3,'0');
+      return `${zonePrefix()}-${year}${month}${day}-${seq}-${randomCode(4)}`;
+    }
+    function ensureStudentId(){
+      const current=studentId.textContent;
+      const prefix=zonePrefix()+'-';
+      if(current==='รอบันทึกใบสมัคร' || !current.startsWith(prefix)){
+        const id=makeStudentId();
+        studentId.textContent=id;
+        localStorage.setItem('e8StudentId',id);
+      }
+      return studentId.textContent;
+    }
+    function addApplicationCountOnce(){
+      if(localStorage.getItem('e8CurrentApplicationCounted')==='true')return;
       const next=getCurrentCount()+1;
       localStorage.setItem('e8ApplicationCount',String(next));
-      return 'E8-'+padNumber(next);
-    }
-    function getOrCreateStudentId(){
-      const saved=localStorage.getItem('e8StudentId');
-      if(saved) return saved;
-      const id=createNextStudentId();
-      localStorage.setItem('e8StudentId',id);
-      return id;
+      localStorage.setItem('e8CurrentApplicationCounted','true');
+      updateCounter();
     }
     updateCounter();
     issueDate.textContent=new Date().toLocaleDateString('en-GB');
@@ -224,6 +296,8 @@
       root.style.setProperty('--zone-soft',zone.dataset.soft);
       root.style.setProperty('--zone-ink',zone.dataset.ink);
       root.style.setProperty('--signature-color',zone.dataset.signature);
+      root.style.setProperty('--zone-rgb',zone.dataset.rgb);
+      root.style.setProperty('--zone-dark-rgb',zone.dataset.darkRgb);
       cardDivision.textContent=selectedZone;
       cardWatermark.src=zone.dataset.logo;
       cardSeal.src=zone.dataset.logo;
@@ -233,7 +307,7 @@
     photoInput.addEventListener('change',()=>{
       const file=photoInput.files&&photoInput.files[0];
       if(!file)return;
-      if(file.size>5*1024*1024){alert('ไฟล์รูปใหญ่เกินไปค่ะ กรุณาใช้ไฟล์ไม่เกิน 5MB');photoInput.value='';return}
+      if(file.size>5*1024*1024){showModal('ไฟล์รูปใหญ่เกินไป','กรุณาใช้ไฟล์รูปไม่เกิน 5MB นะคะ');photoInput.value='';return}
       const reader=new FileReader();
       reader.onload=e=>{
         uploadedPhoto=e.target.result;
@@ -250,11 +324,10 @@
     registerForm.addEventListener('submit',event=>{
       event.preventDefault();
       const name=displayName.value.trim();
-      if(!name){alert('กรุณากรอกชื่อที่ใช้ในระบบก่อนค่ะ');displayName.focus();return}
-      if(!selectedZone){alert('กรุณาเลือกโซน E2-E8 ก่อนค่ะ');document.getElementById('zones').scrollIntoView({behavior:'smooth'});return}
-      if(studentId.textContent==='รอบันทึกใบสมัคร'){
-        studentId.textContent=getOrCreateStudentId();
-      }
+      if(!name){showModal('กรุณากรอกชื่อ','กรอกชื่อที่ใช้ในระบบก่อนนะคะ');displayName.focus();return}
+      if(!selectedZone){showModal('ยังไม่ได้เลือกโซน','กรุณาเลือกโซน E2-E8 ก่อนค่ะ');document.getElementById('zones').scrollIntoView({behavior:'smooth'});return}
+      ensureStudentId();
+      addApplicationCountOnce();
       const data={studentId:studentId.textContent,displayName:name,nickname:nickname.value.trim(),level:'Year 1',zone:selectedZone,reason:reason.value.trim(),photo:uploadedPhoto,status:'pending_verification',submittedAt:new Date().toISOString()};
       localStorage.setItem('e8StudentApplication',JSON.stringify(data));
       localStorage.setItem('e8IsMember','true');
@@ -277,16 +350,13 @@
 
     async function downloadCard(){
       if(typeof html2canvas==='undefined'){
-        alert('ระบบดาวน์โหลดยังโหลดไม่เสร็จ กรุณารอสักครู่แล้วกดอีกครั้งค่ะ');
+        showModal('ระบบยังโหลดไม่เสร็จ','กรุณารอสักครู่ แล้วกดดาวน์โหลดอีกครั้งค่ะ');
         return;
       }
       const name=displayName.value.trim();
-      if(!name){alert('กรุณากรอกชื่อที่ใช้ในระบบก่อนดาวน์โหลดค่ะ');displayName.focus();return}
-      if(!selectedZone){alert('กรุณาเลือกโซนก่อนดาวน์โหลดค่ะ');document.getElementById('zones').scrollIntoView({behavior:'smooth'});return}
-      if(studentId.textContent==='รอบันทึกใบสมัคร'){
-        studentId.textContent=getOrCreateStudentId();
-        updateCounter();
-      }
+      if(!name){showModal('กรุณากรอกชื่อ','กรอกชื่อที่ใช้ในระบบก่อนดาวน์โหลดค่ะ');displayName.focus();return}
+      if(!selectedZone){showModal('ยังไม่ได้เลือกโซน','กรุณาเลือกโซนก่อนดาวน์โหลดค่ะ');document.getElementById('zones').scrollIntoView({behavior:'smooth'});return}
+      ensureStudentId();
       downloadCardBtn.disabled=true;
       const oldText=downloadCardBtn.textContent;
       downloadCardBtn.textContent='กำลังสร้างไฟล์...';
@@ -312,7 +382,7 @@
         link.click();
         link.remove();
       }catch(error){
-        alert('ดาวน์โหลดไม่สำเร็จค่ะ ลองรีเฟรชหน้าเว็บ แล้วกดเลือกโซนใหม่อีกครั้งนะคะ');
+        showModal('ดาวน์โหลดไม่สำเร็จ','ลองรีเฟรชหน้าเว็บ แล้วกดเลือกโซนใหม่อีกครั้งนะคะ ถ้ายังไม่ได้ ให้ตรวจว่าไฟล์ eden.png และ e1-e8.png อยู่ใน repo แล้วค่ะ');
       }finally{
         downloadCardBtn.disabled=false;
         downloadCardBtn.textContent=oldText;
@@ -321,29 +391,33 @@
     downloadCardBtn.addEventListener('click',downloadCard);
 
     resetBtn.addEventListener('click',()=>{
-      if(!confirm('ต้องการล้างข้อมูลในฟอร์มนี้ใช่ไหมคะ'))return;
-      registerForm.reset();
-      zones.forEach(item=>item.classList.remove('selected'));
-      selectedZone='';
-      uploadedPhoto='';
-      cardName.textContent='—';
-      cardDivision.textContent='E8 Zone';
-      studentId.textContent='รอบันทึกใบสมัคร';
-      localStorage.removeItem('e8StudentId');
-      reasonCount.textContent='0';
-      photoPreview.removeAttribute('src');
-      cardPhoto.removeAttribute('src');
-      photoPreview.style.display='none';
-      cardPhoto.style.display='none';
-      photoPlus.style.display='block';
-      cardSilhouette.style.display='block';
-      cardWatermark.src='./eden.png';
-      cardSeal.src='./eden.png';
-      statusCard.classList.remove('show');
-      root.style.setProperty('--zone','#d7bd8c');
-      root.style.setProperty('--zone-dark','#8f6a32');
-      root.style.setProperty('--zone-soft','#fff5de');
-      root.style.setProperty('--signature-color','#5f4422');
+      showConfirmModal('ล้างข้อมูลใบสมัคร','ต้องการล้างข้อมูลในฟอร์มนี้ใช่ไหมคะ',()=>{
+        registerForm.reset();
+        zones.forEach(item=>item.classList.remove('selected'));
+        selectedZone='';
+        uploadedPhoto='';
+        cardName.textContent='—';
+        cardDivision.textContent='E8 Zone';
+        studentId.textContent='รอบันทึกใบสมัคร';
+        localStorage.removeItem('e8StudentId');
+        localStorage.removeItem('e8CurrentApplicationCounted');
+        reasonCount.textContent='0';
+        photoPreview.removeAttribute('src');
+        cardPhoto.removeAttribute('src');
+        photoPreview.style.display='none';
+        cardPhoto.style.display='none';
+        photoPlus.style.display='block';
+        cardSilhouette.style.display='block';
+        cardWatermark.src='./eden.png';
+        cardSeal.src='./eden.png';
+        statusCard.classList.remove('show');
+        root.style.setProperty('--zone','#d7bd8c');
+        root.style.setProperty('--zone-dark','#8f6a32');
+        root.style.setProperty('--zone-soft','#fff5de');
+        root.style.setProperty('--signature-color','#5f4422');
+        root.style.setProperty('--zone-rgb','215,189,140');
+        root.style.setProperty('--zone-dark-rgb','143,106,50');
+      });
     });
 
     const saved=localStorage.getItem('e8StudentApplication');
