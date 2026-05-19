@@ -180,7 +180,7 @@
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <!-- ไม่ใช้ html2canvas แล้ว เพราะบางเครื่องแคป CSS การ์ดไม่ผ่าน จึงวาดบัตรด้วย canvas โดยตรง -->
   <script>
     const root=document.documentElement;
     const displayName=document.getElementById('displayName');
@@ -337,44 +337,222 @@
       statusCard.scrollIntoView({behavior:'smooth',block:'center'});
     });
 
-    function waitForImages(target){
-      const images=[...target.querySelectorAll('img')];
-      return Promise.all(images.map(img=>{
-        if(img.complete && img.naturalWidth>0) return Promise.resolve();
-        return new Promise(resolve=>{
-          img.onload=resolve;
-          img.onerror=resolve;
-        });
-      }));
+    function loadCanvasImage(src){
+      return new Promise((resolve,reject)=>{
+        if(!src){resolve(null);return;}
+        const img=new Image();
+        img.crossOrigin='anonymous';
+        img.onload=()=>resolve(img);
+        img.onerror=()=>reject(new Error('load image failed: '+src));
+        img.src=src;
+      });
+    }
+
+    function roundRect(ctx,x,y,w,h,r){
+      const radius=Math.min(r,w/2,h/2);
+      ctx.beginPath();
+      ctx.moveTo(x+radius,y);
+      ctx.arcTo(x+w,y,x+w,y+h,radius);
+      ctx.arcTo(x+w,y+h,x,y+h,radius);
+      ctx.arcTo(x,y+h,x,y,radius);
+      ctx.arcTo(x,y,x+w,y,radius);
+      ctx.closePath();
+    }
+
+    function drawImageContain(ctx,img,x,y,w,h,alpha=1){
+      if(!img)return;
+      const oldAlpha=ctx.globalAlpha;
+      ctx.globalAlpha=alpha;
+      const ratio=Math.min(w/img.width,h/img.height);
+      const nw=img.width*ratio;
+      const nh=img.height*ratio;
+      ctx.drawImage(img,x+(w-nw)/2,y+(h-nh)/2,nw,nh);
+      ctx.globalAlpha=oldAlpha;
+    }
+
+    function drawImageCover(ctx,img,x,y,w,h){
+      if(!img)return;
+      const ratio=Math.max(w/img.width,h/img.height);
+      const nw=img.width*ratio;
+      const nh=img.height*ratio;
+      ctx.drawImage(img,x+(w-nw)/2,y+(h-nh)/2,nw,nh);
+    }
+
+    function wrapText(ctx,text,x,y,maxWidth,lineHeight,maxLines=3){
+      const words=String(text||'').split(' ');
+      let line='';
+      let lines=0;
+      for(let n=0;n<words.length;n++){
+        const testLine=line+words[n]+' ';
+        if(ctx.measureText(testLine).width>maxWidth && n>0){
+          ctx.fillText(line,x,y);
+          line=words[n]+' ';
+          y+=lineHeight;
+          lines++;
+          if(lines>=maxLines-1)break;
+        }else{
+          line=testLine;
+        }
+      }
+      if(line)ctx.fillText(line,x,y);
+    }
+
+    function hexToRgb(hex){
+      const clean=String(hex||'#d7bd8c').replace('#','');
+      const bigint=parseInt(clean,16);
+      return {r:(bigint>>16)&255,g:(bigint>>8)&255,b:bigint&255};
     }
 
     async function downloadCard(){
-      if(typeof html2canvas==='undefined'){
-        showModal('ระบบยังโหลดไม่เสร็จ','กรุณารอสักครู่ แล้วกดดาวน์โหลดอีกครั้งค่ะ');
-        return;
-      }
       const name=displayName.value.trim();
       if(!name){showModal('กรุณากรอกชื่อ','กรอกชื่อที่ใช้ในระบบก่อนดาวน์โหลดค่ะ');displayName.focus();return}
       if(!selectedZone){showModal('ยังไม่ได้เลือกโซน','กรุณาเลือกโซนก่อนดาวน์โหลดค่ะ');document.getElementById('zones').scrollIntoView({behavior:'smooth'});return}
       ensureStudentId();
+
       downloadCardBtn.disabled=true;
       const oldText=downloadCardBtn.textContent;
       downloadCardBtn.textContent='กำลังสร้างไฟล์...';
+
       try{
-        const card=document.getElementById('idCard');
         await document.fonts.ready;
-        await waitForImages(card);
-        await new Promise(resolve=>setTimeout(resolve,250));
-        const canvas=await html2canvas(card,{
-          backgroundColor:null,
-          scale:2,
-          useCORS:true,
-          allowTaint:false,
-          imageTimeout:15000,
-          logging:false,
-          scrollX:0,
-          scrollY:0
+        const selected=document.querySelector('.zone-box.selected');
+        const logoSrc=selected ? selected.dataset.logo : './eden.png';
+        const edenSrc='./eden.png';
+        const photoSrc=uploadedPhoto || '';
+        const [zoneLogo,edenLogo,photoImg]=await Promise.all([
+          loadCanvasImage(logoSrc),
+          loadCanvasImage(edenSrc),
+          photoSrc ? loadCanvasImage(photoSrc) : Promise.resolve(null)
+        ]);
+
+        const canvas=document.createElement('canvas');
+        canvas.width=1600;
+        canvas.height=1000;
+        const ctx=canvas.getContext('2d');
+        const zoneColor=getComputedStyle(root).getPropertyValue('--zone').trim() || '#d7bd8c';
+        const zoneDark=getComputedStyle(root).getPropertyValue('--zone-dark').trim() || '#8f6a32';
+        const zoneSoft=getComputedStyle(root).getPropertyValue('--zone-soft').trim() || '#fff5de';
+        const zoneRgb=hexToRgb(zoneColor);
+        const darkRgb=hexToRgb(zoneDark);
+
+        const bg=ctx.createLinearGradient(0,0,1600,1000);
+        bg.addColorStop(0,'#fffdf8');
+        bg.addColorStop(.38,'#fff4f7');
+        bg.addColorStop(.72,zoneSoft);
+        bg.addColorStop(1,`rgba(${zoneRgb.r},${zoneRgb.g},${zoneRgb.b},.45)`);
+        ctx.fillStyle=bg;
+        roundRect(ctx,0,0,1600,1000,58);
+        ctx.fill();
+
+        ctx.save();
+        roundRect(ctx,36,36,1528,928,42);
+        ctx.strokeStyle=`rgba(${zoneRgb.r},${zoneRgb.g},${zoneRgb.b},.72)`;
+        ctx.lineWidth=4;
+        ctx.stroke();
+        roundRect(ctx,62,62,1476,876,30);
+        ctx.strokeStyle='rgba(255,255,255,.72)';
+        ctx.lineWidth=2;
+        ctx.stroke();
+        ctx.restore();
+
+        for(let i=0;i<26;i++){
+          ctx.globalAlpha=.05;
+          ctx.fillStyle=i%2?zoneColor:'#ffffff';
+          ctx.beginPath();
+          ctx.arc(120+i*62,120+(i%5)*110,80,0,Math.PI*2);
+          ctx.fill();
+        }
+        ctx.globalAlpha=1;
+
+        drawImageContain(ctx,zoneLogo,930,130,500,610,.11);
+        drawImageContain(ctx,edenLogo,1340,80,150,150,1);
+
+        ctx.fillStyle='#202a3a';
+        ctx.font='700 70px Cinzel, Georgia, serif';
+        ctx.fillText('E8’s Eden Academy',610,170);
+        ctx.font='700 26px Cinzel, Georgia, serif';
+        ctx.fillStyle='#765e69';
+        ctx.fillText('STUDENT IDENTITY CARD',614,215);
+
+        ctx.save();
+        roundRect(ctx,115,145,390,540,48);
+        ctx.fillStyle='rgba(255,255,255,.48)';
+        ctx.fill();
+        ctx.strokeStyle=`rgba(${darkRgb.r},${darkRgb.g},${darkRgb.b},.38)`;
+        ctx.lineWidth=5;
+        ctx.stroke();
+        ctx.clip();
+        if(photoImg){
+          drawImageCover(ctx,photoImg,115,145,390,540);
+        }else{
+          ctx.fillStyle='rgba(170,150,150,.18)';
+          ctx.fillRect(115,145,390,540);
+          ctx.fillStyle='rgba(70,56,62,.25)';
+          ctx.font='130px Georgia, serif';
+          ctx.textAlign='center';
+          ctx.fillText('♙',310,450);
+          ctx.textAlign='left';
+        }
+        ctx.restore();
+
+        drawImageContain(ctx,zoneLogo,255,705,130,130,1);
+
+        const fields=[
+          ['STUDENT ID',studentId.textContent],
+          ['NAME',cardName.textContent],
+          ['LEVEL','YEAR 1']
+        ];
+        ctx.font='800 24px Noto Sans Thai, Arial, sans-serif';
+        fields.forEach((item,index)=>{
+          const y=305+index*92;
+          ctx.fillStyle='#705764';
+          ctx.fillText(item[0],610,y);
+          ctx.strokeStyle=`rgba(${darkRgb.r},${darkRgb.g},${darkRgb.b},.38)`;
+          ctx.lineWidth=2;
+          ctx.setLineDash([8,8]);
+          ctx.beginPath();
+          ctx.moveTo(830,y+6);
+          ctx.lineTo(1420,y+6);
+          ctx.stroke();
+          ctx.setLineDash([]);
+          ctx.fillStyle='#30262d';
+          ctx.font='800 30px Noto Sans Thai, Arial, sans-serif';
+          ctx.fillText(item[1]||'—',850,y);
+          ctx.font='800 24px Noto Sans Thai, Arial, sans-serif';
         });
+
+        const sig=ctx.createLinearGradient(610,585,1420,710);
+        sig.addColorStop(0,zoneDark);
+        sig.addColorStop(1,zoneColor);
+        ctx.fillStyle=sig;
+        roundRect(ctx,610,585,810,125,30);
+        ctx.fill();
+        ctx.strokeStyle='rgba(255,255,255,.35)';
+        ctx.lineWidth=2;
+        ctx.stroke();
+        ctx.fillStyle=getComputedStyle(root).getPropertyValue('--signature-color').trim() || '#fff7ec';
+        ctx.textAlign='center';
+        ctx.font='110px Great Vibes, cursive';
+        ctx.fillText(cardDivision.textContent,1015,675);
+        ctx.textAlign='left';
+
+        ctx.fillStyle='#806070';
+        ctx.font='800 20px Noto Sans Thai, Arial, sans-serif';
+        ctx.fillText('ISSUE DATE',112,875);
+        ctx.fillText(issueDate.textContent,112,910);
+        ctx.fillText('AUTHORIZED SIGNATURE',580,875);
+        ctx.fillText('Eden Office',580,910);
+
+        for(let x=1210;x<1450;x+=10){
+          const w=[3,5,2,7,4][x%5];
+          ctx.fillStyle='rgba(42,37,37,.72)';
+          ctx.fillRect(x,840,w,82);
+        }
+
+        ctx.fillStyle='rgba(75,54,64,.86)';
+        ctx.font='700 25px Noto Sans Thai, Arial, sans-serif';
+        wrapText(ctx,reason.value.trim() || 'Student Registration • E8’s Eden Academy',610,785,790,38,3);
+
         const link=document.createElement('a');
         link.download=`E8-student-card-${studentId.textContent}.png`;
         link.href=canvas.toDataURL('image/png');
@@ -382,7 +560,8 @@
         link.click();
         link.remove();
       }catch(error){
-        showModal('ดาวน์โหลดไม่สำเร็จ','ลองรีเฟรชหน้าเว็บ แล้วกดเลือกโซนใหม่อีกครั้งนะคะ ถ้ายังไม่ได้ ให้ตรวจว่าไฟล์ eden.png และ e1-e8.png อยู่ใน repo แล้วค่ะ');
+        console.error(error);
+        showModal('ดาวน์โหลดไม่สำเร็จ','ระบบสร้างบัตรไม่ผ่านค่ะ ลองกดเลือกโซนใหม่อีกครั้ง หรือเช็กว่าไฟล์ eden.png และ e2-e8.png อยู่ใน repo แล้วค่ะ');
       }finally{
         downloadCardBtn.disabled=false;
         downloadCardBtn.textContent=oldText;
