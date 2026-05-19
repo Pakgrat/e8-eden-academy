@@ -79,6 +79,7 @@
     @media(max-width:1260px){.header{grid-template-columns:1fr}.nav{justify-content:flex-start}.back{width:max-content}.hero{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.zone-grid{grid-template-columns:repeat(4,1fr)}}
     @media(max-width:860px){.wrap{width:min(100% - 24px,1500px)}.brand img{width:78px;height:72px}.brand h1{font-size:24px;white-space:normal}.panel,.card,.upload,.zone-section,.id-preview{border-radius:26px;padding:22px}.notice-list,.steps,.two{grid-template-columns:1fr}.zone-grid{grid-template-columns:repeat(2,1fr)}.student-card{aspect-ratio:auto}.card-inner{padding:30px 24px;grid-template-columns:1fr}.card-photo{width:190px}.field{grid-template-columns:95px 1fr}.side-status img{width:110px;height:110px}.mini-logo{width:70px;height:70px}}
   
+    .generated-card-box{display:none;margin-top:22px;border-radius:28px;padding:22px;background:linear-gradient(180deg,rgba(255,249,251,.95),rgba(247,224,232,.92));border:1px solid rgba(186,112,137,.30);box-shadow:0 18px 46px rgba(91,45,62,.13);text-align:center}.generated-card-box.show{display:block}.generated-card-box h3{font-size:24px;color:#382631}.generated-card-box p{color:#856a72;line-height:1.7;margin:8px auto 16px;font-weight:700}.generated-card-box img{width:min(760px,100%);border-radius:22px;border:1px solid rgba(186,112,137,.22);box-shadow:0 16px 34px rgba(64,33,46,.14)}
     .web-modal{position:fixed;inset:0;z-index:80;display:none;place-items:center;padding:22px;background:rgba(20,10,18,.46);backdrop-filter:blur(10px)}
     .web-modal.show{display:grid;animation:fadeIn .18s ease-out both}
     .modal-card{width:min(520px,100%);border-radius:30px;padding:28px;background:linear-gradient(180deg,rgba(255,249,251,.98),rgba(247,224,232,.96));border:1px solid rgba(186,112,137,.34);box-shadow:0 30px 80px rgba(40,16,28,.38);position:relative;overflow:hidden}
@@ -128,7 +129,7 @@
           <article class="zone-box e4" data-zone="E4 Zone" data-logo="./e4.png" data-color="#bad5ad" data-dark="#5d8453" data-soft="#edf6e9" data-ink="#33502d" data-signature="#315829" data-rgb="186,213,173" data-dark-rgb="93,132,83"><img src="./e4.png" alt="E4 Zone" /><h3>E4 ZONE</h3><small>AVAILABLE</small></article>
           <article class="zone-box e5" data-zone="E5 Zone" data-logo="./e5.png" data-color="#b99add" data-dark="#704eaa" data-soft="#f2e8ff" data-ink="#4b3171" data-signature="#41246a" data-rgb="185,154,221" data-dark-rgb="112,78,170"><img src="./e5.png" alt="E5 Zone" /><h3>E5 ZONE</h3><small>AVAILABLE</small></article>
           <article class="zone-box e6" data-zone="E6 Zone" data-logo="./e6.png" data-color="#eba0bb" data-dark="#b95b7f" data-soft="#ffe7ef" data-ink="#843653" data-signature="#8d2c52" data-rgb="235,160,187" data-dark-rgb="185,91,127"><img src="./e6.png" alt="E6 Zone" /><h3>E6 ZONE</h3><small>AVAILABLE</small></article>
-          <article class="zone-box e7" data-zone="E7 Zone" data-logo="./e7.png" data-color="#a8d6ee" data-dark="#4d90b4" data-soft="#f4fbff" data-ink="#2f6b88" data-signature="#275d78" data-rgb="168,214,238" data-dark-rgb="77,144,180"><img src="./e7.png" alt="E7 Zone" /><h3>E7 ZONE</h3><small>AVAILABLE</small></article>
+          <article class="zone-box e7" data-zone="E7 Zone" data-logo="./e7.png" data-color="#a8d6ee" data-dark="#4d90b4" data-soft="#f4fbff" data-ink="#2f6b88" data-signature="#275d78" data-rgb="168,214,238" data-dark-rgb="77,144,180"><img src="./e7.png" alt="E7 Zone" /><h3>E7 ZONE</h3><p>รับทั้งนักเรียนทุนฟรี และนักเรียนแลกเปลี่ยนจากโรงเรียนอื่น</p><small>AVAILABLE</small></article>
           <article class="zone-box e8" data-zone="E8 Zone" data-logo="./e8.png" data-color="#d0a245" data-dark="#8a641b" data-soft="#fff2c8" data-ink="#5c3e12" data-signature="#5a3b0f" data-rgb="208,162,69" data-dark-rgb="138,100,27"><img src="./e8.png" alt="E8 Zone" /><h3>E8 ZONE</h3><small>AVAILABLE</small></article>
         </div>
       </section>
@@ -162,7 +163,13 @@
             <div class="card-right"><div class="card-title"><div><h2>E8’s Eden Academy</h2><span>STUDENT IDENTITY CARD</span></div><img class="mini-logo" src="./eden.png" alt="Eden Logo" /></div><div class="card-fields"><div class="field"><span>STUDENT ID</span><div class="line" id="studentId">รอบันทึกใบสมัคร</div></div><div class="field"><span>NAME</span><div class="line" id="cardName">—</div></div><div class="field"><span>LEVEL</span><div class="line">YEAR 1</div></div></div><div class="zone-signature"><div class="zone-script" id="cardDivision">E8 Zone</div></div><div class="card-foot"><div>ISSUE DATE<br><span id="issueDate">—</span></div><div>AUTHORIZED SIGNATURE<br>Eden Office</div><div class="barcode" aria-hidden="true"></div></div></div>
           </div>
         </article>
-        <div class="download-row"><button class="btn primary" type="button" id="downloadCardBtn">ดาวน์โหลดบัตรนักเรียน</button><a class="btn soft" href="./index.html">กลับหน้าแรก</a></div>
+        <div class="download-row"><button class="btn primary" type="button" id="downloadCardBtn">สร้างและดาวน์โหลดบัตรนักเรียน</button><a class="btn soft" href="./index.html">กลับหน้าแรก</a></div>
+        <div class="generated-card-box" id="generatedCardBox">
+          <h3>ไฟล์บัตรที่สร้างแล้ว</h3>
+          <p>ถ้าปุ่มดาวน์โหลดไม่ทำงาน ให้กดเปิดรูป แล้วกดค้าง/คลิกขวาเพื่อบันทึกรูปได้ค่ะ</p>
+          <img id="generatedCardImage" alt="บัตรนักเรียนที่สร้างแล้ว" />
+          <div class="download-row"><a class="btn primary" id="openCardImage" href="#" target="_blank" rel="noopener">เปิดรูปบัตร</a></div>
+        </div>
       </section>
 
       <div class="status-card" id="statusCard"><h3>ส่งใบสมัครเรียบร้อยแล้ว</h3><p id="statusText">สถานะของคุณคือ “รอตรวจสอบ” หลังจากนี้สามารถกลับไปใช้หน้าเว็บและติดตามประกาศของสถาบันได้ทันที</p><div class="status-actions"><a class="btn primary" href="./index.html">กลับหน้าแรก</a><a class="btn soft" href="./board.html">ไปกระดานนักเรียน</a></div></div>
@@ -260,12 +267,20 @@
       return `${zonePrefix()}-${year}${month}${day}-${seq}-${randomCode(4)}`;
     }
     function ensureStudentId(){
-      const current=studentId.textContent;
+      const saved=localStorage.getItem('e8StudentId');
       const prefix=zonePrefix()+'-';
-      if(current==='รอบันทึกใบสมัคร' || !current.startsWith(prefix)){
+      if(saved && saved.startsWith(prefix)){
+        studentId.textContent=saved;
+        return saved;
+      }
+      if(saved && !saved.startsWith(prefix)){
+        localStorage.removeItem('e8StudentId');
+      }
+      if(studentId.textContent==='รอบันทึกใบสมัคร' || !studentId.textContent.startsWith(prefix)){
         const id=makeStudentId();
         studentId.textContent=id;
         localStorage.setItem('e8StudentId',id);
+        saveDraft();
       }
       return studentId.textContent;
     }
@@ -279,13 +294,18 @@
     updateCounter();
     issueDate.textContent=new Date().toLocaleDateString('en-GB');
 
+    function saveDraft(){
+      const draft={displayName:displayName.value.trim(),nickname:nickname.value.trim(),reason:reason.value.trim(),zone:selectedZone,photo:uploadedPhoto,studentId:studentId.textContent==='รอบันทึกใบสมัคร'?'':studentId.textContent};
+      localStorage.setItem('e8StudentDraft',JSON.stringify(draft));
+    }
     function updateName(){
       const name=displayName.value.trim()||nickname.value.trim()||'—';
       cardName.textContent=name;
+      saveDraft();
     }
     displayName.addEventListener('input',updateName);
     nickname.addEventListener('input',updateName);
-    reason.addEventListener('input',()=>{reasonCount.textContent=reason.value.length});
+    reason.addEventListener('input',()=>{reasonCount.textContent=reason.value.length;saveDraft()});
 
     function applyZone(zone){
       zones.forEach(item=>item.classList.remove('selected'));
@@ -301,6 +321,12 @@
       cardDivision.textContent=selectedZone;
       cardWatermark.src=zone.dataset.logo;
       cardSeal.src=zone.dataset.logo;
+      const saved=localStorage.getItem('e8StudentId');
+      if(saved && !saved.startsWith(zonePrefix()+'-')){
+        studentId.textContent='รอบันทึกใบสมัคร';
+        localStorage.removeItem('e8StudentId');
+      }
+      saveDraft();
     }
     zones.forEach(zone=>zone.addEventListener('click',()=>applyZone(zone)));
 
@@ -317,6 +343,7 @@
         cardPhoto.style.display='block';
         photoPlus.style.display='none';
         cardSilhouette.style.display='none';
+        saveDraft();
       };
       reader.readAsDataURL(file);
     });
@@ -338,12 +365,11 @@
     });
 
     function loadCanvasImage(src){
-      return new Promise((resolve,reject)=>{
+      return new Promise(resolve=>{
         if(!src){resolve(null);return;}
         const img=new Image();
-        img.crossOrigin='anonymous';
         img.onload=()=>resolve(img);
-        img.onerror=()=>reject(new Error('load image failed: '+src));
+        img.onerror=()=>resolve(null);
         img.src=src;
       });
     }
@@ -403,165 +429,177 @@
       return {r:(bigint>>16)&255,g:(bigint>>8)&255,b:bigint&255};
     }
 
+    async function createCardDataURL(){
+      const selected=document.querySelector('.zone-box.selected');
+      const logoSrc=selected ? selected.dataset.logo : './eden.png';
+      const edenSrc='./eden.png';
+      const photoSrc=uploadedPhoto || '';
+      const [zoneLogo,edenLogo,photoImg]=await Promise.all([
+        loadCanvasImage(logoSrc),
+        loadCanvasImage(edenSrc),
+        photoSrc ? loadCanvasImage(photoSrc) : Promise.resolve(null)
+      ]);
+
+      const canvas=document.createElement('canvas');
+      canvas.width=1600;
+      canvas.height=1000;
+      const ctx=canvas.getContext('2d');
+      const zoneColor=getComputedStyle(root).getPropertyValue('--zone').trim() || '#d7bd8c';
+      const zoneDark=getComputedStyle(root).getPropertyValue('--zone-dark').trim() || '#8f6a32';
+      const zoneSoft=getComputedStyle(root).getPropertyValue('--zone-soft').trim() || '#fff5de';
+      const zoneRgb=hexToRgb(zoneColor);
+      const darkRgb=hexToRgb(zoneDark);
+
+      const bg=ctx.createLinearGradient(0,0,1600,1000);
+      bg.addColorStop(0,'#fffdf8');
+      bg.addColorStop(.36,'#fff4f7');
+      bg.addColorStop(.72,zoneSoft);
+      bg.addColorStop(1,`rgba(${zoneRgb.r},${zoneRgb.g},${zoneRgb.b},.48)`);
+      ctx.fillStyle=bg;
+      roundRect(ctx,0,0,1600,1000,58);
+      ctx.fill();
+
+      ctx.save();
+      roundRect(ctx,36,36,1528,928,42);
+      ctx.strokeStyle=`rgba(${zoneRgb.r},${zoneRgb.g},${zoneRgb.b},.72)`;
+      ctx.lineWidth=4;
+      ctx.stroke();
+      roundRect(ctx,62,62,1476,876,30);
+      ctx.strokeStyle='rgba(255,255,255,.72)';
+      ctx.lineWidth=2;
+      ctx.stroke();
+      ctx.restore();
+
+      for(let i=0;i<28;i++){
+        ctx.globalAlpha=.045;
+        ctx.fillStyle=i%2?zoneColor:'#ffffff';
+        ctx.beginPath();
+        ctx.arc(120+i*58,125+(i%6)*105,84,0,Math.PI*2);
+        ctx.fill();
+      }
+      ctx.globalAlpha=1;
+
+      if(zoneLogo){drawImageContain(ctx,zoneLogo,930,130,500,610,.12)}
+      if(edenLogo){drawImageContain(ctx,edenLogo,1340,80,150,150,1)}
+
+      ctx.fillStyle='#202a3a';
+      ctx.font='700 70px Georgia, serif';
+      ctx.fillText('E8’s Eden Academy',610,170);
+      ctx.font='700 26px Georgia, serif';
+      ctx.fillStyle='#765e69';
+      ctx.fillText('STUDENT IDENTITY CARD',614,215);
+
+      ctx.save();
+      roundRect(ctx,115,145,390,540,48);
+      ctx.fillStyle='rgba(255,255,255,.48)';
+      ctx.fill();
+      ctx.strokeStyle=`rgba(${darkRgb.r},${darkRgb.g},${darkRgb.b},.38)`;
+      ctx.lineWidth=5;
+      ctx.stroke();
+      ctx.clip();
+      if(photoImg){
+        drawImageCover(ctx,photoImg,115,145,390,540);
+      }else{
+        ctx.fillStyle='rgba(170,150,150,.18)';
+        ctx.fillRect(115,145,390,540);
+        ctx.fillStyle='rgba(70,56,62,.25)';
+        ctx.font='130px Georgia, serif';
+        ctx.textAlign='center';
+        ctx.fillText('♙',310,450);
+        ctx.textAlign='left';
+      }
+      ctx.restore();
+
+      if(zoneLogo){drawImageContain(ctx,zoneLogo,255,705,130,130,1)}
+
+      const fields=[
+        ['STUDENT ID',studentId.textContent],
+        ['NAME',cardName.textContent],
+        ['LEVEL','YEAR 1']
+      ];
+      ctx.font='800 24px Arial, sans-serif';
+      fields.forEach((item,index)=>{
+        const y=305+index*92;
+        ctx.fillStyle='#705764';
+        ctx.fillText(item[0],610,y);
+        ctx.strokeStyle=`rgba(${darkRgb.r},${darkRgb.g},${darkRgb.b},.38)`;
+        ctx.lineWidth=2;
+        ctx.setLineDash([8,8]);
+        ctx.beginPath();
+        ctx.moveTo(830,y+6);
+        ctx.lineTo(1420,y+6);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.fillStyle='#30262d';
+        ctx.font='800 30px Arial, sans-serif';
+        ctx.fillText(item[1]||'—',850,y);
+        ctx.font='800 24px Arial, sans-serif';
+      });
+
+      const sig=ctx.createLinearGradient(610,585,1420,710);
+      sig.addColorStop(0,zoneDark);
+      sig.addColorStop(1,zoneColor);
+      ctx.fillStyle=sig;
+      roundRect(ctx,610,585,810,125,30);
+      ctx.fill();
+      ctx.strokeStyle='rgba(255,255,255,.35)';
+      ctx.lineWidth=2;
+      ctx.stroke();
+      ctx.fillStyle=getComputedStyle(root).getPropertyValue('--signature-color').trim() || '#fff7ec';
+      ctx.textAlign='center';
+      ctx.font='italic 92px Georgia, serif';
+      ctx.fillText(cardDivision.textContent,1015,668);
+      ctx.textAlign='left';
+
+      ctx.fillStyle='#806070';
+      ctx.font='800 20px Arial, sans-serif';
+      ctx.fillText('ISSUE DATE',112,875);
+      ctx.fillText(issueDate.textContent,112,910);
+      ctx.fillText('AUTHORIZED SIGNATURE',580,875);
+      ctx.fillText('Eden Office',580,910);
+
+      for(let x=1210;x<1450;x+=10){
+        const w=[3,5,2,7,4][x%5];
+        ctx.fillStyle='rgba(42,37,37,.72)';
+        ctx.fillRect(x,840,w,82);
+      }
+
+      ctx.fillStyle='rgba(75,54,64,.86)';
+      ctx.font='700 25px Arial, sans-serif';
+      wrapText(ctx,reason.value.trim() || 'Student Registration • E8’s Eden Academy',610,785,790,38,3);
+      return canvas.toDataURL('image/png');
+    }
+
     async function downloadCard(){
       const name=displayName.value.trim();
       if(!name){showModal('กรุณากรอกชื่อ','กรอกชื่อที่ใช้ในระบบก่อนดาวน์โหลดค่ะ');displayName.focus();return}
       if(!selectedZone){showModal('ยังไม่ได้เลือกโซน','กรุณาเลือกโซนก่อนดาวน์โหลดค่ะ');document.getElementById('zones').scrollIntoView({behavior:'smooth'});return}
       ensureStudentId();
+      saveDraft();
 
       downloadCardBtn.disabled=true;
       const oldText=downloadCardBtn.textContent;
       downloadCardBtn.textContent='กำลังสร้างไฟล์...';
-
       try{
         await document.fonts.ready;
-        const selected=document.querySelector('.zone-box.selected');
-        const logoSrc=selected ? selected.dataset.logo : './eden.png';
-        const edenSrc='./eden.png';
-        const photoSrc=uploadedPhoto || '';
-        const [zoneLogo,edenLogo,photoImg]=await Promise.all([
-          loadCanvasImage(logoSrc),
-          loadCanvasImage(edenSrc),
-          photoSrc ? loadCanvasImage(photoSrc) : Promise.resolve(null)
-        ]);
-
-        const canvas=document.createElement('canvas');
-        canvas.width=1600;
-        canvas.height=1000;
-        const ctx=canvas.getContext('2d');
-        const zoneColor=getComputedStyle(root).getPropertyValue('--zone').trim() || '#d7bd8c';
-        const zoneDark=getComputedStyle(root).getPropertyValue('--zone-dark').trim() || '#8f6a32';
-        const zoneSoft=getComputedStyle(root).getPropertyValue('--zone-soft').trim() || '#fff5de';
-        const zoneRgb=hexToRgb(zoneColor);
-        const darkRgb=hexToRgb(zoneDark);
-
-        const bg=ctx.createLinearGradient(0,0,1600,1000);
-        bg.addColorStop(0,'#fffdf8');
-        bg.addColorStop(.38,'#fff4f7');
-        bg.addColorStop(.72,zoneSoft);
-        bg.addColorStop(1,`rgba(${zoneRgb.r},${zoneRgb.g},${zoneRgb.b},.45)`);
-        ctx.fillStyle=bg;
-        roundRect(ctx,0,0,1600,1000,58);
-        ctx.fill();
-
-        ctx.save();
-        roundRect(ctx,36,36,1528,928,42);
-        ctx.strokeStyle=`rgba(${zoneRgb.r},${zoneRgb.g},${zoneRgb.b},.72)`;
-        ctx.lineWidth=4;
-        ctx.stroke();
-        roundRect(ctx,62,62,1476,876,30);
-        ctx.strokeStyle='rgba(255,255,255,.72)';
-        ctx.lineWidth=2;
-        ctx.stroke();
-        ctx.restore();
-
-        for(let i=0;i<26;i++){
-          ctx.globalAlpha=.05;
-          ctx.fillStyle=i%2?zoneColor:'#ffffff';
-          ctx.beginPath();
-          ctx.arc(120+i*62,120+(i%5)*110,80,0,Math.PI*2);
-          ctx.fill();
-        }
-        ctx.globalAlpha=1;
-
-        drawImageContain(ctx,zoneLogo,930,130,500,610,.11);
-        drawImageContain(ctx,edenLogo,1340,80,150,150,1);
-
-        ctx.fillStyle='#202a3a';
-        ctx.font='700 70px Cinzel, Georgia, serif';
-        ctx.fillText('E8’s Eden Academy',610,170);
-        ctx.font='700 26px Cinzel, Georgia, serif';
-        ctx.fillStyle='#765e69';
-        ctx.fillText('STUDENT IDENTITY CARD',614,215);
-
-        ctx.save();
-        roundRect(ctx,115,145,390,540,48);
-        ctx.fillStyle='rgba(255,255,255,.48)';
-        ctx.fill();
-        ctx.strokeStyle=`rgba(${darkRgb.r},${darkRgb.g},${darkRgb.b},.38)`;
-        ctx.lineWidth=5;
-        ctx.stroke();
-        ctx.clip();
-        if(photoImg){
-          drawImageCover(ctx,photoImg,115,145,390,540);
-        }else{
-          ctx.fillStyle='rgba(170,150,150,.18)';
-          ctx.fillRect(115,145,390,540);
-          ctx.fillStyle='rgba(70,56,62,.25)';
-          ctx.font='130px Georgia, serif';
-          ctx.textAlign='center';
-          ctx.fillText('♙',310,450);
-          ctx.textAlign='left';
-        }
-        ctx.restore();
-
-        drawImageContain(ctx,zoneLogo,255,705,130,130,1);
-
-        const fields=[
-          ['STUDENT ID',studentId.textContent],
-          ['NAME',cardName.textContent],
-          ['LEVEL','YEAR 1']
-        ];
-        ctx.font='800 24px Noto Sans Thai, Arial, sans-serif';
-        fields.forEach((item,index)=>{
-          const y=305+index*92;
-          ctx.fillStyle='#705764';
-          ctx.fillText(item[0],610,y);
-          ctx.strokeStyle=`rgba(${darkRgb.r},${darkRgb.g},${darkRgb.b},.38)`;
-          ctx.lineWidth=2;
-          ctx.setLineDash([8,8]);
-          ctx.beginPath();
-          ctx.moveTo(830,y+6);
-          ctx.lineTo(1420,y+6);
-          ctx.stroke();
-          ctx.setLineDash([]);
-          ctx.fillStyle='#30262d';
-          ctx.font='800 30px Noto Sans Thai, Arial, sans-serif';
-          ctx.fillText(item[1]||'—',850,y);
-          ctx.font='800 24px Noto Sans Thai, Arial, sans-serif';
-        });
-
-        const sig=ctx.createLinearGradient(610,585,1420,710);
-        sig.addColorStop(0,zoneDark);
-        sig.addColorStop(1,zoneColor);
-        ctx.fillStyle=sig;
-        roundRect(ctx,610,585,810,125,30);
-        ctx.fill();
-        ctx.strokeStyle='rgba(255,255,255,.35)';
-        ctx.lineWidth=2;
-        ctx.stroke();
-        ctx.fillStyle=getComputedStyle(root).getPropertyValue('--signature-color').trim() || '#fff7ec';
-        ctx.textAlign='center';
-        ctx.font='110px Great Vibes, cursive';
-        ctx.fillText(cardDivision.textContent,1015,675);
-        ctx.textAlign='left';
-
-        ctx.fillStyle='#806070';
-        ctx.font='800 20px Noto Sans Thai, Arial, sans-serif';
-        ctx.fillText('ISSUE DATE',112,875);
-        ctx.fillText(issueDate.textContent,112,910);
-        ctx.fillText('AUTHORIZED SIGNATURE',580,875);
-        ctx.fillText('Eden Office',580,910);
-
-        for(let x=1210;x<1450;x+=10){
-          const w=[3,5,2,7,4][x%5];
-          ctx.fillStyle='rgba(42,37,37,.72)';
-          ctx.fillRect(x,840,w,82);
-        }
-
-        ctx.fillStyle='rgba(75,54,64,.86)';
-        ctx.font='700 25px Noto Sans Thai, Arial, sans-serif';
-        wrapText(ctx,reason.value.trim() || 'Student Registration • E8’s Eden Academy',610,785,790,38,3);
+        const dataUrl=await createCardDataURL();
+        const imageBox=document.getElementById('generatedCardBox');
+        const generatedImg=document.getElementById('generatedCardImage');
+        const openLink=document.getElementById('openCardImage');
+        generatedImg.src=dataUrl;
+        openLink.href=dataUrl;
+        imageBox.classList.add('show');
 
         const link=document.createElement('a');
         link.download=`E8-student-card-${studentId.textContent}.png`;
-        link.href=canvas.toDataURL('image/png');
+        link.href=dataUrl;
         document.body.appendChild(link);
         link.click();
         link.remove();
+        showModal('สร้างบัตรเรียบร้อย','ระบบสร้างรูปบัตรไว้ด้านล่างแล้วค่ะ ถ้าไฟล์ไม่เด้งดาวน์โหลด ให้กดปุ่ม “เปิดรูปบัตร” แล้วบันทึกรูปได้เลย');
       }catch(error){
         console.error(error);
-        showModal('ดาวน์โหลดไม่สำเร็จ','ระบบสร้างบัตรไม่ผ่านค่ะ ลองกดเลือกโซนใหม่อีกครั้ง หรือเช็กว่าไฟล์ eden.png และ e2-e8.png อยู่ใน repo แล้วค่ะ');
+        showModal('สร้างรูปไม่สำเร็จ','ระบบสร้างรูปบัตรไม่ผ่านค่ะ แต่ข้อมูลยังถูกเก็บไว้ ลองรีเฟรชแล้วกดใหม่ได้เลยค่ะ');
       }finally{
         downloadCardBtn.disabled=false;
         downloadCardBtn.textContent=oldText;
@@ -599,16 +637,22 @@
       });
     });
 
-    const saved=localStorage.getItem('e8StudentApplication');
-    if(saved){
+    function restoreSavedData(){
+      const saved=localStorage.getItem('e8StudentApplication');
+      const draft=localStorage.getItem('e8StudentDraft');
+      const source=saved || draft;
+      if(!source)return;
       try{
-        const data=JSON.parse(saved);
+        const data=JSON.parse(source);
         displayName.value=data.displayName||'';
         nickname.value=data.nickname||'';
         reason.value=data.reason||'';
         reasonCount.textContent=reason.value.length;
         updateName();
-        if(data.studentId) studentId.textContent=data.studentId;
+        if(data.studentId){
+          studentId.textContent=data.studentId;
+          localStorage.setItem('e8StudentId',data.studentId);
+        }
         if(data.zone){
           const target=[...zones].find(z=>z.dataset.zone===data.zone);
           if(target) applyZone(target);
@@ -622,10 +666,13 @@
           photoPlus.style.display='none';
           cardSilhouette.style.display='none';
         }
-        statusText.textContent=`พบใบสมัครเดิมของ ${data.displayName||'นักเรียน'} เลขบัตรคือ ${data.studentId||'-'} สถานะปัจจุบันคือ “รอตรวจสอบ”`;
-        statusCard.classList.add('show');
+        if(saved){
+          statusText.textContent=`พบใบสมัครเดิมของ ${data.displayName||'นักเรียน'} เลขบัตรคือ ${data.studentId||'-'} สถานะปัจจุบันคือ “รอตรวจสอบ”`;
+          statusCard.classList.add('show');
+        }
       }catch(e){}
     }
+    restoreSavedData();
   </script>
 </body>
 </html>
