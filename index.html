@@ -547,44 +547,88 @@
     }
 
     .zone-card {
-      min-height: 150px;
-      border-radius: 24px;
-      padding: 14px 10px;
+      position: relative;
+      min-height: 168px;
+      border-radius: 28px;
+      padding: 16px 12px;
       display: grid;
       place-items: center;
       text-align: center;
-      border: 1px solid rgba(255,255,255,.70);
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,.22), 0 10px 18px rgba(42,25,10,.10);
-      background: var(--zone-bg);
+      overflow: hidden;
+      border: 1px solid var(--zone-border);
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,.32),
+        inset 0 18px 30px rgba(255,255,255,.18),
+        0 16px 26px rgba(42,25,10,.13);
+      background:
+        radial-gradient(circle at 50% 8%, rgba(255,255,255,.34), transparent 34%),
+        linear-gradient(160deg, rgba(255,255,255,.22), rgba(255,255,255,0) 42%),
+        var(--zone-bg);
       transition: .18s ease;
     }
 
+    .zone-card::before {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.35);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .zone-card::after {
+      content: "";
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      right: -45px;
+      top: -48px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.20);
+      filter: blur(1px);
+      pointer-events: none;
+    }
+
     .zone-card:hover {
-      transform: translateY(-3px);
+      transform: translateY(-4px);
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,.36),
+        inset 0 18px 30px rgba(255,255,255,.20),
+        0 22px 36px rgba(42,25,10,.18);
     }
 
     .zone-card img {
-      width: 72px;
-      height: 72px;
+      position: relative;
+      z-index: 2;
+      width: 78px;
+      height: 78px;
       object-fit: contain;
-      border-radius: 16px;
-      filter: drop-shadow(0 8px 12px rgba(34,20,10,.18));
-      margin-bottom: 8px;
+      border-radius: 18px;
+      background: rgba(10,10,10,.28);
+      border: 1px solid rgba(255,255,255,.34);
+      padding: 5px;
+      filter: drop-shadow(0 10px 14px rgba(24,14,8,.28));
+      margin-bottom: 9px;
     }
 
     .zone-card b {
+      position: relative;
+      z-index: 2;
       color: var(--zone-text);
       font-size: 13px;
+      font-weight: 900;
+      text-shadow: 0 1px 8px var(--zone-glow);
     }
 
-    .z1 { --zone-bg: linear-gradient(145deg,#0a315f,#0d1d36); --zone-text: #f7fbff; }
-    .z2 { --zone-bg: linear-gradient(145deg,#f4b7c7,#fff0f4); --zone-text: #8b3f59; }
-    .z3 { --zone-bg: linear-gradient(145deg,#436f4c,#c2dab2); --zone-text: #223f27; }
-    .z4 { --zone-bg: linear-gradient(145deg,#bee3f6,#f2fbff); --zone-text: #315f7c; }
-    .z5 { --zone-bg: linear-gradient(145deg,#f3ddbd,#fff8ea); --zone-text: #765532; }
-    .z6 { --zone-bg: linear-gradient(145deg,#58317c,#b18bd5); --zone-text: #fff8ff; }
-    .z7 { --zone-bg: linear-gradient(145deg,#9a2528,#dc776b); --zone-text: #fff7ec; }
-    .z8 { --zone-bg: linear-gradient(145deg,#222,#505050); --zone-text: #fff8ee; }
+    .z1 { --zone-bg: linear-gradient(145deg,#061a34 0%,#0b3769 48%,#123f75 100%); --zone-border: rgba(124,184,228,.58); --zone-text: #eff9ff; --zone-glow: rgba(0,23,55,.55); }
+    .z2 { --zone-bg: linear-gradient(145deg,#f8efe0 0%,#d8c2a6 48%,#fff8e9 100%); --zone-border: rgba(218,181,122,.70); --zone-text: #5d4833; --zone-glow: rgba(255,255,255,.50); }
+    .z3 { --zone-bg: linear-gradient(145deg,#6c171b 0%,#a8262d 50%,#d77766 100%); --zone-border: rgba(246,180,135,.62); --zone-text: #fff6e8; --zone-glow: rgba(70,0,0,.60); }
+    .z4 { --zone-bg: linear-gradient(145deg,#1f4d2e 0%,#4f8256 50%,#bfd9ac 100%); --zone-border: rgba(210,232,185,.62); --zone-text: #f2ffe9; --zone-glow: rgba(14,50,18,.60); }
+    .z5 { --zone-bg: linear-gradient(145deg,#32184f 0%,#67358d 52%,#b184d0 100%); --zone-border: rgba(217,184,246,.60); --zone-text: #fff6ff; --zone-glow: rgba(31,0,54,.65); }
+    .z6 { --zone-bg: linear-gradient(145deg,#e7a0b4 0%,#f5c5d1 52%,#fff0f4 100%); --zone-border: rgba(255,218,226,.74); --zone-text: #833f55; --zone-glow: rgba(255,255,255,.50); }
+    .z7 { --zone-bg: linear-gradient(145deg,#9ccbe8 0%,#cfeaf8 48%,#f6fbff 100%); --zone-border: rgba(196,230,249,.78); --zone-text: #315a78; --zone-glow: rgba(255,255,255,.55); }
+    .z8 { --zone-bg: linear-gradient(145deg,#8b6a3b 0%,#d9b878 48%,#fff4d9 100%); --zone-border: rgba(255,226,167,.78); --zone-text: #4d3519; --zone-glow: rgba(255,255,255,.48); }
 
     .footer {
       margin-top: 38px;
