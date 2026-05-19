@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>E8’s Eden Academy | School News</title>
 
   <style>
@@ -19,19 +19,11 @@
       --line: rgba(201, 164, 106, 0.32);
       --ink: #2b2224;
       --muted: #806f66;
-      --rose: #cf8f8f;
       --shadow: 0 18px 45px rgba(35, 21, 10, 0.16);
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
     body {
       min-height: 100vh;
@@ -57,9 +49,18 @@
       z-index: 0;
     }
 
-    .site {
-      position: relative;
-      z-index: 1;
+    .site { position: relative; z-index: 1; }
+
+    .site::after {
+      content: "✦";
+      position: fixed;
+      right: 7vw;
+      top: 18vh;
+      z-index: 2;
+      color: rgba(201,164,106,.30);
+      font-size: 18px;
+      pointer-events: none;
+      animation: pageSparkle 5.2s ease-in-out infinite;
     }
 
     .site-header {
@@ -84,14 +85,8 @@
       font-family: serif;
     }
 
-    .site-header::before {
-      left: 16px;
-      transform: rotate(180deg);
-    }
-
-    .site-header::after {
-      right: 16px;
-    }
+    .site-header::before { left: 16px; transform: rotate(180deg); }
+    .site-header::after { right: 16px; }
 
     .header-inner {
       width: min(1320px, calc(100% - 40px));
@@ -104,12 +99,7 @@
       padding: 10px 0;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      min-width: 0;
-    }
+    .brand { display: flex; align-items: center; gap: 18px; min-width: 0; }
 
     .brand-logo {
       width: 106px;
@@ -120,8 +110,8 @@
       padding: 0;
       border: 0;
       box-shadow: none;
-      flex: 0 0 auto;
       filter: drop-shadow(0 8px 14px rgba(0,0,0,.18));
+      flex: 0 0 auto;
     }
 
     .brand h1 {
@@ -152,25 +142,9 @@
       font-size: 14px;
     }
 
-    .main-nav {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    button, a {
-      font-family: inherit;
-    }
-
-    .nav-link,
-    .header-apply {
-      border: 0;
-      cursor: pointer;
-      text-decoration: none;
-      white-space: nowrap;
-    }
+    .main-nav { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
+    button, a { font-family: inherit; }
+    .nav-link, .header-apply { border: 0; cursor: pointer; text-decoration: none; white-space: nowrap; }
 
     .nav-link {
       color: rgba(255, 249, 236, .84);
@@ -200,6 +174,7 @@
       background: linear-gradient(180deg, #2e405f, #132642);
       border: 1px solid rgba(240, 211, 156, .70);
       box-shadow: inset 0 0 0 2px rgba(255,255,255,.05), 0 8px 18px rgba(0,0,0,.22);
+      animation: softPulse 3.4s ease-in-out infinite;
     }
 
     main {
@@ -224,6 +199,7 @@
       border-radius: 30px;
       box-shadow: var(--shadow);
       backdrop-filter: blur(14px);
+      animation: cardArrive .62s ease both;
     }
 
     .panel,
@@ -251,18 +227,9 @@
       pointer-events: none;
     }
 
-    .hero-card {
-      min-height: 360px;
-      padding: 42px;
-    }
-
-    .dark-card {
-      padding: 30px;
-    }
-
-    .panel {
-      padding: 24px;
-    }
+    .hero-card { min-height: 360px; padding: 42px; }
+    .dark-card { padding: 30px; }
+    .panel { padding: 24px; }
 
     .eyebrow {
       width: fit-content;
@@ -292,9 +259,7 @@
       max-width: 760px;
     }
 
-    .hero h2 span {
-      color: #7f5730;
-    }
+    .hero h2 span { color: #7f5730; }
 
     .hero p,
     .section-title p {
@@ -305,12 +270,7 @@
       max-width: 760px;
     }
 
-    .hero-actions {
-      margin-top: 28px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
+    .hero-actions { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 12px; }
 
     .btn {
       display: inline-flex;
@@ -328,22 +288,28 @@
       transition: .18s ease;
     }
 
-    .btn:hover {
-      transform: translateY(-2px);
-    }
+    .btn:hover { transform: translateY(-2px); }
 
     .btn-primary {
+      position: relative;
+      overflow: hidden;
       color: #fff4dc;
       background: linear-gradient(180deg, #172d4c, #09182b);
       border: 1px solid rgba(226, 194, 136, .72);
       box-shadow: 0 10px 24px rgba(8,18,32,.20);
     }
 
-    .btn-soft {
-      color: #6d4b2d;
-      background: rgba(255,255,255,.78);
-      border: 1px solid rgba(191, 142, 81, .36);
+    .btn-primary::after {
+      content: "";
+      position: absolute;
+      inset: -40% -80%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.22), transparent);
+      transform: translateX(-60%);
+      animation: buttonShine 3.6s ease-in-out infinite;
+      pointer-events: none;
     }
+
+    .btn-soft { color: #6d4b2d; background: rgba(255,255,255,.78); border: 1px solid rgba(191, 142, 81, .36); }
 
     .notice-label {
       color: #ffe7b5;
@@ -384,18 +350,9 @@
       font-size: 14px;
     }
 
-    .status-row:last-child {
-      border-bottom: 0;
-    }
-
-    .status-row b {
-      color: #fff2d5;
-    }
-
-    .status-row span {
-      color: rgba(255,255,255,.70);
-      text-align: right;
-    }
+    .status-row:last-child { border-bottom: 0; }
+    .status-row b { color: #fff2d5; }
+    .status-row span { color: rgba(255,255,255,.70); text-align: right; }
 
     .section-title {
       margin: 34px 0 18px;
@@ -405,10 +362,7 @@
       gap: 18px;
     }
 
-    .section-title h2 {
-      font-size: clamp(28px, 3.4vw, 44px);
-      line-height: 1.15;
-    }
+    .section-title h2 { font-size: clamp(28px, 3.4vw, 44px); line-height: 1.15; }
 
     .news-layout {
       display: grid;
@@ -417,25 +371,15 @@
       align-items: start;
     }
 
-    .news-list {
+    .news-list,
+    .mini-list {
       position: relative;
       z-index: 1;
       display: grid;
       gap: 14px;
     }
 
-    .news-link {
-      color: inherit;
-      text-decoration: none;
-      display: block;
-    }
-
-    .news-link .news-item {
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.78), rgba(255,250,243,.95)),
-        radial-gradient(circle at 0% 0%, rgba(232, 195, 127, .26), transparent 38%);
-      border-color: rgba(201,164,106,.42);
-    }
+    .news-link { display: block; color: inherit; text-decoration: none; }
 
     .news-item {
       display: grid;
@@ -447,12 +391,22 @@
       border: 1px solid rgba(180,133,80,.22);
       background: rgba(255,255,255,.68);
       transition: .18s ease;
+      animation: itemRise .54s ease both;
     }
 
     .news-item:hover {
       transform: translateY(-2px);
       background: rgba(255,255,255,.92);
       box-shadow: 0 12px 24px rgba(101,67,33,.09);
+    }
+
+    .pinned-news .news-item {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.82), rgba(255,250,243,.96)),
+        radial-gradient(circle at 0% 0%, rgba(232,195,127,.30), transparent 38%);
+      border-color: rgba(201,164,106,.48);
+      box-shadow: 0 10px 28px rgba(151,105,48,.12);
+      animation: pinnedGlow 3.8s ease-in-out infinite;
     }
 
     .news-icon {
@@ -471,21 +425,9 @@
     .news-rose { background: linear-gradient(135deg,#f7cad1,#fff1f4); color:#a94a62; }
     .news-purple { background: linear-gradient(135deg,#d9c7ee,#f7f0ff); color:#6e4a91; }
 
-    .news-item h3 {
-      color: #35262b;
-      font-size: 17px;
-      line-height: 1.36;
-      margin-bottom: 6px;
-    }
+    .news-item h3 { color: #35262b; font-size: 17px; line-height: 1.36; margin-bottom: 6px; }
 
-    .meta {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 8px;
-      color: #8b7a70;
-      font-size: 13px;
-    }
+    .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; color: #8b7a70; font-size: 13px; }
 
     .chip {
       display: inline-flex;
@@ -499,58 +441,22 @@
       font-weight: 800;
     }
 
-    .news-date {
-      min-width: 90px;
-      text-align: right;
-      color: #806e62;
-      font-size: 13px;
-    }
+    .news-date { min-width: 90px; text-align: right; color: #806e62; font-size: 13px; }
+    .news-date b { display: block; color: #162a46; font-size: 20px; line-height: 1.1; }
 
-    .news-date b {
-      display: block;
-      color: #162a46;
-      font-size: 20px;
-      line-height: 1.1;
-    }
-
-    .side-stack {
-      display: grid;
-      gap: 18px;
-    }
-
-    .side-title {
-      position: relative;
-      z-index: 1;
-      margin-bottom: 14px;
-      font-family: "Noto Serif Thai", serif;
-      font-size: 22px;
-    }
-
-    .mini-list {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      gap: 12px;
-    }
+    .side-stack { display: grid; gap: 18px; }
+    .side-title { position: relative; z-index: 1; margin-bottom: 14px; font-family: "Noto Serif Thai", serif; font-size: 22px; }
 
     .mini-card {
       padding: 14px;
       border-radius: 18px;
       border: 1px solid rgba(184,141,85,.22);
       background: rgba(255,255,255,.70);
+      animation: itemRise .54s ease both;
     }
 
-    .mini-card b {
-      display: block;
-      color: #34282a;
-      margin-bottom: 4px;
-    }
-
-    .mini-card span {
-      color: #826f64;
-      font-size: 13px;
-      line-height: 1.55;
-    }
+    .mini-card b { display: block; color: #34282a; margin-bottom: 4px; }
+    .mini-card span { color: #826f64; font-size: 13px; line-height: 1.55; }
 
     .zone-strip {
       position: relative;
@@ -579,6 +485,7 @@
         linear-gradient(160deg, rgba(255,255,255,.12), rgba(255,255,255,0) 45%),
         var(--zone-bg);
       transition: .18s ease;
+      animation: itemRise .54s ease both;
     }
 
     .zone-card::before {
@@ -588,7 +495,6 @@
       border-radius: 22px;
       border: 1px solid rgba(255,255,255,.30);
       pointer-events: none;
-      z-index: 1;
     }
 
     .zone-card:hover {
@@ -631,13 +537,7 @@
     .z7 { --zone-bg: linear-gradient(145deg, #f5fbff 0%, #d8eef8 48%, #add5ea 100%); --zone-border: rgba(186, 223, 241, .82); --zone-text: #4d7893; --zone-glow: rgba(255,255,255,.48); }
     .z8 { --zone-bg: linear-gradient(145deg, #fff7e6 0%, #ecd39a 48%, #c4963f 100%); --zone-border: rgba(236, 206, 138, .84); --zone-text: #6a4716; --zone-glow: rgba(255,255,255,.42); }
 
-    .footer {
-      margin-top: 38px;
-      text-align: center;
-      color: #8a7666;
-      font-size: 13px;
-      line-height: 1.8;
-    }
+    .footer { margin-top: 38px; text-align: center; color: #8a7666; font-size: 13px; line-height: 1.8; }
 
     .modal-backdrop {
       position: fixed;
@@ -648,12 +548,10 @@
       padding: 20px;
       background: rgba(5, 13, 26, .62);
       backdrop-filter: blur(8px);
-      animation: modalFadeIn .42s ease both;
+      animation: modalBackdropIn .35s ease both;
     }
 
-    .modal-backdrop.hide {
-      display: none;
-    }
+    .modal-backdrop.hide { display: none; }
 
     .welcome-card {
       width: min(560px, 100%);
@@ -667,7 +565,9 @@
       box-shadow: 0 28px 80px rgba(0,0,0,.30);
       text-align: center;
       overflow: hidden;
-      animation: welcomePop .68s cubic-bezier(.18,.86,.25,1.16) both, welcomeFloat 4.8s ease-in-out .75s infinite;
+      animation:
+        modalPop .72s cubic-bezier(.18,.9,.24,1.12) both,
+        modalFloat 4.8s ease-in-out .9s infinite;
     }
 
     .welcome-card::before {
@@ -676,17 +576,6 @@
       inset: 12px;
       border: 1px solid rgba(201,164,106,.35);
       border-radius: 24px;
-      pointer-events: none;
-    }
-
-    .welcome-card::after {
-      content: "✦";
-      position: absolute;
-      left: 34px;
-      top: 32px;
-      color: rgba(201,164,106,.58);
-      font-size: 20px;
-      animation: sparkleMove 2.4s ease-in-out infinite;
       pointer-events: none;
     }
 
@@ -699,8 +588,7 @@
       border: 0;
       margin-bottom: 14px;
       box-shadow: none;
-      filter: drop-shadow(0 8px 14px rgba(0,0,0,.12));
-      animation: crestFloat 3.2s ease-in-out .8s infinite;
+      animation: logoFloat 3.8s ease-in-out infinite;
     }
 
     .welcome-card h2 {
@@ -734,13 +622,7 @@
       font-size: 15px;
     }
 
-    .modal-actions {
-      margin-top: 22px;
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
+    .modal-actions { margin-top: 22px; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
 
     .close-modal {
       position: absolute;
@@ -756,106 +638,40 @@
       cursor: pointer;
       font-size: 18px;
       font-weight: 800;
+      transition: .18s ease;
     }
 
-    @keyframes modalFadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+    .close-modal:hover { transform: rotate(90deg) scale(1.04); background: rgba(255,255,255,.92); }
 
-    @keyframes welcomePop {
-      0% { opacity: 0; transform: translateY(26px) scale(.94); }
-      65% { opacity: 1; transform: translateY(-4px) scale(1.015); }
-      100% { opacity: 1; transform: translateY(0) scale(1); }
-    }
-
-    @keyframes welcomeFloat {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
-    }
-
-    @keyframes crestFloat {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-5px) rotate(-1deg); }
-    }
-
-    @keyframes sparkleMove {
-      0%, 100% { opacity: .38; transform: translate(0,0) scale(.9); }
-      50% { opacity: 1; transform: translate(8px,-6px) scale(1.18); }
-    }
+    @keyframes modalBackdropIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes modalPop { from { opacity: 0; transform: translateY(22px) scale(.94); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    @keyframes modalFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+    @keyframes logoFloat { 0%, 100% { transform: translateY(0); filter: drop-shadow(0 8px 14px rgba(0,0,0,.14)); } 50% { transform: translateY(-5px); filter: drop-shadow(0 13px 18px rgba(0,0,0,.18)); } }
+    @keyframes pinnedGlow { 0%, 100% { box-shadow: 0 10px 28px rgba(151,105,48,.12); } 50% { box-shadow: 0 16px 36px rgba(201,164,106,.26); } }
+    @keyframes softPulse { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
+    @keyframes buttonShine { 0%, 55% { transform: translateX(-70%); opacity: 0; } 65% { opacity: 1; } 100% { transform: translateX(70%); opacity: 0; } }
+    @keyframes cardArrive { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes itemRise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pageSparkle { 0%, 100% { opacity: .20; transform: translateY(0) rotate(0deg) scale(.9); } 50% { opacity: .72; transform: translateY(-18px) rotate(18deg) scale(1.25); } }
 
     @media (max-width: 1120px) {
-      .header-inner {
-        grid-template-columns: 1fr;
-        gap: 12px;
-        padding: 14px 0 18px;
-      }
-
-      .main-nav {
-        justify-content: flex-start;
-      }
-
-      .header-apply {
-        width: fit-content;
-      }
-
-      .hero,
-      .news-layout {
-        grid-template-columns: 1fr;
-      }
-
-      .zone-strip {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-      }
+      .header-inner { grid-template-columns: 1fr; gap: 12px; padding: 14px 0 18px; }
+      .main-nav { justify-content: flex-start; }
+      .header-apply { width: fit-content; }
+      .hero, .news-layout { grid-template-columns: 1fr; }
+      .zone-strip { grid-template-columns: repeat(4, minmax(0, 1fr)); }
     }
 
     @media (max-width: 680px) {
-      .header-inner,
-      main {
-        width: min(100% - 24px, 1320px);
-      }
-
-      .brand-logo {
-        width: 78px;
-        height: 72px;
-      }
-
-      .brand h1 {
-        font-size: 24px;
-        white-space: normal;
-      }
-
-      .academy-word {
-        letter-spacing: 5px;
-      }
-
-      .hero-card,
-      .dark-card,
-      .panel {
-        border-radius: 24px;
-        padding: 22px;
-      }
-
-      .section-title {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .news-item {
-        grid-template-columns: auto minmax(0, 1fr);
-      }
-
-      .news-date {
-        grid-column: 1 / -1;
-        text-align: left;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .zone-strip {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
+      .header-inner, main { width: min(100% - 24px, 1320px); }
+      .brand-logo { width: 78px; height: 72px; }
+      .brand h1 { font-size: 24px; white-space: normal; }
+      .academy-word { letter-spacing: 5px; }
+      .hero-card, .dark-card, .panel { border-radius: 24px; padding: 22px; }
+      .section-title { flex-direction: column; align-items: flex-start; }
+      .news-item { grid-template-columns: auto minmax(0, 1fr); }
+      .news-date { grid-column: 1 / -1; text-align: left; display: flex; align-items: center; gap: 8px; }
+      .zone-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
   </style>
 </head>
@@ -864,7 +680,7 @@
   <div class="modal-backdrop" id="welcomeModal">
     <section class="welcome-card" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle">
       <button class="close-modal" type="button" id="closeModal" aria-label="ปิดหน้าต่าง">×</button>
-      <img src="./eden.png" alt="E8’s Eden Academy">
+      <img src="./eden.png" alt="E8’s Eden Academy" />
       <h2 id="welcomeTitle">
         <span class="welcome-th">ยินดีต้อนรับสู่</span>
         <span class="welcome-en">E8’s Eden Academy</span>
@@ -883,7 +699,7 @@
     <header class="site-header">
       <div class="header-inner">
         <div class="brand">
-          <img src="./eden.png" alt="E8’s Eden Academy" class="brand-logo">
+          <img src="./eden.png" alt="E8’s Eden Academy" class="brand-logo" />
           <div>
             <h1>E8’s Eden Academy</h1>
             <span class="academy-word">ACADEMY</span>
@@ -940,20 +756,20 @@
             <h2>ข่าวสารโรงเรียน</h2>
             <p>ประกาศล่าสุดจากฝ่ายทะเบียนและสภานักเรียน</p>
           </div>
-          <a class="btn btn-soft" href="#zones">ดูโซนทั้งหมด</a>
+          <a class="btn btn-soft" href="./board.html">เข้ากระดานนักเรียน</a>
         </div>
 
         <div class="news-layout">
           <section class="panel">
             <div class="news-list">
-              <a class="news-link" href="./board.html#owners">
+              <a class="news-link pinned-news" href="./board.html#owners">
                 <article class="news-item">
                   <div class="news-icon news-gold">📌</div>
                   <div>
                     <h3>โฉมหน้าของเจ้าของปราสาททั้ง 7 โซน</h3>
-                    <div class="meta"><span class="chip">ปักหมุด</span><span>กระดานนักเรียน</span><span>อัปเดตล่าสุด</span></div>
+                    <div class="meta"><span class="chip">ปักหมุดใหม่</span><span>กระดานนักเรียน</span><span>อัปเดตล่าสุด</span></div>
                   </div>
-                  <div class="news-date"><b>BOARD</b>อ่านกระทู้</div>
+                  <div class="news-date"><b>PIN</b>เปิดอ่าน</div>
                 </article>
               </a>
 
@@ -999,14 +815,8 @@
             <section class="panel" id="member">
               <h3 class="side-title">สมาชิกนักเรียน</h3>
               <div class="mini-list">
-                <div class="mini-card">
-                  <b>สมัครสมาชิกก่อนใช้งานระบบ</b>
-                  <span>ใช้สำหรับเช็คข่าวสารส่วนตัว ตารางเรียน และกิจกรรมของโซน</span>
-                </div>
-                <div class="mini-card">
-                  <b>เลือกสัญลักษณ์ประจำตัว</b>
-                  <span>หลังสมัครแล้วสามารถเลือกสัญลักษณ์ E1 - E8 ได้</span>
-                </div>
+                <div class="mini-card"><b>สมัครสมาชิกก่อนใช้งานระบบ</b><span>ใช้สำหรับเช็คข่าวสารส่วนตัว ตารางเรียน และกิจกรรมของโซน</span></div>
+                <div class="mini-card"><b>เลือกสัญลักษณ์ประจำตัว</b><span>หลังสมัครแล้วสามารถเลือกสัญลักษณ์ E1 - E8 ได้</span></div>
                 <a class="btn btn-primary" href="#schedule">เช็คตารางเรียน</a>
               </div>
             </section>
@@ -1014,14 +824,8 @@
             <section class="panel" id="schedule">
               <h3 class="side-title">ตารางเรียน</h3>
               <div class="mini-list">
-                <div class="mini-card">
-                  <b>ตารางเรียนแยกตามโซน</b>
-                  <span>ระบบจะแสดงตารางเรียนตามสัญลักษณ์ที่เลือกหลังสมัครสมาชิก</span>
-                </div>
-                <div class="mini-card">
-                  <b>ประกาศจากฝ่ายวิชาการ</b>
-                  <span>กำหนดการและห้องเรียนอาจมีการอัปเดตตามรอบประกาศ</span>
-                </div>
+                <div class="mini-card"><b>ตารางเรียนแยกตามโซน</b><span>ระบบจะแสดงตารางเรียนตามสัญลักษณ์ที่เลือกหลังสมัครสมาชิก</span></div>
+                <div class="mini-card"><b>ประกาศจากฝ่ายวิชาการ</b><span>กำหนดการและห้องเรียนอาจมีการอัปเดตตามรอบประกาศ</span></div>
               </div>
             </section>
           </aside>
@@ -1038,20 +842,20 @@
 
         <section class="panel">
           <div class="zone-strip">
-            <div class="zone-card z1"><img src="./e1.png" alt="E1"><b>E1 Zone</b></div>
-            <div class="zone-card z2"><img src="./e2.png" alt="E2"><b>E2 Zone</b></div>
-            <div class="zone-card z3"><img src="./e3.png" alt="E3"><b>E3 Zone</b></div>
-            <div class="zone-card z4"><img src="./e4.png" alt="E4"><b>E4 Zone</b></div>
-            <div class="zone-card z5"><img src="./e5.png" alt="E5"><b>E5 Zone</b></div>
-            <div class="zone-card z6"><img src="./e6.png" alt="E6"><b>E6 Zone</b></div>
-            <div class="zone-card z7"><img src="./e7.png" alt="E7"><b>E7 Zone</b></div>
-            <div class="zone-card z8"><img src="./e8.png" alt="E8"><b>E8 Zone</b></div>
+            <div class="zone-card z1"><img src="./e1.png" alt="E1" /><b>E1 Zone</b></div>
+            <div class="zone-card z2"><img src="./e2.png" alt="E2" /><b>E2 Zone</b></div>
+            <div class="zone-card z3"><img src="./e3.png" alt="E3" /><b>E3 Zone</b></div>
+            <div class="zone-card z4"><img src="./e4.png" alt="E4" /><b>E4 Zone</b></div>
+            <div class="zone-card z5"><img src="./e5.png" alt="E5" /><b>E5 Zone</b></div>
+            <div class="zone-card z6"><img src="./e6.png" alt="E6" /><b>E6 Zone</b></div>
+            <div class="zone-card z7"><img src="./e7.png" alt="E7" /><b>E7 Zone</b></div>
+            <div class="zone-card z8"><img src="./e8.png" alt="E8" /><b>E8 Zone</b></div>
           </div>
         </section>
       </section>
 
       <footer class="footer">
-        E8’s Eden Academy © Admission Portal<br>
+        E8’s Eden Academy © Admission Portal<br />
         Student Registration • School News • Zone Schedule
       </footer>
     </main>
@@ -1063,17 +867,33 @@
       var closeModal = document.getElementById("closeModal");
       var continueSite = document.getElementById("continueSite");
 
-      function hideModal() {
+      var isLogoutPage =
+        window.location.search.includes("logout=1") ||
+        window.location.hash === "#logout";
+
+      var hasSeenWelcome = localStorage.getItem("edenWelcomeSeen") === "yes";
+
+      if (modal && hasSeenWelcome && !isLogoutPage) {
         modal.classList.add("hide");
       }
 
-      closeModal.addEventListener("click", hideModal);
-      continueSite.addEventListener("click", hideModal);
+      function hideModal() {
+        if (!modal) return;
+        modal.classList.add("hide");
+        localStorage.setItem("edenWelcomeSeen", "yes");
+      }
 
-      var memberLink = modal.querySelector("a[href='#member']");
-      memberLink.addEventListener("click", function () {
-        hideModal();
-      });
+      if (closeModal) closeModal.addEventListener("click", hideModal);
+      if (continueSite) continueSite.addEventListener("click", hideModal);
+
+      if (modal) {
+        var memberLink = modal.querySelector("a[href='#member']");
+        if (memberLink) {
+          memberLink.addEventListener("click", function () {
+            hideModal();
+          });
+        }
+      }
 
       var navLinks = document.querySelectorAll(".nav-link");
       navLinks.forEach(function (link) {
