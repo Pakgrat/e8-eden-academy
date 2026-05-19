@@ -1031,5 +1031,220 @@
       renderTrack();
     });
   </script>
+  <script>
+    /* E8 Eden safe patch: slider + music controls. Do not remove existing code. */
+    (function(){
+      function ready(fn){
+        if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", fn);
+        else fn();
+      }
+
+      ready(function(){
+        /* ---------- announcement image slider ---------- */
+        const slideFiles = ["1.png","2.png","3.png","4.png","5.png","6.png","7.png","8.png"];
+        const slideImg = document.getElementById("announcementSlide");
+        const slideNow = document.getElementById("slideNow");
+        const dotsWrap = document.getElementById("slideDots");
+        const prevSlideBtn = document.querySelector(".slide-btn.prev");
+        const nextSlideBtn = document.querySelector(".slide-btn.next");
+        let e8SlideIndex = 0;
+        let e8SlideTimer = null;
+
+        function paintSlide(){
+          if(!slideImg) return;
+          slideImg.src = slideFiles[e8SlideIndex];
+          slideImg.alt = "ภาพประกาศจากสถาบัน " + (e8SlideIndex + 1);
+          if(slideNow) slideNow.textContent = String(e8SlideIndex + 1);
+          if(dotsWrap){
+            [...dotsWrap.querySelectorAll("button")].forEach(function(dot, i){
+              dot.classList.toggle("active", i === e8SlideIndex);
+            });
+          }
+        }
+
+        function goSlide(nextIndex){
+          e8SlideIndex = (nextIndex + slideFiles.length) % slideFiles.length;
+          paintSlide();
+        }
+
+        function makeDots(){
+          if(!dotsWrap) return;
+          dotsWrap.innerHTML = "";
+          slideFiles.forEach(function(_, i){
+            const dot = document.createElement("button");
+            dot.type = "button";
+            dot.className = "dot" + (i === e8SlideIndex ? " active" : "");
+            dot.setAttribute("aria-label", "ไปยังภาพที่ " + (i + 1));
+            dot.addEventListener("click", function(event){
+              event.preventDefault();
+              event.stopPropagation();
+              goSlide(i);
+              restartSlideAuto();
+            });
+            dotsWrap.appendChild(dot);
+          });
+        }
+
+        function restartSlideAuto(){
+          if(e8SlideTimer) clearInterval(e8SlideTimer);
+          e8SlideTimer = setInterval(function(){
+            goSlide(e8SlideIndex + 1);
+          }, 4300);
+        }
+
+        if(slideImg){
+          makeDots();
+          paintSlide();
+          if(prevSlideBtn){
+            prevSlideBtn.onclick = function(event){
+              event.preventDefault();
+              goSlide(e8SlideIndex - 1);
+              restartSlideAuto();
+            };
+          }
+          if(nextSlideBtn){
+            nextSlideBtn.onclick = function(event){
+              event.preventDefault();
+              goSlide(e8SlideIndex + 1);
+              restartSlideAuto();
+            };
+          }
+          restartSlideAuto();
+        }
+
+        /* ---------- music player ---------- */
+        const tracks = [
+          { title:"PLAVE-1232", file:"PLAVE-1232.mp3", video:"seNgeyf93p4", url:"https://www.youtube.com/watch?v=seNgeyf93p4" },
+          { title:"PLAVE-2", file:"Plave-2.mp3", video:"seIrfH92Zkk", url:"https://www.youtube.com/watch?v=seIrfH92Zkk" },
+          { title:"PLAVE-Lunar", file:"PLAVE-Lunar.mp3", video:"HzABxw3MoJ0", url:"https://www.youtube.com/watch?v=HzABxw3MoJ0" },
+          { title:"PLAVE-SO", file:"PLAVE-SO.mp3", video:"K-F7906Jq9U", url:"https://www.youtube.com/watch?v=K-F7906Jq9U" },
+          { title:"borrow", file:"borrow.mp3", video:"eDlYB_e5k3c", url:"https://www.youtube.com/watch?v=eDlYB_e5k3c" },
+          { title:"exoFirstSnow", file:"exoFirstSnow.mp3", video:"h0b4nw7NDhA", url:"https://www.youtube.com/watch?v=h0b4nw7NDhA" },
+          { title:"supernova", file:"supernova.mp3", video:"1o7zm815PqQ", url:"https://www.youtube.com/watch?v=1o7zm815PqQ" }
+        ];
+
+        const audio = document.getElementById("academyAudio");
+        const cover = document.getElementById("musicCover");
+        const title = document.getElementById("musicTitle");
+        const link = document.getElementById("musicYoutube");
+        const playBtn = document.getElementById("musicPlayBtn");
+        const randomBtn = document.getElementById("musicRandomBtn");
+        const prevBtn = document.getElementById("musicPrevBtn");
+        const nextBtn = document.getElementById("musicNextBtn");
+        const progress = document.getElementById("musicProgress");
+        const disc = document.getElementById("musicDisc");
+        let musicIndex = Math.floor(Math.random() * tracks.length);
+
+        function setMusicUI(isPlaying){
+          if(playBtn) playBtn.textContent = isPlaying ? "❚❚ หยุดเพลง" : "▶ เล่นเพลง";
+          if(disc) disc.classList.toggle("paused", !isPlaying);
+        }
+
+        function loadMusic(index, autoplay){
+          if(!audio) return;
+          musicIndex = (index + tracks.length) % tracks.length;
+          const track = tracks[musicIndex];
+          audio.pause();
+          audio.setAttribute("src", "./" + track.file);
+          audio.load();
+          if(title) title.textContent = track.title;
+          if(cover){
+            cover.src = "https://img.youtube.com/vi/" + track.video + "/hqdefault.jpg";
+            cover.alt = "หน้าปกเพลง " + track.title;
+          }
+          if(link){
+            link.href = track.url;
+            link.textContent = "เปิดหน้าปก / ลิงก์เพลง";
+          }
+          if(progress) progress.style.width = "0%";
+          setMusicUI(false);
+          if(autoplay) playMusic();
+        }
+
+        function playMusic(){
+          if(!audio) return;
+          const result = audio.play();
+          if(result && typeof result.then === "function"){
+            result.then(function(){
+              setMusicUI(true);
+            }).catch(function(){
+              setMusicUI(false);
+              showMusicPopup("เพลงยังไม่เริ่มค่ะ", "เบราว์เซอร์อาจบล็อกเสียงอัตโนมัติ ลองกดปุ่มเล่นเพลงอีกครั้งนะคะ ถ้ายังไม่ได้ให้เช็กชื่อไฟล์ MP3 ใน repo ว่าตรงเป๊ะค่ะ");
+            });
+          }else{
+            setMusicUI(true);
+          }
+        }
+
+        function pauseMusic(){
+          if(!audio) return;
+          audio.pause();
+          setMusicUI(false);
+        }
+
+        function showMusicPopup(head, body){
+          const modal = document.getElementById("feedbackModal");
+          if(!modal) return;
+          const headEl = modal.querySelector("h3");
+          const bodyEl = modal.querySelector("p");
+          if(headEl) headEl.textContent = head;
+          if(bodyEl) bodyEl.textContent = body;
+          modal.classList.add("show");
+          modal.setAttribute("aria-hidden", "false");
+        }
+
+        if(audio){
+          loadMusic(musicIndex, false);
+          if(playBtn){
+            playBtn.onclick = function(event){
+              event.preventDefault();
+              event.stopPropagation();
+              if(audio.paused) playMusic();
+              else pauseMusic();
+            };
+          }
+          if(prevBtn){
+            prevBtn.onclick = function(event){
+              event.preventDefault();
+              event.stopPropagation();
+              loadMusic(musicIndex - 1, true);
+            };
+          }
+          if(nextBtn){
+            nextBtn.onclick = function(event){
+              event.preventDefault();
+              event.stopPropagation();
+              loadMusic(musicIndex + 1, true);
+            };
+          }
+          if(randomBtn){
+            randomBtn.onclick = function(event){
+              event.preventDefault();
+              event.stopPropagation();
+              let next = Math.floor(Math.random() * tracks.length);
+              if(tracks.length > 1){
+                while(next === musicIndex) next = Math.floor(Math.random() * tracks.length);
+              }
+              loadMusic(next, true);
+            };
+          }
+          audio.ontimeupdate = function(){
+            if(progress && audio.duration){
+              progress.style.width = Math.min((audio.currentTime / audio.duration) * 100, 100) + "%";
+            }
+          };
+          audio.onplay = function(){ setMusicUI(true); };
+          audio.onpause = function(){ setMusicUI(false); };
+          audio.onended = function(){
+            let next = Math.floor(Math.random() * tracks.length);
+            if(tracks.length > 1){
+              while(next === musicIndex) next = Math.floor(Math.random() * tracks.length);
+            }
+            loadMusic(next, true);
+          };
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
