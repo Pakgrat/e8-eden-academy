@@ -3,792 +3,112 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>E8’s Eden Academy | Student Board</title>
-
+  <title>กระดานนักเรียน | E8’s Eden Academy</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Noto+Serif+Thai:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Noto+Serif+Thai:wght@500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap');
 
     :root{
-      --navy:#071426;
-      --navy2:#102641;
-      --cream:#f5eadb;
-      --paper:#f8efe3;
-      --paper2:#efe1cf;
-      --gold:#c4a06a;
-      --line:rgba(151,112,70,.34);
-      --ink:#2f2528;
-      --muted:#77665d;
-      --shadow:0 18px 44px rgba(34,22,14,.18);
+      --navy:#071426;--navy2:#102641;--cream:#f5eadb;--paper:#fbf3e8;--paper2:#ead8c0;
+      --gold:#c7a267;--line:rgba(145,105,61,.28);--ink:#302329;--muted:#7b695f;
+      --shadow:0 18px 42px rgba(38,24,13,.16);
     }
-
-    *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
+    *{box-sizing:border-box;margin:0;padding:0} html{scroll-behavior:smooth}
     body{
-      min-height:100vh;
-      font-family:"Noto Sans Thai",sans-serif;
-      color:var(--ink);
-      background:
-        radial-gradient(circle at 12% 4%,rgba(198,160,103,.22),transparent 28%),
-        radial-gradient(circle at 92% 7%,rgba(40,62,88,.20),transparent 32%),
-        linear-gradient(135deg,#d8c7b6 0%,#eee2d2 45%,#cfbda9 100%);
-      overflow-x:hidden;
+      min-height:100vh;font-family:"Noto Sans Thai",sans-serif;color:var(--ink);overflow-x:hidden;
+      background:radial-gradient(circle at 10% 0%,rgba(199,162,103,.28),transparent 30%),linear-gradient(135deg,#d5c0aa,#f2e5d2 48%,#cbb79f);
     }
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.15) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.12) 1px,transparent 1px);background-size:54px 54px;opacity:.42}
+    a{text-decoration:none;color:inherit} button,input,textarea{font-family:inherit}
+    .site{position:relative;z-index:1}.wrap{width:min(1440px,calc(100% - 40px));margin:auto}
 
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      background-image:
-        linear-gradient(rgba(255,255,255,.18) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,.14) 1px,transparent 1px);
-      background-size:54px 54px;
-      opacity:.34;
-      z-index:0;
-    }
+    .topbar{position:sticky;top:0;z-index:50;background:linear-gradient(90deg,#302321 0%,#142238 22%,#071426 64%,#081a32);border-bottom:1px solid rgba(235,205,147,.48);box-shadow:0 12px 30px rgba(4,12,24,.32)}
+    .header{min-height:104px;display:grid;grid-template-columns:minmax(280px,1fr) auto auto;align-items:center;gap:20px;padding:10px 0}
+    .brand{display:flex;align-items:center;gap:16px}.brand img{width:102px;height:88px;object-fit:contain;background:transparent;filter:drop-shadow(0 8px 14px rgba(0,0,0,.24))}
+    .brand h1{font-family:"Cinzel",serif;color:#fff9ee;font-size:clamp(28px,3vw,42px);line-height:1;white-space:nowrap}.brand small{display:block;color:#dcc28d;margin-top:8px;font-weight:700}
+    .nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}.nav a{color:rgba(255,249,236,.84);padding:10px 15px;border-radius:999px;font-size:14px;font-weight:700}.nav a:hover,.nav .active{background:rgba(255,255,255,.12);outline:1px solid rgba(235,205,147,.35);color:#fff}
+    .apply{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 24px;border-radius:999px;color:#ffe9b7;font-weight:900;background:linear-gradient(180deg,#2d405f,#132642);border:1px solid rgba(240,211,156,.70);box-shadow:0 8px 18px rgba(0,0,0,.22)}
 
-    .site{position:relative;z-index:1}
+    main{padding:30px 0 58px}.panel,.article,.comment,.compose,.related{border:1px solid var(--line);box-shadow:var(--shadow);backdrop-filter:blur(14px)}
+    .panel,.article,.comment,.compose,.related{background:linear-gradient(180deg,rgba(252,244,234,.9),rgba(236,222,204,.9));border-radius:30px}.panel{padding:28px}.dark{background:radial-gradient(circle at 20% 0%,rgba(255,224,169,.15),transparent 36%),linear-gradient(180deg,#102641,#071426);color:#fff3db}
+    .hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:22px;align-items:center;margin-bottom:24px}.eyebrow{display:inline-flex;align-items:center;gap:8px;width:max-content;padding:8px 14px;border-radius:999px;background:#102641;color:#ffe6b2;border:1px solid rgba(232,203,145,.45);font-size:13px;font-weight:900;margin-bottom:12px}.eyebrow img{width:22px;height:22px;object-fit:contain}
+    h1,h2,h3{font-family:"Noto Serif Thai",serif}.hero h1{font-size:clamp(36px,4vw,60px);line-height:1.05;color:#fff7e8}.hero p{margin-top:12px;color:rgba(255,246,228,.72);line-height:1.75;max-width:820px}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;min-width:360px}.stat{padding:14px;border-radius:22px;background:rgba(255,255,255,.08);border:1px solid rgba(226,194,136,.24)}.stat b{display:block;color:#ffe7b5;font-family:"Cinzel",serif;font-size:25px;line-height:1}.stat span{color:rgba(255,246,228,.70);font-size:12px;font-weight:800}
 
-    .site-header{
-      position:sticky;
-      top:0;
-      z-index:50;
-      background:
-        radial-gradient(circle at 22% 0%,rgba(255,231,181,.14),transparent 28%),
-        linear-gradient(90deg,#2d2423 0%,#141b27 18%,#071426 58%,#08182f 100%);
-      border-bottom:1px solid rgba(235,205,147,.45);
-      box-shadow:0 12px 30px rgba(4,12,24,.30);
-      overflow:hidden;
-    }
+    .layout{display:grid;grid-template-columns:360px minmax(0,1fr);gap:24px;align-items:start}.side{display:grid;gap:18px;position:sticky;top:130px}.sidebox{padding:20px;border-radius:28px;background:rgba(250,243,232,.76);border:1px solid rgba(151,112,70,.25);box-shadow:0 14px 35px rgba(38,24,13,.12)}.sidebox h3{font-size:24px;margin-bottom:14px}
+    .thread-list{display:grid;gap:12px}.thread{display:grid;grid-template-columns:52px minmax(0,1fr);gap:13px;align-items:center;min-height:78px;padding:12px;border-radius:22px;border:1px solid rgba(151,112,70,.20);background:rgba(246,236,222,.68);cursor:pointer;text-align:left;transition:.18s}.thread:hover,.thread.active{transform:translateY(-2px);background:rgba(255,249,239,.95);box-shadow:0 12px 24px rgba(54,34,18,.10)}.thread.active{outline:2px solid rgba(199,162,103,.34)}.thread img{width:46px;height:46px;object-fit:contain;filter:drop-shadow(0 7px 8px rgba(34,20,9,.12))}.thread b{display:block;font-size:15px;line-height:1.32}.thread span{color:#7f6d62;font-size:12px}
+    .zone-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.zone-mini{display:grid;place-items:center;gap:7px;min-height:108px;padding:12px;border-radius:20px;border:1px solid rgba(151,112,70,.20);background:rgba(246,236,222,.68);transition:.18s}.zone-mini:hover{transform:translateY(-2px);background:#fff9ef}.zone-mini img{width:58px;height:58px;object-fit:contain}.zone-mini b{font-size:13px;color:#5d4a40}
 
-    .site-header::before,.site-header::after{
-      content:"❧";
-      position:absolute;
-      top:10px;
-      color:rgba(235,205,147,.42);
-      font-size:30px;
-      font-family:serif;
-    }
-    .site-header::before{left:16px;transform:rotate(180deg)}
-    .site-header::after{right:16px}
+    .content{display:grid;gap:20px}.article{padding:34px 36px;position:relative;overflow:hidden}.official{display:flex;justify-content:center;margin-bottom:20px}.official img{width:132px;height:132px;object-fit:contain;background:transparent;filter:drop-shadow(0 12px 20px rgba(34,20,9,.12))}
+    .article-head{display:flex;justify-content:space-between;gap:18px;border-bottom:1px solid rgba(151,112,70,.22);padding-bottom:20px;margin-bottom:24px}.title h2{font-size:clamp(30px,3vw,46px);line-height:1.15}.title p{margin-top:8px;color:#7a675d;line-height:1.75}.meta{text-align:right;min-width:150px;color:#7d6a5e;font-size:13px}.meta b{display:block;color:#102641;font-size:25px;font-family:"Cinzel",serif}
+    .cover{margin:22px 0;border-radius:28px;overflow:hidden;border:1px solid rgba(151,112,70,.28);background:rgba(0,0,0,.08);box-shadow:0 14px 35px rgba(38,24,13,.12)}.cover img{display:block;width:100%;height:auto;object-fit:contain;background:rgba(244,231,213,.62)}
+    .body{display:grid;gap:14px;color:#6b5a51;line-height:1.9;font-size:15px}.bodybox{padding:18px 20px;border-radius:22px;background:rgba(250,243,232,.66);border:1px solid rgba(151,112,70,.20)}.bodybox h3{font-size:22px;color:#33262a;margin-bottom:8px}
+    .reacts{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.react{min-height:42px;display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;border:1px solid rgba(151,112,70,.24);background:rgba(250,243,232,.78);font-weight:900;cursor:pointer;transition:.18s}.react:hover{transform:translateY(-2px);background:#fff7eb}
 
-    .header-inner{
-      width:min(1320px,calc(100% - 40px));
-      min-height:106px;
-      margin:0 auto;
-      display:grid;
-      grid-template-columns:minmax(300px,1fr) auto auto;
-      align-items:center;
-      gap:22px;
-      padding:10px 0;
-    }
+    .section-title{display:flex;justify-content:space-between;align-items:end;gap:18px;margin:10px 0 2px}.section-title h2{font-size:clamp(30px,3.4vw,50px);line-height:1.1}.section-title p{margin-top:10px;color:var(--muted);line-height:1.65;font-size:15px}
+    .comments{display:grid;gap:14px}.comment{position:relative;overflow:hidden;padding:18px 20px;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:start;border-radius:24px;transition:.18s}.comment:hover{transform:translateY(-2px);background:rgba(250,243,232,.96);box-shadow:0 16px 30px rgba(38,24,13,.12)}.comment:before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--accent)}
+    .avatar{width:54px;height:54px;border-radius:17px;display:grid;place-items:center;background:var(--bg);border:1px solid rgba(255,255,255,.45);box-shadow:0 10px 18px rgba(34,20,9,.12)}.avatar img{width:42px;height:42px;object-fit:contain}.user{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:7px}.name{font-size:16px;font-weight:900;color:var(--name)}.zone{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:3px 9px;background:var(--pill);color:var(--ptxt);font-size:12px;font-weight:900}.comment p{color:#6b5a51;line-height:1.75;font-size:14px}.like{display:flex;flex-direction:column;align-items:flex-end;gap:8px;min-width:84px;color:#876f61}.like button{border:1px solid rgba(151,112,70,.22);border-radius:999px;background:rgba(250,243,232,.78);padding:7px 12px;color:#8b4c5c;font-weight:900;cursor:pointer}.like button:hover{background:#fff7eb;color:#c85173}.like small{font-size:12px;color:#9a8477}
+    .z1{--accent:#2c7fc0;--bg:linear-gradient(145deg,#071d3d,#5aa7da);--name:#2778b8;--pill:linear-gradient(145deg,#0b315e,#5aa7da);--ptxt:#f4fbff}.z2{--accent:#d7bd8c;--bg:linear-gradient(145deg,#fffdf8,#dcc39b);--name:#9a7a4f;--pill:linear-gradient(145deg,#fff8e8,#dcc39b);--ptxt:#6a5338}.z3{--accent:#a51f33;--bg:linear-gradient(145deg,#4d0812,#c84a58);--name:#ae263b;--pill:linear-gradient(145deg,#7b1221,#c84a58);--ptxt:#fff6f7}.z4{--accent:#9ebf91;--bg:linear-gradient(145deg,#edf5e8,#b8d0a9);--name:#5e8b55;--pill:linear-gradient(145deg,#edf5e8,#b8d0a9);--ptxt:#4f6a46}.z5{--accent:#b494da;--bg:linear-gradient(145deg,#efe7fb,#b494da);--name:#8360bb;--pill:linear-gradient(145deg,#efe7fb,#b494da);--ptxt:#604482}.z6{--accent:#ea9eb5;--bg:linear-gradient(145deg,#fdebf1,#ea9eb5);--name:#c76388;--pill:linear-gradient(145deg,#fdebf1,#ea9eb5);--ptxt:#934f67}.z7{--accent:#8ecbe8;--bg:linear-gradient(145deg,#f5fbff,#add5ea);--name:#4e9cc5;--pill:linear-gradient(145deg,#f5fbff,#add5ea);--ptxt:#4d7893}.z8{--accent:#c4963f;--bg:linear-gradient(145deg,#fff7e6,#c4963f);--name:#a97925;--pill:linear-gradient(145deg,#fff7e6,#c4963f);--ptxt:#6a4716}
 
-    .brand{display:flex;align-items:center;gap:18px;min-width:0}
-    .brand-logo{
-      width:106px;
-      height:92px;
-      object-fit:contain;
-      display:block;
-      background:transparent;
-      border:0;
-      box-shadow:none;
-      filter:drop-shadow(0 8px 14px rgba(0,0,0,.20));
-      flex:0 0 auto;
-    }
-
-    .brand h1{
-      font-family:"Cinzel","Noto Serif Thai",serif;
-      font-size:clamp(28px,3vw,43px);
-      line-height:1;
-      color:#fff9ee;
-      text-shadow:0 0 16px rgba(255,235,190,.14);
-      white-space:nowrap;
-    }
-
-    .academy-word{
-      display:block;
-      width:fit-content;
-      margin-top:8px;
-      padding-bottom:4px;
-      color:rgba(255,255,255,.88);
-      font-family:"Cinzel",serif;
-      font-size:11px;
-      letter-spacing:10px;
-      border-bottom:1px solid rgba(255,255,255,.35);
-    }
-
-    .brand p{margin-top:8px;color:#dcc28d;font-family:"Noto Serif Thai",serif;font-size:14px}
-    .main-nav{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}
-    a,button,input,textarea{font-family:inherit}
-    .nav-link,.header-apply{border:0;cursor:pointer;text-decoration:none;white-space:nowrap}
-
-    .nav-link{
-      color:rgba(255,249,236,.84);
-      background:transparent;
-      padding:10px 15px;
-      border-radius:999px;
-      font-size:14px;
-      transition:.18s ease;
-    }
-
-    .nav-link:hover,.nav-link.active{
-      color:#fff;
-      background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.055));
-      outline:1px solid rgba(235,205,147,.38);
-    }
-
-    .header-apply{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      padding:13px 24px;
-      border-radius:999px;
-      color:#ffe9b7;
-      font-weight:800;
-      background:linear-gradient(180deg,#2e405f,#132642);
-      border:1px solid rgba(240,211,156,.70);
-      box-shadow:inset 0 0 0 2px rgba(255,255,255,.05),0 8px 18px rgba(0,0,0,.22);
-    }
-
-    main{width:min(1320px,calc(100% - 40px));margin:0 auto;padding:30px 0 56px}
-
-    .panel,.hero-card,.dark-card{
-      position:relative;
-      overflow:hidden;
-      border:1px solid var(--line);
-      border-radius:30px;
-      box-shadow:var(--shadow);
-      backdrop-filter:blur(14px);
-    }
-
-    .panel,.hero-card{
-      background:
-        linear-gradient(180deg,rgba(250,241,228,.88),rgba(238,225,207,.90)),
-        radial-gradient(circle at 16% 0%,rgba(199,158,98,.24),transparent 44%);
-    }
-
-    .dark-card{
-      background:
-        radial-gradient(circle at 20% 0%,rgba(255,224,169,.14),transparent 36%),
-        linear-gradient(180deg,rgba(14,31,55,.98),rgba(7,20,38,.98));
-      color:var(--cream);
-    }
-
-    .panel::before,.hero-card::before,.dark-card::before{
-      content:"";
-      position:absolute;
-      inset:12px;
-      border:1px solid rgba(160,118,72,.22);
-      border-radius:24px;
-      pointer-events:none;
-    }
-
-    .hero-board{display:grid;grid-template-columns:minmax(0,.92fr) minmax(360px,1.08fr);gap:22px;align-items:stretch}
-    .hero-card{min-height:390px;padding:42px}
-    .dark-card{padding:30px}
-    .panel{padding:24px}
-
-    .eyebrow{
-      width:fit-content;
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 15px;
-      border-radius:999px;
-      background:rgba(8,24,47,.94);
-      color:#ffe7b5;
-      border:1px solid rgba(232,203,145,.48);
-      font-size:13px;
-      font-weight:800;
-      margin-bottom:18px;
-    }
-
-    h2,h3{font-family:"Noto Serif Thai",serif}
-    .hero-card h2{color:#2d2024;font-size:clamp(36px,5vw,68px);line-height:1.08;letter-spacing:-.7px}
-    .hero-card h2 span{color:#7a5231}
-    .hero-card p,.section-title p{margin-top:14px;color:var(--muted);line-height:1.75;font-size:15px;max-width:760px}
-    .hero-actions{margin-top:28px;display:flex;flex-wrap:wrap;gap:12px}
-
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      min-height:46px;
-      padding:12px 22px;
-      border-radius:999px;
-      border:0;
-      cursor:pointer;
-      font-size:15px;
-      font-weight:800;
-      text-decoration:none;
-      transition:.18s ease;
-    }
-    .btn:hover{transform:translateY(-2px)}
-    .btn-primary{color:#fff4dc;background:linear-gradient(180deg,#172d4c,#09182b);border:1px solid rgba(226,194,136,.72);box-shadow:0 10px 24px rgba(8,18,32,.20)}
-    .btn-soft{color:#66492f;background:rgba(245,236,222,.78);border:1px solid rgba(151,112,70,.30)}
-    .btn-disabled{opacity:.55;cursor:not-allowed;transform:none!important}
-
-    .head-preview{
-      position:relative;
-      z-index:1;
-      height:100%;
-      min-height:390px;
-      display:grid;
-      align-content:end;
-      border-radius:24px;
-      overflow:hidden;
-      background:
-        linear-gradient(180deg,rgba(7,20,38,.08),rgba(7,20,38,.80)),
-        url('./head.png') center / cover no-repeat;
-      border:1px solid rgba(190,150,92,.42);
-    }
-
-    .head-caption{padding:24px;color:#fff7e8;background:linear-gradient(180deg,transparent,rgba(7,20,38,.88))}
-    .head-caption b{font-family:"Noto Serif Thai",serif;font-size:25px;display:block;margin-bottom:6px}
-    .head-caption span{color:rgba(255,247,232,.78);line-height:1.65;font-size:14px}
-
-    .section-title{margin:34px 0 18px;display:flex;align-items:end;justify-content:space-between;gap:18px}
-    .section-title h2{color:#2d2024;font-size:clamp(28px,3.4vw,44px);line-height:1.15;letter-spacing:-.7px}
-
-    .board-layout{display:grid;grid-template-columns:minmax(0,1fr) 350px;gap:22px;align-items:start}
-    .pinned-list,.topic-list,.side-list,.tag-grid,.related-grid{position:relative;z-index:1;display:grid;gap:14px}
-    .pin-card,.topic-card,.side-card,.related-card{border:1px solid rgba(151,112,70,.24);background:rgba(246,236,222,.72);transition:.18s ease}
-
-    .pin-card,.topic-card{
-      display:grid;
-      grid-template-columns:auto minmax(0,1fr) auto;
-      align-items:center;
-      gap:16px;
-      padding:16px;
-      border-radius:22px;
-      cursor:pointer;
-    }
-
-    .pin-card:hover,.topic-card:hover,.related-card:hover{transform:translateY(-2px);background:rgba(248,239,227,.95);box-shadow:0 12px 24px rgba(77,50,25,.10)}
-
-    .pin-icon,.topic-icon{
-      width:58px;
-      height:58px;
-      border-radius:18px;
-      display:grid;
-      place-items:center;
-      border:1px solid rgba(255,255,255,.58);
-      box-shadow:inset 0 0 0 1px rgba(255,255,255,.26),0 8px 18px rgba(42,25,10,.10);
-      background:var(--topic-bg);
-    }
-
-    .topic-icon img{width:42px;height:42px;object-fit:contain;filter:drop-shadow(0 5px 8px rgba(0,0,0,.18))}
-    .pin-icon{font-size:25px;color:#69503b}
-    .pin-card h3,.topic-card h3{color:#35262b;font-size:18px;line-height:1.35;margin-bottom:6px}
-    .meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px;color:#88766b;font-size:13px}
-    .chip,.thread-tag{display:inline-flex;align-items:center;width:fit-content;padding:4px 10px;border-radius:999px;background:rgba(231,205,164,.70);border:1px solid rgba(151,112,70,.18);color:#62472f;font-size:12px;font-weight:800}
-    .topic-count{min-width:92px;text-align:right;color:#806e62;font-size:13px}
-    .topic-count b{display:block;color:#162a46;font-size:20px;line-height:1.1}
-
-    .t1{--topic-bg:linear-gradient(145deg,#071d3d,#5aa7da)}
-    .t2{--topic-bg:linear-gradient(145deg,#fffdf8,#dcc39b)}
-    .t3{--topic-bg:linear-gradient(145deg,#4d0812,#c84a58)}
-    .t4{--topic-bg:linear-gradient(145deg,#edf5e8,#b8d0a9)}
-    .t5{--topic-bg:linear-gradient(145deg,#efe7fb,#b494da)}
-    .t6{--topic-bg:linear-gradient(145deg,#fdebf1,#ea9eb5)}
-    .t7{--topic-bg:linear-gradient(145deg,#f5fbff,#add5ea)}
-    .t8{--topic-bg:linear-gradient(145deg,#fff7e6,#c4963f)}
-    .tpin{--topic-bg:linear-gradient(145deg,#20334c,#d7bf8b)}
-
-    .side-title{position:relative;z-index:1;margin-bottom:14px;font-family:"Noto Serif Thai",serif;font-size:22px}
-    .side-card{padding:14px;border-radius:18px}
-    .side-card b{display:block;color:#34282a;margin-bottom:4px}
-    .side-card span{color:#77665d;font-size:13px;line-height:1.55}
-
-    .thread-page{display:none}
-    .thread-page.active{display:block}
-    .board-page.hide{display:none}
-
-    .thread-head{position:relative;z-index:1;display:grid;grid-template-columns:auto minmax(0,1fr);gap:18px;align-items:center;margin-bottom:20px;padding-bottom:18px;border-bottom:1px solid rgba(151,112,70,.18)}
-    .thread-mark{width:86px;height:86px;border-radius:24px;display:grid;place-items:center;background:var(--topic-bg);border:1px solid rgba(255,255,255,.54);box-shadow:inset 0 0 0 1px rgba(255,255,255,.30),0 10px 22px rgba(42,25,10,.14)}
-    .thread-mark img{width:62px;height:62px;object-fit:contain;filter:drop-shadow(0 8px 10px rgba(0,0,0,.18))}
-    .thread-head h2{font-size:clamp(28px,3.5vw,46px);color:#2d2024;line-height:1.14}
-    .thread-head p{margin-top:8px;color:var(--muted);line-height:1.72}
-
-    .official-banner{
-      position:relative;
-      z-index:1;
-      text-align:center;
-      padding:28px 18px 22px;
-      margin-bottom:18px;
-      border-radius:26px;
-      border:1px solid rgba(151,112,70,.24);
-      background:
-        radial-gradient(circle at 50% 0%,rgba(196,160,106,.28),transparent 44%),
-        linear-gradient(180deg,rgba(235,224,208,.86),rgba(226,211,190,.68));
-    }
-
-    .official-logo{width:126px;max-height:126px;object-fit:contain;display:block;margin:0 auto 12px;background:transparent;filter:drop-shadow(0 10px 18px rgba(12,22,37,.12))}
-    .official-banner .label{font-family:"Cinzel",serif;letter-spacing:3px;color:#87683f;font-size:12px;font-weight:700}
-    .official-banner h3{margin-top:7px;font-size:28px;color:#2a2530}
-
-    .thread-image{position:relative;z-index:1;margin-bottom:18px;border-radius:24px;overflow:hidden;border:1px solid rgba(151,112,70,.24);background:rgba(235,224,208,.62)}
-    .thread-image img{width:100%;display:block;max-height:520px;object-fit:cover}
-
-    .thread-tags{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
-    .thread-tag.important{background:#213a5e;color:#fff0cf;border-color:rgba(240,211,156,.32)}
-    .thread-tag.zone{background:#dfc9eb;color:#5d4176}
-    .thread-tag.social{background:#cfe6d1;color:#426a46}
-    .thread-tag.official{background:#e7cda4;color:#65472f}
-
-    .article-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
-    .article-block{padding:18px;border-radius:22px;background:rgba(246,236,222,.72);border:1px solid rgba(151,112,70,.22)}
-    .article-block.wide{grid-column:1/-1}
-    .article-block h3{font-size:21px;margin-bottom:8px;color:#34282a}
-    .article-block p{color:#6f5d54;line-height:1.82;font-size:14px}
-
-    .name-tags-panel{position:relative;z-index:1;margin:18px 0;padding:18px;border-radius:24px;background:rgba(235,224,208,.62);border:1px solid rgba(151,112,70,.22)}
-    .tag-grid{grid-template-columns:repeat(8,minmax(70px,1fr));align-items:end;text-align:center;gap:12px}
-    .tag-item{padding:8px 6px;border-radius:18px;background:rgba(246,236,222,.58);border:1px solid rgba(151,112,70,.16)}
-    .tag-item img{width:72px;height:72px;object-fit:contain;display:block;margin:0 auto 6px;image-rendering:auto;filter:drop-shadow(0 8px 10px rgba(38,20,8,.12))}
-    .tag-item span{font-size:12px;color:#6d584b;font-weight:800}
-
-    .reactions{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 20px}
-    .react-btn{border:1px solid rgba(151,112,70,.26);background:rgba(246,236,222,.76);border-radius:999px;padding:8px 13px;cursor:pointer;color:#604b40;font-weight:800;transition:.16s ease}
-    .react-btn:hover,.react-btn.active{transform:translateY(-2px);background:#ead7bb;box-shadow:0 8px 18px rgba(86,57,30,.10)}
-
-    .comment-box{position:relative;z-index:1;margin-top:22px;padding:20px;border-radius:24px;background:linear-gradient(180deg,rgba(34,47,66,.95),rgba(22,33,49,.96));border:1px solid rgba(213,176,112,.30);box-shadow:0 14px 32px rgba(14,22,34,.20)}
-    .comment-box h3{color:#fff3d8;font-size:24px;margin-bottom:8px}
-    .comment-box p{color:rgba(255,246,228,.72);line-height:1.65;font-size:14px;margin-bottom:14px}
-    .comment-form{display:grid;gap:12px}
-    .comment-form input,.comment-form textarea{width:100%;border-radius:18px;border:1px solid rgba(218,183,124,.22);background:rgba(255,255,255,.08);color:#fff4dc;padding:13px 15px;outline:none;resize:vertical}
-    .comment-form textarea{min-height:112px}
-    .comment-form input::placeholder,.comment-form textarea::placeholder{color:rgba(255,246,228,.45)}
-    .comment-actions{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-    .login-note{font-size:13px;color:rgba(255,246,228,.62)}
-
-    .related-section{position:relative;z-index:1;margin-top:26px}
-    .related-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
-    .related-card{display:block;text-decoration:none;color:inherit;border-radius:22px;padding:16px}
-    .related-card h3{font-size:18px;color:#33262a;margin:8px 0 8px;line-height:1.35}
-    .related-card p{font-size:13px;color:#77665d;line-height:1.6}
-    .create-thread-card{background:linear-gradient(180deg,rgba(28,43,64,.94),rgba(14,26,43,.96));border-color:rgba(226,194,136,.38);color:#fff4dc}
-    .create-thread-card h3,.create-thread-card p{color:#fff4dc}.create-thread-card p{opacity:.72}
-
-    .student-comments{position:relative;z-index:1;margin-top:24px;display:grid;gap:13px}
-    .student-comment{position:relative;overflow:hidden;border-radius:22px;padding:15px 16px;background:rgba(246,236,222,.72);border:1px solid rgba(151,112,70,.22);box-shadow:0 10px 22px rgba(54,34,18,.08);animation:commentRise .55s ease both;transition:.18s ease}
-    .student-comment:hover{transform:translateY(-2px);background:rgba(248,239,227,.96);box-shadow:0 16px 28px rgba(54,34,18,.12)}
-    .student-comment::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--comment-accent)}
-    .comment-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:9px}
-    .comment-user{display:flex;align-items:center;gap:9px;min-width:0}
-    .avatar-dot{width:30px;height:30px;border-radius:999px;display:grid;place-items:center;background:var(--comment-bg);color:var(--comment-text);font-size:12px;font-weight:900;border:1px solid rgba(255,255,255,.48);box-shadow:0 8px 14px rgba(42,25,10,.10)}
-    .comment-name{font-weight:900;color:var(--comment-name);font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .comment-time{color:#8f7c70;font-size:12px;white-space:nowrap}
-    .student-comment p{color:#6e5b52;line-height:1.72;font-size:14px;margin-top:7px}
-    .comment-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-    .e-badge{display:inline-flex;align-items:center;border-radius:999px;padding:3px 9px;font-size:11px;font-weight:900;border:1px solid rgba(255,255,255,.42);color:var(--badge-text);background:var(--badge-bg)}
-    .comment-e1{--comment-accent:#2c7fc0;--comment-bg:linear-gradient(145deg,#071d3d,#5aa7da);--comment-text:#f6fbff;--comment-name:#2778b8;--badge-bg:linear-gradient(145deg,#0b315e,#5aa7da);--badge-text:#f4fbff}
-    .comment-e2{--comment-accent:#d7bd8c;--comment-bg:linear-gradient(145deg,#fffdf8,#dcc39b);--comment-text:#6a5338;--comment-name:#9a7a4f;--badge-bg:linear-gradient(145deg,#fff8e8,#dcc39b);--badge-text:#6a5338}
-    .comment-e3{--comment-accent:#a51f33;--comment-bg:linear-gradient(145deg,#4d0812,#c84a58);--comment-text:#fff6f7;--comment-name:#ae263b;--badge-bg:linear-gradient(145deg,#7b1221,#c84a58);--badge-text:#fff6f7}
-    .comment-e4{--comment-accent:#9ebf91;--comment-bg:linear-gradient(145deg,#edf5e8,#b8d0a9);--comment-text:#4f6a46;--comment-name:#5e8b55;--badge-bg:linear-gradient(145deg,#edf5e8,#b8d0a9);--badge-text:#4f6a46}
-    .comment-e5{--comment-accent:#b494da;--comment-bg:linear-gradient(145deg,#efe7fb,#b494da);--comment-text:#604482;--comment-name:#8360bb;--badge-bg:linear-gradient(145deg,#efe7fb,#b494da);--badge-text:#604482}
-    .comment-e6{--comment-accent:#ea9eb5;--comment-bg:linear-gradient(145deg,#fdebf1,#ea9eb5);--comment-text:#934f67;--comment-name:#c76388;--badge-bg:linear-gradient(145deg,#fdebf1,#ea9eb5);--badge-text:#934f67}
-    .comment-e7{--comment-accent:#8ecbe8;--comment-bg:linear-gradient(145deg,#f5fbff,#add5ea);--comment-text:#4d7893;--comment-name:#4e9cc5;--badge-bg:linear-gradient(145deg,#f5fbff,#add5ea);--badge-text:#4d7893}
-    .comment-e8{--comment-accent:#c4963f;--comment-bg:linear-gradient(145deg,#fff7e6,#c4963f);--comment-text:#6a4716;--comment-name:#a97925;--badge-bg:linear-gradient(145deg,#fff7e6,#c4963f);--badge-text:#6a4716}
-    .board-sparkle{position:absolute;right:28px;top:18px;color:rgba(196,160,106,.42);font-size:18px;animation:floatSpark 3.8s ease-in-out infinite;pointer-events:none}
-    @keyframes commentRise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-    @keyframes floatSpark{0%,100%{opacity:.35;transform:translateY(0) rotate(0deg)}50%{opacity:.9;transform:translateY(-8px) rotate(18deg)}}
-
-    .footer{margin-top:38px;text-align:center;color:#7e6a5d;font-size:13px;line-height:1.8}
-
-    @media(max-width:1120px){
-      .header-inner{grid-template-columns:1fr;gap:12px;padding:14px 0 18px}.main-nav{justify-content:flex-start}.header-apply{width:fit-content}.hero-board,.board-layout{grid-template-columns:1fr}.tag-grid{grid-template-columns:repeat(4,minmax(70px,1fr))}.related-grid{grid-template-columns:1fr 1fr}
-    }
-
-    @media(max-width:680px){
-      .header-inner,main{width:min(100% - 24px,1320px)}.brand-logo{width:78px;height:72px}.brand h1{font-size:24px;white-space:normal}.academy-word{letter-spacing:5px}.hero-card,.dark-card,.panel{border-radius:24px;padding:22px}.pin-card,.topic-card{grid-template-columns:auto minmax(0,1fr)}.topic-count{grid-column:1/-1;text-align:left;display:flex;align-items:center;gap:8px}.section-title{flex-direction:column;align-items:flex-start}.thread-head{grid-template-columns:1fr}.tag-grid{grid-template-columns:repeat(2,minmax(70px,1fr))}.article-grid,.related-grid{grid-template-columns:1fr}
-    }
+    .compose{padding:24px 26px}.compose h3{font-size:28px;margin-bottom:8px}.compose p{color:#7a675d;line-height:1.7;margin-bottom:16px}.form{display:grid;gap:12px}.form input,.form textarea{width:100%;border:1px solid rgba(151,112,70,.24);border-radius:18px;padding:13px 15px;background:rgba(255,249,239,.72);color:#6b5a51;outline:none}.form textarea{min-height:110px;resize:vertical}.formrow{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}.note{font-size:13px;color:#927b6d}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:11px 20px;border-radius:999px;border:0;cursor:pointer;font-size:14px;font-weight:900;transition:.18s}.btn:hover{transform:translateY(-2px)}.primary{color:#fff4dc;background:linear-gradient(180deg,#172d4c,#09182b);border:1px solid rgba(226,194,136,.72);box-shadow:0 10px 24px rgba(8,18,32,.20)}.soft{color:#62482f;background:rgba(246,236,222,.80);border:1px solid rgba(151,112,70,.30)}.disabled{opacity:.6;cursor:not-allowed}.disabled:hover{transform:none}
+    .related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.related{border-radius:24px;padding:16px;min-height:150px;transition:.18s}.related:hover{transform:translateY(-2px);background:rgba(250,243,232,.96)}.ricon{width:48px;height:48px;border-radius:16px;background:rgba(246,236,222,.68);display:grid;place-items:center;border:1px solid rgba(151,112,70,.20);margin-bottom:10px}.ricon img{width:38px;height:38px;object-fit:contain}.related h3{font-size:18px;line-height:1.35}.related p{font-size:13px;color:#7a675d;line-height:1.55;margin-top:6px}
+    .add{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;padding:24px 26px}.add h3{font-size:30px;margin-bottom:6px}.add p{color:#7a675d;line-height:1.7}.footer{text-align:center;margin-top:38px;color:#7e6a5d;font-size:13px;line-height:1.8}
+    @media(max-width:1180px){.header{grid-template-columns:1fr}.nav{justify-content:flex-start}.apply{width:max-content}.hero{grid-template-columns:1fr}.stats{min-width:0}.layout{grid-template-columns:1fr}.side{position:static}.zone-grid{grid-template-columns:repeat(4,1fr)}.related-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:720px){.wrap{width:min(100% - 24px,1440px)}.brand img{width:78px;height:72px}.brand h1{font-size:24px;white-space:normal}.panel,.article,.compose,.add{padding:22px}.stats{grid-template-columns:1fr}.zone-grid{grid-template-columns:repeat(2,1fr)}.article-head{display:block}.meta{text-align:left;margin-top:12px}.comment{grid-template-columns:auto 1fr}.like{grid-column:1/-1;align-items:flex-start;flex-direction:row}.related-grid{grid-template-columns:1fr}.add{grid-template-columns:1fr}}
   </style>
 </head>
-
 <body>
   <div class="site">
-    <header class="site-header">
-      <div class="header-inner">
-        <div class="brand">
-          <img src="./eden.png" alt="E8’s Eden Academy" class="brand-logo" />
-          <div>
-            <h1>E8’s Eden Academy</h1>
-            <span class="academy-word">ACADEMY</span>
-            <p>Student Board ✦ Zone Topics</p>
-          </div>
-        </div>
+    <header class="topbar"><div class="wrap header">
+      <a class="brand" href="./index.html"><img src="./eden.png" alt="E8’s Eden Academy"><div><h1>E8’s Eden Academy</h1><small>กระดานนักเรียน ✦ School Board</small></div></a>
+      <nav class="nav"><a href="./index.html">หน้าหลัก</a><a class="active" href="./board.html">ข่าวสาร</a><a href="#threads">กระทู้ทั้งหมด</a><a href="./index.html#zones">โซนทั้ง 8</a><a href="./index.html#member">สมัครสมาชิก</a></nav>
+      <a class="apply" href="./index.html">← กลับหน้า index</a>
+    </div></header>
 
-        <nav class="main-nav" aria-label="เมนูหลัก">
-          <a class="nav-link" href="./index.html">หน้าหลัก</a>
-          <a class="nav-link active" href="./board.html">กระดานนักเรียน</a>
-          <a class="nav-link" href="./index.html#news">ข่าวสาร</a>
-          <a class="nav-link" href="./index.html#member">สมาชิก</a>
-        </nav>
-
-        <a class="header-apply" href="./index.html#member">✦ สมัครสมาชิก</a>
-      </div>
-    </header>
-
-    <main>
-      <section class="board-page" id="boardPage">
-        <section class="hero-board">
-          <article class="hero-card">
-            <div class="eyebrow">✦ STUDENT BOARD</div>
-            <h2>กระดานข่าวสารของ <span>นักเรียนแต่ละโซน</span></h2>
-            <p>รวมกระทู้ข่าวสารและหัวข้อพูดคุยของนักเรียน E1-E8 คลิกหัวข้อเพื่อเข้าไปอ่านหน้ากระทู้และข้อมูลของแต่ละโซน</p>
-            <div class="hero-actions">
-              <button class="btn btn-primary" type="button" data-open-thread="owners">อ่านกระทู้ปักหมุด</button>
-              <a class="btn btn-soft" href="#zoneTopics">ดูหัวข้อ E1-E8</a>
-            </div>
-          </article>
-
-          <aside class="dark-card">
-            <div class="head-preview">
-              <div class="head-caption">
-                <b>โฉมหน้าของเจ้าของปราสาททั้ง 7 โซน</b>
-                <span>กระทู้ปักหมุดสำหรับข่าวสารสำคัญจากทางสถาบัน</span>
-              </div>
-            </div>
-          </aside>
-        </section>
-
-        <section>
-          <div class="section-title"><div><h2>กระทู้ปักหมุดหน้าแรก</h2><p>หัวข้อสำคัญที่จะแสดงอยู่บนสุดของหน้าข่าวสาร</p></div></div>
-          <section class="panel">
-            <div class="pinned-list">
-              <article class="pin-card" data-open-thread="owners">
-                <div class="pin-icon tpin">🏛️</div>
-                <div><h3>โฉมหน้าของเจ้าของปราสาททั้ง 7 โซน</h3><div class="meta"><span class="chip">ข่าวสารสำคัญ</span><span>Official Notice</span><span>อัปเดตล่าสุด</span></div></div>
-                <div class="topic-count"><b>PIN</b>เปิดอ่าน</div>
-              </article>
-            </div>
-          </section>
-        </section>
-
-        <section id="zoneTopics">
-          <div class="section-title"><div><h2>หัวข้อแต่ละโซน</h2><p>ยังไม่ใส่คำอธิบายโซน ใช้เป็นหัวข้อ E1-E8 ก่อน</p></div></div>
-          <div class="board-layout">
-            <section class="panel">
-              <div class="topic-list">
-                <article class="topic-card" data-open-thread="e1"><div class="topic-icon t1"><img src="./e1.png" alt="E1" /></div><div><h3>โซน E1</h3><div class="meta"><span class="chip">เรื่องโซน</span><span>E1</span><span>วันนี้</span></div></div><div class="topic-count"><b>34</b>ความคิดเห็น</div></article>
-                <article class="topic-card" data-open-thread="e2"><div class="topic-icon t2"><img src="./e2.png" alt="E2" /></div><div><h3>โซน E2</h3><div class="meta"><span class="chip">เรื่องโซน</span><span>E2</span><span>วันนี้</span></div></div><div class="topic-count"><b>29</b>ความคิดเห็น</div></article>
-                <article class="topic-card" data-open-thread="e3"><div class="topic-icon t3"><img src="./e3.png" alt="E3" /></div><div><h3>โซน E3</h3><div class="meta"><span class="chip">เรื่องโซน</span><span>E3</span><span>เมื่อวาน</span></div></div><div class="topic-count"><b>41</b>ความคิดเห็น</div></article>
-                <article class="topic-card" data-open-thread="e4"><div class="topic-icon t4"><img src="./e4.png" alt="E4" /></div><div><h3>โซน E4</h3><div class="meta"><span class="chip">เรื่องโซน</span><span>E4</span><span>เมื่อวาน</span></div></div><div class="topic-count"><b>22</b>ความคิดเห็น</div></article>
-                <article class="topic-card" data-open-thread="e5"><div class="topic-icon t5"><img src="./e5.png" alt="E5" /></div><div><h3>โซน E5</h3><div class="meta"><span class="chip">เรื่องโซน</span><span>E5</span><span>2 วันที่แล้ว</span></div></div><div class="topic-count"><b>38</b>ความคิดเห็น</div></article>
-                <article class="topic-card" data-open-thread="e6"><div class="topic-icon t6"><img src="./e6.png" alt="E6" /></div><div><h3>โซน E6</h3><div class="meta"><span class="chip">เรื่องโซน</span><span>E6</span><span>2 วันที่แล้ว</span></div></div><div class="topic-count"><b>46</b>ความคิดเห็น</div></article>
-                <article class="topic-card" data-open-thread="e7"><div class="topic-icon t7"><img src="./e7.png" alt="E7" /></div><div><h3>โซน E7</h3><div class="meta"><span class="chip">เรื่องโซน</span><span>E7</span><span>3 วันที่แล้ว</span></div></div><div class="topic-count"><b>31</b>ความคิดเห็น</div></article>
-                <article class="topic-card" data-open-thread="e8"><div class="topic-icon t8"><img src="./e8.png" alt="E8" /></div><div><h3>โซน E8</h3><div class="meta"><span class="chip">เรื่องโซน</span><span>E8</span><span>3 วันที่แล้ว</span></div></div><div class="topic-count"><b>27</b>ความคิดเห็น</div></article>
-              </div>
-            </section>
-
-            <aside class="panel">
-              <h3 class="side-title">กระดานนักเรียน</h3>
-              <div class="side-list">
-                <div class="side-card"><b>กดหัวข้อเพื่อเข้ากระทู้</b><span>แต่ละโซนจะมีหน้ากระทู้พร้อมช่องแสดงความคิดเห็น</span></div>
-                <div class="side-card"><b>ข่าวสารจากสถาบัน</b><span>กระทู้ปักหมุดจะแสดงประกาศทางการและข้อมูลสำคัญ</span></div>
-                <div class="side-card"><b>ไฟล์รูปที่ใช้</b><span>eden.png, head.png, e1.png-e8.png และ e1m.png-e8m.png</span></div>
-              </div>
-            </aside>
-          </div>
-        </section>
+    <main class="wrap">
+      <section class="panel dark hero">
+        <div><div class="eyebrow">E8 STUDENT BOARD</div><h1>กระดานนักเรียน</h1><p>พื้นที่รวมประกาศจากสถาบัน ข่าวสารประจำโซน และหัวข้อพูดคุยของนักเรียนใน E8’s Eden Academy</p></div>
+        <div class="stats"><div class="stat"><b id="onlineBoard">96</b><span>กำลังอ่านบอร์ด</span></div><div class="stat"><b>8</b><span>โซนที่เปิดอยู่</span></div><div class="stat"><b>24</b><span>กระทู้วันนี้</span></div></div>
       </section>
 
-      <section class="thread-page" id="threadPage">
-        <section class="panel">
-          <div id="threadContent"></div>
-        </section>
+      <section class="layout" id="threads">
+        <aside class="side">
+          <div class="sidebox"><h3>กระทู้แนะนำ</h3><div class="thread-list" id="threadList"></div></div>
+          <div class="sidebox"><h3>สัญลักษณ์โซน</h3><div class="zone-grid">
+            <a class="zone-mini" href="#e1"><img src="./e1m.png" alt="E1"><b>E1</b></a><a class="zone-mini" href="#e2"><img src="./e2m.png" alt="E2"><b>E2</b></a><a class="zone-mini" href="#e3"><img src="./e3m.png" alt="E3"><b>E3</b></a><a class="zone-mini" href="#e4"><img src="./e4m.png" alt="E4"><b>E4</b></a>
+            <a class="zone-mini" href="#e5"><img src="./e5m.png" alt="E5"><b>E5</b></a><a class="zone-mini" href="#e6"><img src="./e6m.png" alt="E6"><b>E6</b></a><a class="zone-mini" href="#e7"><img src="./e7m.png" alt="E7"><b>E7</b></a><a class="zone-mini" href="#e8"><img src="./e8m.png" alt="E8"><b>E8</b></a>
+          </div></div>
+        </aside>
+        <section class="content" id="boardContent"></section>
       </section>
-
-      <footer class="footer">E8’s Eden Academy © Student Board<br />School News • Zone Topics • Student Comments</footer>
+      <footer class="footer">E8’s Eden Academy © Student Board<br>School News • Zone Talk • Student Community</footer>
     </main>
   </div>
 
   <script>
-    const zoneTagOrder = [
-      ["./e1m.png", "E1"],
-      ["./e2m.png", "E2"],
-      ["./e3m.png", "E3"],
-      ["./e4m.png", "E4"],
-      ["./e5m.png", "E5"],
-      ["./e6m.png", "E6"],
-      ["./e7m.png", "E7"],
-      ["./e8m.png", "E8"]
-    ];
-
-    const relatedPosts = [
-      { tag: "สังคมนักเรียน", title: "มีใครรู้จักรุ่นพี่ที่อยู่ห้องสมุดช่วงเย็นบ้างไหม", desc: "กระทู้พูดคุยทั่วไปเกี่ยวกับบรรยากาศในโรงเรียน", link: "#social-01" },
-      { tag: "เรื่องโซน", title: "โซนไหนมีกิจกรรมรับน้องแยกบ้างคะ", desc: "รวมคำถามเกี่ยวกับกิจกรรมของแต่ละโซน", link: "#zone-activity" },
-      { tag: "พูดคุยทั่วไป", title: "ขอพิกัดมุมถ่ายรูปในโรงเรียนที่แสงสวย", desc: "แชร์สถานที่ถ่ายรูปและจุดนั่งเล่นหลังเลิกเรียน", link: "#photo-spot" },
-      { tag: "สังคมนักเรียน", title: "แอบชอบรุ่นพี่ต่างโซน ควรเริ่มคุยยังไงดี", desc: "กระทู้ปรึกษาแบบเบา ๆ สำหรับนักเรียน", link: "#crush" },
-      { tag: "ข่าวสารสำคัญ", title: "แจ้งเตือนการอัปเดตตารางเรียนประจำสัปดาห์", desc: "ติดตามกำหนดการใหม่และเวลาห้องเรียนที่เปลี่ยนแปลง", link: "#schedule-update" }
-    ];
-
-    const threads = {
-      owners: {
-        cls: "tpin",
-        img: "./eden.png",
-        title: "โฉมหน้าของเจ้าของปราสาททั้ง 7 โซน",
-        meta: "Official Notice • กระทู้ปักหมุด • อัปเดตล่าสุด",
-        image: "./head.png",
-        official: true,
-        bodyTitle: "ประกาศต้อนรับเข้าสู่ E8’s Eden Academy",
-        tags: ["ข่าวสารสำคัญ", "เรื่องโซน", "ประกาศสถาบัน", "สังคมนักเรียน"]
-      },
-      e1: makeZone("E1", "./e1.png", "t1"),
-      e2: makeZone("E2", "./e2.png", "t2"),
-      e3: makeZone("E3", "./e3.png", "t3"),
-      e4: makeZone("E4", "./e4.png", "t4"),
-      e5: makeZone("E5", "./e5.png", "t5"),
-      e6: makeZone("E6", "./e6.png", "t6"),
-      e7: makeZone("E7", "./e7.png", "t7"),
-      e8: makeZone("E8", "./e8.png", "t8")
+    const threads={
+      owners:{id:"owners",icon:"./b1.png",label:"ข่าวสารสำคัญ",status:"PIN",title:"โฉมหน้าของเจ้าของปราสาททั้ง 7 โซน",subtitle:"ประกาศทางการจากสถาบัน",author:"Eden Administrative Office",views:"1,284",official:true,cover:"./head.png",body:[
+        ["ประกาศต้อนรับเข้าสู่ E8’s Eden Academy","ยินดีต้อนรับนักเรียนทุกท่านเข้าสู่พื้นที่กระดานนักเรียนของสถาบัน ประกาศฉบับนี้จัดทำขึ้นเพื่อรวบรวมข้อมูลสำคัญเกี่ยวกับเจ้าของปราสาททั้ง 7 โซน และใช้เป็นจุดเริ่มต้นสำหรับติดตามข่าวสารจากโรงเรียน"],
+        ["รายละเอียดการติดตามข่าวสาร","หลังจากสมัครสมาชิกเรียบร้อยแล้ว กรุณาตรวจสอบประกาศประจำโซน ตารางเรียน และรายละเอียดกิจกรรมอย่างสม่ำเสมอ เนื่องจากกำหนดการบางส่วนอาจมีการปรับตามรอบประกาศของสถาบัน"],
+        ["แนวทางการใช้งานกระดาน","ขอให้นักเรียนทุกคนใช้พื้นที่นี้อย่างสุภาพ เคารพผู้อื่น และติดตามประกาศจากทางสถาบันเป็นหลัก เพื่อให้การสื่อสารระหว่างโรงเรียนและนักเรียนเป็นไปอย่างเรียบร้อย"]],reacts:[96,42,18,11],comments:[
+        c("Aurelia.vv","E1","z1","./b1.png","ประกาศรอบนี้อ่านง่ายขึ้นมากค่ะ เห็นภาพรวมของแต่ละโซนชัดเจนดี",24),c("Celestine.q","E2","z2","./b2.png","ชอบที่มีรูปเจ้าของปราสาทรวมไว้ในกระทู้เดียว เวลากลับมาเช็คจะสะดวกมาก",31),c("Valentina.m","E3","z3","./b3.png","ถ้ามีอัปเดตเรื่องตารางเรียน อยากให้ปักลิงก์ไว้ใต้กระทู้นี้ด้วยค่ะ",18),c("Elowen.ivy","E4","z4","./b4.png","ภาพรวมโซนดูเป็นทางการดีค่ะ เหมาะสำหรับคนที่เพิ่งเข้ามาอ่านครั้งแรก",15),c("Livia.rose","E5","z5","./b5.png","โทนหน้ากระทู้ดูสบายตากว่าเดิมมากค่ะ อ่านนาน ๆ แล้วไม่ล้า",27),c("Seraphina.lux","E6","z6","./b6.png","อยากให้มีแจ้งเตือนเวลาโรงเรียนเพิ่มประกาศใหม่ในหน้าหลักด้วยค่ะ",22),c("Vivienne.lo","E7","z7","./b7.png","ถ้าระบบสมาชิกเปิดแล้ว อยากให้คอมเมนต์แสดงโซนของนักเรียนแบบนี้เลยค่ะ",19)]},
+      register:{id:"register",icon:"./b4.png",label:"สมัครนักเรียน",status:"NEW",title:"ประกาศเปิดรับสมัครสมาชิกนักเรียนประจำภาคเรียน",subtitle:"ฝ่ายทะเบียน · วันนี้ 09:00",author:"Student Registry",views:"864",official:false,cover:null,body:[["ระบบสมัครสมาชิกนักเรียน","ฝ่ายทะเบียนเปิดให้บันทึกข้อมูลสมาชิกนักเรียนเพื่อเตรียมเชื่อมระบบตารางเรียน ประกาศรายโซน และการยืนยันตัวตนในอนาคต"],["สิ่งที่นักเรียนควรเตรียม","โปรดเตรียมชื่อที่ต้องการใช้ในระบบ รูปโปรไฟล์ และเลือกโซนที่ตรงกับตัวตนของคุณ เมื่อระบบยืนยันข้อมูลพร้อมใช้งานจะแสดงข้อมูลบนหน้าบัตรนักเรียน"],["หมายเหตุ","ระบบนี้อยู่ระหว่างเตรียมเปิดใช้งานเต็มรูปแบบ ข้อมูลบางส่วนอาจมีการปรับตามประกาศของฝ่ายทะเบียน"]],reacts:[74,33,16,9],comments:[c("Arabella.n","E2","z2","./b2.png","รอระบบสมัครสมาชิกเลยค่ะ อยากเลือกโซนและเช็คตารางเรียนในหน้าเดียว",28),c("Rosalind.elle","E6","z6","./b6.png","ถ้ามีตัวอย่างรูปที่ใช้ทำบัตรนักเรียนจะดีมากค่ะ จะได้เตรียมรูปให้ถูก",17),c("Mirabelle.x","E4","z4","./b4.png","อยากให้มีปุ่มแก้ไขข้อมูลหลังสมัครด้วย เผื่อพิมพ์ชื่อผิดค่ะ",21),c("Isadora.ln","E8","z8","./b8.png","ส่วนเลือกโซนขอให้มีคำอธิบายสั้น ๆ ของแต่ละโซนด้วยนะคะ",13)]},
+      schedule:{id:"schedule",icon:"./b5.png",label:"ตารางเรียน",status:"E1-E8",title:"คู่มือการตรวจสอบตารางเรียนของแต่ละโซน",subtitle:"Academic Office",author:"Academic Office",views:"642",official:false,cover:null,body:[["การตรวจสอบตารางเรียน","นักเรียนสามารถตรวจสอบตารางเรียนตามโซนของตนเองได้จากหน้าสมาชิก เมื่อระบบเปิดใช้งาน ตารางจะจัดแยกตาม E1-E8 เพื่อให้ค้นหาได้ง่าย"],["การอัปเดตข้อมูล","หากมีการเปลี่ยนแปลงเวลาเรียน ห้องเรียน หรือกิจกรรมพิเศษ ระบบจะแสดงประกาศเพิ่มเติมในกระดานนักเรียนและหน้าแรกของเว็บไซต์"],["คำแนะนำ","กรุณาตรวจสอบตารางเรียนของตนเองอย่างสม่ำเสมอ โดยเฉพาะในช่วงเปิดภาคเรียนและช่วงกิจกรรมประจำโซน"]],reacts:[58,26,12,7],comments:[c("Evangeline.8","E7","z7","./b7.png","ขอให้ตารางเรียนแยกสีตามโซนด้วยค่ะ จะได้ดูง่ายเวลาเปิดจากมือถือ",19),c("Juliette.v","E3","z3","./b3.png","ถ้าเปลี่ยนตารางแบบกะทันหัน อยากให้ขึ้นแจ้งเตือนหน้าแรกด้วยนะคะ",23),c("Ophelia.rose","E4","z4","./b4.png","อยากให้มีปุ่มบันทึกตารางเป็นรูปภาพค่ะ สะดวกมากเวลาเอาไว้เช็คเร็ว ๆ",16),c("Noelle.c","E1","z1","./b1.png","ถ้ามีตารางรายสัปดาห์กับรายเดือนแยกกันจะดีมากค่ะ",12)]},
+      activity:{id:"activity",icon:"./b6.png",label:"กิจกรรม",status:"08",title:"กิจกรรมต้อนรับนักเรียนใหม่: Eden Welcome Week",subtitle:"Eden Council · พรุ่งนี้",author:"Eden Council",views:"918",official:false,cover:null,body:[["ภาพรวมกิจกรรม","Eden Welcome Week เป็นกิจกรรมสำหรับต้อนรับนักเรียนใหม่และแนะนำระบบโซนของสถาบัน โดยจะมีหัวข้อแนะนำกระดานนักเรียน ตารางเรียน และแนวทางการใช้งานระบบสมาชิก"],["การเข้าร่วม","นักเรียนทุกโซนสามารถเข้าร่วมได้ รายละเอียดรอบเวลาและพื้นที่จัดกิจกรรมจะประกาศเพิ่มเติมในกระดานของแต่ละโซน"],["สิ่งที่ควรติดตาม","โปรดติดตามประกาศจาก Eden Council เพื่อรับข้อมูลกิจกรรมย่อยและการลงทะเบียนเข้าร่วมในแต่ละรอบ"]],reacts:[88,39,22,15],comments:[c("Serena.belle","E6","z6","./b6.png","อยากให้มีกิจกรรมแนะนำเพื่อนใหม่แยกตามโซนด้วยค่ะ จะได้เริ่มคุยง่ายขึ้น",34),c("Claudia.rei","E5","z5","./b5.png","ถ้ามีตารางกิจกรรมแบบสรุปในรูปเดียวจะดีมากค่ะ แชร์ต่อได้ง่าย",18),c("Estelle.m","E8","z8","./b8.png","รอติดตามรายละเอียดสถานที่จัดกิจกรรมค่ะ อยากรู้ว่าต้องลงทะเบียนก่อนหรือเปล่า",14),c("Daphne.lu","E2","z2","./b2.png","ถ้าเข้าร่วมไม่ครบทุกกิจกรรม จะยังรับของที่ระลึกได้ไหมคะ",11)]},
+      social:{id:"social",icon:"./b3.png",label:"พูดคุยทั่วไป",status:"CHAT",title:"กระทู้พูดคุยทั่วไป: แชร์มุมโปรดในโรงเรียน",subtitle:"Student Board",author:"Student Board",views:"503",official:false,cover:null,body:[["พื้นที่พูดคุยของนักเรียน","กระทู้นี้เปิดไว้สำหรับพูดคุยทั่วไป แชร์มุมโปรดในโรงเรียน หรือแนะนำจุดถ่ายรูปที่น่าสนใจสำหรับนักเรียนใหม่"],["ขอบเขตการใช้งาน","สามารถพูดคุยได้ตามปกติ แต่ขอให้ใช้ถ้อยคำสุภาพ ไม่พาดพิงหรือเปิดเผยข้อมูลส่วนตัวของผู้อื่น"],["หัวข้อแนะนำ","ลองแชร์มุมที่ชอบ คาเฟ่ใกล้โรงเรียน จุดนั่งอ่านหนังสือ หรือประสบการณ์วันแรกในสถาบันได้ที่นี่"]],reacts:[46,21,13,8],comments:[c("Amelie.noir","E1","z1","./b1.png","ชอบมุมโถงกระจกช่วงเย็นค่ะ แสงสวยมาก ถ่ายรูปออกมาดีทุกครั้ง",20),c("Odette.v","E4","z4","./b4.png","มุมสวนด้านหลังอาคารเรียนเงียบดีค่ะ เหมาะกับนั่งอ่านหนังสือ",15),c("Marceline.q","E3","z3","./b3.png","ใครมีพิกัดเครื่องดื่มอร่อยใกล้โรงเรียน แนะนำหน่อยค่ะ",10),c("Florence.y","E7","z7","./b7.png","อยากให้มีกระทู้รวมรูปถ่ายของแต่ละโซนด้วย น่าจะดูสนุกดีค่ะ",17)]}
     };
-
-    function makeZone(label, img, cls) {
-      return {
-        cls: cls,
-        img: img,
-        title: "โซน " + label,
-        meta: "Student Board • " + label + " • กระทู้ประจำโซน",
-        bodyTitle: "กระทู้ข่าวสารโซน " + label,
-        tags: ["เรื่องโซน", "สังคมนักเรียน", "ตารางเรียน", "พูดคุยทั่วไป"],
-        official: false
-      };
-    }
-
-    const boardPage = document.getElementById("boardPage");
-    const threadPage = document.getElementById("threadPage");
-    const threadContent = document.getElementById("threadContent");
-
-    function renderReactions() {
-      return `
-        <div class="reactions" aria-label="reactions">
-          <button class="react-btn" type="button">💗 <span>96</span></button>
-          <button class="react-btn" type="button">✨ <span>42</span></button>
-          <button class="react-btn" type="button">🦋 <span>18</span></button>
-          <button class="react-btn" type="button">🌙 <span>11</span></button>
-        </div>
-      `;
-    }
-
-    function renderTags() {
-      return `
-        <div class="name-tags-panel">
-          <h3 class="side-title">แท็กชื่อประจำโซน</h3>
-          <div class="tag-grid">
-            ${zoneTagOrder.map(item => `<div class="tag-item"><img src="${item[0]}" alt="${item[1]} tag"><span>${item[1]}</span></div>`).join("")}
-          </div>
-        </div>
-      `;
-    }
-
-    function tagClass(tag) {
-      if (tag === "ข่าวสารสำคัญ") return "important";
-      if (tag === "เรื่องโซน") return "zone";
-      if (tag === "สังคมนักเรียน") return "social";
-      return "official";
-    }
-
-    function renderThreadTags(tags) {
-      return `<div class="thread-tags">${tags.map(tag => `<span class="thread-tag ${tagClass(tag)}">${tag}</span>`).join("")}</div>`;
-    }
-
-    function renderArticle(thread) {
-      if (thread.official) {
-        return `
-          <div class="article-grid">
-            <article class="article-block wide">
-              <h3>ประกาศต้อนรับเข้าสู่สถาบัน</h3>
-              <p>ยินดีต้อนรับนักเรียนทุกท่านเข้าสู่ E8’s Eden Academy สถาบันที่รวบรวมระบบการเรียน การดูแลนักเรียน และกิจกรรมของแต่ละโซนไว้ในพื้นที่เดียวกัน กระทู้นี้เป็นประกาศทางการสำหรับแนะนำภาพรวมของเจ้าของปราสาททั้ง 7 โซน และใช้เป็นจุดเริ่มต้นสำหรับติดตามข่าวสารสำคัญของโรงเรียน</p>
-            </article>
-            <article class="article-block">
-              <h3>การตรวจสอบข้อมูล</h3>
-              <p>หลังจากสมัครสมาชิกเรียบร้อยแล้ว กรุณาตรวจสอบตารางเรียนและประกาศประจำโซนของท่านอย่างสม่ำเสมอ เนื่องจากกำหนดการ กิจกรรม และรายละเอียดบางส่วนอาจมีการอัปเดตตามรอบประกาศของสถาบัน</p>
-            </article>
-            <article class="article-block">
-              <h3>มารยาทในกระดาน</h3>
-              <p>ขอให้นักเรียนทุกท่านใช้พื้นที่กระดานนี้อย่างสุภาพ เคารพผู้อื่น และติดตามประกาศจากทางสถาบันเป็นหลัก เพื่อให้การสื่อสารระหว่างโรงเรียนและนักเรียนเป็นไปอย่างเรียบร้อย</p>
-            </article>
-          </div>
-        `;
-      }
-
-      return `
-        <div class="article-grid">
-          <article class="article-block wide">
-            <h3>${thread.bodyTitle}</h3>
-            <p>พื้นที่สำหรับประกาศข่าวสารและพูดคุยของนักเรียนใน${thread.title} ข้อมูลรายละเอียดของโซนจะเพิ่มภายหลัง</p>
-          </article>
-          <article class="article-block">
-            <h3>ข่าวสารของโซน</h3>
-            <p>ติดตามประกาศล่าสุด กิจกรรม และการอัปเดตจากกระดานนักเรียนของโซนนี้</p>
-          </article>
-          <article class="article-block">
-            <h3>พูดคุยทั่วไป</h3>
-            <p>ใช้สำหรับถามตอบ แลกเปลี่ยนข้อมูล และพูดคุยเรื่องโรงเรียนอย่างสุภาพ</p>
-          </article>
-        </div>
-      `;
-    }
-
-    function renderStudentComments(thread) {
-      const commentPool = thread.official ? [
-        { name:"Aurelia.vv", zone:"E1", cls:"comment-e1", text:"ประกาศอ่านง่ายขึ้นมากค่ะ เห็นภาพรวมของแต่ละโซนชัดเจนดี", tag:"ข่าวสารสำคัญ" },
-        { name:"Celestine.q", zone:"E2", cls:"comment-e2", text:"ชอบที่มีรูปเจ้าของปราสาทรวมไว้ในกระทู้เดียว เวลากลับมาเช็คจะสะดวกมาก", tag:"ประกาศสถาบัน" },
-        { name:"Valentina.m", zone:"E3", cls:"comment-e3", text:"ถ้ามีอัปเดตเรื่องตารางเรียน อยากให้ปักไว้ใต้กระทู้นี้ด้วยค่ะ", tag:"ตารางเรียน" },
-        { name:"Elowen.ivy", zone:"E4", cls:"comment-e4", text:"แท็กชื่อประจำโซนเรียงดูง่ายขึ้นค่ะ แยก E1-E8 ได้ชัดเจน", tag:"เรื่องโซน" },
-        { name:"Livia.rose", zone:"E5", cls:"comment-e5", text:"โทนหน้ากระทู้ดูเป็นทางการดีค่ะ ไม่สว่างเกินไปแล้ว อ่านสบายขึ้น", tag:"ดีไซน์เว็บ" },
-        { name:"Seraphina.lux", zone:"E6", cls:"comment-e6", text:"อยากให้มีปุ่มแจ้งเตือนเมื่อประกาศจากสถาบันอัปเดตใหม่ในอนาคตค่ะ", tag:"ระบบสมาชิก" },
-        { name:"Vivienne.lo", zone:"E7", cls:"comment-e7", text:"ถ้าระบบล็อกอินเปิดแล้ว ขอให้คอมเมนต์ขึ้นตามโซนของนักเรียนด้วยนะคะ", tag:"สังคมนักเรียน" }
-      ] : [
-        { name:"Evangeline.8", zone:"E1", cls:"comment-e1", text:"เข้ามาเช็คข่าวของโซนนี้ค่ะ ถ้ามีกิจกรรมเพิ่มฝากอัปเดตไว้ในกระทู้ด้วยนะคะ", tag:"เรื่องโซน" },
-        { name:"Arabella.n", zone:"E2", cls:"comment-e2", text:"อยากให้มีสรุปตารางเรียนรายสัปดาห์ จะได้ไม่พลาดประกาศสำคัญ", tag:"ตารางเรียน" },
-        { name:"Ophelia.rose", zone:"E3", cls:"comment-e3", text:"กระทู้นี้เหมาะไว้รวมคำถามของเด็กใหม่มากค่ะ อ่านแล้วตามง่าย", tag:"ถามตอบ" },
-        { name:"Juliette.v", zone:"E4", cls:"comment-e4", text:"ถ้ามีรูปกิจกรรมของโซน อยากให้แยกอัลบั้มไว้ใต้กระทู้นี้เลย", tag:"กิจกรรม" },
-        { name:"Rosalind.elle", zone:"E5", cls:"comment-e5", text:"ขอช่องรวมประกาศด่วนของแต่ละโซนด้วยค่ะ จะได้เห็นทันทีตอนเปิดเว็บ", tag:"ข่าวสารสำคัญ" },
-        { name:"Mirabelle.x", zone:"E6", cls:"comment-e6", text:"บอร์ดดูเป็นระเบียบขึ้นค่ะ อยากให้มีระบบค้นหากระทู้ในอนาคต", tag:"ระบบเว็บ" },
-        { name:"Isadora.ln", zone:"E8", cls:"comment-e8", text:"ชอบที่มีแท็กสีตามโซน ช่วยให้รู้ว่าคอมเมนต์มาจากโซนไหน", tag:"สังคมนักเรียน" }
-      ];
-
-      return `
-        <section class="student-comments">
-          <div class="section-title" style="margin:4px 0 6px;">
-            <div><h2>ความคิดเห็นล่าสุด</h2><p>คอมเมนต์ตัวอย่างจากนักเรียนในกระดานนี้</p></div>
-          </div>
-          ${commentPool.map((item, index) => `
-            <article class="student-comment ${item.cls}" style="animation-delay:${index * 0.04}s">
-              <div class="comment-head">
-                <div class="comment-user">
-                  <span class="avatar-dot">${item.zone}</span>
-                  <span class="comment-name">${item.name}</span>
-                </div>
-                <span class="comment-time">ความคิดเห็นที่ ${index + 1}</span>
-              </div>
-              <p>${item.text}</p>
-              <div class="comment-tags">
-                <span class="e-badge">${item.zone}</span>
-                <span class="thread-tag ${tagClass(item.tag)}">${item.tag}</span>
-              </div>
-            </article>
-          `).join("")}
-        </section>
-      `;
-    }
-
-    function renderCommentBox() {
-      return `
-        <section class="comment-box">
-          <h3>แสดงความคิดเห็น</h3>
-          <p>ระบบแสดงความคิดเห็นจะเปิดให้เฉพาะนักเรียนที่เข้าสู่ระบบแล้ว ในอนาคตช่องนี้จะเชื่อมกับระบบสมาชิกของโรงเรียน</p>
-          <div class="comment-form">
-            <input type="text" placeholder="ชื่อผู้ใช้ / Student ID" disabled>
-            <textarea placeholder="เขียนความคิดเห็นของคุณ..." disabled></textarea>
-            <div class="comment-actions">
-              <span class="login-note">กรุณาเข้าสู่ระบบก่อนแสดงความคิดเห็น</span>
-              <button class="btn btn-soft btn-disabled" type="button" disabled>ส่งความคิดเห็น</button>
-            </div>
-          </div>
-        </section>
-      `;
-    }
-
-    function renderRelatedPosts() {
-      return `
-        <section class="related-section">
-          <div class="section-title" style="margin-top:26px;">
-            <div><h2>กระทู้อื่น ๆ</h2><p>หัวข้อสุ่มจากกระดานนักเรียน</p></div>
-          </div>
-          <div class="related-grid">
-            ${relatedPosts.map(post => `
-              <a class="related-card" href="${post.link}">
-                <span class="thread-tag ${tagClass(post.tag)}">${post.tag}</span>
-                <h3>${post.title}</h3>
-                <p>${post.desc}</p>
-              </a>
-            `).join("")}
-            <a class="related-card create-thread-card" href="./create-thread.html">
-              <span class="thread-tag official">สร้างกระทู้</span>
-              <h3>เพิ่มกระทู้ใหม่</h3>
-              <p>กดเพื่อไปหน้าสร้างกระทู้สำหรับนักเรียนที่เข้าสู่ระบบแล้ว</p>
-            </a>
-          </div>
-        </section>
-      `;
-    }
-
-    function renderThread(key) {
-      const thread = threads[key];
-      if (!thread) return;
-
-      const officialHTML = thread.official
-        ? `<div class="official-banner"><img class="official-logo" src="./eden.png" alt="E8’s Eden Academy"><div class="label">OFFICIAL ANNOUNCEMENT</div><h3>ข่าวสารทางการจากทางสถาบัน</h3></div>`
-        : "";
-
-      const imageHTML = thread.image
-        ? `<div class="thread-image"><img src="${thread.image}" alt="${thread.title}" /></div>`
-        : "";
-
-      const tagsHTML = thread.official ? renderTags() : "";
-
-      threadContent.innerHTML = `
-        <span class="board-sparkle">✦</span>
-        <div class="thread-head">
-          <div class="thread-mark ${thread.cls}"><img src="${thread.img}" alt="${thread.title}" /></div>
-          <div>
-            <h2>${thread.title}</h2>
-            <p>${thread.meta}</p>
-          </div>
-        </div>
-
-        ${officialHTML}
-        ${renderThreadTags(thread.tags)}
-        ${imageHTML}
-        ${tagsHTML}
-        ${renderArticle(thread)}
-        ${renderReactions()}
-        ${renderStudentComments(thread)}
-        ${renderCommentBox()}
-        ${renderRelatedPosts()}
-
-        <div class="section-title" style="margin-top:24px;">
-          <div></div>
-          <button class="btn btn-soft" type="button" id="backBoard">กลับหน้ากระดาน</button>
-        </div>
-      `;
-
-      boardPage.classList.add("hide");
-      threadPage.classList.add("active");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      history.replaceState(null, "", "#" + key);
-
-      document.getElementById("backBoard").addEventListener("click", showBoard);
-      document.querySelectorAll(".react-btn").forEach(function(btn) {
-        btn.addEventListener("click", function() {
-          const span = btn.querySelector("span");
-          if (!btn.classList.contains("active")) {
-            span.textContent = String(Number(span.textContent) + 1);
-            btn.classList.add("active");
-          }
-        });
-      });
-    }
-
-    function showBoard() {
-      threadPage.classList.remove("active");
-      boardPage.classList.remove("hide");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      history.replaceState(null, "", "./board.html");
-    }
-
-    document.querySelectorAll("[data-open-thread]").forEach(function(item) {
-      item.addEventListener("click", function() { renderThread(item.dataset.openThread); });
-    });
-
-    const firstHash = window.location.hash.replace("#", "");
-    if (firstHash && threads[firstHash]) renderThread(firstHash);
+    function c(name,zone,cls,icon,text,likes){return{name,zone,cls,icon,text,likes}}
+    const related=[{id:"register",icon:"./b4.png",title:"วิธีเตรียมข้อมูลก่อนสมัครสมาชิก",desc:"เช็กลิสต์ก่อนเริ่มกรอกข้อมูลนักเรียน"},{id:"schedule",icon:"./b5.png",title:"สรุปตารางเรียนรายโซน",desc:"ข้อมูลตารางเรียนของ E1-E8"},{id:"activity",icon:"./b6.png",title:"ประกาศกิจกรรมสัปดาห์นี้",desc:"รวมกิจกรรมและกำหนดการจากสภานักเรียน"}];
+    const list=document.getElementById("threadList"),content=document.getElementById("boardContent");
+    function drawList(active){list.innerHTML=Object.values(threads).map(t=>`<button class="thread ${t.id===active?'active':''}" data-id="${t.id}"><img src="${t.icon}" alt="${t.label}"><span><b>${t.title}</b><span>${t.label} · ${t.status}</span></span></button>`).join("");document.querySelectorAll(".thread").forEach(b=>b.onclick=()=>openThread(b.dataset.id))}
+    function article(t){return`<article class="article">${t.official?`<div class="official"><img src="./eden.png" alt="Eden"></div>`:""}<div class="article-head"><div class="title"><div class="eyebrow"><img src="${t.icon}" alt="">${t.label}</div><h2>${t.title}</h2><p>${t.subtitle} · โดย ${t.author}</p></div><div class="meta"><b>${t.status}</b><span>${t.views} views</span></div></div>${t.cover?`<div class="cover"><img src="${t.cover}" alt="${t.title}"></div>`:""}<div class="body">${t.body.map(x=>`<section class="bodybox"><h3>${x[0]}</h3><p>${x[1]}</p></section>`).join("")}</div><div class="reacts"><button class="react">💗 ${t.reacts[0]}</button><button class="react">✨ ${t.reacts[1]}</button><button class="react">🎀 ${t.reacts[2]}</button><button class="react">🌙 ${t.reacts[3]}</button></div></article>`}
+    function comments(t){return`<section><div class="section-title"><div><h2>ความคิดเห็น</h2><p>ความคิดเห็นตัวอย่างจะตรงกับหัวข้อกระทู้ปัจจุบัน และใช้รูป B ประจำ E1-E8 แทนแท็ก</p></div><a class="btn soft" href="#threads">กลับขึ้นบน</a></div><div class="comments">${t.comments.map((m,i)=>`<article class="comment ${m.cls}"><div class="avatar"><img src="${m.icon}" alt="${m.zone}"></div><div><div class="user"><span class="name">${m.name}</span><span class="zone">${m.zone}</span></div><p>${m.text}</p></div><div class="like"><button type="button">♡ ${m.likes}</button><small>ความคิดเห็นที่ ${i+1}</small></div></article>`).join("")}</div></section>`}
+    function compose(){return`<section class="compose"><h3>แสดงความคิดเห็น</h3><p>กล่องนี้เตรียมไว้สำหรับระบบสมาชิกในอนาคต เมื่อเข้าสู่ระบบแล้วนักเรียนจะสามารถแสดงความคิดเห็นได้</p><div class="form"><input placeholder="ชื่อผู้ใช้ของนักเรียน" disabled><textarea placeholder="กรุณาเข้าสู่ระบบก่อนแสดงความคิดเห็น" disabled></textarea><div class="formrow"><span class="note">เฉพาะนักเรียนที่ login แล้วเท่านั้น</span><button class="btn primary disabled" disabled>ส่งความคิดเห็น</button></div></div></section>`}
+    function relatedBox(){return`<section><div class="section-title"><div><h2>กระทู้อื่น ๆ</h2><p>หัวข้อที่เกี่ยวข้องในกระดานนักเรียน</p></div></div><div class="related-grid">${related.map(r=>`<a class="related" href="#${r.id}" onclick="openThread('${r.id}')"><div class="ricon"><img src="${r.icon}" alt=""></div><h3>${r.title}</h3><p>${r.desc}</p></a>`).join("")}</div></section><section class="compose add"><div><h3>เพิ่มกระทู้ใหม่</h3><p>พื้นที่สำหรับสร้างกระทู้จะเชื่อมกับระบบสมาชิกในอนาคต</p></div><a class="btn primary" href="./create-thread.html">ไปหน้าสร้างกระทู้</a></section>`}
+    function openThread(id="owners"){const t=threads[id]||threads.owners;drawList(t.id);content.innerHTML=article(t)+comments(t)+compose()+relatedBox();history.replaceState(null,"","#"+t.id);window.scrollTo({top:0,behavior:"smooth"})}
+    document.querySelectorAll(".react,.like button").forEach(b=>b.addEventListener("click",()=>{}));
+    let online=96;setInterval(()=>{online+=Math.floor(Math.random()*5)-2;online=Math.max(88,Math.min(112,online));document.getElementById("onlineBoard").textContent=online},2500);
+    openThread(location.hash.replace("#","")||"owners");
   </script>
 </body>
 </html>
