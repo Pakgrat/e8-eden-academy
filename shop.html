@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Academy Shop | E8’s Eden Academy</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --navy:#06182d;
+      --navy-2:#0b223c;
+      --ink:#271b22;
+      --muted:#786a67;
+      --cream:#fff8ee;
+      --cream-2:#f3e5d1;
+      --gold:#e9d2a2;
+      --gold-2:#b99055;
+      --line:rgba(232,203,153,.50);
+      --shadow:0 24px 70px rgba(0,0,0,.30);
+      --radius:34px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;background:#05070d}
+    body{
+      min-height:100vh;
+      font-family:"Noto Sans Thai",sans-serif;
+      color:var(--ink);
+      background:
+        linear-gradient(90deg,rgba(3,9,18,.62),rgba(3,9,18,.20),rgba(3,9,18,.58)),
+        linear-gradient(180deg,rgba(3,9,18,.10),rgba(3,9,18,.55)),
+        url("./black.png") center center / cover fixed no-repeat;
+      overflow-x:hidden;
+    }
+
+    a{text-decoration:none;color:inherit}
+    button{font-family:inherit;cursor:pointer}
+    img{max-width:100%;display:block}
+    .container{width:min(1320px,calc(100% - 36px));margin:auto}
+
+    .site-header{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:linear-gradient(180deg,rgba(6,18,33,.94),rgba(4,13,25,.88));
+      border-bottom:1px solid var(--line);
+      box-shadow:0 18px 42px rgba(0,0,0,.35);
+      backdrop-filter:blur(16px);
+    }
+    .header-inner{
+      min-height:98px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:24px;
+      padding:12px 0;
+    }
+    .brand{display:flex;align-items:center;gap:18px;color:#fff7e8}
+    .brand-logo{
+      width:82px;height:82px;border-radius:50%;object-fit:contain;
+      filter:drop-shadow(0 12px 24px rgba(0,0,0,.28));
+    }
+    .brand h1{
+      font-family:"Cinzel",serif;
+      font-size:clamp(28px,3vw,46px);
+      line-height:1;
+      letter-spacing:.02em;
+      color:#fff7ea;
+      text-shadow:0 3px 18px rgba(0,0,0,.35);
+    }
+    .brand p{
+      margin-top:8px;
+      color:#e8c982;
+      font-weight:800;
+      letter-spacing:.04em;
+    }
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .nav a{
+      color:rgba(255,247,234,.86);
+      font-weight:800;
+      padding:12px 18px;
+      border-radius:999px;
+      border:1px solid transparent;
+      transition:.25s ease;
+      white-space:nowrap;
+    }
+    .nav a:hover,.nav a.active{
+      color:#fff2c5;
+      background:rgba(255,255,255,.08);
+      border-color:rgba(232,203,153,.38);
+      transform:translateY(-1px);
+    }
+    .nav a.cta{
+      background:linear-gradient(180deg,#244362,#0b2139);
+      color:#fff1c6;
+      border:1px solid rgba(232,203,153,.68);
+      box-shadow:0 10px 24px rgba(0,0,0,.24);
+    }
+
+    main{padding:42px 0 56px}
+
+    .shop-hero{
+      position:relative;
+      overflow:hidden;
+      border-radius:42px;
+      padding:42px 40px;
+      color:#fff7ea;
+      background:
+        linear-gradient(135deg,rgba(7,21,38,.96),rgba(9,32,55,.88)),
+        radial-gradient(circle at 84% 18%,rgba(232,203,153,.22),transparent 38%);
+      border:1px solid rgba(232,203,153,.58);
+      box-shadow:var(--shadow);
+    }
+    .shop-hero::before{
+      content:"";
+      position:absolute;
+      inset:18px;
+      border-radius:32px;
+      border:1px solid rgba(232,203,153,.25);
+      pointer-events:none;
+    }
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 18px;
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+      color:#ffe8ad;
+      border:1px solid rgba(232,203,153,.42);
+      font-family:"Cinzel",serif;
+      font-weight:800;
+      font-size:14px;
+      box-shadow:0 10px 26px rgba(0,0,0,.20);
+    }
+    .shop-hero h2{
+      position:relative;
+      z-index:2;
+      margin-top:18px;
+      font-family:"Playfair Display","Noto Sans Thai",serif;
+      font-size:clamp(42px,5vw,72px);
+      line-height:.95;
+      letter-spacing:-.035em;
+      color:#fff7ea;
+    }
+    .shop-hero h2 span{
+      display:block;
+      margin-top:10px;
+      color:#e8c982;
+      font-size:.55em;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .shop-hero p{
+      position:relative;
+      z-index:2;
+      margin-top:18px;
+      max-width:680px;
+      color:rgba(255,247,234,.78);
+      font-weight:750;
+      line-height:1.85;
+    }
+
+    section{padding:38px 0 0}
+    .section-head{margin-bottom:18px;color:#fff7ea}
+    .section-head h2{
+      font-family:"Playfair Display","Noto Sans Thai",serif;
+      font-size:clamp(34px,4vw,56px);
+      line-height:1;
+      color:#fff7ea;
+      text-shadow:0 4px 22px rgba(0,0,0,.35);
+    }
+    .section-head p{
+      margin-top:12px;
+      color:rgba(255,247,234,.78);
+      font-weight:700;
+      line-height:1.75;
+    }
+
+    .zone-shop-panel{
+      width:100%;
+      border-radius:42px;
+      padding:28px 30px;
+      background:
+        linear-gradient(135deg,rgba(255,250,240,.92),rgba(219,203,179,.82)),
+        radial-gradient(circle at 80% 10%,rgba(255,232,174,.22),transparent 32%);
+      border:1px solid rgba(232,203,153,.70);
+      box-shadow:0 24px 70px rgba(0,0,0,.30);
+      overflow:hidden;
+    }
+    .zone-shop-grid{
+      display:grid;
+      grid-template-columns:repeat(8,minmax(0,1fr));
+      gap:14px;
+    }
+    .zone-shop-card{
+      min-height:172px;
+      border-radius:28px;
+      padding:16px 12px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:12px;
+      border:1px solid rgba(255,255,255,.48);
+      box-shadow:0 16px 34px rgba(0,0,0,.16);
+      transition:transform .22s ease,filter .22s ease,box-shadow .22s ease;
+      cursor:pointer;
+      text-align:center;
+      font-weight:950;
+    }
+    .zone-shop-card:hover{
+      transform:translateY(-4px);
+      filter:brightness(1.04);
+      box-shadow:0 22px 46px rgba(0,0,0,.22);
+    }
+    .zone-shop-card img{
+      width:92px;
+      height:92px;
+      object-fit:contain;
+      filter:drop-shadow(0 10px 14px rgba(0,0,0,.16));
+    }
+    .zone-shop-card span{
+      font-size:17px;
+      line-height:1.1;
+      letter-spacing:-.01em;
+    }
+
+    .shop-e1{background:linear-gradient(150deg,#0b3e70,#2d8bc8);color:#fff}
+    .shop-e2{background:linear-gradient(150deg,#fffaf0,#e9d9b8);color:#6a5539}
+    .shop-e3{background:linear-gradient(150deg,#8c0718,#cf3e50);color:#fff}
+    .shop-e4{background:linear-gradient(150deg,#edf8e9,#bddbb3);color:#42623a}
+    .shop-e5{background:linear-gradient(150deg,#f0e2ff,#b993df);color:#5d3f84}
+    .shop-e6{background:linear-gradient(150deg,#ffe5ef,#eda0be);color:#914866}
+    .shop-e7{background:linear-gradient(150deg,#f0fbff,#aadcf2);color:#397390}
+    .shop-e8{background:linear-gradient(150deg,#fff2c8,#d8ad49);color:#6c4e18}
+
+    .shop-board{
+      border-radius:42px;
+      padding:28px;
+      background:linear-gradient(180deg,rgba(255,250,242,.91),rgba(239,220,193,.82));
+      border:1px solid rgba(232,203,153,.62);
+      box-shadow:var(--shadow);
+      color:#2c2024;
+      overflow:hidden;
+    }
+    .shop-board-top{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:18px;
+      margin-bottom:20px;
+    }
+    .shop-board-top h3{
+      font-family:"Playfair Display","Noto Sans Thai",serif;
+      font-size:clamp(28px,3vw,42px);
+      line-height:1;
+      color:#2a1b22;
+    }
+    .shop-board-top p{
+      margin-top:10px;
+      color:#786a67;
+      font-weight:800;
+      line-height:1.7;
+    }
+    .shop-note{
+      flex:0 0 auto;
+      padding:10px 16px;
+      border-radius:999px;
+      background:linear-gradient(180deg,#102846,#07182b);
+      color:#ffe8ad;
+      border:1px solid rgba(232,203,153,.56);
+      font-weight:900;
+      white-space:nowrap;
+    }
+
+    .product-grid{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:14px;
+    }
+    .product-card{
+      min-height:172px;
+      border-radius:26px;
+      padding:20px;
+      background:rgba(255,255,255,.54);
+      border:1px solid rgba(190,150,91,.28);
+      box-shadow:0 14px 32px rgba(0,0,0,.10);
+      transition:transform .22s ease,box-shadow .22s ease;
+    }
+    .product-card:hover{
+      transform:translateY(-3px);
+      box-shadow:0 20px 42px rgba(0,0,0,.16);
+    }
+    .product-card .tag{
+      display:inline-flex;
+      align-items:center;
+      padding:6px 12px;
+      border-radius:999px;
+      background:#0a2138;
+      color:#ffe8b0;
+      font-size:12px;
+      font-weight:950;
+    }
+    .product-card h4{
+      margin-top:14px;
+      font-size:20px;
+      color:#2b2024;
+      line-height:1.3;
+    }
+    .product-card p{
+      margin-top:8px;
+      color:#79675e;
+      font-weight:750;
+      line-height:1.65;
+      font-size:13px;
+    }
+
+    .register-panel{
+      border-radius:42px;
+      padding:36px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:22px;
+      background:linear-gradient(180deg,rgba(255,250,242,.91),rgba(239,220,193,.82));
+      border:1px solid rgba(232,203,153,.62);
+      box-shadow:var(--shadow);
+      color:#2c2024;
+      overflow:hidden;
+    }
+    .register-panel h2{
+      font-family:"Playfair Display","Noto Sans Thai",serif;
+      font-size:clamp(34px,4vw,54px);
+      line-height:1;
+      color:#2a1b22;
+    }
+    .register-panel p{
+      margin-top:12px;
+      color:#786a67;
+      font-weight:750;
+      line-height:1.8;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      min-height:52px;
+      padding:0 26px;
+      border-radius:999px;
+      border:1px solid rgba(199,162,105,.42);
+      font-weight:950;
+      transition:.22s ease;
+      white-space:nowrap;
+    }
+    .btn.primary{
+      background:linear-gradient(180deg,#17385e,#071a2e);
+      color:#fff2c8;
+      box-shadow:0 14px 28px rgba(0,0,0,.28);
+    }
+    .btn.soft{background:rgba(255,255,255,.56);color:#6a4d35}
+    .btn:hover{transform:translateY(-2px)}
+
+    footer{
+      text-align:center;
+      color:rgba(255,247,234,.74);
+      font-weight:700;
+      padding:40px 0 56px;
+      text-shadow:0 2px 14px rgba(0,0,0,.38);
+    }
+
+    @media(max-width:1100px){
+      .zone-shop-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+      .product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+    @media(max-width:760px){
+      .header-inner{align-items:flex-start;flex-direction:column}
+      .nav{justify-content:flex-start}
+      .brand-logo{width:68px;height:68px}
+      .brand h1{font-size:28px}
+      .shop-hero{padding:34px 26px}
+      .register-panel{flex-direction:column;align-items:flex-start}
+      .shop-board-top{flex-direction:column;align-items:flex-start}
+      .shop-note{white-space:normal}
+    }
+    @media(max-width:620px){
+      .container{width:min(100% - 24px,1320px)}
+      .zone-shop-panel{padding:20px;border-radius:32px}
+      .zone-shop-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+      .zone-shop-card{min-height:150px;border-radius:24px}
+      .zone-shop-card img{width:78px;height:78px}
+      .product-grid{grid-template-columns:1fr}
+      .shop-board,.register-panel{padding:24px;border-radius:32px}
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="./index.html" aria-label="E8 Eden Academy Home">
+        <img class="brand-logo" src="./eden.png" alt="โรงเรียนอีเดน Logo">
+        <div>
+          <h1>E8’s Eden Academy</h1>
+          <p>ระบบการรับสมัครเข้าเรียน ✦</p>
+        </div>
+      </a>
+      <nav class="nav">
+        <a href="./index.html">หน้าหลัก</a>
+        <a href="./board.html">กระทู้</a>
+        <a class="active" href="./shop.html">ร้านค้า</a>
+        <a href="./zone.html">โซน</a>
+        <a class="cta" href="./register.html">✦ สมัครบัตรสถาบัน</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="container">
+      <div class="shop-hero">
+        <span class="kicker">ACADEMY SHOP</span>
+        <h2>ร้านค้าสถาบัน<span>Institut Privé d’Eden</span></h2>
+        <p>พื้นที่สำหรับสินค้า เครื่องแบบ ไอเท็มประจำโซน และของสะสมของนักเรียนเอเดน สามารถเลือกดูหมวดสินค้าตามสัญลักษณ์ประจำโซน E1-E8 ได้จากด้านล่าง</p>
+      </div>
+    </section>
+
+    <section id="zone-category">
+      <div class="container">
+        <div class="section-head">
+          <h2>หมวดสินค้าประจำโซน</h2>
+          <p>เลือกหมวดเล็กตามโซนของนักเรียน เรียงสีตามสัญลักษณ์ E1-E8</p>
+        </div>
+
+        <div class="zone-shop-panel">
+          <div class="zone-shop-grid">
+            <a class="zone-shop-card shop-e1" href="#zone-e1">
+              <img src="./e1m.png" alt="โซน E1">
+              <span>โซน E1</span>
+            </a>
+            <a class="zone-shop-card shop-e2" href="#zone-e2">
+              <img src="./e2m.png" alt="โซน E2">
+              <span>โซน E2</span>
+            </a>
+            <a class="zone-shop-card shop-e3" href="#zone-e3">
+              <img src="./e3m.png" alt="โซน E3">
+              <span>โซน E3</span>
+            </a>
+            <a class="zone-shop-card shop-e4" href="#zone-e4">
+              <img src="./e4m.png" alt="โซน E4">
+              <span>โซน E4</span>
+            </a>
+            <a class="zone-shop-card shop-e5" href="#zone-e5">
+              <img src="./e5m.png" alt="โซน E5">
+              <span>โซน E5</span>
+            </a>
+            <a class="zone-shop-card shop-e6" href="#zone-e6">
+              <img src="./e6m.png" alt="โซน E6">
+              <span>โซน E6</span>
+            </a>
+            <a class="zone-shop-card shop-e7" href="#zone-e7">
+              <img src="./e7m.png" alt="โซน E7">
+              <span>โซน E7</span>
+            </a>
+            <a class="zone-shop-card shop-e8" href="#zone-e8">
+              <img src="./e8m.png" alt="โซน E8">
+              <span>โซน E8</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="items">
+      <div class="container">
+        <div class="shop-board">
+          <div class="shop-board-top">
+            <div>
+              <h3>รายการสินค้าเตรียมเปิด</h3>
+              <p>ส่วนนี้เป็นพื้นที่จัดวางสินค้าในอนาคต สามารถเพิ่มรูป ราคา และปุ่มซื้อได้ภายหลังโดยไม่กระทบหน้า index.html</p>
+            </div>
+            <span class="shop-note">Coming Soon</span>
+          </div>
+
+          <div class="product-grid">
+            <article class="product-card" id="zone-e1">
+              <span class="tag">โซน E1</span>
+              <h4>E1 Academy Item</h4>
+              <p>หมวดสินค้าและไอเท็มประจำโซน E1</p>
+            </article>
+            <article class="product-card" id="zone-e2">
+              <span class="tag">โซน E2</span>
+              <h4>E2 Academy Item</h4>
+              <p>หมวดสินค้าและไอเท็มประจำโซน E2</p>
+            </article>
+            <article class="product-card" id="zone-e3">
+              <span class="tag">โซน E3</span>
+              <h4>E3 Academy Item</h4>
+              <p>หมวดสินค้าและไอเท็มประจำโซน E3</p>
+            </article>
+            <article class="product-card" id="zone-e4">
+              <span class="tag">โซน E4</span>
+              <h4>E4 Academy Item</h4>
+              <p>หมวดสินค้าและไอเท็มประจำโซน E4</p>
+            </article>
+            <article class="product-card" id="zone-e5">
+              <span class="tag">โซน E5</span>
+              <h4>E5 Academy Item</h4>
+              <p>หมวดสินค้าและไอเท็มประจำโซน E5</p>
+            </article>
+            <article class="product-card" id="zone-e6">
+              <span class="tag">โซน E6</span>
+              <h4>E6 Academy Item</h4>
+              <p>หมวดสินค้าและไอเท็มประจำโซน E6</p>
+            </article>
+            <article class="product-card" id="zone-e7">
+              <span class="tag">โซน E7</span>
+              <h4>E7 Academy Item</h4>
+              <p>หมวดสินค้าและไอเท็มประจำโซน E7</p>
+            </article>
+            <article class="product-card" id="zone-e8">
+              <span class="tag">โซน E8</span>
+              <h4>E8 Academy Item</h4>
+              <p>หมวดสินค้าและไอเท็มประจำโซน E8</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="register-panel">
+          <div>
+            <h2>สมัครบัตรสถาบัน</h2>
+            <p>สมัครบัตรนักเรียนเพื่อเชื่อมกับระบบสมาชิก ตารางเรียน และสิทธิ์การเข้าถึงสินค้าประจำโซนในอนาคต</p>
+          </div>
+          <a class="btn primary" href="./register.html">ไปหน้าสมัครบัตรสถาบัน</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    E8’s Eden Academy © Academy Shop<br>
+    Zone Goods • Student Uniform • Academy Items
+  </footer>
+</body>
+</html>
