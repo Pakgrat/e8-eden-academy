@@ -2672,5 +2672,294 @@
       });
     })();
   </script>
+
+  <style>
+    /* PATCH v32: FORCE correct black.png background + stable popup */
+    html{
+      min-height:100% !important;
+      background:#020812 !important;
+      overflow-x:hidden !important;
+      overflow-y:auto !important;
+    }
+
+    body{
+      min-height:100% !important;
+      height:auto !important;
+      overflow-x:hidden !important;
+      overflow-y:auto !important;
+      background:transparent !important;
+      position:relative !important;
+    }
+
+    /* พื้นหลังหลักของเว็บ: black.png เท่านั้น */
+    html::before{
+      content:"" !important;
+      position:fixed !important;
+      inset:0 !important;
+      z-index:-9999 !important;
+      pointer-events:none !important;
+      background:
+        linear-gradient(180deg,rgba(1,8,18,.20),rgba(1,8,18,.44)),
+        url("black.png") center center / cover no-repeat !important;
+    }
+
+    /* ปิดพื้นหลังสีเทา/เบจเก่าที่เคยทับ black.png */
+    body::before,
+    body::after,
+    .page-bg,
+    .site-bg,
+    .bg,
+    .bg-layer,
+    .background,
+    .background-layer,
+    .ambient-bg,
+    .noise,
+    .grid-bg,
+    .cursor-glow,
+    .mouse-light{
+      background:none !important;
+      background-image:none !important;
+      pointer-events:none !important;
+    }
+
+    .page-bg,
+    .site-bg,
+    .bg,
+    .bg-layer,
+    .background,
+    .background-layer,
+    .ambient-bg,
+    .noise,
+    .grid-bg,
+    .cursor-glow,
+    .mouse-light{
+      display:none !important;
+    }
+
+    main,
+    .site-main,
+    .page,
+    .app,
+    .wrap,
+    .container,
+    .main-wrap,
+    .content-wrap{
+      background:transparent !important;
+    }
+
+    /* 4 ช่องวิสัยทัศน์: ไม่ใช่ปุ่ม ไม่ใช่ลิงก์ มีแค่ hover effect */
+    .mini-grid .eden-vision-card,
+    .vision-grid .eden-vision-card,
+    .vision-card,
+    .mini-card{
+      cursor:default !important;
+      text-decoration:none !important;
+      pointer-events:auto !important;
+      transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease, filter .22s ease !important;
+    }
+
+    .mini-grid .eden-vision-card:hover,
+    .vision-grid .eden-vision-card:hover,
+    .vision-card:hover,
+    .mini-card:hover{
+      transform:translateY(-4px) !important;
+      filter:brightness(1.04) !important;
+      box-shadow:0 18px 42px rgba(0,0,0,.22), 0 0 0 1px rgba(230,198,141,.48) inset !important;
+    }
+
+    /* popup ใหม่ ไม่หายเอง รอให้กดปิดเท่านั้น */
+    #edenWelcomeModal32{
+      position:fixed !important;
+      inset:0 !important;
+      z-index:2147483647 !important;
+      display:flex !important;
+      align-items:center !important;
+      justify-content:center !important;
+      padding:22px !important;
+      background:rgba(1,8,18,.58) !important;
+      backdrop-filter:blur(10px) !important;
+      -webkit-backdrop-filter:blur(10px) !important;
+    }
+
+    #edenWelcomeModal32 .eden-welcome-box{
+      width:min(660px,92vw) !important;
+      border-radius:34px !important;
+      padding:36px 34px 32px !important;
+      position:relative !important;
+      text-align:center !important;
+      background:radial-gradient(circle at 12% 10%,rgba(255,255,255,.88),transparent 38%),linear-gradient(135deg,rgba(255,250,241,.98),rgba(232,213,184,.96)) !important;
+      border:1px solid rgba(219,184,128,.68) !important;
+      box-shadow:0 28px 80px rgba(0,0,0,.45) !important;
+      color:#241923 !important;
+      animation:edenPopIn32 .34s ease both !important;
+    }
+
+    @keyframes edenPopIn32{
+      from{opacity:0;transform:translateY(16px) scale(.97);}
+      to{opacity:1;transform:translateY(0) scale(1);}
+    }
+
+    #edenWelcomeModal32 .eden-welcome-close{
+      position:absolute !important;
+      right:18px !important;
+      top:18px !important;
+      width:42px !important;
+      height:42px !important;
+      border-radius:50% !important;
+      border:1px solid rgba(180,139,85,.46) !important;
+      background:rgba(255,255,255,.65) !important;
+      color:#7a5a3b !important;
+      font-size:22px !important;
+      font-weight:900 !important;
+      cursor:pointer !important;
+    }
+
+    #edenWelcomeModal32 .eden-welcome-logo{
+      width:98px !important;
+      height:98px !important;
+      object-fit:contain !important;
+      margin:0 auto 14px !important;
+      display:block !important;
+      filter:drop-shadow(0 10px 18px rgba(0,0,0,.14)) !important;
+    }
+
+    #edenWelcomeModal32 h2{
+      margin:0 !important;
+      font-family:"Playfair Display","Noto Sans Thai",serif !important;
+      font-size:clamp(34px,4vw,54px) !important;
+      line-height:1.08 !important;
+      color:#071d33 !important;
+      font-weight:900 !important;
+    }
+
+    #edenWelcomeModal32 .eden-welcome-fr{
+      margin-top:10px !important;
+      font-family:"Playfair Display",serif !important;
+      font-size:18px !important;
+      letter-spacing:.08em !important;
+      color:#8b6842 !important;
+      font-weight:900 !important;
+    }
+
+    #edenWelcomeModal32 p{
+      margin:18px auto 0 !important;
+      max-width:490px !important;
+      line-height:1.8 !important;
+      color:#6a574e !important;
+      font-weight:800 !important;
+    }
+
+    #edenWelcomeModal32 .eden-welcome-actions{
+      margin-top:26px !important;
+      display:flex !important;
+      justify-content:center !important;
+      gap:14px !important;
+      flex-wrap:wrap !important;
+    }
+
+    #edenWelcomeModal32 .eden-welcome-primary,
+    #edenWelcomeModal32 .eden-welcome-secondary{
+      min-width:150px !important;
+      border-radius:999px !important;
+      padding:13px 22px !important;
+      font-weight:900 !important;
+      cursor:pointer !important;
+      border:1px solid rgba(191,153,96,.44) !important;
+      font-family:inherit !important;
+      text-decoration:none !important;
+      display:inline-flex !important;
+      justify-content:center !important;
+      align-items:center !important;
+    }
+
+    #edenWelcomeModal32 .eden-welcome-primary{
+      background:linear-gradient(180deg,#0d2d4c,#061827) !important;
+      color:#fff3c9 !important;
+      box-shadow:0 12px 28px rgba(0,24,48,.25) !important;
+    }
+
+    #edenWelcomeModal32 .eden-welcome-secondary{
+      background:rgba(255,255,255,.66) !important;
+      color:#6b4a31 !important;
+    }
+  </style>
+
+  <script>
+    /* PATCH v32: popup fix + disable old wrong popup without touching other systems */
+    (function(){
+      function ready(fn){
+        if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", fn);
+        else fn();
+      }
+
+      function removeOldBrokenPopups(){
+        document.querySelectorAll("#edenWelcomeModal31,#edenWelcomeModal30,#edenWelcomeModal29,.welcome-popup,.welcome-modal").forEach(function(el){
+          el.remove();
+        });
+        document.querySelectorAll(".popup,.modal,.modal-card,.popup-card,[role='dialog']").forEach(function(el){
+          if(el.id === "edenWelcomeModal32" || el.closest("#edenWelcomeModal32")) return;
+          const text = el.textContent || "";
+          if(/ฐานะ|ชนชั้น|ร่ำรวย|สติปัญญา/.test(text) || /ยินดีต้อนรับสู่ E8|สมัครบัตรสถาบัน|เข้าสู่หน้าเว็บ/.test(text)){
+            el.remove();
+          }
+        });
+      }
+
+      function makeVisionCardsDisplayOnly(){
+        document.querySelectorAll(".mini-grid a,.vision-grid a,a.eden-vision-card,a.vision-card,a.mini-card").forEach(function(a){
+          const text = a.textContent || "";
+          if(/ฐานะ|ชนชั้น|ร่ำรวย|สติปัญญา/.test(text)){
+            const box = document.createElement("div");
+            box.className = a.className || "eden-vision-card";
+            box.innerHTML = a.innerHTML;
+            box.setAttribute("role","presentation");
+            a.replaceWith(box);
+          }
+        });
+      }
+
+      function showWelcome(){
+        removeOldBrokenPopups();
+        if(document.getElementById("edenWelcomeModal32")) return;
+        if(sessionStorage.getItem("edenWelcomeClosedV32") === "1") return;
+
+        const modal = document.createElement("div");
+        modal.id = "edenWelcomeModal32";
+        modal.innerHTML = `
+          <div class="eden-welcome-box" role="dialog" aria-modal="true" aria-label="Eden welcome popup">
+            <button class="eden-welcome-close" type="button" aria-label="close">×</button>
+            <img class="eden-welcome-logo" src="eden.png" alt="E8's Eden Academy Logo">
+            <h2>ยินดีต้อนรับสู่<br>E8’s Eden Academy</h2>
+            <div class="eden-welcome-fr">Institut Privé d’Eden</div>
+            <p>กรุณาตรวจสอบตารางเรียนแต่ละโซนของท่าน และสมัครบัตรนักเรียนเพื่อเข้าสู่ระบบของสถาบัน</p>
+            <div class="eden-welcome-actions">
+              <a class="eden-welcome-primary" href="register.html">สมัครบัตรสถาบัน</a>
+              <button class="eden-welcome-secondary" type="button">เข้าสู่หน้าเว็บ</button>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(modal);
+
+        function closeWelcome(){
+          sessionStorage.setItem("edenWelcomeClosedV32","1");
+          modal.remove();
+        }
+
+        modal.querySelector(".eden-welcome-close").addEventListener("click", closeWelcome);
+        modal.querySelector(".eden-welcome-secondary").addEventListener("click", closeWelcome);
+        modal.addEventListener("click", function(e){
+          if(e.target === modal) closeWelcome();
+        });
+      }
+
+      ready(function(){
+        document.documentElement.style.overflowY = "auto";
+        document.body.style.overflowY = "auto";
+        makeVisionCardsDisplayOnly();
+        removeOldBrokenPopups();
+        setTimeout(showWelcome, 150);
+      });
+    })();
+  </script>
 </body>
 </html>
