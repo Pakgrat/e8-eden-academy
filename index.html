@@ -3239,5 +3239,165 @@
       });
     })();
   </script>
+
+  <style>
+    /* PATCH v34: stop whole-page hover/mouse movement */
+    html,
+    body{
+      transform:none !important;
+      translate:none !important;
+      scale:1 !important;
+      scroll-behavior:auto !important;
+    }
+
+    body,
+    main,
+    .site-main,
+    .page,
+    .app,
+    .wrap,
+    .container,
+    .main-wrap,
+    .content-wrap,
+    .shell,
+    .site-shell,
+    .hero,
+    .hero-wrap,
+    .hero-grid,
+    .hero-layout,
+    .hero-panel,
+    .announcement,
+    .announcement-card,
+    .status-panel,
+    .status-card,
+    .music-panel,
+    .music-card,
+    .board-preview,
+    .section,
+    .section-card{
+      transform:none !important;
+      translate:none !important;
+      scale:1 !important;
+      animation-name:none !important;
+    }
+
+    body:hover,
+    main:hover,
+    .site-main:hover,
+    .page:hover,
+    .app:hover,
+    .wrap:hover,
+    .container:hover,
+    .main-wrap:hover,
+    .content-wrap:hover,
+    .shell:hover,
+    .site-shell:hover,
+    .hero:hover,
+    .hero-wrap:hover,
+    .hero-grid:hover,
+    .hero-layout:hover,
+    .hero-panel:hover,
+    .announcement:hover,
+    .announcement-card:hover,
+    .status-panel:hover,
+    .status-card:hover,
+    .music-panel:hover,
+    .music-card:hover,
+    .board-preview:hover,
+    .section:hover,
+    .section-card:hover{
+      transform:none !important;
+      translate:none !important;
+      scale:1 !important;
+      top:auto !important;
+      left:auto !important;
+    }
+
+    /* ให้มีเอฟเฟกต์เฉพาะกล่องเล็กที่ตั้งใจเท่านั้น ไม่ให้ดัน layout ทั้งหน้า */
+    .vision-card,
+    .mini-card,
+    .quick-card,
+    .post,
+    .post-row,
+    .zone-card,
+    .tag-pill,
+    .nav-link,
+    .btn,
+    button,
+    .slider-btn,
+    .music-btn{
+      will-change:transform,filter,box-shadow !important;
+    }
+
+    .vision-card:hover,
+    .mini-card:hover,
+    .quick-card:hover,
+    .post:hover,
+    .post-row:hover,
+    .zone-card:hover{
+      transform:translateY(-3px) !important;
+    }
+
+    .tag-pill:hover,
+    .nav-link:hover,
+    .btn:hover,
+    button:hover,
+    .slider-btn:hover,
+    .music-btn:hover{
+      transform:translateY(-1px) !important;
+    }
+
+    /* popup ต้องนิ่ง ไม่โดน hover / tilt effect */
+    #edenGate33,
+    #edenGate33 *,
+    #edenWelcomeModal32,
+    #edenWelcomeModal32 *{
+      transform:none !important;
+      translate:none !important;
+      scale:1 !important;
+    }
+
+    #edenGate33 .eden-gate-card33,
+    #edenWelcomeModal32 .eden-welcome-box{
+      animation:edenPopupStill34 .25s ease both !important;
+    }
+
+    @keyframes edenPopupStill34{
+      from{opacity:0;}
+      to{opacity:1;}
+    }
+  </style>
+
+  <script>
+    /* PATCH v34: neutralize mouse-follow / tilt scripts that move big layout */
+    (function(){
+      function lockBigLayout(){
+        const selectors = [
+          'body','main','.site-main','.page','.app','.wrap','.container','.main-wrap','.content-wrap',
+          '.shell','.site-shell','.hero','.hero-wrap','.hero-grid','.hero-layout','.hero-panel',
+          '.announcement','.announcement-card','.status-panel','.status-card','.music-panel','.music-card',
+          '.board-preview','.section','.section-card','#edenGate33','#edenWelcomeModal32'
+        ];
+        document.querySelectorAll(selectors.join(',')).forEach(function(el){
+          el.style.transform = 'none';
+          el.style.translate = 'none';
+          el.style.scale = '1';
+        });
+      }
+
+      function ready(fn){
+        if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
+        else fn();
+      }
+
+      ready(function(){
+        lockBigLayout();
+        ['mousemove','pointermove','mouseover','mouseenter'].forEach(function(evt){
+          window.addEventListener(evt, lockBigLayout, true);
+          document.addEventListener(evt, lockBigLayout, true);
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
