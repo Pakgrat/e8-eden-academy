@@ -451,6 +451,9 @@
       const signatureColor=getComputedStyle(root).getPropertyValue('--signature-color').trim() || zoneInk;
       const zoneRgb=hexToRgb(zoneColor);
       const darkRgb=hexToRgb(zoneDark);
+      const detailColor=zoneDark;
+      const detailSoft=`rgba(${darkRgb.r},${darkRgb.g},${darkRgb.b},.72)`;
+      const detailLine=`rgba(${darkRgb.r},${darkRgb.g},${darkRgb.b},.30)`;
 
       const bg=ctx.createLinearGradient(0,0,1600,1000);
       bg.addColorStop(0,'#fffdf8');
@@ -493,7 +496,7 @@
       ctx.fillText('E8’s Eden Academy',610,170);
       ctx.restore();
       ctx.font='700 26px Georgia, serif';
-      ctx.fillStyle=`rgba(${darkRgb.r},${darkRgb.g},${darkRgb.b},.78)`;
+      ctx.fillStyle=detailSoft;
       ctx.fillText('STUDENT IDENTITY CARD',614,215);
       ctx.fillStyle=`rgba(${zoneRgb.r},${zoneRgb.g},${zoneRgb.b},.38)`;
       roundRect(ctx,610,238,360,10,8);
@@ -530,9 +533,9 @@
       ctx.font='800 24px Arial, sans-serif';
       fields.forEach((item,index)=>{
         const y=305+index*92;
-        ctx.fillStyle=`rgba(${darkRgb.r},${darkRgb.g},${darkRgb.b},.78)`;
+        ctx.fillStyle=detailColor;
         ctx.fillText(item[0],610,y);
-        ctx.strokeStyle=`rgba(${darkRgb.r},${darkRgb.g},${darkRgb.b},.38)`;
+        ctx.strokeStyle=detailLine;
         ctx.lineWidth=2;
         ctx.setLineDash([8,8]);
         ctx.beginPath();
@@ -540,7 +543,7 @@
         ctx.lineTo(1420,y+6);
         ctx.stroke();
         ctx.setLineDash([]);
-        ctx.fillStyle=zoneInk;
+        ctx.fillStyle=detailColor;
         ctx.font='800 30px Arial, sans-serif';
         ctx.fillText(item[1]||'—',850,y);
         ctx.font='800 24px Arial, sans-serif';
@@ -565,7 +568,7 @@
       ctx.restore();
       ctx.textAlign='left';
 
-      ctx.fillStyle=`rgba(${darkRgb.r},${darkRgb.g},${darkRgb.b},.78)`;
+      ctx.fillStyle=detailColor;
       ctx.font='800 20px Arial, sans-serif';
       ctx.fillText('ISSUE DATE',112,875);
       ctx.fillText(issueDate.textContent,112,910);
@@ -590,7 +593,7 @@
       ctx.fillStyle=zoneInk;
       ctx.font='800 24px Arial, sans-serif';
       ctx.fillText('E8 EDEN ACADEMY • VERIFIED STUDENT RECORD',646,805);
-      ctx.fillStyle=`rgba(${darkRgb.r},${darkRgb.g},${darkRgb.b},.64)`;
+      ctx.fillStyle=detailSoft;
       ctx.font='700 19px Arial, sans-serif';
       ctx.fillText('This card is generated from the student registration portal.',646,832);
       return canvas.toDataURL('image/png');
