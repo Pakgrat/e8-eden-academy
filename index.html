@@ -663,10 +663,22 @@
     <section class="hero">
       <div class="container">
         <div class="hero-grid">
-          <article class="hero-card">
+          <article class="hero-card eden-admission-hero">
             <span class="kicker">TODAY’S ANNOUNCEMENT</span>
-            <h2>เปิดระบบสมัคร<br><span>บัตรนักเรียนใหม่</span></h2>
-            <p>นักเรียนสามารถสมัครบัตร เลือกโซนประจำตัว ตรวจสอบข่าวสาร และติดตามตารางเรียนของแต่ละโซนได้จากหน้าเว็บของสถาบัน</p>
+            <h2 class="eden-admission-title"><span class="fr">Institut Privé d’Eden</span><span class="th">สถาบันเอกชนแห่งเอเดน</span></h2>
+            <h3 class="eden-admission-subtitle">Institut Privé d’Eden เปิดรับสมัครนักเรียนใหม่ประจำปีการศึกษา</h3>
+            <div class="eden-admission-copy">
+              <p>สถาบันเอกชนสำหรับผู้ที่พร้อมก้าวเข้าสู่สังคมชั้นนำ ภายใต้ระบบการศึกษาเฉพาะของเอเดน นักเรียนทุกคนจะได้รับสิทธิ์เลือกสังกัดจาก 8 โซนหลัก ตามคุณสมบัติ บุคลิกภาพ และศักยภาพของตนเอง</p>
+              <div class="qual-title">คุณสมบัติผู้สมัคร</div>
+              <ul>
+                <li>มีความพร้อมด้านทุนการศึกษา</li>
+                <li>หรือมีผลการเรียนและความสามารถโดดเด่นเพียงพอสำหรับการสอบชิงทุน</li>
+                <li>สามารถปฏิบัติตามกฎของสถาบันและโซนที่ตนสังกัดได้</li>
+              </ul>
+              <p>ผู้สำเร็จการศึกษาจากเอเดนจะได้รับใบรับรองจากสถาบัน ซึ่งเป็นที่ยอมรับในกลุ่มบริษัทเอกชนชั้นนำ องค์กรธุรกิจ กลุ่มทุน และสถาบันระดับสูงทั้งในและต่างประเทศ</p>
+              <div class="eden-admission-motto">เลือกตราสัญลักษณ์ของคุณ<br><span>เลือกโซนของคุณ</span><br>และพิสูจน์ว่าคุณคู่ควรกับเอเดน</div>
+              <p class="eden-admission-open">เปิดรับสมัครแล้ววันนี้<br>Institut Privé d’Eden — สถาบันเอกชนแห่งเอเดน</p>
+            </div>
             <div class="hero-actions">
               <a class="btn primary" href="./register.html">สมัครบัตรสถาบัน</a>
               <a class="btn soft" href="#news">อ่านประกาศสถาบัน</a>
@@ -708,10 +720,10 @@
         </div>
 
         <div class="mini-grid">
-          <a class="mini-box" href="./board.html"><b>กระทู้ล่าสุด</b><span>อ่านข่าวสารและประกาศจากสถาบัน</span></a>
-          <a class="mini-box" href="#official"><b>ภาพประกาศ</b><span>รวมรูป 1-8 ที่เลื่อนอัตโนมัติ</span></a>
-          <a class="mini-box" href="#zones"><b>โซนทั้ง 8</b><span>ตรวจสัญลักษณ์และสีประจำโซน</span></a>
-          <a class="mini-box" href="./register.html"><b>สมัครบัตร</b><span>สร้างบัตรนักเรียนประจำโซน</span></a>
+          <a class="mini-box eden-vision-card" href="./board.html"><b>ฐานะ</b><span>รากฐานของโอกาส เส้นทาง และความพร้อมในการเข้าสู่สังคมของเอเดน</span></a>
+          <a class="mini-box eden-vision-card" href="#official"><b>ชนชั้น</b><span>ลำดับทางสังคมที่สะท้อนมารยาท เครือข่าย และความรับผิดชอบของนักเรียน</span></a>
+          <a class="mini-box eden-vision-card" href="#zones"><b>ร่ำรวย</b><span>ทรัพยากร วิสัยทัศน์ และอำนาจในการต่อยอดสู่โลกธุรกิจระดับสูง</span></a>
+          <a class="mini-box eden-vision-card" href="./register.html"><b>สติปัญญา</b><span>ความสามารถในการตัดสินใจ วิเคราะห์ และพิสูจน์คุณค่าของตนในระบบเอเดน</span></a>
         </div>
       </div>
     </section>
@@ -1957,6 +1969,12 @@
     .eden-admission-hero .cta-row,
     .eden-admission-hero .hero-buttons{
       margin-top:18px !important;
+    }
+    .mini-grid .eden-vision-card{
+      min-height:132px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
     }
     .eden-vision-card{
       position:relative;
