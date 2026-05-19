@@ -441,8 +441,8 @@
       ]);
 
       const canvas=document.createElement('canvas');
-      canvas.width=1600;
-      canvas.height=1000;
+      canvas.width=1400;
+      canvas.height=850;
       const ctx=canvas.getContext('2d');
       const zoneColor=getComputedStyle(root).getPropertyValue('--zone').trim() || '#d7bd8c';
       const zoneDark=getComputedStyle(root).getPropertyValue('--zone-dark').trim() || '#8f6a32';
@@ -453,149 +453,163 @@
       const darkRgb=hexToRgb(zoneDark);
       const detailColor=zoneDark;
       const detailSoft=`rgba(${darkRgb.r},${darkRgb.g},${darkRgb.b},.72)`;
-      const detailLine=`rgba(${darkRgb.r},${darkRgb.g},${darkRgb.b},.30)`;
+      const detailLine=`rgba(${darkRgb.r},${darkRgb.g},${darkRgb.b},.26)`;
 
-      const bg=ctx.createLinearGradient(0,0,1600,1000);
-      bg.addColorStop(0,'#fffdf8');
-      bg.addColorStop(.36,'#fff4f7');
+      function fitText(text,x,y,maxWidth,fontSize,fontFamily,weight='800',color=detailColor,align='left'){
+        let size=fontSize;
+        ctx.textAlign=align;
+        do{
+          ctx.font=`${weight} ${size}px ${fontFamily}`;
+          if(ctx.measureText(String(text)).width<=maxWidth || size<=18)break;
+          size-=2;
+        }while(size>18);
+        ctx.fillStyle=color;
+        ctx.fillText(String(text),x,y);
+        ctx.textAlign='left';
+      }
+
+      const bg=ctx.createLinearGradient(0,0,1400,850);
+      bg.addColorStop(0,'#fffdf9');
+      bg.addColorStop(.35,'#fff5f7');
       bg.addColorStop(.72,zoneSoft);
-      bg.addColorStop(1,`rgba(${zoneRgb.r},${zoneRgb.g},${zoneRgb.b},.48)`);
+      bg.addColorStop(1,`rgba(${zoneRgb.r},${zoneRgb.g},${zoneRgb.b},.38)`);
       ctx.fillStyle=bg;
-      roundRect(ctx,0,0,1600,1000,58);
+      roundRect(ctx,0,0,1400,850,54);
       ctx.fill();
 
       ctx.save();
-      roundRect(ctx,36,36,1528,928,42);
-      ctx.strokeStyle=`rgba(${zoneRgb.r},${zoneRgb.g},${zoneRgb.b},.72)`;
+      roundRect(ctx,34,34,1332,782,36);
+      ctx.strokeStyle=`rgba(${zoneRgb.r},${zoneRgb.g},${zoneRgb.b},.70)`;
       ctx.lineWidth=4;
       ctx.stroke();
-      roundRect(ctx,62,62,1476,876,30);
+      roundRect(ctx,58,58,1284,734,26);
       ctx.strokeStyle='rgba(255,255,255,.72)';
       ctx.lineWidth=2;
       ctx.stroke();
       ctx.restore();
 
-      for(let i=0;i<28;i++){
-        ctx.globalAlpha=.045;
+      ctx.save();
+      roundRect(ctx,58,58,1284,734,26);
+      ctx.clip();
+      for(let i=-1;i<22;i++){
+        ctx.globalAlpha=.055;
         ctx.fillStyle=i%2?zoneColor:'#ffffff';
         ctx.beginPath();
-        ctx.arc(120+i*58,125+(i%6)*105,84,0,Math.PI*2);
+        ctx.arc(120+i*72,145+(i%5)*116,74,0,Math.PI*2);
         ctx.fill();
       }
       ctx.globalAlpha=1;
-
-      if(zoneLogo){drawImageContain(ctx,zoneLogo,930,130,500,610,.12)}
-      if(edenLogo){drawImageContain(ctx,edenLogo,1340,80,150,150,1)}
-
-      ctx.save();
-      ctx.shadowColor=`rgba(${darkRgb.r},${darkRgb.g},${darkRgb.b},.18)`;
-      ctx.shadowBlur=18;
-      ctx.shadowOffsetY=8;
-      ctx.fillStyle=zoneInk;
-      ctx.font='700 70px Georgia, serif';
-      ctx.fillText('E8’s Eden Academy',610,170);
+      ctx.strokeStyle=`rgba(${zoneRgb.r},${zoneRgb.g},${zoneRgb.b},.12)`;
+      ctx.lineWidth=1.4;
+      for(let x=-120;x<1500;x+=30){
+        ctx.beginPath();
+        ctx.moveTo(x,0);
+        ctx.lineTo(x+650,850);
+        ctx.stroke();
+      }
       ctx.restore();
-      ctx.font='700 26px Georgia, serif';
+
+      if(zoneLogo){drawImageContain(ctx,zoneLogo,820,170,390,420,.10)}
+      if(edenLogo){drawImageContain(ctx,edenLogo,1180,75,116,116,1)}
+
+      ctx.save();
+      ctx.shadowColor=`rgba(${darkRgb.r},${darkRgb.g},${darkRgb.b},.16)`;
+      ctx.shadowBlur=14;
+      ctx.shadowOffsetY=6;
+      fitText('E8’s Eden Academy',510,130,600,58,'Cinzel, Georgia, serif','700',zoneInk);
+      ctx.restore();
+      ctx.font='700 21px Cinzel, Georgia, serif';
       ctx.fillStyle=detailSoft;
-      ctx.fillText('STUDENT IDENTITY CARD',614,215);
-      ctx.fillStyle=`rgba(${zoneRgb.r},${zoneRgb.g},${zoneRgb.b},.38)`;
-      roundRect(ctx,610,238,360,10,8);
+      ctx.fillText('STUDENT IDENTITY CARD',512,168);
+      ctx.fillStyle=`rgba(${zoneRgb.r},${zoneRgb.g},${zoneRgb.b},.36)`;
+      roundRect(ctx,512,185,300,8,8);
       ctx.fill();
 
       ctx.save();
-      roundRect(ctx,115,145,390,540,48);
-      ctx.fillStyle='rgba(255,255,255,.48)';
+      roundRect(ctx,105,125,335,465,36);
+      ctx.fillStyle='rgba(255,255,255,.52)';
       ctx.fill();
-      ctx.strokeStyle=`rgba(${darkRgb.r},${darkRgb.g},${darkRgb.b},.38)`;
-      ctx.lineWidth=5;
+      ctx.strokeStyle=`rgba(${darkRgb.r},${darkRgb.g},${darkRgb.b},.36)`;
+      ctx.lineWidth=4;
       ctx.stroke();
       ctx.clip();
       if(photoImg){
-        drawImageCover(ctx,photoImg,115,145,390,540);
+        drawImageCover(ctx,photoImg,105,125,335,465);
       }else{
-        ctx.fillStyle='rgba(170,150,150,.18)';
-        ctx.fillRect(115,145,390,540);
-        ctx.fillStyle='rgba(70,56,62,.25)';
-        ctx.font='130px Georgia, serif';
+        ctx.fillStyle='rgba(170,150,150,.15)';
+        ctx.fillRect(105,125,335,465);
+        ctx.fillStyle='rgba(70,56,62,.22)';
+        ctx.font='120px Georgia, serif';
         ctx.textAlign='center';
-        ctx.fillText('♙',310,450);
+        ctx.fillText('♙',272,395);
         ctx.textAlign='left';
       }
       ctx.restore();
 
-      if(zoneLogo){drawImageContain(ctx,zoneLogo,255,705,130,130,1)}
+      if(zoneLogo){drawImageContain(ctx,zoneLogo,212,612,122,122,1)}
 
       const fields=[
         ['STUDENT ID',studentId.textContent],
         ['NAME',cardName.textContent],
         ['LEVEL','YEAR 1']
       ];
-      ctx.font='800 24px Arial, sans-serif';
       fields.forEach((item,index)=>{
-        const y=305+index*92;
-        ctx.fillStyle=detailColor;
-        ctx.fillText(item[0],610,y);
+        const y=270+index*88;
+        fitText(item[0],510,y,180,22,'Noto Sans Thai, Tahoma, Arial, sans-serif','900',detailColor);
         ctx.strokeStyle=detailLine;
         ctx.lineWidth=2;
         ctx.setLineDash([8,8]);
         ctx.beginPath();
-        ctx.moveTo(830,y+6);
-        ctx.lineTo(1420,y+6);
+        ctx.moveTo(705,y+7);
+        ctx.lineTo(1225,y+7);
         ctx.stroke();
         ctx.setLineDash([]);
-        ctx.fillStyle=detailColor;
-        ctx.font='800 30px Arial, sans-serif';
-        ctx.fillText(item[1]||'—',850,y);
-        ctx.font='800 24px Arial, sans-serif';
+        fitText(item[1]||'—',725,y,480,28,'Noto Sans Thai, Tahoma, Arial, sans-serif','900',detailColor);
       });
 
-      const sig=ctx.createLinearGradient(610,585,1420,710);
-      sig.addColorStop(0,zoneDark);
-      sig.addColorStop(1,zoneColor);
+      const sig=ctx.createLinearGradient(510,505,1225,610);
+      sig.addColorStop(0,`rgba(${darkRgb.r},${darkRgb.g},${darkRgb.b},.92)`);
+      sig.addColorStop(1,`rgba(${zoneRgb.r},${zoneRgb.g},${zoneRgb.b},.72)`);
       ctx.fillStyle=sig;
-      roundRect(ctx,610,585,810,125,30);
+      roundRect(ctx,510,500,715,88,24);
       ctx.fill();
       ctx.strokeStyle='rgba(255,255,255,.35)';
       ctx.lineWidth=2;
       ctx.stroke();
       ctx.save();
-      ctx.shadowColor='rgba(255,255,255,.28)';
-      ctx.shadowBlur=10;
-      ctx.fillStyle=signatureColor;
-      ctx.textAlign='center';
-      ctx.font='italic 96px Georgia, serif';
-      ctx.fillText(cardDivision.textContent,1015,668);
+      ctx.shadowColor='rgba(255,255,255,.20)';
+      ctx.shadowBlur=7;
+      fitText(cardDivision.textContent,868,560,630,70,'Great Vibes, Georgia, serif','700',signatureColor,'center');
       ctx.restore();
-      ctx.textAlign='left';
 
-      ctx.fillStyle=detailColor;
-      ctx.font='800 20px Arial, sans-serif';
-      ctx.fillText('ISSUE DATE',112,875);
-      ctx.fillText(issueDate.textContent,112,910);
-      ctx.fillText('AUTHORIZED SIGNATURE',580,875);
-      ctx.fillText('Eden Office',580,910);
-
-      for(let x=1210;x<1450;x+=10){
-        const w=[3,5,2,7,4][x%5];
-        ctx.fillStyle='rgba(42,37,37,.72)';
-        ctx.fillRect(x,840,w,82);
-      }
-
-      const ribbon=ctx.createLinearGradient(610,760,1420,835);
-      ribbon.addColorStop(0,`rgba(${zoneRgb.r},${zoneRgb.g},${zoneRgb.b},.22)`);
-      ribbon.addColorStop(1,'rgba(255,255,255,.36)');
-      ctx.fillStyle=ribbon;
-      roundRect(ctx,610,752,810,92,26);
+      const badge=ctx.createLinearGradient(510,626,1225,690);
+      badge.addColorStop(0,'rgba(255,255,255,.50)');
+      badge.addColorStop(1,`rgba(${zoneRgb.r},${zoneRgb.g},${zoneRgb.b},.18)`);
+      ctx.fillStyle=badge;
+      roundRect(ctx,510,618,715,70,20);
       ctx.fill();
-      ctx.strokeStyle=`rgba(${darkRgb.r},${darkRgb.g},${darkRgb.b},.18)`;
+      ctx.strokeStyle=`rgba(${darkRgb.r},${darkRgb.g},${darkRgb.b},.13)`;
       ctx.lineWidth=2;
       ctx.stroke();
-      ctx.fillStyle=zoneInk;
-      ctx.font='800 24px Arial, sans-serif';
-      ctx.fillText('E8 EDEN ACADEMY • VERIFIED STUDENT RECORD',646,805);
-      ctx.fillStyle=detailSoft;
-      ctx.font='700 19px Arial, sans-serif';
-      ctx.fillText('This card is generated from the student registration portal.',646,832);
+      fitText('E8 EDEN ACADEMY • VERIFIED STUDENT RECORD',542,656,620,22,'Noto Sans Thai, Tahoma, Arial, sans-serif','900',detailColor);
+      fitText('Generated from the student registration portal.',542,680,620,16,'Noto Sans Thai, Tahoma, Arial, sans-serif','800',detailSoft);
+
+      ctx.fillStyle=detailColor;
+      ctx.font='900 18px Noto Sans Thai, Tahoma, Arial, sans-serif';
+      ctx.fillText('ISSUE DATE',105,735);
+      ctx.font='900 20px Noto Sans Thai, Tahoma, Arial, sans-serif';
+      ctx.fillText(issueDate.textContent,105,766);
+      ctx.font='900 18px Noto Sans Thai, Tahoma, Arial, sans-serif';
+      ctx.fillText('AUTHORIZED SIGNATURE',510,735);
+      ctx.font='900 20px Noto Sans Thai, Tahoma, Arial, sans-serif';
+      ctx.fillText('Eden Office',510,766);
+
+      for(let x=1050;x<1245;x+=9){
+        const w=[2,4,2,6,3][x%5];
+        ctx.fillStyle='rgba(42,37,37,.70)';
+        ctx.fillRect(x,718,w,70);
+      }
+
       return canvas.toDataURL('image/png');
     }
 
