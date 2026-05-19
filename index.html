@@ -2961,5 +2961,283 @@
       });
     })();
   </script>
+
+  <style>
+    /* PATCH v33: background tone + stable welcome popup */
+    html,
+    body{
+      min-height:100% !important;
+      height:auto !important;
+      overflow-x:hidden !important;
+      overflow-y:auto !important;
+      background:#020812 !important;
+    }
+
+    body{
+      background:transparent !important;
+      isolation:isolate !important;
+    }
+
+    /* ใช้ black.png เป็นพื้นหลังจริง และกดฟิลเตอร์ให้กลับไปเป็นโทนมืดหรู ไม่ขาวลอย */
+    html::before{
+      content:"" !important;
+      position:fixed !important;
+      inset:0 !important;
+      z-index:-10000 !important;
+      pointer-events:none !important;
+      background-image:
+        linear-gradient(90deg,rgba(1,7,16,.78),rgba(1,8,18,.52),rgba(1,7,16,.72)),
+        linear-gradient(180deg,rgba(1,7,16,.24),rgba(1,7,16,.68)),
+        url("black.png") !important;
+      background-size:cover !important;
+      background-position:center center !important;
+      background-repeat:no-repeat !important;
+      filter:saturate(1.08) contrast(1.08) brightness(.78) !important;
+    }
+
+    html::after{
+      content:"" !important;
+      position:fixed !important;
+      inset:0 !important;
+      z-index:-9999 !important;
+      pointer-events:none !important;
+      background:
+        radial-gradient(circle at 18% 12%,rgba(246,223,177,.18),transparent 28%),
+        radial-gradient(circle at 76% 28%,rgba(63,137,188,.13),transparent 30%),
+        linear-gradient(180deg,rgba(4,12,22,.08),rgba(4,12,22,.30)) !important;
+      mix-blend-mode:normal !important;
+    }
+
+    /* ปิดเลเยอร์ฟิลเตอร์สีขาว/เทาเก่าที่เคยทับพื้นหลัง */
+    body::before,
+    body::after,
+    .page-bg,
+    .site-bg,
+    .bg,
+    .bg-layer,
+    .background,
+    .background-layer,
+    .ambient-bg,
+    .screen-wash,
+    .white-wash,
+    .cream-wash,
+    .blur-wash,
+    .light-filter,
+    .page-filter,
+    .noise,
+    .grid-bg,
+    .cursor-glow,
+    .mouse-light{
+      display:none !important;
+      opacity:0 !important;
+      visibility:hidden !important;
+      background:none !important;
+      background-image:none !important;
+      pointer-events:none !important;
+    }
+
+    main,
+    .site-main,
+    .page,
+    .app,
+    .wrap,
+    .container,
+    .main-wrap,
+    .content-wrap,
+    .shell,
+    .site-shell{
+      background:transparent !important;
+    }
+
+    /* popup ตัวใหม่ ใช้ชื่อ class ที่ไม่โดน script เก่าลบ */
+    #edenGate33{
+      position:fixed !important;
+      inset:0 !important;
+      z-index:2147483647 !important;
+      display:flex !important;
+      align-items:center !important;
+      justify-content:center !important;
+      padding:22px !important;
+      background:rgba(1,8,18,.54) !important;
+      backdrop-filter:blur(8px) !important;
+      -webkit-backdrop-filter:blur(8px) !important;
+      pointer-events:auto !important;
+    }
+
+    #edenGate33 .eden-gate-card33{
+      width:min(650px,92vw) !important;
+      border-radius:34px !important;
+      padding:34px 34px 32px !important;
+      position:relative !important;
+      text-align:center !important;
+      background:
+        radial-gradient(circle at 16% 12%,rgba(255,255,255,.86),transparent 36%),
+        linear-gradient(135deg,rgba(255,250,241,.97),rgba(234,214,184,.95)) !important;
+      border:1px solid rgba(219,184,128,.72) !important;
+      box-shadow:0 30px 82px rgba(0,0,0,.48) !important;
+      color:#241923 !important;
+      transform:translateZ(0) !important;
+      animation:edenGateIn33 .34s ease both !important;
+      pointer-events:auto !important;
+    }
+
+    @keyframes edenGateIn33{
+      from{opacity:0;transform:translateY(14px) scale(.97);}
+      to{opacity:1;transform:translateY(0) scale(1);}
+    }
+
+    #edenGate33 .eden-gate-close33{
+      position:absolute !important;
+      right:18px !important;
+      top:18px !important;
+      width:42px !important;
+      height:42px !important;
+      border-radius:50% !important;
+      border:1px solid rgba(180,139,85,.52) !important;
+      background:rgba(255,255,255,.68) !important;
+      color:#7a5a3b !important;
+      font-size:22px !important;
+      font-weight:900 !important;
+      cursor:pointer !important;
+    }
+
+    #edenGate33 .eden-gate-logo33{
+      width:98px !important;
+      height:98px !important;
+      object-fit:contain !important;
+      display:block !important;
+      margin:0 auto 14px !important;
+      filter:drop-shadow(0 10px 18px rgba(0,0,0,.15)) !important;
+    }
+
+    #edenGate33 h2{
+      margin:0 !important;
+      font-family:"Playfair Display","Noto Sans Thai",serif !important;
+      font-size:clamp(34px,4vw,54px) !important;
+      line-height:1.08 !important;
+      color:#071d33 !important;
+      font-weight:900 !important;
+    }
+
+    #edenGate33 .eden-gate-fr33{
+      margin-top:10px !important;
+      font-family:"Playfair Display",serif !important;
+      font-size:18px !important;
+      letter-spacing:.08em !important;
+      color:#8b6842 !important;
+      font-weight:900 !important;
+    }
+
+    #edenGate33 p{
+      margin:18px auto 0 !important;
+      max-width:500px !important;
+      line-height:1.8 !important;
+      color:#6a574e !important;
+      font-weight:800 !important;
+    }
+
+    #edenGate33 .eden-gate-actions33{
+      margin-top:26px !important;
+      display:flex !important;
+      justify-content:center !important;
+      gap:14px !important;
+      flex-wrap:wrap !important;
+    }
+
+    #edenGate33 .eden-gate-primary33,
+    #edenGate33 .eden-gate-secondary33{
+      min-width:150px !important;
+      border-radius:999px !important;
+      padding:13px 22px !important;
+      font-weight:900 !important;
+      cursor:pointer !important;
+      border:1px solid rgba(191,153,96,.48) !important;
+      font-family:inherit !important;
+      text-decoration:none !important;
+      display:inline-flex !important;
+      justify-content:center !important;
+      align-items:center !important;
+    }
+
+    #edenGate33 .eden-gate-primary33{
+      background:linear-gradient(180deg,#0d2d4c,#061827) !important;
+      color:#fff3c9 !important;
+      box-shadow:0 12px 28px rgba(0,24,48,.26) !important;
+    }
+
+    #edenGate33 .eden-gate-secondary33{
+      background:rgba(255,255,255,.68) !important;
+      color:#6b4a31 !important;
+    }
+  </style>
+
+  <script>
+    /* PATCH v33: popup ไม่โดน hover / script เก่าลบ */
+    (function(){
+      function ready(fn){
+        if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", fn);
+        else fn();
+      }
+
+      function clearOldWelcomeOnly(){
+        document.querySelectorAll("#edenWelcomeModal31,#edenWelcomeModal32,#edenWelcomeModal30,#edenWelcomeModal29,.welcome-popup,.welcome-modal").forEach(function(el){
+          el.remove();
+        });
+      }
+
+      function showGate33(){
+        clearOldWelcomeOnly();
+        if(document.getElementById("edenGate33")) return;
+        if(sessionStorage.getItem("edenGateClosed33") === "1") return;
+
+        const gate = document.createElement("div");
+        gate.id = "edenGate33";
+        gate.innerHTML = `
+          <div class="eden-gate-card33">
+            <button class="eden-gate-close33" type="button" aria-label="close">×</button>
+            <img class="eden-gate-logo33" src="eden.png" alt="E8's Eden Academy Logo">
+            <h2>ยินดีต้อนรับสู่<br>E8’s Eden Academy</h2>
+            <div class="eden-gate-fr33">Institut Privé d’Eden</div>
+            <p>กรุณาตรวจสอบตารางเรียนแต่ละโซนของท่าน และสมัครบัตรนักเรียนเพื่อเข้าสู่ระบบของสถาบัน</p>
+            <div class="eden-gate-actions33">
+              <a class="eden-gate-primary33" href="register.html">สมัครบัตรสถาบัน</a>
+              <button class="eden-gate-secondary33" type="button">เข้าสู่หน้าเว็บ</button>
+            </div>
+          </div>
+        `;
+
+        ["mouseover","mouseenter","mousemove","pointermove","mouseout","mouseleave"].forEach(function(evt){
+          gate.addEventListener(evt,function(e){
+            e.stopPropagation();
+          },true);
+        });
+
+        document.body.appendChild(gate);
+
+        function closeGate33(){
+          sessionStorage.setItem("edenGateClosed33","1");
+          gate.remove();
+        }
+
+        gate.querySelector(".eden-gate-close33").addEventListener("click",function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          closeGate33();
+        });
+
+        gate.querySelector(".eden-gate-secondary33").addEventListener("click",function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          closeGate33();
+        });
+      }
+
+      ready(function(){
+        document.documentElement.style.overflowY = "auto";
+        document.body.style.overflowY = "auto";
+        setTimeout(showGate33,180);
+      });
+    })();
+  </script>
 </body>
 </html>
