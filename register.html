@@ -94,7 +94,7 @@
           <div class="eyebrow">E8 ADMISSION FORM</div>
           <h1>สมัครสมาชิกนักเรียนประจำสถาบัน</h1>
           <p>เลือกโซน อัปโหลดรูปหน้าตรง และสร้างบัตรนักเรียนเบื้องต้นของคุณ สีบัตร ลายน้ำ และลายเซ็นประจำโซนจะเปลี่ยนตามโซนที่เลือกทันที</p>
-          <div class="notice-list"><div class="notice"><b>YEAR 1</b><span>ระบบนี้สำหรับนักเรียนปี 1 เท่านั้น</span></div><div class="notice"><b>E2-E8</b><span>ปี 1 ยังไม่เปิดรับเลือก E1 Zone</span></div><div class="notice"><b>CARD</b><span>ดาวน์โหลดบัตรตัวอย่างได้หลังกรอกข้อมูล</span></div></div>
+          <div class="notice-list"><div class="notice"><b>YEAR 1</b><span>ระบบนี้สำหรับนักเรียนปี 1 เท่านั้น</span></div><div class="notice"><b>E2-E8</b><span>ปี 1 ยังไม่เปิดรับเลือก E1 Zone</span></div><div class="notice"><b id="memberCounter">000</b><span>จำนวนนักเรียนที่สมัครในเครื่องนี้</span></div></div>
         </div>
         <aside class="panel side-status"><img src="./eden.png" alt="Eden Logo" /><h2>Admission Status</h2><p>เลือกโซนแล้วระบบจะเปลี่ยนสี ลายน้ำ และลายเซ็นบนบัตรนักเรียน</p></aside>
       </section>
@@ -147,7 +147,7 @@
           <img class="watermark" id="cardWatermark" src="./eden.png" alt="watermark" />
           <div class="card-inner">
             <div class="card-left"><div class="card-photo"><img id="cardPhoto" alt="รูปบนบัตร" /><div class="silhouette" id="cardSilhouette">♙</div></div><img class="card-seal" id="cardSeal" src="./eden.png" alt="zone seal" /></div>
-            <div class="card-right"><div class="card-title"><div><h2>E8’s Eden Academy</h2><span>STUDENT IDENTITY CARD</span></div><img class="mini-logo" src="./eden.png" alt="Eden Logo" /></div><div class="card-fields"><div class="field"><span>STUDENT ID</span><div class="line" id="studentId">E8-000000</div></div><div class="field"><span>NAME</span><div class="line" id="cardName">—</div></div><div class="field"><span>LEVEL</span><div class="line">YEAR 1</div></div></div><div class="zone-signature"><div class="zone-script" id="cardDivision">E8 Zone</div></div><div class="card-foot"><div>ISSUE DATE<br><span id="issueDate">—</span></div><div>AUTHORIZED SIGNATURE<br>Eden Office</div><div class="barcode" aria-hidden="true"></div></div></div>
+            <div class="card-right"><div class="card-title"><div><h2>E8’s Eden Academy</h2><span>STUDENT IDENTITY CARD</span></div><img class="mini-logo" src="./eden.png" alt="Eden Logo" /></div><div class="card-fields"><div class="field"><span>STUDENT ID</span><div class="line" id="studentId">รอบันทึกใบสมัคร</div></div><div class="field"><span>NAME</span><div class="line" id="cardName">—</div></div><div class="field"><span>LEVEL</span><div class="line">YEAR 1</div></div></div><div class="zone-signature"><div class="zone-script" id="cardDivision">E8 Zone</div></div><div class="card-foot"><div>ISSUE DATE<br><span id="issueDate">—</span></div><div>AUTHORIZED SIGNATURE<br>Eden Office</div><div class="barcode" aria-hidden="true"></div></div></div>
           </div>
         </article>
         <div class="download-row"><button class="btn primary" type="button" id="downloadCardBtn">ดาวน์โหลดบัตรนักเรียน</button><a class="btn soft" href="./index.html">กลับหน้าแรก</a></div>
@@ -181,14 +181,36 @@
     const resetBtn=document.getElementById('resetBtn');
     const registerForm=document.getElementById('registerForm');
     const downloadCardBtn=document.getElementById('downloadCardBtn');
+    const memberCounter=document.getElementById('memberCounter');
     const zones=document.querySelectorAll('.zone-box[data-zone]');
     let selectedZone='';
     let uploadedPhoto='';
 
-    function makeId(){const saved=localStorage.getItem('e8StudentId');if(saved)return saved;const id='E8-'+String(Math.floor(100000+Math.random()*899999));localStorage.setItem('e8StudentId',id);return id}
-    studentId.textContent=makeId();
+    function padNumber(num){return String(num).padStart(6,'0')}
+    function getCurrentCount(){return Number(localStorage.getItem('e8ApplicationCount') || '0')}
+    function updateCounter(){
+      const count=getCurrentCount();
+      if(memberCounter) memberCounter.textContent=String(count).padStart(3,'0');
+    }
+    function createNextStudentId(){
+      const next=getCurrentCount()+1;
+      localStorage.setItem('e8ApplicationCount',String(next));
+      return 'E8-'+padNumber(next);
+    }
+    function getOrCreateStudentId(){
+      const saved=localStorage.getItem('e8StudentId');
+      if(saved) return saved;
+      const id=createNextStudentId();
+      localStorage.setItem('e8StudentId',id);
+      return id;
+    }
+    updateCounter();
     issueDate.textContent=new Date().toLocaleDateString('en-GB');
-    function updateName(){const name=displayName.value.trim()||nickname.value.trim()||'—';cardName.textContent=name}
+
+    function updateName(){
+      const name=displayName.value.trim()||nickname.value.trim()||'—';
+      cardName.textContent=name;
+    }
     displayName.addEventListener('input',updateName);
     nickname.addEventListener('input',updateName);
     reason.addEventListener('input',()=>{reasonCount.textContent=reason.value.length});
@@ -208,16 +230,149 @@
     }
     zones.forEach(zone=>zone.addEventListener('click',()=>applyZone(zone)));
 
-    photoInput.addEventListener('change',()=>{const file=photoInput.files&&photoInput.files[0];if(!file)return;if(file.size>5*1024*1024){alert('ไฟล์รูปใหญ่เกินไปค่ะ กรุณาใช้ไฟล์ไม่เกิน 5MB');photoInput.value='';return}const reader=new FileReader();reader.onload=e=>{uploadedPhoto=e.target.result;photoPreview.src=uploadedPhoto;cardPhoto.src=uploadedPhoto;photoPreview.style.display='block';cardPhoto.style.display='block';photoPlus.style.display='none';cardSilhouette.style.display='none'};reader.readAsDataURL(file)});
+    photoInput.addEventListener('change',()=>{
+      const file=photoInput.files&&photoInput.files[0];
+      if(!file)return;
+      if(file.size>5*1024*1024){alert('ไฟล์รูปใหญ่เกินไปค่ะ กรุณาใช้ไฟล์ไม่เกิน 5MB');photoInput.value='';return}
+      const reader=new FileReader();
+      reader.onload=e=>{
+        uploadedPhoto=e.target.result;
+        photoPreview.src=uploadedPhoto;
+        cardPhoto.src=uploadedPhoto;
+        photoPreview.style.display='block';
+        cardPhoto.style.display='block';
+        photoPlus.style.display='none';
+        cardSilhouette.style.display='none';
+      };
+      reader.readAsDataURL(file);
+    });
 
-    registerForm.addEventListener('submit',event=>{event.preventDefault();const name=displayName.value.trim();if(!name){alert('กรุณากรอกชื่อที่ใช้ในระบบก่อนค่ะ');displayName.focus();return}if(!selectedZone){alert('กรุณาเลือกโซน E2-E8 ก่อนค่ะ');document.getElementById('zones').scrollIntoView({behavior:'smooth'});return}const data={studentId:studentId.textContent,displayName:name,nickname:nickname.value.trim(),level:'Year 1',zone:selectedZone,reason:reason.value.trim(),photo:uploadedPhoto,status:'pending_verification',submittedAt:new Date().toISOString()};localStorage.setItem('e8StudentApplication',JSON.stringify(data));localStorage.setItem('e8IsMember','true');statusText.textContent=`ใบสมัครของ ${name} ถูกบันทึกแล้ว โซนที่เลือกคือ ${selectedZone} สถานะปัจจุบันคือ “รอตรวจสอบ”`;statusCard.classList.add('show');statusCard.scrollIntoView({behavior:'smooth',block:'center'})});
+    registerForm.addEventListener('submit',event=>{
+      event.preventDefault();
+      const name=displayName.value.trim();
+      if(!name){alert('กรุณากรอกชื่อที่ใช้ในระบบก่อนค่ะ');displayName.focus();return}
+      if(!selectedZone){alert('กรุณาเลือกโซน E2-E8 ก่อนค่ะ');document.getElementById('zones').scrollIntoView({behavior:'smooth'});return}
+      if(studentId.textContent==='รอบันทึกใบสมัคร'){
+        studentId.textContent=getOrCreateStudentId();
+      }
+      const data={studentId:studentId.textContent,displayName:name,nickname:nickname.value.trim(),level:'Year 1',zone:selectedZone,reason:reason.value.trim(),photo:uploadedPhoto,status:'pending_verification',submittedAt:new Date().toISOString()};
+      localStorage.setItem('e8StudentApplication',JSON.stringify(data));
+      localStorage.setItem('e8IsMember','true');
+      updateCounter();
+      statusText.textContent=`ใบสมัครของ ${name} ถูกบันทึกแล้ว เลขบัตรคือ ${studentId.textContent} โซนที่เลือกคือ ${selectedZone} สถานะปัจจุบันคือ “รอตรวจสอบ”`;
+      statusCard.classList.add('show');
+      statusCard.scrollIntoView({behavior:'smooth',block:'center'});
+    });
 
-    downloadCardBtn.addEventListener('click',async()=>{if(typeof html2canvas==='undefined'){alert('ระบบดาวน์โหลดยังโหลดไม่เสร็จ กรุณาลองใหม่อีกครั้งค่ะ');return}const row=downloadCardBtn.closest('.download-row');row.style.display='none';const canvas=await html2canvas(document.getElementById('idCard'),{backgroundColor:null,scale:2,useCORS:true});row.style.display='flex';const link=document.createElement('a');link.download=`E8-student-card-${studentId.textContent}.png`;link.href=canvas.toDataURL('image/png');link.click()});
+    function waitForImages(target){
+      const images=[...target.querySelectorAll('img')];
+      return Promise.all(images.map(img=>{
+        if(img.complete && img.naturalWidth>0) return Promise.resolve();
+        return new Promise(resolve=>{
+          img.onload=resolve;
+          img.onerror=resolve;
+        });
+      }));
+    }
 
-    resetBtn.addEventListener('click',()=>{if(!confirm('ต้องการล้างข้อมูลในฟอร์มนี้ใช่ไหมคะ'))return;registerForm.reset();zones.forEach(item=>item.classList.remove('selected'));selectedZone='';uploadedPhoto='';cardName.textContent='—';cardDivision.textContent='E8 Zone';reasonCount.textContent='0';photoPreview.removeAttribute('src');cardPhoto.removeAttribute('src');photoPreview.style.display='none';cardPhoto.style.display='none';photoPlus.style.display='block';cardSilhouette.style.display='block';cardWatermark.src='./eden.png';cardSeal.src='./eden.png';statusCard.classList.remove('show');root.style.setProperty('--zone','#d7bd8c');root.style.setProperty('--zone-dark','#8f6a32');root.style.setProperty('--zone-soft','#fff5de');root.style.setProperty('--signature-color','#5f4422')});
+    async function downloadCard(){
+      if(typeof html2canvas==='undefined'){
+        alert('ระบบดาวน์โหลดยังโหลดไม่เสร็จ กรุณารอสักครู่แล้วกดอีกครั้งค่ะ');
+        return;
+      }
+      const name=displayName.value.trim();
+      if(!name){alert('กรุณากรอกชื่อที่ใช้ในระบบก่อนดาวน์โหลดค่ะ');displayName.focus();return}
+      if(!selectedZone){alert('กรุณาเลือกโซนก่อนดาวน์โหลดค่ะ');document.getElementById('zones').scrollIntoView({behavior:'smooth'});return}
+      if(studentId.textContent==='รอบันทึกใบสมัคร'){
+        studentId.textContent=getOrCreateStudentId();
+        updateCounter();
+      }
+      downloadCardBtn.disabled=true;
+      const oldText=downloadCardBtn.textContent;
+      downloadCardBtn.textContent='กำลังสร้างไฟล์...';
+      try{
+        const card=document.getElementById('idCard');
+        await document.fonts.ready;
+        await waitForImages(card);
+        await new Promise(resolve=>setTimeout(resolve,250));
+        const canvas=await html2canvas(card,{
+          backgroundColor:null,
+          scale:2,
+          useCORS:true,
+          allowTaint:false,
+          imageTimeout:15000,
+          logging:false,
+          scrollX:0,
+          scrollY:0
+        });
+        const link=document.createElement('a');
+        link.download=`E8-student-card-${studentId.textContent}.png`;
+        link.href=canvas.toDataURL('image/png');
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+      }catch(error){
+        alert('ดาวน์โหลดไม่สำเร็จค่ะ ลองรีเฟรชหน้าเว็บ แล้วกดเลือกโซนใหม่อีกครั้งนะคะ');
+      }finally{
+        downloadCardBtn.disabled=false;
+        downloadCardBtn.textContent=oldText;
+      }
+    }
+    downloadCardBtn.addEventListener('click',downloadCard);
+
+    resetBtn.addEventListener('click',()=>{
+      if(!confirm('ต้องการล้างข้อมูลในฟอร์มนี้ใช่ไหมคะ'))return;
+      registerForm.reset();
+      zones.forEach(item=>item.classList.remove('selected'));
+      selectedZone='';
+      uploadedPhoto='';
+      cardName.textContent='—';
+      cardDivision.textContent='E8 Zone';
+      studentId.textContent='รอบันทึกใบสมัคร';
+      localStorage.removeItem('e8StudentId');
+      reasonCount.textContent='0';
+      photoPreview.removeAttribute('src');
+      cardPhoto.removeAttribute('src');
+      photoPreview.style.display='none';
+      cardPhoto.style.display='none';
+      photoPlus.style.display='block';
+      cardSilhouette.style.display='block';
+      cardWatermark.src='./eden.png';
+      cardSeal.src='./eden.png';
+      statusCard.classList.remove('show');
+      root.style.setProperty('--zone','#d7bd8c');
+      root.style.setProperty('--zone-dark','#8f6a32');
+      root.style.setProperty('--zone-soft','#fff5de');
+      root.style.setProperty('--signature-color','#5f4422');
+    });
 
     const saved=localStorage.getItem('e8StudentApplication');
-    if(saved){try{const data=JSON.parse(saved);displayName.value=data.displayName||'';nickname.value=data.nickname||'';reason.value=data.reason||'';reasonCount.textContent=reason.value.length;updateName();if(data.studentId)studentId.textContent=data.studentId;if(data.zone){const target=[...zones].find(z=>z.dataset.zone===data.zone);if(target)applyZone(target)}if(data.photo){uploadedPhoto=data.photo;photoPreview.src=uploadedPhoto;cardPhoto.src=uploadedPhoto;photoPreview.style.display='block';cardPhoto.style.display='block';photoPlus.style.display='none';cardSilhouette.style.display='none'}statusText.textContent=`พบใบสมัครเดิมของ ${data.displayName||'นักเรียน'} สถานะปัจจุบันคือ “รอตรวจสอบ”`;statusCard.classList.add('show')}catch(e){}}
+    if(saved){
+      try{
+        const data=JSON.parse(saved);
+        displayName.value=data.displayName||'';
+        nickname.value=data.nickname||'';
+        reason.value=data.reason||'';
+        reasonCount.textContent=reason.value.length;
+        updateName();
+        if(data.studentId) studentId.textContent=data.studentId;
+        if(data.zone){
+          const target=[...zones].find(z=>z.dataset.zone===data.zone);
+          if(target) applyZone(target);
+        }
+        if(data.photo){
+          uploadedPhoto=data.photo;
+          photoPreview.src=uploadedPhoto;
+          cardPhoto.src=uploadedPhoto;
+          photoPreview.style.display='block';
+          cardPhoto.style.display='block';
+          photoPlus.style.display='none';
+          cardSilhouette.style.display='none';
+        }
+        statusText.textContent=`พบใบสมัครเดิมของ ${data.displayName||'นักเรียน'} เลขบัตรคือ ${data.studentId||'-'} สถานะปัจจุบันคือ “รอตรวจสอบ”`;
+        statusCard.classList.add('show');
+      }catch(e){}
+    }
   </script>
 </body>
 </html>
