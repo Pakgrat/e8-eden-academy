@@ -893,15 +893,15 @@
       });
     }
 
-    (function academyMusicBox(){
+    document.addEventListener("DOMContentLoaded", function academyMusicBox(){
       const tracks = [
-        { title:"PLAVE-1232", file:"PLAVE-1232.mp3", video:"seNgeyf93p4", url:"https://www.youtube.com/watch?v=seNgeyf93p4" },
-        { title:"PLAVE-2", file:"PLAVE-2.mp3", video:"seIrfH92Zkk", url:"https://www.youtube.com/watch?v=seIrfH92Zkk" },
-        { title:"PLAVE-Lunar", file:"PLAVE-Lunar.mp3", video:"HzABxw3MoJ0", url:"https://www.youtube.com/watch?v=HzABxw3MoJ0" },
-        { title:"PLAVE-SO", file:"PLAVE-SO.mp3", video:"K-F7906Jq9U", url:"https://www.youtube.com/watch?v=K-F7906Jq9U" },
-        { title:"borrow", file:"borrow.mp3", video:"eDlYB_e5k3c", url:"https://www.youtube.com/watch?v=eDlYB_e5k3c" },
-        { title:"exoFirstSnow", file:"exoFirstSnow.mp3", video:"h0b4nw7NDhA", url:"https://www.youtube.com/watch?v=h0b4nw7NDhA" },
-        { title:"supernova", file:"supernova.mp3", video:"1o7zm815PqQ", url:"https://www.youtube.com/watch?v=1o7zm815PqQ" }
+        { title:"PLAVE-1232", base:"PLAVE-1232", video:"seNgeyf93p4", url:"https://www.youtube.com/watch?v=seNgeyf93p4" },
+        { title:"PLAVE-2", base:"PLAVE-2", video:"seIrfH92Zkk", url:"https://www.youtube.com/watch?v=seIrfH92Zkk" },
+        { title:"PLAVE-Lunar", base:"PLAVE-Lunar", video:"HzABxw3MoJ0", url:"https://www.youtube.com/watch?v=HzABxw3MoJ0" },
+        { title:"PLAVE-SO", base:"PLAVE-SO", video:"K-F7906Jq9U", url:"https://www.youtube.com/watch?v=K-F7906Jq9U" },
+        { title:"borrow", base:"borrow", video:"eDlYB_e5k3c", url:"https://www.youtube.com/watch?v=eDlYB_e5k3c" },
+        { title:"exoFirstSnow", base:"exoFirstSnow", video:"h0b4nw7NDhA", url:"https://www.youtube.com/watch?v=h0b4nw7NDhA" },
+        { title:"supernova", base:"supernova", video:"1o7zm815PqQ", url:"https://www.youtube.com/watch?v=1o7zm815PqQ" }
       ];
 
       const audio = document.getElementById("academyAudio");
@@ -916,16 +916,24 @@
       const disc = document.getElementById("musicDisc");
       if(!audio || !cover || !title || !playBtn) return;
 
-      let currentIndex = -1;
-      let userPaused = false;
+      let currentIndex = Math.floor(Math.random() * tracks.length);
+      let currentExtTry = 0;
+      let intentionallyPaused = false;
+      const extList = [".mp3", ".MP3"];
 
-      function randomIndex(){
-        if(tracks.length === 1) return 0;
-        let next = Math.floor(Math.random() * tracks.length);
-        while(next === currentIndex){
-          next = Math.floor(Math.random() * tracks.length);
-        }
-        return next;
+      function setPopup(head, body){
+        const modal = document.getElementById("feedbackModal");
+        if(!modal) return;
+        const titleEl = modal.querySelector("h3");
+        const textEl = modal.querySelector("p");
+        if(titleEl) titleEl.textContent = head;
+        if(textEl) textEl.textContent = body;
+        modal.classList.add("show");
+        modal.setAttribute("aria-hidden", "false");
+      }
+
+      function srcFor(track){
+        return `./${track.base}${extList[currentExtTry]}`;
       }
 
       function setPlayingUI(isPlaying){
@@ -933,11 +941,11 @@
         if(disc) disc.classList.toggle("paused", !isPlaying);
       }
 
-      function loadTrack(index, shouldPlay = true){
-        currentIndex = (index + tracks.length) % tracks.length;
+      function renderTrack(){
+        currentExtTry = 0;
         const track = tracks[currentIndex];
         audio.pause();
-        audio.src = encodeURI(track.file);
+        audio.src = srcFor(track);
         audio.load();
         cover.src = `https://img.youtube.com/vi/${track.video}/hqdefault.jpg`;
         cover.alt = `หน้าปกเพลง ${track.title}`;
@@ -948,79 +956,80 @@
         }
         if(progress) progress.style.width = "0%";
         setPlayingUI(false);
-        if(shouldPlay && !userPaused){
-          playCurrentTrack();
+      }
+
+      function playTrack(){
+        intentionallyPaused = false;
+        const playPromise = audio.play();
+        if(playPromise && typeof playPromise.then === "function"){
+          playPromise.then(()=>setPlayingUI(true)).catch(()=>{
+            setPlayingUI(false);
+            setPopup("เพลงยังไม่เริ่มค่ะ", "ลองกดปุ่มเล่นเพลงอีกครั้ง หรือเช็กว่าไฟล์ MP3 อยู่หน้าเดียวกับ index.html และชื่อไฟล์ตรงเป๊ะ เช่น PLAVE-1232.mp3");
+          });
+        }else{
+          setPlayingUI(true);
         }
       }
 
-      function playCurrentTrack(){
-        audio.play().then(()=>{
-          userPaused = false;
-          setPlayingUI(true);
-        }).catch(()=>{
-          setPlayingUI(false);
-        });
+      function pauseTrack(){
+        intentionallyPaused = true;
+        audio.pause();
+        setPlayingUI(false);
       }
 
       function togglePlay(){
-        if(audio.paused){
-          userPaused = false;
-          playCurrentTrack();
-        }else{
-          userPaused = true;
-          audio.pause();
-          setPlayingUI(false);
-        }
+        if(audio.paused) playTrack();
+        else pauseTrack();
       }
 
-      function nextTrack(){
-        userPaused = false;
-        loadTrack(currentIndex + 1, true);
-      }
-
-      function prevTrack(){
-        userPaused = false;
-        loadTrack(currentIndex - 1, true);
+      function changeTrack(step){
+        currentIndex = (currentIndex + step + tracks.length) % tracks.length;
+        intentionallyPaused = false;
+        renderTrack();
+        playTrack();
       }
 
       function randomTrack(){
-        userPaused = false;
-        loadTrack(randomIndex(), true);
+        let next = Math.floor(Math.random() * tracks.length);
+        if(tracks.length > 1){
+          while(next === currentIndex) next = Math.floor(Math.random() * tracks.length);
+        }
+        currentIndex = next;
+        intentionallyPaused = false;
+        renderTrack();
+        playTrack();
       }
 
       playBtn.addEventListener("click", togglePlay);
+      if(prevBtn) prevBtn.addEventListener("click", ()=>changeTrack(-1));
+      if(nextBtn) nextBtn.addEventListener("click", ()=>changeTrack(1));
       if(randomBtn) randomBtn.addEventListener("click", randomTrack);
-      if(prevBtn) prevBtn.addEventListener("click", prevTrack);
-      if(nextBtn) nextBtn.addEventListener("click", nextTrack);
 
       audio.addEventListener("timeupdate", ()=>{
         if(!progress || !audio.duration) return;
         progress.style.width = `${Math.min((audio.currentTime / audio.duration) * 100, 100)}%`;
       });
-      audio.addEventListener("ended", ()=>loadTrack(randomIndex(), true));
-      audio.addEventListener("pause", ()=>{
-        if(audio.currentTime > 0 && !audio.ended) setPlayingUI(false);
-      });
+
+      audio.addEventListener("ended", randomTrack);
       audio.addEventListener("play", ()=>setPlayingUI(true));
+      audio.addEventListener("pause", ()=>{
+        if(!audio.ended) setPlayingUI(false);
+      });
 
-      const feedbackFormForPopup = document.getElementById("studentFeedbackForm");
-      if(feedbackFormForPopup){
-        feedbackFormForPopup.addEventListener("submit", ()=>{
-          const modal = document.getElementById("feedbackModal");
-          if(!modal) return;
-          const titleEl = modal.querySelector("h3");
-          const textEl = modal.querySelector("p");
-          if(titleEl) titleEl.textContent = "ได้รับข้อความแล้วครับ";
-          if(textEl) textEl.textContent = "ขอบคุณมากครับ สำหรับความคิดเห็นของคุณ ทางสถาบันได้รับข้อความเรียบร้อยแล้ว ✦";
-        }, true);
-      }
+      audio.addEventListener("error", ()=>{
+        const track = tracks[currentIndex];
+        if(currentExtTry < extList.length - 1){
+          currentExtTry += 1;
+          audio.src = srcFor(track);
+          audio.load();
+          if(!intentionallyPaused) playTrack();
+          return;
+        }
+        setPlayingUI(false);
+      });
 
-      loadTrack(randomIndex(), true);
-      document.addEventListener("click", function firstMusicStart(){
-        if(audio.paused && !userPaused) playCurrentTrack();
-        document.removeEventListener("click", firstMusicStart);
-      }, { once:true });
-    })();
+      renderTrack();
+    });
   </script>
 </body>
 </html>
