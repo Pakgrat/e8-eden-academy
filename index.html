@@ -1005,7 +1005,7 @@
     document.addEventListener("DOMContentLoaded", function academyMusicBox(){
       const tracks = [
         { title:"PLAVE-1232", base:"PLAVE-1232", video:"seNgeyf93p4", url:"https://www.youtube.com/watch?v=seNgeyf93p4" },
-        { title:"PLAVE-2", base:"Plave-2", video:"seIrfH92Zkk", url:"https://www.youtube.com/watch?v=seIrfH92Zkk" },
+        { title:"PLAVE-2", base:"PLAVE-2", video:"seIrfH92Zkk", url:"https://www.youtube.com/watch?v=seIrfH92Zkk" },
         { title:"PLAVE-Lunar", base:"PLAVE-Lunar", video:"HzABxw3MoJ0", url:"https://www.youtube.com/watch?v=HzABxw3MoJ0" },
         { title:"PLAVE-SO", base:"PLAVE-SO", video:"K-F7906Jq9U", url:"https://www.youtube.com/watch?v=K-F7906Jq9U" },
         { title:"borrow", base:"borrow", video:"eDlYB_e5k3c", url:"https://www.youtube.com/watch?v=eDlYB_e5k3c" },
@@ -1224,7 +1224,7 @@
         /* ---------- music player ---------- */
         const tracks = [
           { title:"PLAVE-1232", file:"PLAVE-1232.mp3", video:"seNgeyf93p4", url:"https://www.youtube.com/watch?v=seNgeyf93p4" },
-          { title:"PLAVE-2", file:"Plave-2.mp3", video:"seIrfH92Zkk", url:"https://www.youtube.com/watch?v=seIrfH92Zkk" },
+          { title:"PLAVE-2", file:"PLAVE-2.mp3", video:"seIrfH92Zkk", url:"https://www.youtube.com/watch?v=seIrfH92Zkk" },
           { title:"PLAVE-Lunar", file:"PLAVE-Lunar.mp3", video:"HzABxw3MoJ0", url:"https://www.youtube.com/watch?v=HzABxw3MoJ0" },
           { title:"PLAVE-SO", file:"PLAVE-SO.mp3", video:"K-F7906Jq9U", url:"https://www.youtube.com/watch?v=K-F7906Jq9U" },
           { title:"borrow", file:"borrow.mp3", video:"eDlYB_e5k3c", url:"https://www.youtube.com/watch?v=eDlYB_e5k3c" },
@@ -1254,7 +1254,7 @@
           musicIndex = (index + tracks.length) % tracks.length;
           const track = tracks[musicIndex];
           audio.pause();
-          audio.setAttribute("src", "./" + track.file);
+          audio.setAttribute("src", "./" + track.file + "?v=28");
           audio.load();
           if(title) title.textContent = track.title;
           if(cover){
@@ -1669,7 +1669,7 @@
 
         const tracks = [
           { title:"PLAVE-1232", file:"PLAVE-1232.mp3", video:"seNgeyf93p4", url:"https://www.youtube.com/watch?v=seNgeyf93p4" },
-          { title:"PLAVE-2", file:"Plave-2.mp3", video:"seIrfH92Zkk", url:"https://www.youtube.com/watch?v=seIrfH92Zkk" },
+          { title:"PLAVE-2", file:"PLAVE-2.mp3", video:"seIrfH92Zkk", url:"https://www.youtube.com/watch?v=seIrfH92Zkk" },
           { title:"PLAVE-Lunar", file:"PLAVE-Lunar.mp3", video:"HzABxw3MoJ0", url:"https://www.youtube.com/watch?v=HzABxw3MoJ0" },
           { title:"PLAVE-SO", file:"PLAVE-SO.mp3", video:"K-F7906Jq9U", url:"https://www.youtube.com/watch?v=K-F7906Jq9U" },
           { title:"borrow", file:"borrow.mp3", video:"eDlYB_e5k3c", url:"https://www.youtube.com/watch?v=eDlYB_e5k3c" },
@@ -1689,7 +1689,7 @@
           index = (nextIndex + tracks.length) % tracks.length;
           const track = tracks[index];
           audio.pause();
-          audio.src = encodeURI("./" + track.file);
+          audio.src = encodeURI("./" + track.file) + "?v=28";
           audio.load();
           if(title) title.textContent = track.title;
           if(cover){
@@ -2094,4 +2094,3 @@
   </script>
 </body>
 </html>
- 
