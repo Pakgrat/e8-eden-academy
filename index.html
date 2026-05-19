@@ -649,13 +649,13 @@
           <p>ระบบการรับสมัครเข้าเรียน ✦</p>
         </div>
       </a>
-    <nav class="nav">
-  <a class="active" href="./index.html">หน้าหลัก</a>
-  <a href="./board.html">กระทู้</a>
-  <a href="./shop.html">ร้านค้า</a>
-  <a href="./zone.html">โซน</a>
-  <a class="cta" href="./register.html">✦ สมัครบัตรสถาบัน</a>
-</nav>
+      <nav class="nav">
+        <a class="active" href="./index.html">หน้าหลัก</a>
+        <a href="./board.html">กระทู้</a>
+        <a href="./shop.html">ร้านค้า</a>
+        <a href="./zone.html">โซน</a>
+        <a class="cta" href="./register.html">✦ สมัครบัตรสถาบัน</a>
+      </nav>
     </div>
   </header>
 
@@ -958,27 +958,29 @@
     const dots=document.getElementById('dots');
     let currentSlide=1;
     let slideTimer;
-    for(let i=1;i<=8;i++){
-      const dot=document.createElement('button');
-      dot.className='dot';
-      dot.type='button';
-      dot.setAttribute('aria-label','slide '+i);
-      dot.addEventListener('click',()=>goSlide(i,true));
-      dots.appendChild(dot);
+    if(slideImage && slideNumber && prevSlide && nextSlide && dots){
+      for(let i=1;i<=8;i++){
+        const dot=document.createElement('button');
+        dot.className='dot';
+        dot.type='button';
+        dot.setAttribute('aria-label','slide '+i);
+        dot.addEventListener('click',()=>goSlide(i,true));
+        dots.appendChild(dot);
+      }
+      function updateDots(){[...dots.children].forEach((dot,index)=>dot.classList.toggle('active',index+1===currentSlide))}
+      function goSlide(num,manual=false){
+        currentSlide=num;
+        if(currentSlide<1)currentSlide=8;
+        if(currentSlide>8)currentSlide=1;
+        slideImage.style.opacity='0';
+        setTimeout(()=>{slideImage.src=`./${currentSlide}.png`;slideNumber.textContent=currentSlide;updateDots();slideImage.style.opacity='1'},160);
+        if(manual)restartSlide();
+      }
+      function restartSlide(){clearInterval(slideTimer);slideTimer=setInterval(()=>goSlide(currentSlide+1),4200)}
+      prevSlide.addEventListener('click',()=>goSlide(currentSlide-1,true));
+      nextSlide.addEventListener('click',()=>goSlide(currentSlide+1,true));
+      updateDots();restartSlide();
     }
-    function updateDots(){[...dots.children].forEach((dot,index)=>dot.classList.toggle('active',index+1===currentSlide))}
-    function goSlide(num,manual=false){
-      currentSlide=num;
-      if(currentSlide<1)currentSlide=8;
-      if(currentSlide>8)currentSlide=1;
-      slideImage.style.opacity='0';
-      setTimeout(()=>{slideImage.src=`./${currentSlide}.png`;slideNumber.textContent=currentSlide;updateDots();slideImage.style.opacity='1'},160);
-      if(manual)restartSlide();
-    }
-    function restartSlide(){clearInterval(slideTimer);slideTimer=setInterval(()=>goSlide(currentSlide+1),4200)}
-    prevSlide.addEventListener('click',()=>goSlide(currentSlide-1,true));
-    nextSlide.addEventListener('click',()=>goSlide(currentSlide+1,true));
-    updateDots();restartSlide();
   
 
     const feedbackForm = document.getElementById("studentFeedbackForm");
@@ -1448,21 +1450,14 @@
         }
 
         /* top navigation: add pages for shop and zone */
-        document.querySelectorAll("a, button").forEach(function(el){
+        document.querySelectorAll(".site-header .nav a").forEach(function(el){
           const text = (el.textContent || "").split(/
 /).join(" ").split(/	/).join(" ").trim();
-          if(text.includes("ร้านค้า")){
-            if(el.tagName.toLowerCase() === "a") el.href = "shop.html";
-            else el.onclick = function(){ window.location.href = "shop.html"; };
-          }
-          if(text.includes("โซน") || text.includes("Zone")){
-            if(el.tagName.toLowerCase() === "a") el.href = "zone.html";
-            else el.onclick = function(){ window.location.href = "zone.html"; };
-          }
-          if(text.includes("สมัครบัตร") || text.includes("สมัครบัตรสถาบัน")){
-            if(el.tagName.toLowerCase() === "a") el.href = "register.html";
-            else el.onclick = function(){ window.location.href = "register.html"; };
-          }
+          if(text.includes("หน้าหลัก")) el.href = "index.html";
+          if(text.includes("กระทู้")) el.href = "board.html";
+          if(text.includes("ร้านค้า")) el.href = "shop.html";
+          if(text.includes("โซน") || text.includes("Zone")) el.href = "zone.html";
+          if(text.includes("สมัครบัตร") || text.includes("สมัครบัตรสถาบัน")) el.href = "register.html";
         });
       });
     })();
@@ -1767,6 +1762,31 @@
           if(text.includes("ร้านค้า")) a.href = "./shop.html";
           if(text.includes("โซน")) a.href = "./zone.html";
           if(text.includes("สมัครบัตร")) a.href = "./register.html";
+        });
+      });
+    })();
+  </script>
+
+  <script>
+    /* FINAL NAV LOCK: top menu only */
+    (function(){
+      function ready(fn){
+        if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", fn);
+        else fn();
+      }
+      ready(function(){
+        const navMap = [
+          ["หน้าหลัก", "./index.html"],
+          ["กระทู้", "./board.html"],
+          ["ร้านค้า", "./shop.html"],
+          ["โซน", "./zone.html"],
+          ["สมัครบัตร", "./register.html"]
+        ];
+        document.querySelectorAll(".site-header .nav a").forEach(function(a){
+          const text = (a.textContent || "").replace(/\s+/g," ").trim();
+          navMap.forEach(function(item){
+            if(text.includes(item[0])) a.setAttribute("href", item[1]);
+          });
         });
       });
     })();
