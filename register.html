@@ -447,6 +447,8 @@
       const zoneColor=getComputedStyle(root).getPropertyValue('--zone').trim() || '#d7bd8c';
       const zoneDark=getComputedStyle(root).getPropertyValue('--zone-dark').trim() || '#8f6a32';
       const zoneSoft=getComputedStyle(root).getPropertyValue('--zone-soft').trim() || '#fff5de';
+      const zoneInk=getComputedStyle(root).getPropertyValue('--zone-ink').trim() || zoneDark;
+      const signatureColor=getComputedStyle(root).getPropertyValue('--signature-color').trim() || zoneInk;
       const zoneRgb=hexToRgb(zoneColor);
       const darkRgb=hexToRgb(zoneDark);
 
@@ -482,12 +484,20 @@
       if(zoneLogo){drawImageContain(ctx,zoneLogo,930,130,500,610,.12)}
       if(edenLogo){drawImageContain(ctx,edenLogo,1340,80,150,150,1)}
 
-      ctx.fillStyle='#202a3a';
+      ctx.save();
+      ctx.shadowColor=`rgba(${darkRgb.r},${darkRgb.g},${darkRgb.b},.18)`;
+      ctx.shadowBlur=18;
+      ctx.shadowOffsetY=8;
+      ctx.fillStyle=zoneInk;
       ctx.font='700 70px Georgia, serif';
       ctx.fillText('E8’s Eden Academy',610,170);
+      ctx.restore();
       ctx.font='700 26px Georgia, serif';
-      ctx.fillStyle='#765e69';
+      ctx.fillStyle=`rgba(${darkRgb.r},${darkRgb.g},${darkRgb.b},.78)`;
       ctx.fillText('STUDENT IDENTITY CARD',614,215);
+      ctx.fillStyle=`rgba(${zoneRgb.r},${zoneRgb.g},${zoneRgb.b},.38)`;
+      roundRect(ctx,610,238,360,10,8);
+      ctx.fill();
 
       ctx.save();
       roundRect(ctx,115,145,390,540,48);
@@ -520,7 +530,7 @@
       ctx.font='800 24px Arial, sans-serif';
       fields.forEach((item,index)=>{
         const y=305+index*92;
-        ctx.fillStyle='#705764';
+        ctx.fillStyle=`rgba(${darkRgb.r},${darkRgb.g},${darkRgb.b},.78)`;
         ctx.fillText(item[0],610,y);
         ctx.strokeStyle=`rgba(${darkRgb.r},${darkRgb.g},${darkRgb.b},.38)`;
         ctx.lineWidth=2;
@@ -530,7 +540,7 @@
         ctx.lineTo(1420,y+6);
         ctx.stroke();
         ctx.setLineDash([]);
-        ctx.fillStyle='#30262d';
+        ctx.fillStyle=zoneInk;
         ctx.font='800 30px Arial, sans-serif';
         ctx.fillText(item[1]||'—',850,y);
         ctx.font='800 24px Arial, sans-serif';
@@ -545,13 +555,17 @@
       ctx.strokeStyle='rgba(255,255,255,.35)';
       ctx.lineWidth=2;
       ctx.stroke();
-      ctx.fillStyle=getComputedStyle(root).getPropertyValue('--signature-color').trim() || '#fff7ec';
+      ctx.save();
+      ctx.shadowColor='rgba(255,255,255,.28)';
+      ctx.shadowBlur=10;
+      ctx.fillStyle=signatureColor;
       ctx.textAlign='center';
-      ctx.font='italic 92px Georgia, serif';
+      ctx.font='italic 96px Georgia, serif';
       ctx.fillText(cardDivision.textContent,1015,668);
+      ctx.restore();
       ctx.textAlign='left';
 
-      ctx.fillStyle='#806070';
+      ctx.fillStyle=`rgba(${darkRgb.r},${darkRgb.g},${darkRgb.b},.78)`;
       ctx.font='800 20px Arial, sans-serif';
       ctx.fillText('ISSUE DATE',112,875);
       ctx.fillText(issueDate.textContent,112,910);
@@ -564,9 +578,21 @@
         ctx.fillRect(x,840,w,82);
       }
 
-      ctx.fillStyle='rgba(75,54,64,.86)';
-      ctx.font='700 25px Arial, sans-serif';
-      wrapText(ctx,reason.value.trim() || 'Student Registration • E8’s Eden Academy',610,785,790,38,3);
+      const ribbon=ctx.createLinearGradient(610,760,1420,835);
+      ribbon.addColorStop(0,`rgba(${zoneRgb.r},${zoneRgb.g},${zoneRgb.b},.22)`);
+      ribbon.addColorStop(1,'rgba(255,255,255,.36)');
+      ctx.fillStyle=ribbon;
+      roundRect(ctx,610,752,810,92,26);
+      ctx.fill();
+      ctx.strokeStyle=`rgba(${darkRgb.r},${darkRgb.g},${darkRgb.b},.18)`;
+      ctx.lineWidth=2;
+      ctx.stroke();
+      ctx.fillStyle=zoneInk;
+      ctx.font='800 24px Arial, sans-serif';
+      ctx.fillText('E8 EDEN ACADEMY • VERIFIED STUDENT RECORD',646,805);
+      ctx.fillStyle=`rgba(${darkRgb.r},${darkRgb.g},${darkRgb.b},.64)`;
+      ctx.font='700 19px Arial, sans-serif';
+      ctx.fillText('This card is generated from the student registration portal.',646,832);
       return canvas.toDataURL('image/png');
     }
 
