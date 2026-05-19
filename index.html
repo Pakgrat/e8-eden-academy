@@ -1856,6 +1856,241 @@
       });
     })();
   </script>
+
+  <style>
+    /* PATCH v27: Eden admission announcement + academy vision boxes */
+    .eden-admission-hero{
+      max-width:760px !important;
+      min-height:auto !important;
+      padding:38px 38px 34px !important;
+      background:
+        linear-gradient(135deg,rgba(255,250,239,.88),rgba(226,211,188,.72)),
+        radial-gradient(circle at 88% 18%,rgba(255,232,180,.35),transparent 34%) !important;
+      border:1px solid rgba(218,184,128,.52) !important;
+      box-shadow:0 26px 70px rgba(5,14,25,.32) !important;
+    }
+    .eden-admission-title{
+      margin:18px 0 8px !important;
+      font-family:"Playfair Display","Noto Sans Thai",serif !important;
+      font-size:clamp(38px,4.5vw,64px) !important;
+      line-height:1.02 !important;
+      letter-spacing:-.035em !important;
+      color:#251821 !important;
+    }
+    .eden-admission-title .fr{
+      display:block;
+      color:#102940;
+      font-size:.72em;
+      letter-spacing:-.02em;
+    }
+    .eden-admission-title .th{
+      display:block;
+      margin-top:4px;
+      color:#8b6740;
+    }
+    .eden-admission-subtitle{
+      margin:0 0 16px !important;
+      font-family:"Playfair Display","Noto Sans Thai",serif !important;
+      font-size:clamp(18px,2vw,28px) !important;
+      line-height:1.35 !important;
+      font-weight:900 !important;
+      color:#3c2c27 !important;
+    }
+    .eden-admission-copy{
+      max-width:650px;
+      color:#5f514a !important;
+      font-size:14px !important;
+      line-height:1.95 !important;
+      font-weight:750 !important;
+    }
+    .eden-admission-copy p{margin:0 0 12px !important;}
+    .eden-admission-copy .qual-title{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      margin:5px 0 8px;
+      padding:7px 14px;
+      border-radius:999px;
+      background:#0a2138;
+      color:#ffe8b0;
+      font-weight:950;
+      box-shadow:0 10px 24px rgba(5,18,32,.22);
+    }
+    .eden-admission-copy ul{
+      margin:0 0 13px 0 !important;
+      padding:0 !important;
+      list-style:none !important;
+      display:grid;
+      gap:6px;
+    }
+    .eden-admission-copy li{
+      position:relative;
+      padding-left:22px;
+    }
+    .eden-admission-copy li::before{
+      content:"✦";
+      position:absolute;
+      left:0;
+      top:0;
+      color:#bd8f4e;
+    }
+    .eden-admission-motto{
+      margin:14px 0 18px !important;
+      padding:13px 16px;
+      border-radius:22px;
+      background:rgba(255,255,255,.46);
+      border:1px solid rgba(215,180,123,.45);
+      font-family:"Playfair Display","Noto Sans Thai",serif;
+      font-size:clamp(18px,1.8vw,25px);
+      line-height:1.45;
+      font-weight:950;
+      color:#251821;
+    }
+    .eden-admission-motto span{color:#8c633b;}
+    .eden-admission-open{
+      margin:0 0 20px !important;
+      color:#0d2a45 !important;
+      font-weight:950 !important;
+      letter-spacing:.02em;
+    }
+    .eden-admission-hero .hero-actions,
+    .eden-admission-hero .cta-row,
+    .eden-admission-hero .hero-buttons{
+      margin-top:18px !important;
+    }
+    .eden-vision-card{
+      position:relative;
+      overflow:hidden;
+      border:1px solid rgba(224,190,132,.45) !important;
+      background:
+        linear-gradient(135deg,rgba(255,250,240,.78),rgba(219,203,179,.58)),
+        radial-gradient(circle at 90% 18%,rgba(255,232,174,.28),transparent 32%) !important;
+      box-shadow:0 18px 44px rgba(4,12,22,.22) !important;
+      transition:transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+    }
+    .eden-vision-card::after{
+      content:"✦";
+      position:absolute;
+      right:20px;
+      top:16px;
+      color:rgba(176,132,69,.38);
+      font-size:24px;
+    }
+    .eden-vision-card:hover{
+      transform:translateY(-4px);
+      box-shadow:0 24px 58px rgba(4,12,22,.30) !important;
+      border-color:rgba(255,225,170,.72) !important;
+    }
+    .eden-vision-card strong,
+    .eden-vision-card h3,
+    .eden-vision-card .title{
+      font-family:"Playfair Display","Noto Sans Thai",serif !important;
+      color:#241a22 !important;
+      font-size:clamp(20px,1.55vw,28px) !important;
+      letter-spacing:-.01em;
+    }
+    .eden-vision-card p,
+    .eden-vision-card small,
+    .eden-vision-card .desc{
+      color:#6a5a50 !important;
+      font-weight:800 !important;
+    }
+    @media(max-width:760px){
+      .eden-admission-hero{padding:28px 24px 26px !important;}
+      .eden-admission-copy{font-size:13px !important;}
+    }
+  </style>
+
+  <script>
+    /* PATCH v27: replace main announcement text and 4 quick cards, without deleting existing code */
+    (function(){
+      function ready(fn){
+        if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", fn);
+        else fn();
+      }
+
+      ready(function(){
+        const all = Array.from(document.querySelectorAll("body *"));
+        const badge = all.find(function(el){
+          const t = (el.textContent || "").trim();
+          return t === "TODAY’S ANNOUNCEMENT" || t === "TODAY'S ANNOUNCEMENT";
+        });
+        if(badge){
+          const hero = badge.closest("section, article, .hero-card, .announcement-hero, .welcome-card, .glass-card, .card") || badge.parentElement;
+          if(hero && !hero.classList.contains("eden-admission-hero")){
+            hero.classList.add("eden-admission-hero");
+            const oldTitle = hero.querySelector("h1");
+            const oldText = oldTitle ? oldTitle.nextElementSibling : null;
+            if(oldTitle){
+              oldTitle.className = "eden-admission-title";
+              oldTitle.innerHTML = '<span class="fr">Institut Privé d’Eden</span><span class="th">สถาบันเอกชนแห่งเอเดน</span>';
+            }
+
+            if(!hero.querySelector(".eden-admission-subtitle")){
+              const subtitle = document.createElement("h2");
+              subtitle.className = "eden-admission-subtitle";
+              subtitle.textContent = "Institut Privé d’Eden เปิดรับสมัครนักเรียนใหม่ประจำปีการศึกษา";
+              if(oldTitle) oldTitle.insertAdjacentElement("afterend", subtitle);
+            }
+
+            const copy = document.createElement("div");
+            copy.className = "eden-admission-copy";
+            copy.innerHTML = `
+              <p>สถาบันเอกชนสำหรับผู้ที่พร้อมก้าวเข้าสู่สังคมชั้นนำ ภายใต้ระบบการศึกษาเฉพาะของเอเดน นักเรียนทุกคนจะได้รับสิทธิ์เลือกสังกัดจาก 8 โซนหลัก ตามคุณสมบัติ บุคลิกภาพ และศักยภาพของตนเอง</p>
+              <div class="qual-title">คุณสมบัติผู้สมัคร</div>
+              <ul>
+                <li>มีความพร้อมด้านทุนการศึกษา</li>
+                <li>หรือมีผลการเรียนและความสามารถโดดเด่นเพียงพอสำหรับการสอบชิงทุน</li>
+                <li>สามารถปฏิบัติตามกฎของสถาบันและโซนที่ตนสังกัดได้</li>
+              </ul>
+              <p>ผู้สำเร็จการศึกษาจากเอเดนจะได้รับใบรับรองจากสถาบัน ซึ่งเป็นที่ยอมรับในกลุ่มบริษัทเอกชนชั้นนำ องค์กรธุรกิจ กลุ่มทุน และสถาบันระดับสูงทั้งในและต่างประเทศ</p>
+              <div class="eden-admission-motto">เลือกตราสัญลักษณ์ของคุณ<br><span>เลือกโซนของคุณ</span><br>และพิสูจน์ว่าคุณคู่ควรกับเอเดน</div>
+              <p class="eden-admission-open">เปิดรับสมัครแล้ววันนี้<br>Institut Privé d’Eden — สถาบันเอกชนแห่งเอเดน</p>
+            `;
+
+            const oldCopy = hero.querySelector(".eden-admission-copy");
+            if(oldCopy) oldCopy.replaceWith(copy);
+            else{
+              const subtitle = hero.querySelector(".eden-admission-subtitle");
+              if(oldText && oldText.tagName === "P") oldText.replaceWith(copy);
+              else if(subtitle) subtitle.insertAdjacentElement("afterend", copy);
+            }
+
+            const primaryBtn = Array.from(hero.querySelectorAll("a,button")).find(function(btn){
+              return (btn.textContent || "").includes("สมัคร");
+            });
+            if(primaryBtn) primaryBtn.textContent = "สมัครบัตรสถาบัน";
+          }
+        }
+
+        const vision = [
+          { old:["กระทู้ล่าสุด","ข่าวสารและประกาศจากสถาบัน"], title:"ฐานะ", desc:"รากฐานของโอกาส เส้นทาง และความพร้อมในการเข้าสู่สังคมของเอเดน" },
+          { old:["ภาพประกาศ","รวมรูป 1-8 ที่เลื่อนอัตโนมัติ"], title:"ชนชั้น", desc:"ลำดับทางสังคมที่สะท้อนมารยาท เครือข่าย และความรับผิดชอบของนักเรียน" },
+          { old:["โซนทั้ง 8","ตรวจสัญลักษณ์และสีประจำโซน"], title:"ร่ำรวย", desc:"ทรัพยากร วิสัยทัศน์ และอำนาจในการต่อยอดสู่โลกธุรกิจระดับสูง" },
+          { old:["สมัครบัตร","สร้างบัตรนักเรียนประจำโซน"], title:"สติปัญญา", desc:"ความสามารถในการตัดสินใจ วิเคราะห์ และพิสูจน์คุณค่าของตนในระบบเอเดน" }
+        ];
+
+        vision.forEach(function(item){
+          const found = all.find(function(el){
+            const text = (el.textContent || "").trim();
+            return item.old.some(function(word){ return text === word || text.includes(word); });
+          });
+          const card = found ? (found.closest("a, article, .card, .quick-card, .shortcut-card, .glass-card, div") || found.parentElement) : null;
+          if(card && !card.classList.contains("eden-vision-card")){
+            card.classList.add("eden-vision-card");
+            const heading = card.querySelector("h2,h3,h4,strong,.title") || found;
+            const desc = card.querySelector("p,small,.desc");
+            if(heading) heading.textContent = item.title;
+            if(desc) desc.textContent = item.desc;
+            else{
+              const p = document.createElement("p");
+              p.textContent = item.desc;
+              card.appendChild(p);
+            }
+          }
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
- 
