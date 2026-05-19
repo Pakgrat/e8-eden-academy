@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>สมัครสมาชิกนักเรียน | E8’s Eden Academy</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Noto+Serif+Thai:wght@500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap');
+
+    :root{
+      --navy:#0b1c33;
+      --navy2:#112947;
+      --gold:#d4b179;
+      --cream:#f8efe3;
+      --paper:#fff8f0;
+      --ink:#34262b;
+      --muted:#7c6b63;
+      --line:rgba(168,128,86,.28);
+      --shadow:0 18px 40px rgba(50,29,15,.16);
+
+      --zone-main:#e6d2b3;
+      --zone-soft:#f6ebdc;
+      --zone-text:#7b5b34;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      min-height:100vh;
+      font-family:"Noto Sans Thai",sans-serif;
+      color:var(--ink);
+      background:
+        linear-gradient(rgba(255,248,240,.74), rgba(255,248,240,.74)),
+        url('./pink.png') center/cover fixed no-repeat;
+    }
+
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.10) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
+      background-size:54px 54px;
+      opacity:.26;
+    }
+
+    a{text-decoration:none;color:inherit}
+    button,input,select,textarea{font-family:inherit}
+    img{display:block;max-width:100%}
+
+    .site{position:relative;z-index:1}
+    .wrap{width:min(1440px, calc(100% - 32px));margin:auto}
+
+    /* header */
+    .topbar{
+      position:sticky; top:0; z-index:40;
+      background:linear-gradient(90deg,#2c211f 0%, #162843 22%, #08172b 64%, #0a1e37 100%);
+      border-bottom:1px solid rgba(231,203,149,.5);
+      box-shadow:0 12px 30px rgba(0,0,0,.18);
+    }
+    .header{
+      min-height:102px;
+      display:grid;
+      grid-template-columns:minmax(260px,1fr) auto auto;
+      gap:18px;
+      align-items:center;
+      padding:10px 0;
+    }
+    .brand{display:flex;align-items:center;gap:15px}
+    .brand img{width:94px;height:84px;object-fit:contain}
+    .brand h1{
+      color:#fff9ef;
+      font-family:"Cinzel",serif;
+      font-size:clamp(26px,2.8vw,40px);
+      line-height:1;
+    }
+    .brand small{
+      display:block;
+      margin-top:8px;
+      color:#e4c78e;
+      font-weight:800;
+      font-size:14px;
+    }
+
+    .nav{
+      display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
+    }
+    .nav a{
+      color:rgba(255,248,236,.84);
+      padding:10px 15px;
+      border-radius:999px;
+      font-size:14px;
+      font-weight:800;
+      transition:.18s;
+    }
+    .nav a:hover,.nav a.active{
+      color:#fff;
+      background:rgba(255,255,255,.12);
+      outline:1px solid rgba(232,204,147,.34);
+    }
+
+    .header-btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      min-height:48px;
+      padding:12px 22px;
+      border-radius:999px;
+      color:#ffe8b2;
+      font-weight:900;
+      background:linear-gradient(180deg,#2f4463,#132742);
+      border:1px solid rgba(241,212,156,.7);
+      box-shadow:0 8px 18px rgba(0,0,0,.18);
+    }
+
+    main{padding:28px 0 60px}
+
+    .hero{
+      margin-bottom:22px;
+      border:1px solid rgba(172,134,91,.28);
+      border-radius:30px;
+      background:linear-gradient(180deg,rgba(16,38,65,.96),rgba(7,20,38,.96));
+      color:#fff6e2;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:radial-gradient(circle at top right, rgba(255,230,177,.14), transparent 32%);
+    }
+    .hero-inner{
+      padding:34px 34px 28px;
+      display:grid;
+      grid-template-columns:minmax(0,1.2fr) minmax(280px,.75fr);
+      gap:20px;
+      align-items:center;
+    }
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;
+      width:max-content;
+      padding:8px 14px;
+      border-radius:999px;
+      font-size:13px;font-weight:900;
+      color:#ffe7b8;
+      border:1px solid rgba(231,203,149,.36);
+      background:rgba(255,255,255,.07);
+      margin-bottom:12px;
+    }
+    .hero h2{
+      font-family:"Noto Serif Thai",serif;
+      font-size:clamp(34px,4vw,58px);
+      line-height:1.06;
+      margin-bottom:10px;
+    }
+    .hero p{
+      color:rgba(255,244,224,.78);
+      line-height:1.8;
+      max-width:880px;
+    }
+    .hero-stats{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+    }
+    .hero-stat{
+      min-height:90px;
+      padding:16px;
+      border-radius:22px;
+      border:1px solid rgba(230,197,138,.20);
+      background:rgba(255,255,255,.08);
+    }
+    .hero-stat b{
+      display:block;
+      font-family:"Cinzel",serif;
+      font-size:28px;
+      color:#ffe5b2;
+      margin-bottom:8px;
+    }
+    .hero-stat span{
+      color:rgba(255,244,224,.72);
+      font-size:13px;
+      font-weight:800;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:minmax(0,1.1fr) minmax(320px,.72fr) minmax(340px,.78fr);
+      gap:18px;
+      align-items:start;
+    }
+
+    .panel{
+      border:1px solid var(--line);
+      border-radius:30px;
+      background:linear-gradient(180deg,rgba(255,250,245,.92),rgba(245,233,218,.92));
+      box-shadow:var(--shadow);
+      padding:24px;
+      position:relative;
+      overflow:hidden;
+    }
+    .panel::before{
+      content:"";
+      position:absolute; inset:10px;
+      border-radius:24px;
+      border:1px solid rgba(210,175,123,.18);
+      pointer-events:none;
+    }
+    .panel-title{
+      display:flex;align-items:center;gap:10px;
+      margin-bottom:18px;
+      font-family:"Noto Serif Thai",serif;
+      font-size:28px;
+      line-height:1.2;
+    }
+    .badge-step{
+      width:42px;height:42px;border-radius:999px;
+      display:grid;place-items:center;
+      font-weight:900;
+      color:#fff8ec;
+      background:linear-gradient(180deg,#d7acb0,#b17f86);
+      border:1px solid rgba(177,127,134,.42);
+      box-shadow:0 8px 16px rgba(177,127,134,.18);
+      flex:0 0 auto;
+    }
+
+    /* form */
+    .form-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px 14px;
+    }
+    .field{display:grid;gap:7px}
+    .field.full{grid-column:1/-1}
+    .field label{
+      font-size:14px;
+      font-weight:800;
+      color:#5d4942;
+    }
+    .field small{
+      color:#927f73;
+      font-size:12px;
+      line-height:1.5;
+    }
+    .field input,.field select,.field textarea{
+      width:100%;
+      min-height:48px;
+      border-radius:16px;
+      border:1px solid rgba(168,128,86,.24);
+      background:rgba(255,252,248,.82);
+      padding:12px 14px;
+      color:#4d3b34;
+      outline:none;
+      transition:.18s;
+    }
+    .field textarea{
+      min-height:110px;
+      resize:vertical;
+    }
+    .field input:focus,.field select:focus,.field textarea:focus{
+      border-color:rgba(177,127,134,.48);
+      box-shadow:0 0 0 4px rgba(226,200,191,.34);
+      background:#fffdfa;
+    }
+
+    .locked-box{
+      margin-top:14px;
+      padding:14px 15px;
+      border-radius:18px;
+      background:rgba(255,245,236,.75);
+      border:1px dashed rgba(168,128,86,.34);
+      color:#7c675f;
+      font-size:13px;
+      line-height:1.7;
+    }
+
+    .zone-select-box{
+      margin-top:16px;
+      padding:14px;
+      border-radius:22px;
+      background:rgba(255,249,241,.78);
+      border:1px solid rgba(168,128,86,.20);
+    }
+    .zone-select-box h4{
+      margin-bottom:12px;
+      font-size:15px;
+      color:#5f4b43;
+    }
+    .zone-buttons{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:10px;
+    }
+    .zone-btn{
+      min-height:88px;
+      border-radius:22px;
+      border:1px solid rgba(168,128,86,.18);
+      background:var(--zone-bg,#f7ecdc);
+      color:var(--zone-color,#6d5643);
+      display:grid;
+      place-items:center;
+      gap:6px;
+      padding:10px;
+      cursor:pointer;
+      transition:.18s;
+      font-weight:900;
+      text-align:center;
+    }
+    .zone-btn img{
+      width:42px;height:42px;object-fit:contain;
+      filter:drop-shadow(0 6px 10px rgba(50,29,15,.12));
+    }
+    .zone-btn:hover{transform:translateY(-2px)}
+    .zone-btn.active{
+      outline:3px solid rgba(255,255,255,.72);
+      box-shadow:0 14px 26px rgba(50,29,15,.15);
+      transform:translateY(-2px);
+    }
+
+    .zone-info{
+      margin-top:14px;
+      padding:16px;
+      border-radius:20px;
+      border:1px solid rgba(168,128,86,.20);
+      background:linear-gradient(180deg,var(--zone-soft),#fffaf3);
+    }
+    .zone-info h5{
+      font-size:19px;
+      margin-bottom:8px;
+      color:var(--zone-text);
+      font-family:"Noto Serif Thai",serif;
+    }
+    .zone-info p{
+      color:#6c5950;
+      line-height:1.75;
+      font-size:14px;
+    }
+    .zone-traits{
+      margin-top:10px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+    .trait{
+      display:inline-flex;align-items:center;
+      min-height:34px;
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:900;
+      color:var(--zone-text);
+      background:rgba(255,255,255,.78);
+      border:1px solid rgba(168,128,86,.18);
+    }
+
+    .actions{
+      display:flex;flex-wrap:wrap;gap:12px;
+      margin-top:18px;
+    }
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      min-height:50px;
+      padding:12px 22px;
+      border-radius:999px;
+      border:0;
+      cursor:pointer;
+      font-size:14px;
+      font-weight:900;
+      transition:.18s;
+    }
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{
+      color:#fff4dd;
+      background:linear-gradient(180deg,#1b3456,#09192d);
+      border:1px solid rgba(226,194,136,.72);
+      box-shadow:0 12px 26px rgba(9,25,45,.18);
+    }
+    .btn-soft{
+      color:#6d5234;
+      background:rgba(250,241,230,.84);
+      border:1px solid rgba(168,128,86,.30);
+    }
+
+    /* upload */
+    .upload-box{
+      padding:12px;
+      border-radius:26px;
+      background:linear-gradient(180deg,rgba(255,249,244,.72),rgba(252,236,234,.78));
+      border:1px dashed rgba(185,138,139,.46);
+      text-align:center;
+      min-height:520px;
+      display:flex;flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      gap:16px;
+    }
+    .upload-frame{
+      width:min(100%,270px);
+      aspect-ratio:3/4;
+      border-radius:999px / 24%;
+      border:3px solid rgba(205,164,164,.38);
+      padding:10px;
+      display:grid;
+      place-items:center;
+      background:rgba(255,255,255,.44);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.66);
+      overflow:hidden;
+    }
+    .upload-frame img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      border-radius:999px / 24%;
+    }
+    .upload-placeholder{
+      display:grid;
+      place-items:center;
+      color:#ab8686;
+      gap:10px;
+      padding:18px;
+      line-height:1.65;
+    }
+    .upload-placeholder span{
+      font-size:60px;
+      line-height:1;
+    }
+    .upload-tip{
+      font-size:13px;
+      color:#8f7671;
+      line-height:1.75;
+      max-width:280px;
+    }
+    .hidden-input{display:none}
+
+    /* card preview */
+    .card-preview{
+      min-height:520px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .id-card{
+      width:100%;
+      max-width:470px;
+      aspect-ratio:1.58/1;
+      border-radius:28px;
+      padding:22px 22px 18px;
+      background:
+        linear-gradient(180deg,rgba(255,255,255,.86),rgba(247,236,220,.96)),
+        url('./pink.png') center/cover;
+      border:2px solid rgba(211,176,121,.44);
+      box-shadow:0 18px 38px rgba(50,29,15,.16), inset 0 0 0 2px rgba(255,255,255,.52);
+      position:relative;
+      overflow:hidden;
+    }
+    .id-card::before{
+      content:"";
+      position:absolute; inset:10px;
+      border-radius:22px;
+      border:1px solid rgba(211,176,121,.32);
+      pointer-events:none;
+    }
+    .id-top{
+      display:flex;justify-content:space-between;gap:16px;align-items:flex-start;
+      margin-bottom:14px;
+    }
+    .id-title h3{
+      font-family:"Cinzel",serif;
+      font-size:20px;
+      color:#2e2328;
+      line-height:1.1;
+    }
+    .id-title span{
+      display:block;
+      margin-top:4px;
+      color:#735f54;
+      font-size:11px;
+      letter-spacing:.06em;
+      font-weight:700;
+    }
+    .id-logo{
+      width:68px;height:68px;object-fit:contain;
+    }
+
+    .id-body{
+      display:grid;
+      grid-template-columns:104px minmax(0,1fr);
+      gap:14px;
+      align-items:start;
+    }
+    .id-photo{
+      width:104px;height:132px;
+      border-radius:20px;
+      overflow:hidden;
+      border:2px solid rgba(211,176,121,.36);
+      background:linear-gradient(180deg,#f5ece0,#ece1d2);
+      display:grid;place-items:center;
+    }
+    .id-photo img{
+      width:100%;height:100%;object-fit:cover;
+    }
+    .id-photo .silhouette{
+      font-size:46px;
+      color:#b8ab9e;
+    }
+
+    .id-info{
+      display:grid;
+      gap:8px;
+    }
+    .line{
+      display:grid;
+      grid-template-columns:92px minmax(0,1fr);
+      gap:8px;
+      align-items:center;
+      min-height:24px;
+      font-size:12px;
+    }
+    .line b{
+      color:#6a5549;
+      font-family:"Cinzel",serif;
+      font-size:12px;
+    }
+    .line span{
+      border-bottom:1px dashed rgba(150,116,83,.44);
+      color:#493931;
+      padding-bottom:2px;
+      min-height:18px;
+      display:flex;align-items:center;
+      font-weight:700;
+    }
+
+    .division-bar{
+      margin-top:10px;
+      min-height:42px;
+      border-radius:14px;
+      display:flex;align-items:center;
+      padding:0 14px;
+      color:#fff9f2;
+      font-weight:900;
+      background:linear-gradient(90deg,var(--zone-main),color-mix(in srgb, var(--zone-main) 72%, white));
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.24);
+    }
+
+    .id-bottom{
+      margin-top:14px;
+      display:flex;justify-content:space-between;align-items:end;gap:12px;
+      font-size:10px;color:#7f6b62;
+    }
+    .sign{
+      font-family:"Cinzel",serif;
+      font-size:16px;
+      color:#735f54;
+    }
+    .barcode{
+      width:86px;height:34px;
+      background:repeating-linear-gradient(
+        90deg,
+        #222 0,#222 2px,
+        transparent 2px,transparent 4px,
+        #222 4px,#222 5px,
+        transparent 5px,transparent 7px
+      );
+      opacity:.7;
+      border-radius:4px;
+    }
+
+    /* modal */
+    .modal{
+      position:fixed; inset:0;
+      background:rgba(9,17,29,.46);
+      display:none;
+      align-items:center;justify-content:center;
+      padding:18px;
+      z-index:100;
+      backdrop-filter:blur(6px);
+    }
+    .modal.show{display:flex}
+    .modal-card{
+      width:min(520px,100%);
+      border-radius:28px;
+      background:linear-gradient(180deg,rgba(255,251,246,.98),rgba(244,232,216,.98));
+      border:1px solid rgba(168,128,86,.28);
+      box-shadow:0 28px 60px rgba(0,0,0,.18);
+      padding:28px;
+      text-align:center;
+    }
+    .modal-card h3{
+      font-family:"Noto Serif Thai",serif;
+      font-size:34px;
+      margin-bottom:10px;
+      line-height:1.15;
+    }
+    .modal-card p{
+      color:#6b5950;
+      line-height:1.8;
+      margin-bottom:18px;
+    }
+    .status-pill{
+      display:inline-flex;align-items:center;gap:8px;
+      min-height:38px;
+      padding:9px 15px;
+      border-radius:999px;
+      background:rgba(245,233,213,.88);
+      border:1px solid rgba(168,128,86,.22);
+      color:#6e5638;
+      font-weight:900;
+      margin-bottom:14px;
+    }
+    .spinner{
+      width:18px;height:18px;border-radius:999px;
+      border:2px solid rgba(168,128,86,.22);
+      border-top-color:#b17f86;
+      animation:spin 1s linear infinite;
+    }
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    .success-mark{
+      width:74px;height:74px;border-radius:999px;
+      display:grid;place-items:center;
+      margin:0 auto 14px;
+      background:linear-gradient(180deg,#dceee0,#b5d9bf);
+      color:#2d6b46;
+      font-size:34px;
+      font-weight:900;
+      box-shadow:0 14px 28px rgba(45,107,70,.14);
+    }
+
+    @media (max-width:1220px){
+      .header{grid-template-columns:1fr}
+      .nav{justify-content:flex-start}
+      .header-btn{width:max-content}
+      .grid{grid-template-columns:1fr}
+      .hero-inner{grid-template-columns:1fr}
+    }
+
+    @media (max-width:720px){
+      .wrap{width:min(100% - 20px,1440px)}
+      .brand img{width:78px;height:72px}
+      .brand h1{font-size:24px}
+      .hero-inner,.panel{padding:20px}
+      .hero-stats{grid-template-columns:1fr}
+      .form-grid{grid-template-columns:1fr}
+      .zone-buttons{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .panel-title{font-size:22px}
+      .id-card{max-width:100%}
+    }
+  </style>
+</head>
+<body>
+  <div class="site">
+    <header class="topbar">
+      <div class="wrap header">
+        <a class="brand" href="./index.html">
+          <img src="./eden.png" alt="E8’s Eden Academy">
+          <div>
+            <h1>E8’s Eden Academy</h1>
+            <small>ระบบสมัครสมาชิกนักเรียน</small>
+          </div>
+        </a>
+
+        <nav class="nav">
+          <a href="./index.html">หน้าหลัก</a>
+          <a href="./board.html">ข่าวสาร</a>
+          <a class="active" href="./register.html">สมัครสมาชิก</a>
+        </nav>
+
+        <a class="header-btn" href="./index.html">← กลับหน้าแรก</a>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <section class="hero">
+        <div class="hero-inner">
+          <div>
+            <div class="eyebrow">STUDENT REGISTRATION</div>
+            <h2>เปิดระบบสมาชิกนักเรียนใหม่</h2>
+            <p>
+              สำหรับนักเรียนปี 1 สามารถสมัครสมาชิกเพื่อเข้าใช้งานระบบของโรงเรียน
+              เลือกโซนประจำตัว อัปโหลดรูปหน้าตรงสำหรับบัตรนักเรียน และเข้าสู่ระบบเว็บไซต์ได้หลังจากผ่านการตรวจสอบข้อมูลเบื้องต้น
+            </p>
+          </div>
+
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <b>Year 1</b>
+              <span>เปิดรับเฉพาะนักเรียนปี 1</span>
+            </div>
+            <div class="hero-stat">
+              <b>E2-E8</b>
+              <span>E1 ปิดรับสำหรับปี 1</span>
+            </div>
+            <div class="hero-stat">
+              <b>Photo ID</b>
+              <span>ใช้รูปหน้าตรงสำหรับบัตรนักเรียน</span>
+            </div>
+            <div class="hero-stat">
+              <b>Verified</b>
+              <span>สมัครแล้วเข้าสู่ระบบใช้งานเว็บได้</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid">
+        <!-- FORM -->
+        <section class="panel">
+          <div class="panel-title">
+            <div class="badge-step">1</div>
+            <span>กรอกข้อมูลผู้สมัคร</span>
+          </div>
+
+          <form id="registerForm">
+            <div class="form-grid">
+              <div class="field">
+                <label for="prefix">คำนำหน้า</label>
+                <select id="prefix">
+                  <option value="">เลือกคำนำหน้า</option>
+                  <option>นาย</option>
+                  <option>นางสาว</option>
+                  <option>อื่น ๆ</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="gender">เพศ</label>
+                <select id="gender">
+                  <option value="">เลือกเพศ</option>
+                  <option>ชาย</option>
+                  <option>หญิง</option>
+                  <option>ไม่ระบุ</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="firstName">ชื่อ (ไม่ต้องระบุจริงก็ได้)</label>
+                <input id="firstName" type="text" placeholder="กรอกชื่อ">
+              </div>
+
+              <div class="field">
+                <label for="lastName">นามสกุล (ไม่ต้องระบุจริงก็ได้)</label>
+                <input id="lastName" type="text" placeholder="กรอกนามสกุล">
+              </div>
+
+              <div class="field">
+                <label for="birthday">วัน / เดือน / ปีเกิด</label>
+                <input id="birthday" type="date">
+              </div>
+
+              <div class="field">
+                <label for="nickname">ชื่อที่ใช้ในระบบ</label>
+                <input id="nickname" type="text" placeholder="เช่น Aurelia.vv">
+              </div>
+
+              <div class="field">
+                <label for="email">อีเมล</label>
+                <input id="email" type="email" placeholder="example@email.com">
+                <small>ใช้สำหรับระบบสมาชิกในอนาคต</small>
+              </div>
+
+              <div class="field">
+                <label for="phone">เบอร์โทรศัพท์</label>
+                <input id="phone" type="text" placeholder="0XX-XXX-XXXX">
+              </div>
+
+              <div class="field">
+                <label for="level">ระดับชั้นที่ต้องการสมัคร</label>
+                <input id="level" type="text" value="ปี 1" readonly>
+              </div>
+
+              <div class="field">
+                <label for="studentReason">เหตุผลที่อยากเข้าร่วม E8’s Eden Academy</label>
+                <input id="studentReason" type="text" placeholder="บอกเล่าเหตุผลของคุณแบบสั้น ๆ">
+              </div>
+
+              <div class="field full">
+                <label for="intro">แนะนำตัวแบบสั้น ๆ</label>
+                <textarea id="intro" placeholder="แนะนำตัวเล็กน้อย เช่น บุคลิก ความสนใจ หรือสิ่งที่คาดหวังจากโรงเรียน"></textarea>
+              </div>
+            </div>
+
+            <div class="locked-box">
+              <strong>หมายเหตุสำคัญ:</strong> ระบบสมัครของนักเรียนปี 1 จะเปิดให้เลือกเฉพาะ <strong>E2 - E8</strong> เท่านั้น
+              โดย <strong>E1 Zone ปิดรับสำหรับปี 1</strong> ในรอบนี้
+            </div>
+
+            <div class="zone-select-box">
+              <h4>เลือกโซน / บ้านของคุณ</h4>
+              <div class="zone-buttons" id="zoneButtons"></div>
+
+              <div class="zone-info" id="zoneInfo">
+                <h5>กรุณาเลือกโซน</h5>
+                <p>เมื่อเลือกโซนแล้ว ระบบจะเปลี่ยนสีธีมของบัตรนักเรียนให้ตรงกับบ้านที่คุณเลือก พร้อมแสดงคุณสมบัติพื้นฐานของบ้านนั้น</p>
+              </div>
+            </div>
+
+            <div class="actions">
+              <button class="btn btn-soft" type="reset" id="resetBtn">ล้างข้อมูล</button>
+              <button class="btn btn-primary" type="submit">บันทึกข้อมูลและส่งตรวจสอบ</button>
+            </div>
+          </form>
+        </section>
+
+        <!-- UPLOAD -->
+        <section class="panel">
+          <div class="panel-title">
+            <div class="badge-step">2</div>
+            <span>อัปโหลดรูปหน้าตรง</span>
+          </div>
+
+          <div class="upload-box">
+            <div class="upload-frame" id="uploadFrame">
+              <div class="upload-placeholder" id="uploadPlaceholder">
+                <span>＋</span>
+                <div>
+                  <strong>คลิกเพื่ออัปโหลดรูปหน้าตรง</strong><br>
+                  รองรับไฟล์ JPG / PNG
+                </div>
+              </div>
+              <img id="previewImage" alt="รูปสำหรับบัตรนักเรียน" style="display:none;">
+            </div>
+
+            <input class="hidden-input" id="photoInput" type="file" accept="image/png,image/jpeg,image/webp">
+
+            <button class="btn btn-soft" type="button" id="choosePhotoBtn">เลือกไฟล์จากอุปกรณ์</button>
+
+            <div class="upload-tip">
+              แนะนำให้ใช้รูปหน้าตรง พื้นหลังเรียบ เห็นใบหน้าชัดเจน
+              เพื่อให้นำไปใช้กับบัตรนักเรียนได้สวยและดูเป็นทางการ
+            </div>
+          </div>
+        </section>
+
+        <!-- CARD -->
+        <section class="panel">
+          <div class="panel-title">
+            <div class="badge-step">3</div>
+            <span>ตัวอย่างบัตรนักเรียน</span>
+          </div>
+
+          <div class="card-preview">
+            <div class="id-card" id="idCard">
+              <div class="id-top">
+                <div class="id-title">
+                  <h3>E8’s Eden Academy</h3>
+                  <span>STUDENT IDENTITY CARD</span>
+                </div>
+                <img class="id-logo" src="./eden.png" alt="โลโก้โรงเรียน">
+              </div>
+
+              <div class="id-body">
+                <div class="id-photo" id="idPhotoBox">
+                  <div class="silhouette" id="idSilhouette">👤</div>
+                  <img id="idPhotoImage" alt="Student Photo" style="display:none;">
+                </div>
+
+                <div class="id-info">
+                  <div class="line"><b>STUDENT ID</b><span id="cardId">00000000</span></div>
+                  <div class="line"><b>NAME</b><span id="cardName">-</span></div>
+                  <div class="line"><b>LEVEL</b><span id="cardLevel">Year 1</span></div>
+                  <div class="line"><b>DIVISION</b><span id="cardDivision">ยังไม่เลือกโซน</span></div>
+
+                  <div class="division-bar" id="divisionBar">UNASSIGNED</div>
+                </div>
+              </div>
+
+              <div class="id-bottom">
+                <div>
+                  ISSUE DATE<br>
+                  <strong id="issueDate">01 / 06 / 2026</strong>
+                </div>
+                <div class="sign">Authorized Signature</div>
+                <div class="barcode" aria-hidden="true"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <!-- MODAL -->
+  <div class="modal" id="statusModal">
+    <div class="modal-card" id="modalCard">
+      <div id="modalLoading">
+        <div class="status-pill">
+          <span class="spinner"></span>
+          กำลังตรวจสอบข้อมูล
+        </div>
+        <h3>กำลังประมวลผลใบสมัคร</h3>
+        <p>
+          ระบบกำลังบันทึกข้อมูลสมาชิกและตรวจสอบข้อมูลเบื้องต้นของนักเรียน
+          กรุณารอสักครู่...
+        </p>
+      </div>
+
+      <div id="modalSuccess" style="display:none;">
+        <div class="success-mark">✓</div>
+        <h3>สมัครสมาชิกสำเร็จ</h3>
+        <p>
+          ระบบตรวจสอบข้อมูลเรียบร้อยแล้ว ขณะนี้คุณสามารถเข้าสู่หน้าเว็บและใช้งานระบบในฐานะสมาชิกนักเรียนได้
+        </p>
+        <div class="actions" style="justify-content:center;">
+          <a class="btn btn-primary" href="./index.html">กลับหน้าแรก</a>
+          <a class="btn btn-soft" href="./board.html">ไปหน้ากระดาน</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const zoneData = {
+      E2: {
+        label: "E2 Zone",
+        color: "#e7d6b4",
+        soft: "#fbf5e7",
+        text: "#8b6b40",
+        image: "./e2.png",
+        title: "E2 Zone",
+        desc: "เหมาะกับนักเรียนที่มีบุคลิกสุขุม เรียบหรู ภูมิฐาน และให้ความสำคัญกับภาพลักษณ์ ความประณีต และเครือข่ายครอบครัวหรือฐานะทางสังคม",
+        traits: ["ฐานะดี", "เรียบหรู", "วงสังคม", "บุคลิกผู้ดี"]
+      },
+      E3: {
+        label: "E3 Zone",
+        color: "#b0273d",
+        soft: "#f6e6e9",
+        text: "#9d2137",
+        image: "./e3.png",
+        title: "E3 Zone",
+        desc: "เหมาะกับนักเรียนสายผู้นำ มั่นใจ เด็ดขาด และมีพื้นฐานครอบครัวที่เกี่ยวข้องกับการบริหาร การตัดสินใจ หรือธุรกิจที่ต้องใช้ความกล้า",
+        traits: ["ผู้นำ", "ธุรกิจ", "มั่นใจ", "เด็ดขาด"]
+      },
+      E4: {
+        label: "E4 Zone",
+        color: "#b8cfab",
+        soft: "#eef6ea",
+        text: "#587c4a",
+        image: "./e4.png",
+        title: "E4 Zone",
+        desc: "เหมาะกับนักเรียนที่มีบุคลิกอ่อนโยน สุภาพ มีความสมดุล รักความเรียบร้อย และมีพื้นฐานที่เกี่ยวกับครอบครัวหรือกิจการที่เน้นความมั่นคง",
+        traits: ["สมดุล", "สุขุม", "ครอบครัวมั่นคง", "นุ่มนวล"]
+      },
+      E5: {
+        label: "E5 Zone",
+        color: "#c9b4e8",
+        soft: "#f2ecfb",
+        text: "#7755a8",
+        image: "./e5.png",
+        title: "E5 Zone",
+        desc: "เหมาะกับนักเรียนที่มีความคิดสร้างสรรค์ ละเอียด มีเสน่ห์เฉพาะตัว และมักมีพื้นฐานเกี่ยวข้องกับสายศิลปะ ภาพลักษณ์ หรือแวดวงครีเอทีฟ",
+        traits: ["สร้างสรรค์", "ศิลปะ", "มีเสน่ห์", "ครีเอทีฟ"]
+      },
+      E6: {
+        label: "E6 Zone",
+        color: "#ecb5c8",
+        soft: "#fdeff4",
+        text: "#b66382",
+        image: "./e6.png",
+        title: "E6 Zone",
+        desc: "เหมาะกับนักเรียนบุคลิกสดใส เข้าสังคมเก่ง ดูโดดเด่น และมีพื้นฐานที่เอื้อต่อการเข้าสังคม งานภาพลักษณ์ หรือสายที่ต้องอาศัยเสน่ห์เฉพาะตัว",
+        traits: ["สดใส", "เข้าสังคม", "ภาพลักษณ์", "โดดเด่น"]
+      },
+      E7: {
+        label: "E7 Zone",
+        color: "#b7daf0",
+        soft: "#eef8fd",
+        text: "#4c89b0",
+        image: "./e7.png",
+        title: "E7 Zone",
+        desc: "เหมาะกับนักเรียนที่มีบุคลิกสงบ สุภาพ ฉลาดวิเคราะห์ และมีแนวโน้มเกี่ยวข้องกับครอบครัวที่สนับสนุนด้านวิชาการ ความรู้ หรือการวางแผน",
+        traits: ["วิเคราะห์", "วิชาการ", "สงบ", "เป็นระบบ"]
+      },
+      E8: {
+        label: "E8 Zone",
+        color: "#d7b25d",
+        soft: "#fcf4de",
+        text: "#936c26",
+        image: "./e8.png",
+        title: "E8 Zone",
+        desc: "เหมาะกับนักเรียนที่มีภาพลักษณ์สง่างาม มีรสนิยม ดูน่าเชื่อถือ และมักมีพื้นฐานเกี่ยวกับตระกูลเก่า เครือข่ายธุรกิจ หรือบทบาทตัวแทนสถาบัน",
+        traits: ["สง่างาม", "ตัวแทนสถาบัน", "ตระกูลดี", "น่าเชื่อถือ"]
+      }
+    };
+
+    const zoneButtons = document.getElementById('zoneButtons');
+    const zoneInfo = document.getElementById('zoneInfo');
+
+    const cardName = document.getElementById('cardName');
+    const cardDivision = document.getElementById('cardDivision');
+    const divisionBar = document.getElementById('divisionBar');
+    const issueDate = document.getElementById('issueDate');
+    const cardId = document.getElementById('cardId');
+
+    const nicknameInput = document.getElementById('nickname');
+    const firstNameInput = document.getElementById('firstName');
+    const lastNameInput = document.getElementById('lastName');
+
+    const photoInput = document.getElementById('photoInput');
+    const choosePhotoBtn = document.getElementById('choosePhotoBtn');
+    const previewImage = document.getElementById('previewImage');
+    const uploadPlaceholder = document.getElementById('uploadPlaceholder');
+    const idPhotoImage = document.getElementById('idPhotoImage');
+    const idSilhouette = document.getElementById('idSilhouette');
+
+    const form = document.getElementById('registerForm');
+    const resetBtn = document.getElementById('resetBtn');
+
+    const statusModal = document.getElementById('statusModal');
+    const modalLoading = document.getElementById('modalLoading');
+    const modalSuccess = document.getElementById('modalSuccess');
+
+    let selectedZone = "";
+    let uploadedImageData = "";
+
+    function formatDate(d){
+      const day = String(d.getDate()).padStart(2, '0');
+      const month = String(d.getMonth()+1).padStart(2, '0');
+      const year = d.getFullYear();
+      return `${day} / ${month} / ${year}`;
+    }
+
+    function randomStudentId(){
+      return String(Math.floor(10000000 + Math.random() * 90000000));
+    }
+
+    issueDate.textContent = formatDate(new Date());
+    cardId.textContent = randomStudentId();
+
+    function renderZoneButtons(){
+      zoneButtons.innerHTML = Object.entries(zoneData).map(([key, zone]) => `
+        <button
+          class="zone-btn ${selectedZone === key ? 'active' : ''}"
+          type="button"
+          data-zone="${key}"
+          style="--zone-bg:${zone.soft}; --zone-color:${zone.text};"
+        >
+          <img src="${zone.image}" alt="${zone.label}">
+          <span>${zone.label}</span>
+        </button>
+      `).join('');
+
+      document.querySelectorAll('.zone-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          selectedZone = btn.dataset.zone;
+          updateZoneInfo();
+          renderZoneButtons();
+          updateCard();
+        });
+      });
+    }
+
+    function updateZoneInfo(){
+      if(!selectedZone || !zoneData[selectedZone]){
+        zoneInfo.innerHTML = `
+          <h5>กรุณาเลือกโซน</h5>
+          <p>เมื่อเลือกโซนแล้ว ระบบจะเปลี่ยนสีธีมของบัตรนักเรียนให้ตรงกับบ้านที่คุณเลือก พร้อมแสดงคุณสมบัติพื้นฐานของบ้านนั้น</p>
+        `;
+        return;
+      }
+
+      const z = zoneData[selectedZone];
+      zoneInfo.innerHTML = `
+        <h5 style="color:${z.text};">${z.title}</h5>
+        <p>${z.desc}</p>
+        <div class="zone-traits">
+          ${z.traits.map(t => `<span class="trait" style="color:${z.text};">${t}</span>`).join('')}
+        </div>
+      `;
+
+      document.documentElement.style.setProperty('--zone-main', z.color);
+      document.documentElement.style.setProperty('--zone-soft', z.soft);
+      document.documentElement.style.setProperty('--zone-text', z.text);
+    }
+
+    function updateCard(){
+      const nick = nicknameInput.value.trim();
+      const fullName = [firstNameInput.value.trim(), lastNameInput.value.trim()].filter(Boolean).join(' ');
+      cardName.textContent = nick || fullName || "-";
+      cardDivision.textContent = selectedZone ? `${selectedZone} Zone` : "ยังไม่เลือกโซน";
+      divisionBar.textContent = selectedZone ? `${selectedZone} DIVISION` : "UNASSIGNED";
+
+      if(selectedZone && zoneData[selectedZone]){
+        const z = zoneData[selectedZone];
+        divisionBar.style.background = `linear-gradient(90deg, ${z.color}, color-mix(in srgb, ${z.color} 68%, white))`;
+      } else {
+        divisionBar.style.background = `linear-gradient(90deg, #d8c2a1, #efe2ce)`;
+      }
+    }
+
+    [nicknameInput, firstNameInput, lastNameInput].forEach(el => {
+      el.addEventListener('input', updateCard);
+    });
+
+    choosePhotoBtn.addEventListener('click', () => photoInput.click());
+
+    photoInput.addEventListener('change', e => {
+      const file = e.target.files?.[0];
+      if(!file) return;
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        uploadedImageData = reader.result;
+        previewImage.src = uploadedImageData;
+        previewImage.style.display = 'block';
+        uploadPlaceholder.style.display = 'none';
+
+        idPhotoImage.src = uploadedImageData;
+        idPhotoImage.style.display = 'block';
+        idSilhouette.style.display = 'none';
+      };
+      reader.readAsDataURL(file);
+    });
+
+    resetBtn.addEventListener('click', () => {
+      selectedZone = "";
+      uploadedImageData = "";
+      renderZoneButtons();
+      updateZoneInfo();
+      updateCard();
+
+      previewImage.style.display = 'none';
+      previewImage.src = "";
+      uploadPlaceholder.style.display = 'grid';
+      idPhotoImage.style.display = 'none';
+      idPhotoImage.src = "";
+      idSilhouette.style.display = 'grid';
+
+      cardId.textContent = randomStudentId();
+    });
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+
+      const nickname = nicknameInput.value.trim();
+      if(!nickname){
+        alert('กรุณากรอกชื่อที่ใช้ในระบบ');
+        nicknameInput.focus();
+        return;
+      }
+
+      if(!selectedZone){
+        alert('กรุณาเลือกโซนก่อนส่งใบสมัคร');
+        return;
+      }
+
+      if(!uploadedImageData){
+        alert('กรุณาอัปโหลดรูปหน้าตรงสำหรับบัตรนักเรียน');
+        return;
+      }
+
+      statusModal.classList.add('show');
+      modalLoading.style.display = 'block';
+      modalSuccess.style.display = 'none';
+
+      const memberData = {
+        prefix: document.getElementById('prefix').value,
+        gender: document.getElementById('gender').value,
+        firstName: firstNameInput.value.trim(),
+        lastName: lastNameInput.value.trim(),
+        birthday: document.getElementById('birthday').value,
+        nickname: nickname,
+        email: document.getElementById('email').value.trim(),
+        phone: document.getElementById('phone').value.trim(),
+        level: 'ปี 1',
+        reason: document.getElementById('studentReason').value.trim(),
+        intro: document.getElementById('intro').value.trim(),
+        zone: selectedZone,
+        cardId: cardId.textContent,
+        issueDate: issueDate.textContent,
+        photo: uploadedImageData,
+        verified: true,
+        status: 'approved'
+      };
+
+      setTimeout(() => {
+        localStorage.setItem('e8MemberProfile', JSON.stringify(memberData));
+        localStorage.setItem('e8MemberLoggedIn', 'true');
+        localStorage.setItem('e8MemberVerified', 'true');
+        localStorage.setItem('e8MemberZone', selectedZone);
+        localStorage.setItem('e8StudentNickname', nickname);
+
+        modalLoading.style.display = 'none';
+        modalSuccess.style.display = 'block';
+      }, 1600);
+    });
+
+    renderZoneButtons();
+    updateZoneInfo();
+    updateCard();
+  </script>
+</body>
+</html>
