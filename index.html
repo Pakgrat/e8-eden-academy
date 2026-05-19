@@ -515,6 +515,115 @@
     @media(max-width:620px){
       .container{width:min(100% - 24px,1320px)}.hero-card{padding:30px 24px}.live-card{padding:24px}.zone-grid{grid-template-columns:repeat(2,1fr)}.tag-grid{grid-template-columns:1fr}.post{grid-template-columns:1fr}.post-icon{width:54px;height:54px}.slide-stage{height:500px}.mini-grid{grid-template-columns:1fr}.feedback-stack{grid-template-rows:auto}.feedback-box{min-height:auto}.slide-btn{width:44px;height:44px}.brand h1{font-size:28px}
     }
+  
+
+    /* PATCH v24: modern music card + shop/zone navigation */
+    .music-card{
+      padding:18px !important;
+      border-radius:28px !important;
+      background:linear-gradient(135deg,rgba(255,250,242,.92),rgba(225,211,190,.82)) !important;
+      backdrop-filter:blur(16px) !important;
+    }
+    .music-card .music-top{
+      justify-content:flex-start !important;
+      gap:12px !important;
+      min-height:116px;
+    }
+    .music-card .disc{
+      width:108px !important;
+      height:108px !important;
+      order:1;
+      box-shadow:0 20px 42px rgba(7,17,30,.28),0 0 0 8px rgba(255,255,255,.38) !important;
+    }
+    .music-card .music-nav{
+      order:3;
+      width:42px !important;
+      height:42px !important;
+      background:rgba(9,28,48,.94) !important;
+      border:1px solid rgba(239,211,156,.7) !important;
+      color:#ffe7b0 !important;
+    }
+    .music-card #musicPrevBtn{margin-left:auto;}
+    .music-card .music-info{
+      position:absolute;
+      left:148px;
+      top:38px;
+      right:24px;
+      text-align:left !important;
+      margin-top:0 !important;
+      z-index:4;
+    }
+    .music-card .music-info h3,
+    .music-card #musicTitle{
+      font-size:24px !important;
+      line-height:1.08 !important;
+      color:#1e232d !important;
+      letter-spacing:-.02em;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      max-width:240px;
+    }
+    .music-card .music-link,
+    .music-card #musicYoutube{display:none !important;}
+    .music-card .music-bar{
+      margin-top:14px !important;
+      height:7px !important;
+      background:rgba(57,45,39,.16) !important;
+    }
+    .music-card .music-actions{
+      justify-content:flex-start !important;
+      margin-left:130px;
+      margin-top:16px !important;
+      gap:10px !important;
+    }
+    .music-card .music-actions button{
+      background:linear-gradient(180deg,#0e2c4b,#061827) !important;
+      color:#fff1c8 !important;
+      border:1px solid rgba(255,224,163,.58) !important;
+      box-shadow:0 12px 24px rgba(5,19,33,.25) !important;
+    }
+    .music-card .music-actions button:nth-child(2){
+      background:rgba(255,255,255,.62) !important;
+      color:#4d3a2d !important;
+      border-color:rgba(169,126,69,.35) !important;
+    }
+    .music-volume{
+      margin:14px 0 0 130px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:#614f45;
+      font-size:12px;
+      font-weight:900;
+      position:relative;
+      z-index:5;
+    }
+    .music-volume input[type="range"]{
+      width:150px;
+      accent-color:#0c2a48;
+      cursor:pointer;
+    }
+    .music-volume .volume-value{
+      min-width:34px;
+      color:#0c2a48;
+    }
+    .music-mini-state{
+      margin:8px 0 0 130px;
+      color:#7d6b61;
+      font-size:12px;
+      font-weight:800;
+      position:relative;
+      z-index:5;
+    }
+    @media(max-width:520px){
+      .music-card .music-top{justify-content:center !important;flex-wrap:wrap;}
+      .music-card .disc{width:92px !important;height:92px !important;}
+      .music-card .music-info{position:relative;left:auto;top:auto;right:auto;text-align:center !important;width:100%;}
+      .music-card .music-info h3,.music-card #musicTitle{max-width:100%;white-space:normal;text-align:center;}
+      .music-card #musicPrevBtn{margin-left:0;}
+      .music-card .music-actions,.music-volume,.music-mini-state{margin-left:0;justify-content:center;}
+    }
   </style>
 </head>
 <body>
@@ -543,8 +652,8 @@
       <nav class="nav">
         <a class="active" href="./index.html">หน้าหลัก</a>
         <a href="./board.html">กระทู้</a>
-        <a href="#shop">ร้านค้า</a>
-        <a href="#zones">โซน</a>
+        <a href="./shop.html">ร้านค้า</a>
+        <a href="./zone.html">โซน</a>
         <a class="cta" href="./register.html">✦ สมัครบัตรสถาบัน</a>
       </nav>
     </div>
@@ -1243,6 +1352,422 @@
             loadMusic(next, true);
           };
         }
+      });
+    })();
+  </script>
+  <script>
+    /* PATCH v24: keep all existing code, only enhance music UI and top links */
+    (function(){
+      function ready(fn){
+        if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", fn);
+        else fn();
+      }
+
+      ready(function(){
+        const audio = document.getElementById("academyAudio");
+        const musicCard = document.getElementById("music");
+        const title = document.getElementById("musicTitle");
+        const playBtn = document.getElementById("musicPlayBtn");
+        const randomBtn = document.getElementById("musicRandomBtn");
+        const prevBtn = document.getElementById("musicPrevBtn");
+        const nextBtn = document.getElementById("musicNextBtn");
+
+        if(musicCard && audio){
+          let volumeBox = document.getElementById("musicVolumeBox");
+          if(!volumeBox){
+            volumeBox = document.createElement("div");
+            volumeBox.className = "music-volume";
+            volumeBox.id = "musicVolumeBox";
+            volumeBox.innerHTML = '<span>เสียง</span><input id="musicVolume" type="range" min="0" max="100" value="70" aria-label="ปรับระดับเสียงเพลง"><span class="volume-value" id="musicVolumeValue">70%</span>';
+            const actions = musicCard.querySelector(".music-actions");
+            if(actions) actions.insertAdjacentElement("afterend", volumeBox);
+            else musicCard.appendChild(volumeBox);
+          }
+
+          let stateText = document.getElementById("musicMiniState");
+          if(!stateText){
+            stateText = document.createElement("div");
+            stateText.className = "music-mini-state";
+            stateText.id = "musicMiniState";
+            stateText.textContent = "เลือกเพลงแบบสุ่มจากคลังเพลงของสถาบัน";
+            volumeBox.insertAdjacentElement("afterend", stateText);
+          }
+
+          const volumeInput = document.getElementById("musicVolume");
+          const volumeValue = document.getElementById("musicVolumeValue");
+          audio.volume = 0.7;
+          if(volumeInput){
+            volumeInput.oninput = function(){
+              const value = Number(volumeInput.value || 70);
+              audio.volume = value / 100;
+              if(volumeValue) volumeValue.textContent = value + "%";
+            };
+          }
+
+          if(title && title.textContent.trim() === "Academy Music Box"){
+            title.textContent = "E8 Eden Playlist";
+          }
+
+          function setState(text){
+            const mini = document.getElementById("musicMiniState");
+            if(mini) mini.textContent = text;
+          }
+
+          function forcePlay(){
+            if(!audio) return;
+            const result = audio.play();
+            if(result && typeof result.then === "function"){
+              result.then(function(){
+                setState("กำลังเล่นเพลง");
+                if(playBtn) playBtn.textContent = "❚❚ หยุดเพลง";
+              }).catch(function(){
+                setState("กดปุ่มเล่นอีกครั้งเพื่อเริ่มเพลง");
+              });
+            }
+          }
+
+          if(playBtn){
+            playBtn.addEventListener("click", function(){
+              setTimeout(function(){
+                setState(audio.paused ? "หยุดเพลงอยู่" : "กำลังเล่นเพลง");
+              }, 80);
+            });
+          }
+          if(prevBtn){
+            prevBtn.addEventListener("click", function(){ setTimeout(forcePlay, 120); });
+          }
+          if(nextBtn){
+            nextBtn.addEventListener("click", function(){ setTimeout(forcePlay, 120); });
+          }
+          if(randomBtn){
+            randomBtn.addEventListener("click", function(){ setTimeout(forcePlay, 120); });
+          }
+          audio.addEventListener("play", function(){ setState("กำลังเล่นเพลง"); });
+          audio.addEventListener("pause", function(){ setState("หยุดเพลงอยู่"); });
+          audio.addEventListener("error", function(){ setState("ไม่พบไฟล์เพลง กรุณาตรวจชื่อไฟล์ MP3"); });
+        }
+
+        /* top navigation: add pages for shop and zone */
+        document.querySelectorAll("a, button").forEach(function(el){
+          const text = (el.textContent || "").split(/
+/).join(" ").split(/	/).join(" ").trim();
+          if(text.includes("ร้านค้า")){
+            if(el.tagName.toLowerCase() === "a") el.href = "shop.html";
+            else el.onclick = function(){ window.location.href = "shop.html"; };
+          }
+          if(text.includes("โซน") || text.includes("Zone")){
+            if(el.tagName.toLowerCase() === "a") el.href = "zone.html";
+            else el.onclick = function(){ window.location.href = "zone.html"; };
+          }
+          if(text.includes("สมัครบัตร") || text.includes("สมัครบัตรสถาบัน")){
+            if(el.tagName.toLowerCase() === "a") el.href = "register.html";
+            else el.onclick = function(){ window.location.href = "register.html"; };
+          }
+        });
+      });
+    })();
+  </script>
+
+  <style>
+    /* PATCH v25: modern left-cover music player + safer navigation */
+    #music.music-card{
+      padding:22px !important;
+      min-height:210px !important;
+      border-radius:34px !important;
+      background:
+        linear-gradient(135deg,rgba(255,250,242,.92),rgba(225,211,190,.80)) !important;
+      border:1px solid rgba(232,203,153,.62) !important;
+      box-shadow:0 24px 60px rgba(0,0,0,.24) !important;
+    }
+    #music .music-top{display:none !important;}
+    #music .music-modern-layout{
+      position:relative;
+      z-index:5;
+      display:grid;
+      grid-template-columns:136px minmax(0,1fr);
+      gap:20px;
+      align-items:center;
+    }
+    #music .music-cover-column{display:grid;place-items:center;}
+    #music .music-cover-column .disc{
+      width:128px !important;
+      height:128px !important;
+      margin:0 !important;
+      order:0 !important;
+      border:3px solid rgba(255,239,198,.88) !important;
+      box-shadow:
+        0 22px 42px rgba(7,17,30,.30),
+        0 0 0 9px rgba(255,255,255,.36),
+        inset 0 0 22px rgba(255,255,255,.20) !important;
+    }
+    #music .music-content-column{min-width:0;}
+    #music .music-player-head{
+      display:grid;
+      grid-template-columns:46px minmax(0,1fr) 46px;
+      gap:10px;
+      align-items:center;
+    }
+    #music .music-info{
+      position:static !important;
+      inset:auto !important;
+      margin:0 !important;
+      text-align:left !important;
+      min-width:0;
+    }
+    #music .music-info h3,
+    #music #musicTitle{
+      max-width:100% !important;
+      white-space:nowrap !important;
+      overflow:hidden !important;
+      text-overflow:ellipsis !important;
+      font-family:"Playfair Display","Noto Sans Thai",serif !important;
+      font-size:30px !important;
+      line-height:1.05 !important;
+      color:#221b22 !important;
+      letter-spacing:-.02em;
+      margin:0 !important;
+    }
+    #music .music-link,
+    #music #musicYoutube{display:none !important;}
+    #music .music-nav{
+      width:46px !important;
+      height:46px !important;
+      margin:0 !important;
+      order:0 !important;
+      display:grid !important;
+      place-items:center !important;
+      border-radius:16px !important;
+      background:linear-gradient(180deg,#112f50,#071827) !important;
+      border:1px solid rgba(255,226,168,.68) !important;
+      color:#ffe8b0 !important;
+      box-shadow:0 12px 24px rgba(7,20,34,.26) !important;
+      font-size:28px !important;
+      transition:.22s ease;
+    }
+    #music .music-nav:hover{transform:translateY(-2px);filter:brightness(1.08);}
+    #music .music-bar{
+      margin:16px 0 0 !important;
+      height:9px !important;
+      border-radius:999px !important;
+      background:rgba(53,42,36,.14) !important;
+      overflow:hidden;
+    }
+    #music .music-bar span{
+      background:linear-gradient(90deg,#0b2744,#c99e5d,#ffe1a1) !important;
+    }
+    #music .music-actions{
+      margin:16px 0 0 !important;
+      display:flex !important;
+      gap:10px !important;
+      justify-content:flex-start !important;
+      flex-wrap:wrap;
+    }
+    #music .music-actions button{
+      min-height:42px;
+      padding:0 18px !important;
+      border-radius:999px !important;
+      background:linear-gradient(180deg,#0f3153,#061827) !important;
+      color:#fff0c8 !important;
+      border:1px solid rgba(255,226,168,.62) !important;
+      box-shadow:0 12px 24px rgba(7,20,34,.22) !important;
+      font-weight:900 !important;
+    }
+    #music .music-actions button:nth-child(2){
+      background:rgba(255,255,255,.58) !important;
+      color:#513b2c !important;
+      border-color:rgba(172,128,70,.36) !important;
+      box-shadow:0 10px 20px rgba(80,52,38,.13) !important;
+    }
+    #music .music-volume{
+      margin:14px 0 0 !important;
+      display:flex !important;
+      align-items:center;
+      gap:10px;
+      color:#614f45;
+      font-size:12px;
+      font-weight:900;
+    }
+    #music .music-volume input[type="range"]{
+      width:min(190px,100%);
+      accent-color:#0d2d4d;
+      cursor:pointer;
+    }
+    #music .music-mini-state{display:none !important;}
+    @media(max-width:620px){
+      #music .music-modern-layout{grid-template-columns:1fr;gap:14px;text-align:center;}
+      #music .music-player-head{grid-template-columns:44px minmax(0,1fr) 44px;}
+      #music .music-info{text-align:center !important;}
+      #music .music-info h3,#music #musicTitle{font-size:25px !important;text-align:center;}
+      #music .music-actions,#music .music-volume{justify-content:center !important;}
+    }
+  </style>
+
+  <script>
+    /* PATCH v25: final safe music system. Keeps existing code, but replaces button listeners cleanly. */
+    (function(){
+      function ready(fn){
+        if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", fn);
+        else fn();
+      }
+      ready(function(){
+        const musicCard = document.getElementById("music");
+        const audio = document.getElementById("academyAudio");
+        const disc = document.getElementById("musicDisc");
+        const info = document.querySelector("#music .music-info");
+        const bar = document.querySelector("#music .music-bar");
+        const actions = document.querySelector("#music .music-actions");
+        if(!musicCard || !audio || !disc || !info || !bar || !actions) return;
+
+        function freshButton(id){
+          const oldBtn = document.getElementById(id);
+          if(!oldBtn) return null;
+          const newBtn = oldBtn.cloneNode(true);
+          oldBtn.parentNode.replaceChild(newBtn, oldBtn);
+          return newBtn;
+        }
+
+        const playBtn = freshButton("musicPlayBtn");
+        const randomBtn = freshButton("musicRandomBtn");
+        const prevBtn = freshButton("musicPrevBtn");
+        const nextBtn = freshButton("musicNextBtn");
+        const progress = document.getElementById("musicProgress");
+        const cover = document.getElementById("musicCover");
+        const title = document.getElementById("musicTitle");
+        const link = document.getElementById("musicYoutube");
+
+        let volumeBox = document.getElementById("musicVolumeBox");
+        if(!volumeBox){
+          volumeBox = document.createElement("div");
+          volumeBox.className = "music-volume";
+          volumeBox.id = "musicVolumeBox";
+          volumeBox.innerHTML = '<span>เสียง</span><input id="musicVolume" type="range" min="0" max="100" value="70" aria-label="ปรับระดับเสียงเพลง"><span class="volume-value" id="musicVolumeValue">70%</span>';
+        }
+
+        let layout = document.querySelector("#music .music-modern-layout");
+        if(!layout){
+          layout = document.createElement("div");
+          layout.className = "music-modern-layout";
+          const coverColumn = document.createElement("div");
+          coverColumn.className = "music-cover-column";
+          const contentColumn = document.createElement("div");
+          contentColumn.className = "music-content-column";
+          const head = document.createElement("div");
+          head.className = "music-player-head";
+
+          musicCard.insertBefore(layout, musicCard.firstChild);
+          layout.appendChild(coverColumn);
+          layout.appendChild(contentColumn);
+          coverColumn.appendChild(disc);
+          contentColumn.appendChild(head);
+          if(prevBtn) head.appendChild(prevBtn);
+          head.appendChild(info);
+          if(nextBtn) head.appendChild(nextBtn);
+          contentColumn.appendChild(bar);
+          contentColumn.appendChild(actions);
+          contentColumn.appendChild(volumeBox);
+        }
+
+        const tracks = [
+          { title:"PLAVE-1232", file:"PLAVE-1232.mp3", video:"seNgeyf93p4", url:"https://www.youtube.com/watch?v=seNgeyf93p4" },
+          { title:"PLAVE-2", file:"Plave-2.mp3", video:"seIrfH92Zkk", url:"https://www.youtube.com/watch?v=seIrfH92Zkk" },
+          { title:"PLAVE-Lunar", file:"PLAVE-Lunar.mp3", video:"HzABxw3MoJ0", url:"https://www.youtube.com/watch?v=HzABxw3MoJ0" },
+          { title:"PLAVE-SO", file:"PLAVE-SO.mp3", video:"K-F7906Jq9U", url:"https://www.youtube.com/watch?v=K-F7906Jq9U" },
+          { title:"borrow", file:"borrow.mp3", video:"eDlYB_e5k3c", url:"https://www.youtube.com/watch?v=eDlYB_e5k3c" },
+          { title:"exoFirstSnow", file:"exoFirstSnow.mp3", video:"h0b4nw7NDhA", url:"https://www.youtube.com/watch?v=h0b4nw7NDhA" },
+          { title:"supernova", file:"supernova.mp3", video:"1o7zm815PqQ", url:"https://www.youtube.com/watch?v=1o7zm815PqQ" }
+        ];
+
+        let index = Math.floor(Math.random() * tracks.length);
+        audio.volume = 0.7;
+
+        function setUI(isPlaying){
+          if(playBtn) playBtn.textContent = isPlaying ? "❚❚ หยุดเพลง" : "▶ เล่นเพลง";
+          disc.classList.toggle("paused", !isPlaying);
+        }
+
+        function loadTrack(nextIndex, autoplay){
+          index = (nextIndex + tracks.length) % tracks.length;
+          const track = tracks[index];
+          audio.pause();
+          audio.src = encodeURI("./" + track.file);
+          audio.load();
+          if(title) title.textContent = track.title;
+          if(cover){
+            cover.src = "https://img.youtube.com/vi/" + track.video + "/hqdefault.jpg";
+            cover.alt = "หน้าปกเพลง " + track.title;
+          }
+          if(link) link.href = track.url;
+          if(progress) progress.style.width = "0%";
+          setUI(false);
+          if(autoplay) playTrack();
+        }
+
+        function playTrack(){
+          const promise = audio.play();
+          if(promise && typeof promise.then === "function"){
+            promise.then(function(){ setUI(true); }).catch(function(){ setUI(false); });
+          }else{
+            setUI(true);
+          }
+        }
+
+        function pauseTrack(){
+          audio.pause();
+          setUI(false);
+        }
+
+        function randomTrack(autoplay){
+          let next = Math.floor(Math.random() * tracks.length);
+          if(tracks.length > 1){
+            while(next === index) next = Math.floor(Math.random() * tracks.length);
+          }
+          loadTrack(next, autoplay);
+        }
+
+        if(playBtn) playBtn.onclick = function(event){
+          event.preventDefault();
+          audio.paused ? playTrack() : pauseTrack();
+        };
+        if(prevBtn) prevBtn.onclick = function(event){
+          event.preventDefault();
+          loadTrack(index - 1, true);
+        };
+        if(nextBtn) nextBtn.onclick = function(event){
+          event.preventDefault();
+          loadTrack(index + 1, true);
+        };
+        if(randomBtn) randomBtn.onclick = function(event){
+          event.preventDefault();
+          randomTrack(true);
+        };
+
+        const volumeInput = document.getElementById("musicVolume");
+        const volumeValue = document.getElementById("musicVolumeValue");
+        if(volumeInput){
+          volumeInput.oninput = function(){
+            const value = Number(volumeInput.value || 70);
+            audio.volume = value / 100;
+            if(volumeValue) volumeValue.textContent = value + "%";
+          };
+        }
+
+        audio.ontimeupdate = function(){
+          if(progress && audio.duration){
+            progress.style.width = Math.min((audio.currentTime / audio.duration) * 100, 100) + "%";
+          }
+        };
+        audio.onplay = function(){ setUI(true); };
+        audio.onpause = function(){ if(!audio.ended) setUI(false); };
+        audio.onended = function(){ randomTrack(true); };
+        audio.onerror = function(){ setUI(false); };
+        loadTrack(index, false);
+
+        document.querySelectorAll(".nav a").forEach(function(a){
+          const text = (a.textContent || "").trim();
+          if(text.includes("ร้านค้า")) a.href = "./shop.html";
+          if(text.includes("โซน")) a.href = "./zone.html";
+          if(text.includes("สมัครบัตร")) a.href = "./register.html";
+        });
       });
     })();
   </script>
