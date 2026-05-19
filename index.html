@@ -224,7 +224,7 @@
       font-family:Georgia,serif;
       pointer-events:none;
     }
-    .music-top{display:flex;align-items:center;gap:15px;position:relative;z-index:2}
+    .music-top{display:flex;align-items:center;justify-content:center;gap:16px;position:relative;z-index:2}
     .disc{
       width:74px;height:74px;border-radius:50%;
       background:radial-gradient(circle,#ffe8b2 0 11%,#0a1c31 12% 17%,#d8b87a 18% 20%,#172b44 21% 100%);
@@ -244,13 +244,27 @@
       box-shadow:0 0 0 2px rgba(255,232,178,.45);
     }
     @keyframes spinDisc{to{transform:rotate(360deg)}}
-    .music-card h3{font-family:"Playfair Display",serif;font-size:24px;color:#261c21;line-height:1.1}
-    .music-card p{margin-top:4px;color:#786a67;font-weight:800;font-size:13px;line-height:1.55}
-    .music-name{margin-top:16px;font-weight:900;color:#12263e;position:relative;z-index:2}
-    .music-link{display:inline-block;margin-top:6px;color:#815b2e;font-weight:900;text-decoration:none;position:relative;z-index:2}
+    .music-info{text-align:center;margin-top:14px;position:relative;z-index:2}
+    .music-card h3{font-family:"Playfair Display",serif;font-size:26px;color:#261c21;line-height:1.1;margin:0}
+    .music-link{display:inline-block;margin-top:8px;color:#815b2e;font-weight:900;text-decoration:none;position:relative;z-index:2;font-size:13px}
+    .music-nav{
+      width:42px;height:42px;border-radius:50%;
+      border:1px solid rgba(232,203,153,.55);
+      background:linear-gradient(180deg,#132b48,#07182b);
+      color:#ffe4a8;
+      font-size:30px;
+      line-height:1;
+      font-weight:900;
+      cursor:pointer;
+      box-shadow:0 12px 24px rgba(0,0,0,.20);
+      display:grid;
+      place-items:center;
+    }
+    .music-nav:hover{transform:translateY(-1px);filter:brightness(1.08)}
     .music-bar{margin-top:16px;height:8px;border-radius:999px;background:rgba(87,66,54,.16);overflow:hidden;position:relative;z-index:2}
     .music-bar span{display:block;width:0%;height:100%;border-radius:999px;background:linear-gradient(90deg,#102846,#d2ad73);transition:width .2s ease}
     .music-actions{display:flex;gap:10px;margin-top:14px;position:relative;z-index:2;flex-wrap:wrap}
+    .music-actions-center{justify-content:center}
     .music-actions button{border:1px solid rgba(176,137,82,.38);background:rgba(255,255,255,.58);border-radius:999px;padding:9px 14px;font-weight:900;color:#593f30;cursor:pointer}
     .music-actions button:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(57,35,28,.16)}
     .live-card h3{font-size:26px;color:#fff0c7;font-family:"Playfair Display",serif}
@@ -564,22 +578,22 @@
 
             <aside class="music-card" id="music">
               <div class="music-top">
+                <button class="music-nav" type="button" id="musicPrevBtn" aria-label="Previous song">‹</button>
                 <div class="disc paused" id="musicDisc">
                   <img id="musicCover" src="https://img.youtube.com/vi/seNgeyf93p4/hqdefault.jpg" alt="หน้าปกเพลง">
                 </div>
-                <div>
-                  <h3>Academy Music Box</h3>
-                  <p>สุ่มเพลงทุกครั้งที่เปิดหน้าเว็บ กดเล่นเพื่อฟังเพลงจากไฟล์ MP3 ใน repo</p>
-                </div>
+                <button class="music-nav" type="button" id="musicNextBtn" aria-label="Next song">›</button>
               </div>
-              <div class="music-name" id="musicTitle">กำลังสุ่มเพลง...</div>
-              <a class="music-link" id="musicYoutube" href="#" target="_blank" rel="noopener">เปิดหน้าปก / ลิงก์เพลง</a>
+              <div class="music-info">
+                <h3 id="musicTitle">PLAVE-1232</h3>
+                <a class="music-link" id="musicYoutube" href="https://www.youtube.com/watch?v=seNgeyf93p4" target="_blank" rel="noopener">เปิดหน้าปก / ลิงก์เพลง</a>
+              </div>
               <div class="music-bar"><span id="musicProgress"></span></div>
-              <div class="music-actions">
-                <button type="button" id="musicPlayBtn">▶ Play</button>
+              <div class="music-actions music-actions-center">
+                <button type="button" id="musicPlayBtn">▶ เล่นเพลง</button>
                 <button type="button" id="musicRandomBtn">สุ่มเพลงใหม่</button>
               </div>
-              <audio id="academyAudio" preload="metadata"></audio>
+              <audio id="academyAudio" preload="auto" playsinline></audio>
             </aside>
           </div>
         </div>
@@ -896,12 +910,16 @@
       const link = document.getElementById("musicYoutube");
       const playBtn = document.getElementById("musicPlayBtn");
       const randomBtn = document.getElementById("musicRandomBtn");
+      const prevBtn = document.getElementById("musicPrevBtn");
+      const nextBtn = document.getElementById("musicNextBtn");
       const progress = document.getElementById("musicProgress");
       const disc = document.getElementById("musicDisc");
       if(!audio || !cover || !title || !playBtn) return;
 
       let currentIndex = -1;
-      function getRandomTrack(){
+      let userPaused = false;
+
+      function randomIndex(){
         if(tracks.length === 1) return 0;
         let next = Math.floor(Math.random() * tracks.length);
         while(next === currentIndex){
@@ -909,11 +927,17 @@
         }
         return next;
       }
-      function loadTrack(index){
-        currentIndex = index;
+
+      function setPlayingUI(isPlaying){
+        playBtn.textContent = isPlaying ? "❚❚ หยุดเพลง" : "▶ เล่นเพลง";
+        if(disc) disc.classList.toggle("paused", !isPlaying);
+      }
+
+      function loadTrack(index, shouldPlay = true){
+        currentIndex = (index + tracks.length) % tracks.length;
         const track = tracks[currentIndex];
         audio.pause();
-        audio.src = track.file;
+        audio.src = encodeURI(track.file);
         audio.load();
         cover.src = `https://img.youtube.com/vi/${track.video}/hqdefault.jpg`;
         cover.alt = `หน้าปกเพลง ${track.title}`;
@@ -923,42 +947,61 @@
           link.textContent = "เปิดหน้าปก / ลิงก์เพลง";
         }
         if(progress) progress.style.width = "0%";
-        if(disc) disc.classList.add("paused");
-        playBtn.textContent = "▶ Play";
-      }
-      function togglePlay(){
-        if(audio.paused){
-          audio.play().then(()=>{
-            playBtn.textContent = "❚❚ Pause";
-            if(disc) disc.classList.remove("paused");
-          }).catch(()=>{
-            showMusicNotice();
-          });
-        }else{
-          audio.pause();
-          playBtn.textContent = "▶ Play";
-          if(disc) disc.classList.add("paused");
+        setPlayingUI(false);
+        if(shouldPlay && !userPaused){
+          playCurrentTrack();
         }
       }
-      function showMusicNotice(){
-        const modal = document.getElementById("feedbackModal");
-        if(!modal) return;
-        const titleEl = modal.querySelector("h3");
-        const textEl = modal.querySelector("p");
-        if(titleEl) titleEl.textContent = "ยังเล่นเพลงไม่ได้ค่ะ";
-        if(textEl) textEl.textContent = "ตรวจสอบว่าไฟล์ MP3 อยู่ใน repo และชื่อไฟล์ตรงตามที่ตั้งไว้ เช่น PLAVE-1232.mp3";
-        modal.classList.add("show");
-        modal.setAttribute("aria-hidden", "false");
+
+      function playCurrentTrack(){
+        audio.play().then(()=>{
+          userPaused = false;
+          setPlayingUI(true);
+        }).catch(()=>{
+          setPlayingUI(false);
+        });
       }
+
+      function togglePlay(){
+        if(audio.paused){
+          userPaused = false;
+          playCurrentTrack();
+        }else{
+          userPaused = true;
+          audio.pause();
+          setPlayingUI(false);
+        }
+      }
+
+      function nextTrack(){
+        userPaused = false;
+        loadTrack(currentIndex + 1, true);
+      }
+
+      function prevTrack(){
+        userPaused = false;
+        loadTrack(currentIndex - 1, true);
+      }
+
+      function randomTrack(){
+        userPaused = false;
+        loadTrack(randomIndex(), true);
+      }
+
       playBtn.addEventListener("click", togglePlay);
-      if(randomBtn){
-        randomBtn.addEventListener("click", ()=>loadTrack(getRandomTrack()));
-      }
+      if(randomBtn) randomBtn.addEventListener("click", randomTrack);
+      if(prevBtn) prevBtn.addEventListener("click", prevTrack);
+      if(nextBtn) nextBtn.addEventListener("click", nextTrack);
+
       audio.addEventListener("timeupdate", ()=>{
         if(!progress || !audio.duration) return;
         progress.style.width = `${Math.min((audio.currentTime / audio.duration) * 100, 100)}%`;
       });
-      audio.addEventListener("ended", ()=>loadTrack(getRandomTrack()));
+      audio.addEventListener("ended", ()=>loadTrack(randomIndex(), true));
+      audio.addEventListener("pause", ()=>{
+        if(audio.currentTime > 0 && !audio.ended) setPlayingUI(false);
+      });
+      audio.addEventListener("play", ()=>setPlayingUI(true));
 
       const feedbackFormForPopup = document.getElementById("studentFeedbackForm");
       if(feedbackFormForPopup){
@@ -972,7 +1015,11 @@
         }, true);
       }
 
-      loadTrack(getRandomTrack());
+      loadTrack(randomIndex(), true);
+      document.addEventListener("click", function firstMusicStart(){
+        if(audio.paused && !userPaused) playCurrentTrack();
+        document.removeEventListener("click", firstMusicStart);
+      }, { once:true });
     })();
   </script>
 </body>
