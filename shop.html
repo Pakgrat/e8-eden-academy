@@ -701,6 +701,605 @@
     @media(max-width:1080px){.shop-zone-shelf{grid-template-columns:repeat(4,minmax(0,1fr));}}
     @media(max-width:620px){.shop-zone-shelf{grid-template-columns:repeat(2,minmax(0,1fr));padding:18px;border-radius:30px}.shop-title-card{padding:28px 24px}.shop-zone-item{min-height:150px}.shop-zone-item img{width:76px;height:76px;}}
   </style>
+
+  <style>
+    /* PATCH v25: Real Academy Shop Layout */
+    .shop-hero{
+      padding:46px 0 18px;
+      color:#fff7ea;
+    }
+    .shop-store-hero{
+      width:min(1200px,100%);
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:minmax(0,1.1fr) minmax(310px,.9fr);
+      gap:18px;
+      align-items:stretch;
+    }
+    .shop-title-card.shop-real{
+      margin:0;
+      width:100%;
+      min-height:372px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      isolation:isolate;
+    }
+    .shop-title-card.shop-real::before{
+      content:"";
+      position:absolute;
+      inset:auto -90px -130px auto;
+      width:360px;
+      height:360px;
+      border-radius:50%;
+      background:radial-gradient(circle,rgba(255,226,168,.34),transparent 62%);
+      z-index:0;
+      pointer-events:none;
+    }
+    .shop-title-card.shop-real h2{
+      font-size:clamp(42px,5vw,76px);
+      letter-spacing:-.05em;
+    }
+    .shop-title-card.shop-real p{
+      max-width:760px;
+      font-size:15px;
+    }
+    .shop-hero-badges{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:22px;
+      position:relative;
+      z-index:2;
+    }
+    .shop-hero-badges span{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:36px;
+      padding:0 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.58);
+      border:1px solid rgba(185,144,80,.30);
+      color:#654935;
+      font-weight:900;
+      font-size:13px;
+    }
+    .shop-feature-card{
+      border-radius:38px;
+      padding:24px;
+      background:linear-gradient(180deg,rgba(5,17,31,.94),rgba(7,21,38,.90));
+      border:1px solid rgba(232,203,153,.56);
+      box-shadow:0 24px 70px rgba(0,0,0,.28);
+      color:#fff7ea;
+      overflow:hidden;
+      position:relative;
+    }
+    .shop-feature-card::after{
+      content:"E8";
+      position:absolute;
+      right:-10px;
+      bottom:-32px;
+      font-family:"Cinzel",serif;
+      font-size:152px;
+      font-weight:900;
+      color:rgba(255,232,173,.07);
+      line-height:1;
+    }
+    .feature-tag{
+      display:inline-flex;
+      border-radius:999px;
+      padding:8px 14px;
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(232,203,153,.25);
+      color:#ffe4a8;
+      font-weight:900;
+      font-size:12px;
+      letter-spacing:.08em;
+    }
+    .shop-feature-card h3{
+      margin-top:18px;
+      font-family:"Playfair Display","Noto Sans Thai",serif;
+      color:#fff0c7;
+      font-size:34px;
+      line-height:1.08;
+      position:relative;
+      z-index:2;
+    }
+    .shop-feature-card p{
+      margin-top:12px;
+      color:rgba(255,247,234,.74);
+      font-weight:800;
+      line-height:1.75;
+      position:relative;
+      z-index:2;
+    }
+    .shop-feature-row{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
+      margin-top:20px;
+      position:relative;
+      z-index:2;
+    }
+    .shop-feature-row div{
+      border-radius:22px;
+      padding:14px;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(232,203,153,.18);
+    }
+    .shop-feature-row b{
+      display:block;
+      font-family:"Cinzel",serif;
+      color:#ffe4a8;
+      font-size:23px;
+      line-height:1;
+    }
+    .shop-feature-row span{
+      display:block;
+      margin-top:7px;
+      color:rgba(255,247,234,.68);
+      font-size:12px;
+      font-weight:800;
+    }
+
+    .shop-zone-section.real-shop{
+      padding:22px 0 58px;
+    }
+    .shop-layout{
+      width:min(1320px,calc(100% - 32px));
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:310px minmax(0,1fr);
+      gap:18px;
+      align-items:start;
+    }
+    .shop-sidebar{
+      position:sticky;
+      top:116px;
+      display:grid;
+      gap:14px;
+    }
+    .shop-panel{
+      border-radius:34px;
+      background:linear-gradient(180deg,rgba(255,250,242,.94),rgba(239,220,193,.84));
+      border:1px solid rgba(232,203,153,.65);
+      box-shadow:0 20px 54px rgba(0,0,0,.20);
+      color:#2c2024;
+      overflow:hidden;
+    }
+    .shop-panel-inner{padding:22px;}
+    .shop-panel h3{
+      font-family:"Playfair Display","Noto Sans Thai",serif;
+      font-size:28px;
+      line-height:1.1;
+      color:#2b2024;
+      margin-bottom:12px;
+    }
+    .shop-panel p{
+      color:#786a67;
+      font-weight:800;
+      line-height:1.65;
+      font-size:13px;
+    }
+    .shop-search{
+      margin-top:14px;
+      width:100%;
+      border:1px solid rgba(190,150,91,.35);
+      border-radius:999px;
+      background:rgba(255,255,255,.66);
+      padding:13px 16px;
+      outline:none;
+      color:#34242a;
+      font-family:inherit;
+      font-weight:800;
+    }
+    .shop-search:focus{
+      border-color:rgba(20,45,74,.70);
+      box-shadow:0 0 0 4px rgba(20,45,74,.10);
+    }
+    .shop-category-list{
+      margin-top:14px;
+      display:grid;
+      gap:9px;
+    }
+    .category-btn{
+      border:1px solid rgba(190,150,91,.25);
+      background:rgba(255,255,255,.46);
+      color:#5d4637;
+      border-radius:18px;
+      min-height:46px;
+      padding:0 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      font-weight:950;
+      transition:.22s ease;
+    }
+    .category-btn:hover,
+    .category-btn.active{
+      background:linear-gradient(180deg,#17385e,#071a2e);
+      color:#fff2c8;
+      border-color:rgba(232,203,153,.56);
+      transform:translateY(-1px);
+    }
+    .category-btn small{
+      font-size:11px;
+      opacity:.72;
+    }
+
+    .zone-mini-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:8px;
+      margin-top:14px;
+    }
+    .zone-mini{
+      min-height:64px;
+      border-radius:18px;
+      display:grid;
+      place-items:center;
+      text-align:center;
+      border:1px solid rgba(255,255,255,.45);
+      box-shadow:0 10px 18px rgba(0,0,0,.08);
+      font-weight:950;
+      font-size:12px;
+      line-height:1.2;
+      color:#fff;
+      cursor:pointer;
+      transition:.2s ease;
+    }
+    .zone-mini:hover{transform:translateY(-2px);}
+    .zone-mini img{
+      width:30px;
+      height:30px;
+      object-fit:contain;
+      margin-bottom:2px;
+      filter:drop-shadow(0 6px 8px rgba(0,0,0,.14));
+    }
+    .zone-mini.e2,.zone-mini.e4,.zone-mini.e5,.zone-mini.e6,.zone-mini.e7,.zone-mini.e8{text-shadow:none;}
+    .cart-card{
+      background:linear-gradient(180deg,rgba(5,17,31,.94),rgba(7,21,38,.90));
+      color:#fff7ea;
+    }
+    .cart-card h3{color:#fff0c7;}
+    .cart-summary{
+      display:grid;
+      gap:10px;
+      margin-top:14px;
+    }
+    .cart-line{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:12px 14px;
+      border-radius:18px;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(232,203,153,.18);
+      color:rgba(255,247,234,.74);
+      font-weight:850;
+    }
+    .cart-line b{color:#ffe4a8;}
+    .checkout-btn{
+      width:100%;
+      margin-top:14px;
+      border:1px solid rgba(232,203,153,.60);
+      border-radius:999px;
+      min-height:50px;
+      background:linear-gradient(180deg,#ffe2a0,#c9984e);
+      color:#211820;
+      font-weight:950;
+      box-shadow:0 14px 28px rgba(0,0,0,.22);
+    }
+
+    .shop-content{
+      display:grid;
+      gap:18px;
+    }
+    .shop-toolbar{
+      border-radius:34px;
+      background:linear-gradient(135deg,rgba(255,249,238,.94),rgba(226,211,188,.84));
+      border:1px solid rgba(232,203,153,.72);
+      box-shadow:0 20px 54px rgba(0,0,0,.20);
+      padding:18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+      color:#2c2024;
+    }
+    .shop-toolbar h2{
+      font-family:"Playfair Display","Noto Sans Thai",serif;
+      font-size:34px;
+      line-height:1;
+      color:#2b2024;
+    }
+    .shop-toolbar p{
+      margin-top:7px;
+      color:#786a67;
+      font-weight:800;
+      font-size:13px;
+    }
+    .sort-pill{
+      min-height:42px;
+      border-radius:999px;
+      padding:0 15px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(255,255,255,.52);
+      border:1px solid rgba(190,150,91,.28);
+      color:#614b3a;
+      font-weight:950;
+      white-space:nowrap;
+    }
+    .promo-strip{
+      min-height:112px;
+      border-radius:34px;
+      padding:22px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      background:
+        radial-gradient(circle at 20% 10%,rgba(255,232,173,.28),transparent 30%),
+        linear-gradient(135deg,rgba(5,17,31,.94),rgba(22,55,90,.90));
+      border:1px solid rgba(232,203,153,.56);
+      box-shadow:0 20px 54px rgba(0,0,0,.22);
+      color:#fff7ea;
+      overflow:hidden;
+      position:relative;
+    }
+    .promo-strip::after{
+      content:"UNIFORM DROP";
+      position:absolute;
+      right:18px;
+      bottom:-8px;
+      font-family:"Cinzel",serif;
+      font-size:52px;
+      font-weight:900;
+      color:rgba(255,255,255,.06);
+      white-space:nowrap;
+    }
+    .promo-strip h3{
+      font-family:"Playfair Display","Noto Sans Thai",serif;
+      color:#fff0c7;
+      font-size:30px;
+      line-height:1.1;
+      position:relative;
+      z-index:2;
+    }
+    .promo-strip p{
+      margin-top:8px;
+      color:rgba(255,247,234,.72);
+      font-weight:800;
+      line-height:1.6;
+      position:relative;
+      z-index:2;
+    }
+    .promo-pill{
+      flex:0 0 auto;
+      border-radius:999px;
+      padding:12px 18px;
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(232,203,153,.28);
+      color:#ffe4a8;
+      font-weight:950;
+      position:relative;
+      z-index:2;
+    }
+
+    .product-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:16px;
+    }
+    .product-card{
+      border-radius:34px;
+      background:linear-gradient(180deg,rgba(255,250,242,.94),rgba(239,220,193,.84));
+      border:1px solid rgba(232,203,153,.65);
+      box-shadow:0 20px 54px rgba(0,0,0,.18);
+      overflow:hidden;
+      color:#2c2024;
+      transition:.24s ease;
+      position:relative;
+    }
+    .product-card:hover{
+      transform:translateY(-5px);
+      box-shadow:0 26px 60px rgba(0,0,0,.24);
+    }
+    .product-visual{
+      min-height:210px;
+      display:grid;
+      place-items:center;
+      position:relative;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at 50% 35%,rgba(255,255,255,.64),transparent 30%),
+        linear-gradient(135deg,#f6ead8,#d9c0a2);
+      border-bottom:1px solid rgba(190,150,91,.26);
+    }
+    .product-visual.dark{
+      background:
+        radial-gradient(circle at 50% 32%,rgba(255,233,185,.18),transparent 34%),
+        linear-gradient(135deg,#07182b,#183d63);
+    }
+    .product-visual.pink{
+      background:
+        radial-gradient(circle at 50% 32%,rgba(255,255,255,.50),transparent 34%),
+        linear-gradient(135deg,#ffe3ef,#eda0be);
+    }
+    .product-visual.gold{
+      background:
+        radial-gradient(circle at 50% 32%,rgba(255,255,255,.52),transparent 34%),
+        linear-gradient(135deg,#fff2c8,#d7a943);
+    }
+    .product-visual.purple{
+      background:
+        radial-gradient(circle at 50% 32%,rgba(255,255,255,.52),transparent 34%),
+        linear-gradient(135deg,#f0e1ff,#b894df);
+    }
+    .product-visual.blue{
+      background:
+        radial-gradient(circle at 50% 32%,rgba(255,255,255,.52),transparent 34%),
+        linear-gradient(135deg,#eaf8ff,#9ed7ef);
+    }
+    .product-visual::after{
+      content:"";
+      position:absolute;
+      width:170px;
+      height:170px;
+      border-radius:42px;
+      border:1px solid rgba(255,255,255,.34);
+      transform:rotate(12deg);
+    }
+    .product-icon{
+      width:96px;
+      height:96px;
+      border-radius:28px;
+      display:grid;
+      place-items:center;
+      background:rgba(255,255,255,.48);
+      border:1px solid rgba(255,255,255,.58);
+      box-shadow:0 18px 34px rgba(0,0,0,.16);
+      position:relative;
+      z-index:2;
+      font-size:46px;
+      font-weight:950;
+      color:#1b2633;
+      font-family:"Cinzel",serif;
+    }
+    .product-icon img{
+      width:74px;
+      height:74px;
+      object-fit:contain;
+      filter:drop-shadow(0 8px 12px rgba(0,0,0,.14));
+    }
+    .product-badge{
+      position:absolute;
+      left:14px;
+      top:14px;
+      z-index:3;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:30px;
+      padding:0 10px;
+      border-radius:999px;
+      background:rgba(6,24,45,.86);
+      color:#ffe4a8;
+      border:1px solid rgba(232,203,153,.45);
+      font-size:11px;
+      font-weight:950;
+    }
+    .product-body{
+      padding:18px;
+    }
+    .product-body h3{
+      color:#2b2024;
+      font-size:20px;
+      line-height:1.25;
+      margin-bottom:7px;
+    }
+    .product-desc{
+      color:#786a67;
+      font-weight:800;
+      font-size:13px;
+      line-height:1.6;
+      min-height:42px;
+    }
+    .product-meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:12px;
+    }
+    .meta-chip{
+      display:inline-flex;
+      align-items:center;
+      min-height:28px;
+      padding:0 10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.56);
+      border:1px solid rgba(190,150,91,.24);
+      color:#6a4d35;
+      font-size:12px;
+      font-weight:950;
+    }
+    .product-bottom{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-top:14px;
+    }
+    .price{
+      font-family:"Cinzel","Noto Sans Thai",serif;
+      color:#0b223c;
+      font-weight:900;
+      font-size:22px;
+      white-space:nowrap;
+    }
+    .add-btn{
+      border:1px solid rgba(232,203,153,.58);
+      border-radius:999px;
+      min-height:42px;
+      padding:0 15px;
+      background:linear-gradient(180deg,#17385e,#071a2e);
+      color:#fff2c8;
+      font-weight:950;
+      box-shadow:0 10px 18px rgba(0,0,0,.16);
+      transition:.2s ease;
+      white-space:nowrap;
+    }
+    .add-btn:hover{transform:translateY(-1px);filter:brightness(1.06);}
+    .product-card.hide{display:none;}
+
+    .shop-note.real-note{
+      width:100%;
+      margin:0;
+      border-radius:34px;
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:18px;
+      align-items:center;
+    }
+    .shop-note.real-note ul{
+      margin-top:12px;
+      padding-left:18px;
+      color:rgba(255,247,234,.74);
+      font-weight:800;
+      line-height:1.8;
+    }
+    .shop-note.real-note .btn{
+      white-space:nowrap;
+    }
+
+    @media(max-width:1120px){
+      .shop-store-hero{grid-template-columns:1fr;}
+      .shop-layout{grid-template-columns:1fr;}
+      .shop-sidebar{position:relative;top:auto;grid-template-columns:repeat(2,minmax(0,1fr));}
+      .cart-card{grid-column:1 / -1;}
+      .product-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+    }
+    @media(max-width:720px){
+      .shop-sidebar{grid-template-columns:1fr;}
+      .product-grid{grid-template-columns:1fr;}
+      .promo-strip,.shop-note.real-note{grid-template-columns:1fr;}
+      .shop-toolbar{align-items:flex-start;}
+      .shop-title-card.shop-real{min-height:auto;}
+      .product-visual{min-height:190px;}
+      .zone-mini-grid{grid-template-columns:repeat(4,1fr);}
+    }
+    @media(max-width:460px){
+      .zone-mini-grid{grid-template-columns:repeat(2,1fr);}
+      .shop-layout{width:min(100% - 22px,1320px);}
+      .shop-store-hero{gap:14px;}
+    }
+  </style>
+
 </head>
 <body>
 <header class="site-header">
@@ -724,62 +1323,233 @@
   <main>
     <section class="shop-hero">
       <div class="container">
-        <article class="shop-title-card">
-          <span class="kicker">ACADEMY SHOP</span>
-          <h2>ร้านค้าสถาบัน</h2>
-          <p>หมวดสินค้าประจำโซน E1-E8 สำหรับเลือกดูไอเท็ม เครื่องแบบ และของตกแต่งประจำโซน เรียงสีตามสัญลักษณ์ของสถาบัน</p>
-        </article>
+        <div class="shop-store-hero">
+          <article class="shop-title-card shop-real">
+            <span class="kicker">ACADEMY OFFICIAL STORE</span>
+            <h2>ร้านค้าสถาบัน<br><span>สำหรับนักเรียน E8</span></h2>
+            <p>หน้าร้านรวมเครื่องแบบ เสื้อผ้า อุปกรณ์เรียน ไอเท็มประจำโซน และของใช้ในสถาบันอาเคเดมี่ จัดหมวดให้เหมือนร้านค้าจริง กดเลือกหมวดหรือค้นหาสินค้าได้ทันที</p>
+            <div class="shop-hero-badges" aria-label="Shop service badges">
+              <span>Uniform Drop</span>
+              <span>Zone Collection E1-E8</span>
+              <span>Academy Goods</span>
+              <span>Student Essentials</span>
+            </div>
+          </article>
+
+          <aside class="shop-feature-card">
+            <span class="feature-tag">NEW TERM COLLECTION</span>
+            <h3>เปิดเทอมนี้ต้องมี<br>ครบทั้งชุดและอุปกรณ์</h3>
+            <p>คัดสินค้าแนวสถาบันหรูสำหรับนักเรียนใหม่ ทั้งเบลเซอร์ เนกไท เข็มกลัด กระเป๋า สมุด และไอเท็มประจำโซน</p>
+            <div class="shop-feature-row">
+              <div><b>24</b><span>รายการตัวอย่างสินค้า</span></div>
+              <div><b>E1-E8</b><span>แยกหมวดประจำโซน</span></div>
+              <div><b>NEW</b><span>คอลเลกชันเปิดเทอม</span></div>
+              <div><b>VIP</b><span>ของใช้พรีเมียม</span></div>
+            </div>
+          </aside>
+        </div>
       </div>
     </section>
 
-    <section class="shop-zone-section">
-      <div class="shop-zone-shelf">
-        <a class="shop-zone-item shop-e1" href="#shop-e1" aria-label="e1m โซนE1">
-          <img src="./e1m.png" alt="e1m โซนE1">
-          <span>e1m โซนE1</span>
-          <small>E1 Zone</small>
-        </a>
-        <a class="shop-zone-item shop-e2" href="#shop-e2" aria-label="e2m โซนE2">
-          <img src="./e2m.png" alt="e2m โซนE2">
-          <span>e2m โซนE2</span>
-          <small>E2 Zone</small>
-        </a>
-        <a class="shop-zone-item shop-e3" href="#shop-e3" aria-label="e3m โซนE3">
-          <img src="./e3m.png" alt="e3m โซนE3">
-          <span>e3m โซนE3</span>
-          <small>E3 Zone</small>
-        </a>
-        <a class="shop-zone-item shop-e4" href="#shop-e4" aria-label="e4m โซนE4">
-          <img src="./e4m.png" alt="e4m โซนE4">
-          <span>e4m โซนE4</span>
-          <small>E4 Zone</small>
-        </a>
-        <a class="shop-zone-item shop-e5" href="#shop-e5" aria-label="e5m โซนE5">
-          <img src="./e5m.png" alt="e5m โซนE5">
-          <span>e5m โซนE5</span>
-          <small>E5 Zone</small>
-        </a>
-        <a class="shop-zone-item shop-e6" href="#shop-e6" aria-label="e6m โซนE6">
-          <img src="./e6m.png" alt="e6m โซนE6">
-          <span>e6m โซนE6</span>
-          <small>E6 Zone</small>
-        </a>
-        <a class="shop-zone-item shop-e7" href="#shop-e7" aria-label="e7m โซนE7">
-          <img src="./e7m.png" alt="e7m โซนE7">
-          <span>e7m โซนE7</span>
-          <small>E7 Zone</small>
-        </a>
-        <a class="shop-zone-item shop-e8" href="#shop-e8" aria-label="e8m โซนE8">
-          <img src="./e8m.png" alt="e8m โซนE8">
-          <span>e8m โซนE8</span>
-          <small>E8 Zone</small>
-        </a>
-      </div>
+    <section class="shop-zone-section real-shop">
+      <div class="shop-layout">
+        <aside class="shop-sidebar" aria-label="ตัวกรองร้านค้า">
+          <article class="shop-panel">
+            <div class="shop-panel-inner">
+              <h3>ค้นหาสินค้า</h3>
+              <p>พิมพ์ชื่อสินค้า หรือเลือกหมวดเพื่อดูของในร้านค้าสถาบัน</p>
+              <input class="shop-search" id="shopSearch" type="search" placeholder="ค้นหา เช่น blazer, tie, bag">
+              <div class="shop-category-list" aria-label="หมวดสินค้า">
+                <button class="category-btn active" data-filter="all">ทั้งหมด <small>All</small></button>
+                <button class="category-btn" data-filter="uniform">เครื่องแบบ <small>Uniform</small></button>
+                <button class="category-btn" data-filter="sport">ชุดพละ / กีฬา <small>Sport</small></button>
+                <button class="category-btn" data-filter="accessory">เครื่องประดับ <small>Accessory</small></button>
+                <button class="category-btn" data-filter="equipment">อุปกรณ์เรียน <small>Equipment</small></button>
+                <button class="category-btn" data-filter="dorm">ของใช้หอพัก <small>Dorm</small></button>
+              </div>
+            </div>
+          </article>
 
-      <article class="shop-note">
-        <h3>หมวดร้านค้าประจำโซน</h3>
-        <p>ไฟล์รูปหมวดใช้ชื่อ e1m.png ถึง e8m.png วางไว้โฟลเดอร์เดียวกับ shop.html ได้เลยค่ะ แต่ละหมวดมีคำต่อท้ายเป็น โซนE1 ถึง โซนE8 ตามที่กำหนด</p>
-      </article>
+          <article class="shop-panel">
+            <div class="shop-panel-inner">
+              <h3>หมวดประจำโซน</h3>
+              <p>โซน E1-E8 สำหรับไอเท็มพิเศษของแต่ละเขตในสถาบัน</p>
+              <div class="zone-mini-grid">
+                <button class="zone-mini e1" data-zone="E1"><img src="./e1m.png" alt="">E1</button>
+                <button class="zone-mini e2" data-zone="E2"><img src="./e2m.png" alt="">E2</button>
+                <button class="zone-mini e3" data-zone="E3"><img src="./e3m.png" alt="">E3</button>
+                <button class="zone-mini e4" data-zone="E4"><img src="./e4m.png" alt="">E4</button>
+                <button class="zone-mini e5" data-zone="E5"><img src="./e5m.png" alt="">E5</button>
+                <button class="zone-mini e6" data-zone="E6"><img src="./e6m.png" alt="">E6</button>
+                <button class="zone-mini e7" data-zone="E7"><img src="./e7m.png" alt="">E7</button>
+                <button class="zone-mini e8" data-zone="E8"><img src="./e8m.png" alt="">E8</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="shop-panel cart-card">
+            <div class="shop-panel-inner">
+              <h3>ตะกร้าสินค้า</h3>
+              <p>ตัวอย่างระบบหน้าร้าน ยังไม่เชื่อมระบบชำระเงินจริง</p>
+              <div class="cart-summary">
+                <div class="cart-line"><span>จำนวนสินค้า</span><b id="cartCount">0 ชิ้น</b></div>
+                <div class="cart-line"><span>ยอดรวม</span><b id="cartTotal">฿0</b></div>
+              </div>
+              <button class="checkout-btn" type="button">ตรวจสอบรายการ</button>
+            </div>
+          </article>
+        </aside>
+
+        <div class="shop-content">
+          <div class="shop-toolbar">
+            <div>
+              <h2>สินค้าแนะนำ</h2>
+              <p id="shopResultText">แสดงสินค้าทั้งหมดใน Academy Official Store</p>
+            </div>
+            <span class="sort-pill">เรียงตาม: New Arrival</span>
+          </div>
+
+          <article class="promo-strip">
+            <div>
+              <h3>Premium Uniform Set</h3>
+              <p>เซ็ตเครื่องแบบหลักของสถาบัน โทนหรู ใส่ได้ทั้งงานพิธี ห้องเรียน และกิจกรรมโซน</p>
+            </div>
+            <span class="promo-pill">เปิดคอลเลกชันใหม่</span>
+          </article>
+
+          <div class="product-grid" id="productGrid">
+            <article class="product-card" data-category="uniform" data-zone="ALL" data-name="academy blazer เสื้อเบลเซอร์สถาบัน">
+              <div class="product-visual dark">
+                <span class="product-badge">UNIFORM</span>
+                <div class="product-icon">B</div>
+              </div>
+              <div class="product-body">
+                <h3>Academy Blazer</h3>
+                <p class="product-desc">เสื้อเบลเซอร์สถาบันทรงพรีเมียม สำหรับชุดนักเรียนทางการ</p>
+                <div class="product-meta"><span class="meta-chip">Navy Gold</span><span class="meta-chip">Formal</span></div>
+                <div class="product-bottom"><b class="price" data-price="2890">฿2,890</b><button class="add-btn">เพิ่มลงตะกร้า</button></div>
+              </div>
+            </article>
+
+            <article class="product-card" data-category="uniform accessory" data-zone="ALL" data-name="zone tie set เนกไทประจำโซน">
+              <div class="product-visual gold">
+                <span class="product-badge">ZONE SET</span>
+                <div class="product-icon">T</div>
+              </div>
+              <div class="product-body">
+                <h3>Zone Tie Set</h3>
+                <p class="product-desc">เนกไทประจำโซน ใช้คู่กับเบลเซอร์หรือเสื้อเชิ้ตสถาบัน</p>
+                <div class="product-meta"><span class="meta-chip">E1-E8</span><span class="meta-chip">Accessory</span></div>
+                <div class="product-bottom"><b class="price" data-price="690">฿690</b><button class="add-btn">เพิ่มลงตะกร้า</button></div>
+              </div>
+            </article>
+
+            <article class="product-card" data-category="sport uniform" data-zone="E3" data-name="training jersey ชุดพละสถาบัน">
+              <div class="product-visual blue">
+                <span class="product-badge">SPORT</span>
+                <div class="product-icon">J</div>
+              </div>
+              <div class="product-body">
+                <h3>Training Jersey</h3>
+                <p class="product-desc">ชุดพละเนื้อผ้ายืดหยุ่น สำหรับคลาสกีฬาและกิจกรรมกลางแจ้ง</p>
+                <div class="product-meta"><span class="meta-chip">Breathable</span><span class="meta-chip">E3</span></div>
+                <div class="product-bottom"><b class="price" data-price="1290">฿1,290</b><button class="add-btn">เพิ่มลงตะกร้า</button></div>
+              </div>
+            </article>
+
+            <article class="product-card" data-category="accessory" data-zone="E1" data-name="gold jaguar brooch เข็มกลัดเสือจากัวร์ทอง">
+              <div class="product-visual gold">
+                <span class="product-badge">LIMITED</span>
+                <div class="product-icon"><img src="./e1m.png" alt=""></div>
+              </div>
+              <div class="product-body">
+                <h3>Gold Jaguar Brooch</h3>
+                <p class="product-desc">เข็มกลัดประดับปกเสื้อ โทนทองหรูสำหรับลุคสถาบันระดับพรีเมียม</p>
+                <div class="product-meta"><span class="meta-chip">Gold</span><span class="meta-chip">E1</span></div>
+                <div class="product-bottom"><b class="price" data-price="1490">฿1,490</b><button class="add-btn">เพิ่มลงตะกร้า</button></div>
+              </div>
+            </article>
+
+            <article class="product-card" data-category="equipment" data-zone="ALL" data-name="eden student bag กระเป๋านักเรียน">
+              <div class="product-visual dark">
+                <span class="product-badge">BAG</span>
+                <div class="product-icon">A</div>
+              </div>
+              <div class="product-body">
+                <h3>Eden Student Bag</h3>
+                <p class="product-desc">กระเป๋านักเรียนทรงเรียบหรู มีช่องใส่บัตรและอุปกรณ์เรียน</p>
+                <div class="product-meta"><span class="meta-chip">Leather Look</span><span class="meta-chip">Daily</span></div>
+                <div class="product-bottom"><b class="price" data-price="1690">฿1,690</b><button class="add-btn">เพิ่มลงตะกร้า</button></div>
+              </div>
+            </article>
+
+            <article class="product-card" data-category="equipment" data-zone="ALL" data-name="black academy notebook สมุดสถาบัน">
+              <div class="product-visual">
+                <span class="product-badge">STUDY</span>
+                <div class="product-icon">N</div>
+              </div>
+              <div class="product-body">
+                <h3>Black Academy Notebook</h3>
+                <p class="product-desc">สมุดโน้ตปกแข็งลายตราสถาบัน สำหรับคลาสเรียนและประชุมโซน</p>
+                <div class="product-meta"><span class="meta-chip">Hard Cover</span><span class="meta-chip">Stationery</span></div>
+                <div class="product-bottom"><b class="price" data-price="350">฿350</b><button class="add-btn">เพิ่มลงตะกร้า</button></div>
+              </div>
+            </article>
+
+            <article class="product-card" data-category="accessory" data-zone="E8" data-name="e8 card holder ซองบัตรนักเรียน">
+              <div class="product-visual gold">
+                <span class="product-badge">E8 ITEM</span>
+                <div class="product-icon"><img src="./e8m.png" alt=""></div>
+              </div>
+              <div class="product-body">
+                <h3>E8 Card Holder</h3>
+                <p class="product-desc">ซองบัตรนักเรียนลาย E8 โทนทอง เหมาะกับนักเรียนระดับพิเศษ</p>
+                <div class="product-meta"><span class="meta-chip">Card</span><span class="meta-chip">E8</span></div>
+                <div class="product-bottom"><b class="price" data-price="790">฿790</b><button class="add-btn">เพิ่มลงตะกร้า</button></div>
+              </div>
+            </article>
+
+            <article class="product-card" data-category="dorm" data-zone="E6" data-name="dorm blanket ผ้าห่มหอพัก">
+              <div class="product-visual pink">
+                <span class="product-badge">DORM</span>
+                <div class="product-icon"><img src="./e6m.png" alt=""></div>
+              </div>
+              <div class="product-body">
+                <h3>Dorm Blanket</h3>
+                <p class="product-desc">ผ้าห่มหอพักเนื้อนุ่ม โทนอ่อนสำหรับห้องพักนักเรียนประจำ</p>
+                <div class="product-meta"><span class="meta-chip">Soft Touch</span><span class="meta-chip">E6</span></div>
+                <div class="product-bottom"><b class="price" data-price="990">฿990</b><button class="add-btn">เพิ่มลงตะกร้า</button></div>
+              </div>
+            </article>
+
+            <article class="product-card" data-category="accessory" data-zone="E5" data-name="zone pin collection เข็มกลัดประจำโซน">
+              <div class="product-visual purple">
+                <span class="product-badge">PIN</span>
+                <div class="product-icon"><img src="./e5m.png" alt=""></div>
+              </div>
+              <div class="product-body">
+                <h3>Zone Pin Collection</h3>
+                <p class="product-desc">ชุดเข็มกลัดสะสมประจำโซน สำหรับติดกระเป๋าหรือปกเสื้อ</p>
+                <div class="product-meta"><span class="meta-chip">Collectible</span><span class="meta-chip">E5</span></div>
+                <div class="product-bottom"><b class="price" data-price="520">฿520</b><button class="add-btn">เพิ่มลงตะกร้า</button></div>
+              </div>
+            </article>
+          </div>
+
+          <article class="shop-note real-note">
+            <div>
+              <h3>หมายเหตุสำหรับหน้าเว็บ</h3>
+              <p>หน้านี้เป็นโครงร้านค้าแบบ Static สำหรับ GitHub Pages กดเพิ่มตะกร้าได้ในหน้าเว็บ แต่ยังไม่เชื่อมระบบหลังบ้านหรือชำระเงินจริง</p>
+              <ul>
+                <li>รูปไอคอนโซนยังใช้ไฟล์เดิม e1m.png ถึง e8m.png</li>
+                <li>เมนูด้านบนยังลิงก์ไป index / board / shop / zone / register ตามเดิม</li>
+                <li>เพิ่มสินค้าได้ด้วยการคัดลอกการ์ดสินค้าแล้วแก้ชื่อ ราคา และหมวด</li>
+              </ul>
+            </div>
+            <a class="btn primary" href="./register.html">สมัครบัตรก่อนซื้อ</a>
+          </article>
+        </div>
+      </div>
     </section>
   </main>
 
@@ -805,5 +1575,90 @@
       });
     })();
   </script>
+
+  <script>
+    /* PATCH v25: shop filtering + simple cart preview */
+    (function(){
+      const cards = Array.from(document.querySelectorAll(".product-card"));
+      const filterButtons = Array.from(document.querySelectorAll(".category-btn"));
+      const zoneButtons = Array.from(document.querySelectorAll(".zone-mini"));
+      const searchInput = document.getElementById("shopSearch");
+      const resultText = document.getElementById("shopResultText");
+      const cartCount = document.getElementById("cartCount");
+      const cartTotal = document.getElementById("cartTotal");
+      let activeFilter = "all";
+      let activeZone = "ALL";
+      let count = 0;
+      let total = 0;
+
+      function money(value){
+        return "฿" + value.toLocaleString("th-TH");
+      }
+
+      function applyFilter(){
+        const term = (searchInput && searchInput.value ? searchInput.value : "").trim().toLowerCase();
+        let visible = 0;
+
+        cards.forEach(function(card){
+          const category = (card.dataset.category || "").toLowerCase();
+          const zone = (card.dataset.zone || "ALL").toUpperCase();
+          const name = (card.dataset.name || "").toLowerCase();
+          const matchCategory = activeFilter === "all" || category.includes(activeFilter);
+          const matchZone = activeZone === "ALL" || zone === activeZone || zone === "ALL";
+          const matchSearch = !term || name.includes(term);
+          const show = matchCategory && matchZone && matchSearch;
+          card.classList.toggle("hide", !show);
+          if(show) visible++;
+        });
+
+        if(resultText){
+          const zoneText = activeZone === "ALL" ? "ทุกโซน" : "โซน " + activeZone;
+          resultText.textContent = "แสดง " + visible + " รายการ • หมวด " + (activeFilter === "all" ? "ทั้งหมด" : activeFilter) + " • " + zoneText;
+        }
+      }
+
+      filterButtons.forEach(function(btn){
+        btn.addEventListener("click", function(){
+          filterButtons.forEach(function(item){ item.classList.remove("active"); });
+          btn.classList.add("active");
+          activeFilter = btn.dataset.filter || "all";
+          activeZone = "ALL";
+          applyFilter();
+        });
+      });
+
+      zoneButtons.forEach(function(btn){
+        btn.addEventListener("click", function(){
+          activeZone = btn.dataset.zone || "ALL";
+          filterButtons.forEach(function(item){ item.classList.remove("active"); });
+          const allBtn = document.querySelector('.category-btn[data-filter="all"]');
+          if(allBtn) allBtn.classList.add("active");
+          activeFilter = "all";
+          applyFilter();
+        });
+      });
+
+      if(searchInput){
+        searchInput.addEventListener("input", applyFilter);
+      }
+
+      document.querySelectorAll(".add-btn").forEach(function(btn){
+        btn.addEventListener("click", function(){
+          const card = btn.closest(".product-card");
+          const priceNode = card ? card.querySelector(".price") : null;
+          const price = priceNode ? Number(priceNode.dataset.price || 0) : 0;
+          count += 1;
+          total += price;
+          if(cartCount) cartCount.textContent = count + " ชิ้น";
+          if(cartTotal) cartTotal.textContent = money(total);
+          btn.textContent = "เพิ่มแล้ว ✓";
+          window.setTimeout(function(){ btn.textContent = "เพิ่มลงตะกร้า"; }, 900);
+        });
+      });
+
+      applyFilter();
+    })();
+  </script>
+
 </body>
 </html>
