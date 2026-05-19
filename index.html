@@ -102,7 +102,7 @@
     .nav{
       display:flex;
       align-items:center;
-      justify-content:flex-end;
+      justify-content:center;
       gap:10px;
       flex-wrap:wrap;
     }
@@ -223,6 +223,8 @@
     .section-head p{margin-top:12px;color:rgba(255,247,234,.78);font-weight:700}
 
     .slider-shell{
+      width:min(760px,100%);
+      margin:0 auto;
       border-radius:42px;background:linear-gradient(180deg,rgba(5,17,31,.94),rgba(7,21,38,.90));
       border:1px solid rgba(232,203,153,.52);box-shadow:var(--shadow);padding:28px;color:#fff7ea;overflow:hidden;
     }
@@ -230,10 +232,17 @@
     .slider-top h2{font-family:"Playfair Display",serif;font-size:30px;color:#fff0c7}
     .counter{padding:10px 16px;border-radius:999px;border:1px solid rgba(232,203,153,.52);color:#ffe7ad;font-weight:900}
     .slide-stage{
-      position:relative;height:clamp(440px,52vw,720px);border-radius:30px;overflow:hidden;
-      border:1px solid rgba(232,203,153,.35);background:#111;
+      position:relative;
+      width:100%;
+      height:clamp(680px,82vw,980px);
+      border-radius:30px;
+      overflow:hidden;
+      border:1px solid rgba(232,203,153,.35);
+      background:radial-gradient(circle at 50% 30%,rgba(255,236,198,.12),rgba(4,13,25,.94));
+      display:grid;
+      place-items:center;
     }
-    .slide-stage img{width:100%;height:100%;object-fit:cover;transition:opacity .35s ease,transform .6s ease}
+    .slide-stage img{width:100%;height:100%;object-fit:contain;transition:opacity .35s ease,transform .6s ease}
     .slide-stage:hover img{transform:scale(1.02)}
     .slide-btn{position:absolute;top:50%;transform:translateY(-50%);width:54px;height:54px;border-radius:50%;border:1px solid rgba(232,203,153,.54);background:rgba(5,17,31,.78);color:#ffe7ad;font-size:32px;z-index:3}
     .slide-btn.prev{left:18px}.slide-btn.next{right:18px}
@@ -279,10 +288,10 @@
     footer{text-align:center;color:rgba(255,247,234,.74);font-weight:700;padding:38px 0 56px;text-shadow:0 2px 14px rgba(0,0,0,.38)}
 
     @media(max-width:980px){
-      .hero-grid{grid-template-columns:1fr}.header-inner{align-items:flex-start;flex-direction:column}.nav{justify-content:flex-start}.zone-grid{grid-template-columns:repeat(4,1fr)}.tag-grid{grid-template-columns:repeat(2,1fr)}.post{grid-template-columns:62px 1fr}.post-side{grid-column:2;text-align:left}.register-panel{flex-direction:column;align-items:flex-start}.brand-logo{width:68px;height:68px}.slide-stage{height:520px}
+      .hero-grid{grid-template-columns:1fr}.header-inner{align-items:flex-start;flex-direction:column}.nav{justify-content:flex-start}.zone-grid{grid-template-columns:repeat(4,1fr)}.tag-grid{grid-template-columns:repeat(2,1fr)}.post{grid-template-columns:62px 1fr}.post-side{grid-column:2;text-align:left}.register-panel{flex-direction:column;align-items:flex-start}.brand-logo{width:68px;height:68px}.slide-stage{height:760px}
     }
     @media(max-width:620px){
-      .container{width:min(100% - 24px,1320px)}.hero-card{padding:34px 24px}.live-card{padding:24px}.zone-grid{grid-template-columns:repeat(2,1fr)}.tag-grid{grid-template-columns:1fr}.post{grid-template-columns:1fr}.post-icon{width:54px;height:54px}.slide-stage{height:420px}.slide-btn{width:44px;height:44px}.brand h1{font-size:28px}
+      .container{width:min(100% - 24px,1320px)}.hero-card{padding:34px 24px}.live-card{padding:24px}.zone-grid{grid-template-columns:repeat(2,1fr)}.tag-grid{grid-template-columns:1fr}.post{grid-template-columns:1fr}.post-icon{width:54px;height:54px}.slide-stage{height:620px}.slide-btn{width:44px;height:44px}.brand h1{font-size:28px}
     }
   </style>
 </head>
@@ -292,9 +301,9 @@
       <button class="modal-close" type="button" id="closeModal">×</button>
       <img src="./eden.png" alt="E8’s Eden Academy Logo">
       <h2>ยินดีต้อนรับสู่<br>E8’s Eden Academy</h2>
-      <p>กรุณาตรวจสอบตารางเรียนแต่ละโซนของท่านด้วยค่ะ และสามารถสมัครบัตรนักเรียนเพื่อเข้าใช้ระบบสมาชิกได้</p>
+      <p>กรุณาตรวจสอบตารางเรียนแต่ละโซนของท่านด้วยค่ะ และสามารถสมัครบัตรสถาบันเพื่อเข้าใช้ระบบสมาชิกได้</p>
       <div class="modal-actions">
-        <a class="btn primary" href="./register.html">สมัครบัตรนักเรียน</a>
+        <a class="btn primary" href="./register.html">สมัครบัตรสถาบัน</a>
         <button class="btn soft" type="button" id="enterSite">เข้าสู่หน้าเว็บ</button>
       </div>
     </div>
@@ -311,11 +320,10 @@
       </a>
       <nav class="nav">
         <a class="active" href="./index.html">หน้าหลัก</a>
-        <a href="#news">ข่าวสาร</a>
-        <a href="#tags">กิจกรรม</a>
-        <a href="#zones">โซนทั้ง 8</a>
-        <a href="./board.html">กระดานนักเรียน</a>
-        <a class="cta" href="./register.html">✦ สมัครบัตรนักเรียน</a>
+        <a href="./board.html">กระทู้</a>
+        <a href="#shop">ร้านค้า</a>
+        <a href="#zones">โซน</a>
+        <a class="cta" href="./register.html">✦ สมัครบัตรสถาบัน</a>
       </nav>
     </div>
   </header>
@@ -328,7 +336,7 @@
           <h2>เปิดระบบสมัคร<br><span>บัตรนักเรียนใหม่</span></h2>
           <p>นักเรียนสามารถสมัครบัตร เลือกโซนประจำตัว ตรวจสอบข่าวสาร และติดตามตารางเรียนของแต่ละโซนได้จากหน้าเว็บของสถาบัน</p>
           <div class="hero-actions">
-            <a class="btn primary" href="./register.html">สมัครบัตรนักเรียน</a>
+            <a class="btn primary" href="./register.html">สมัครบัตรสถาบัน</a>
             <a class="btn soft" href="#news">อ่านประกาศสถาบัน</a>
           </div>
         </article>
@@ -466,11 +474,27 @@
       </div>
     </section>
 
+    <section id="shop">
+      <div class="container">
+        <div class="section-head">
+          <h2>ร้านค้าสถาบัน</h2>
+          <p>พื้นที่สำหรับสินค้า เครื่องแบบ และไอเท็มประจำโซน เตรียมเปิดใช้งานในอนาคต</p>
+        </div>
+        <div class="register-panel">
+          <div>
+            <h2>Academy Shop</h2>
+            <p>หมวดร้านค้าจะเชื่อมกับระบบสมาชิกภายหลัง ตอนนี้สามารถใช้เป็นหน้ารวมประกาศสินค้าและไอเท็มของโรงเรียนได้ก่อนค่ะ</p>
+          </div>
+          <a class="btn soft" href="./board.html">ดูกระทู้ประกาศสินค้า</a>
+        </div>
+      </div>
+    </section>
+
     <section id="zones">
       <div class="container">
         <div class="section-head">
           <h2>สัญลักษณ์ประจำโซน</h2>
-          <p>เลือกโซนที่ตรงกับตัวตนของคุณหลังสมัครบัตรนักเรียน</p>
+          <p>เลือกโซนที่ตรงกับตัวตนของคุณหลังสมัครบัตรสถาบัน</p>
         </div>
         <div class="zone-panel">
           <div class="zone-grid">
@@ -491,10 +515,10 @@
       <div class="container">
         <div class="register-panel">
           <div>
-            <h2>สมัครบัตรนักเรียน</h2>
+            <h2>สมัครบัตรสถาบัน</h2>
             <p>พื้นที่นี้เตรียมไว้สำหรับเชื่อมระบบสมัครสมาชิกและตรวจสอบตารางเรียนของแต่ละโซนในอนาคต</p>
           </div>
-          <a class="btn primary" href="./register.html">ไปหน้าสมัครบัตรนักเรียน</a>
+          <a class="btn primary" href="./register.html">ไปหน้าสมัครบัตรสถาบัน</a>
         </div>
       </div>
     </section>
