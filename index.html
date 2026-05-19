@@ -209,34 +209,50 @@
     }
     .music-card{
       border-radius:32px;
-      background:linear-gradient(180deg,rgba(255,250,242,.90),rgba(239,220,193,.78));
+      background:linear-gradient(180deg,rgba(255,250,242,.92),rgba(239,220,193,.78));
       border:1px solid rgba(232,203,153,.58);
       box-shadow:0 20px 54px rgba(0,0,0,.20);
-      padding:20px;
+      padding:24px;
       color:#2c2024;
       overflow:hidden;
       position:relative;
     }
     .music-card::after{
       content:"♪";
-      position:absolute;right:24px;top:16px;
-      font-size:76px;color:rgba(126,88,52,.13);
+      position:absolute;right:22px;top:8px;
+      font-size:86px;color:rgba(126,88,52,.12);
       font-family:Georgia,serif;
+      pointer-events:none;
     }
-    .music-top{display:flex;align-items:center;gap:14px;position:relative;z-index:2}
+    .music-top{display:flex;align-items:center;gap:15px;position:relative;z-index:2}
     .disc{
-      width:58px;height:58px;border-radius:50%;
-      background:radial-gradient(circle,#ffe8b2 0 18%,#0a1c31 19% 48%,#d8b87a 49% 52%,#172b44 53% 100%);
-      box-shadow:0 12px 24px rgba(0,0,0,.22);
-      animation:spinDisc 7s linear infinite;
+      width:74px;height:74px;border-radius:50%;
+      background:radial-gradient(circle,#ffe8b2 0 11%,#0a1c31 12% 17%,#d8b87a 18% 20%,#172b44 21% 100%);
+      box-shadow:0 14px 28px rgba(0,0,0,.26);
+      animation:spinDisc 8s linear infinite;
+      overflow:hidden;
+      border:2px solid rgba(255,234,184,.72);
+      flex:0 0 auto;
+      position:relative;
+    }
+    .disc.paused{animation-play-state:paused}
+    .disc img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.96) contrast(1.05)}
+    .disc::after{
+      content:"";
+      position:absolute;inset:50%;width:15px;height:15px;transform:translate(-50%,-50%);
+      border-radius:50%;background:#fff7e8;border:3px solid rgba(13,31,52,.82);
+      box-shadow:0 0 0 2px rgba(255,232,178,.45);
     }
     @keyframes spinDisc{to{transform:rotate(360deg)}}
-    .music-card h3{font-family:"Playfair Display",serif;font-size:25px;color:#261c21;line-height:1.1}
-    .music-card p{margin-top:4px;color:#786a67;font-weight:800;font-size:13px}
-    .music-bar{margin-top:18px;height:8px;border-radius:999px;background:rgba(87,66,54,.16);overflow:hidden;position:relative;z-index:2}
-    .music-bar span{display:block;width:42%;height:100%;border-radius:999px;background:linear-gradient(90deg,#102846,#d2ad73)}
-    .music-actions{display:flex;gap:10px;margin-top:16px;position:relative;z-index:2;flex-wrap:wrap}
-    .music-actions button{border:1px solid rgba(176,137,82,.38);background:rgba(255,255,255,.46);border-radius:999px;padding:9px 14px;font-weight:900;color:#593f30}
+    .music-card h3{font-family:"Playfair Display",serif;font-size:24px;color:#261c21;line-height:1.1}
+    .music-card p{margin-top:4px;color:#786a67;font-weight:800;font-size:13px;line-height:1.55}
+    .music-name{margin-top:16px;font-weight:900;color:#12263e;position:relative;z-index:2}
+    .music-link{display:inline-block;margin-top:6px;color:#815b2e;font-weight:900;text-decoration:none;position:relative;z-index:2}
+    .music-bar{margin-top:16px;height:8px;border-radius:999px;background:rgba(87,66,54,.16);overflow:hidden;position:relative;z-index:2}
+    .music-bar span{display:block;width:0%;height:100%;border-radius:999px;background:linear-gradient(90deg,#102846,#d2ad73);transition:width .2s ease}
+    .music-actions{display:flex;gap:10px;margin-top:14px;position:relative;z-index:2;flex-wrap:wrap}
+    .music-actions button{border:1px solid rgba(176,137,82,.38);background:rgba(255,255,255,.58);border-radius:999px;padding:9px 14px;font-weight:900;color:#593f30;cursor:pointer}
+    .music-actions button:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(57,35,28,.16)}
     .live-card h3{font-size:26px;color:#fff0c7;font-family:"Playfair Display",serif}
     .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:16px}
     .stat{padding:14px 16px;border-radius:20px;background:rgba(255,255,255,.08);border:1px solid rgba(232,203,153,.20)}
@@ -480,7 +496,7 @@
       .hero-grid{grid-template-columns:1fr;width:min(760px,100%)}
       .official-layout{grid-template-columns:1fr;width:min(430px,100%);margin:auto}
       .feedback-box{min-height:auto}
-      .slide-stage{height.slide-stage{height:520px}-items:flex-start;flex-direction:column}.nav{justify-content:flex-start}.zone-grid{grid-template-columns:repeat(4,1fr)}.tag-grid{grid-template-columns:repeat(2,1fr)}.mini-grid{grid-template-columns:repeat(2,1fr)}.post{grid-template-columns:62px 1fr}.post-side{grid-column:2;text-align:left}.register-panel{flex-direction:column;align-items:flex-start}.brand-logo{width:68px;height:68px}.slide-stage{height:620px}
+      .slide-stage{height:560px}.header-inner{align-items:flex-start;flex-direction:column}.nav{justify-content:flex-start}.zone-grid{grid-template-columns:repeat(4,1fr)}.tag-grid{grid-template-columns:repeat(2,1fr)}.mini-grid{grid-template-columns:repeat(2,1fr)}.post{grid-template-columns:62px 1fr}.post-side{grid-column:2;text-align:left}.register-panel{flex-direction:column;align-items:flex-start}.brand-logo{width:68px;height:68px}.slide-stage{height:520px}
     }
     @media(max-width:620px){
       .container{width:min(100% - 24px,1320px)}.hero-card{padding:30px 24px}.live-card{padding:24px}.zone-grid{grid-template-columns:repeat(2,1fr)}.tag-grid{grid-template-columns:1fr}.post{grid-template-columns:1fr}.post-icon{width:54px;height:54px}.slide-stage{height:500px}.mini-grid{grid-template-columns:1fr}.feedback-stack{grid-template-rows:auto}.feedback-box{min-height:auto}.slide-btn{width:44px;height:44px}.brand h1{font-size:28px}
@@ -548,17 +564,22 @@
 
             <aside class="music-card" id="music">
               <div class="music-top">
-                <div class="disc"></div>
+                <div class="disc paused" id="musicDisc">
+                  <img id="musicCover" src="https://img.youtube.com/vi/seNgeyf93p4/hqdefault.jpg" alt="หน้าปกเพลง">
+                </div>
                 <div>
                   <h3>Academy Music Box</h3>
-                  <p>พื้นที่สำหรับเพลงธีมโรงเรียน / ลิงก์เพลง / ไฟล์เสียง</p>
+                  <p>สุ่มเพลงทุกครั้งที่เปิดหน้าเว็บ กดเล่นเพื่อฟังเพลงจากไฟล์ MP3 ใน repo</p>
                 </div>
               </div>
-              <div class="music-bar"><span></span></div>
+              <div class="music-name" id="musicTitle">กำลังสุ่มเพลง...</div>
+              <a class="music-link" id="musicYoutube" href="#" target="_blank" rel="noopener">เปิดหน้าปก / ลิงก์เพลง</a>
+              <div class="music-bar"><span id="musicProgress"></span></div>
               <div class="music-actions">
-                <button type="button">▶ Preview</button>
-                <button type="button">＋ Add Link</button>
+                <button type="button" id="musicPlayBtn">▶ Play</button>
+                <button type="button" id="musicRandomBtn">สุ่มเพลงใหม่</button>
               </div>
+              <audio id="academyAudio" preload="metadata"></audio>
             </aside>
           </div>
         </div>
@@ -620,8 +641,8 @@
 
     <div class="feedback-modal" id="feedbackModal" aria-hidden="true">
       <div class="feedback-popup">
-        <h3>ส่งข้อความแล้วค่ะ</h3>
-        <p>ขอบคุณสำหรับความคิดเห็นของคุณ ทางสถาบันได้รับข้อความเรียบร้อยแล้ว ✦</p>
+        <h3>ได้รับข้อความแล้วครับ</h3>
+        <p>ขอบคุณมากครับ สำหรับความคิดเห็นของคุณ ทางสถาบันได้รับข้อความเรียบร้อยแล้ว ✦</p>
         <button type="button" id="closeFeedbackModal">ตกลง</button>
       </div>
     </div>
@@ -857,6 +878,102 @@
         if(event.target === feedbackModal) closeFeedbackModal.click();
       });
     }
+
+    (function academyMusicBox(){
+      const tracks = [
+        { title:"PLAVE-1232", file:"PLAVE-1232.mp3", video:"seNgeyf93p4", url:"https://www.youtube.com/watch?v=seNgeyf93p4" },
+        { title:"PLAVE-2", file:"PLAVE-2.mp3", video:"seIrfH92Zkk", url:"https://www.youtube.com/watch?v=seIrfH92Zkk" },
+        { title:"PLAVE-Lunar", file:"PLAVE-Lunar.mp3", video:"HzABxw3MoJ0", url:"https://www.youtube.com/watch?v=HzABxw3MoJ0" },
+        { title:"PLAVE-SO", file:"PLAVE-SO.mp3", video:"K-F7906Jq9U", url:"https://www.youtube.com/watch?v=K-F7906Jq9U" },
+        { title:"borrow", file:"borrow.mp3", video:"eDlYB_e5k3c", url:"https://www.youtube.com/watch?v=eDlYB_e5k3c" },
+        { title:"exoFirstSnow", file:"exoFirstSnow.mp3", video:"h0b4nw7NDhA", url:"https://www.youtube.com/watch?v=h0b4nw7NDhA" },
+        { title:"supernova", file:"supernova.mp3", video:"1o7zm815PqQ", url:"https://www.youtube.com/watch?v=1o7zm815PqQ" }
+      ];
+
+      const audio = document.getElementById("academyAudio");
+      const cover = document.getElementById("musicCover");
+      const title = document.getElementById("musicTitle");
+      const link = document.getElementById("musicYoutube");
+      const playBtn = document.getElementById("musicPlayBtn");
+      const randomBtn = document.getElementById("musicRandomBtn");
+      const progress = document.getElementById("musicProgress");
+      const disc = document.getElementById("musicDisc");
+      if(!audio || !cover || !title || !playBtn) return;
+
+      let currentIndex = -1;
+      function getRandomTrack(){
+        if(tracks.length === 1) return 0;
+        let next = Math.floor(Math.random() * tracks.length);
+        while(next === currentIndex){
+          next = Math.floor(Math.random() * tracks.length);
+        }
+        return next;
+      }
+      function loadTrack(index){
+        currentIndex = index;
+        const track = tracks[currentIndex];
+        audio.pause();
+        audio.src = track.file;
+        audio.load();
+        cover.src = `https://img.youtube.com/vi/${track.video}/hqdefault.jpg`;
+        cover.alt = `หน้าปกเพลง ${track.title}`;
+        title.textContent = track.title;
+        if(link){
+          link.href = track.url;
+          link.textContent = "เปิดหน้าปก / ลิงก์เพลง";
+        }
+        if(progress) progress.style.width = "0%";
+        if(disc) disc.classList.add("paused");
+        playBtn.textContent = "▶ Play";
+      }
+      function togglePlay(){
+        if(audio.paused){
+          audio.play().then(()=>{
+            playBtn.textContent = "❚❚ Pause";
+            if(disc) disc.classList.remove("paused");
+          }).catch(()=>{
+            showMusicNotice();
+          });
+        }else{
+          audio.pause();
+          playBtn.textContent = "▶ Play";
+          if(disc) disc.classList.add("paused");
+        }
+      }
+      function showMusicNotice(){
+        const modal = document.getElementById("feedbackModal");
+        if(!modal) return;
+        const titleEl = modal.querySelector("h3");
+        const textEl = modal.querySelector("p");
+        if(titleEl) titleEl.textContent = "ยังเล่นเพลงไม่ได้ค่ะ";
+        if(textEl) textEl.textContent = "ตรวจสอบว่าไฟล์ MP3 อยู่ใน repo และชื่อไฟล์ตรงตามที่ตั้งไว้ เช่น PLAVE-1232.mp3";
+        modal.classList.add("show");
+        modal.setAttribute("aria-hidden", "false");
+      }
+      playBtn.addEventListener("click", togglePlay);
+      if(randomBtn){
+        randomBtn.addEventListener("click", ()=>loadTrack(getRandomTrack()));
+      }
+      audio.addEventListener("timeupdate", ()=>{
+        if(!progress || !audio.duration) return;
+        progress.style.width = `${Math.min((audio.currentTime / audio.duration) * 100, 100)}%`;
+      });
+      audio.addEventListener("ended", ()=>loadTrack(getRandomTrack()));
+
+      const feedbackFormForPopup = document.getElementById("studentFeedbackForm");
+      if(feedbackFormForPopup){
+        feedbackFormForPopup.addEventListener("submit", ()=>{
+          const modal = document.getElementById("feedbackModal");
+          if(!modal) return;
+          const titleEl = modal.querySelector("h3");
+          const textEl = modal.querySelector("p");
+          if(titleEl) titleEl.textContent = "ได้รับข้อความแล้วครับ";
+          if(textEl) textEl.textContent = "ขอบคุณมากครับ สำหรับความคิดเห็นของคุณ ทางสถาบันได้รับข้อความเรียบร้อยแล้ว ✦";
+        }, true);
+      }
+
+      loadTrack(getRandomTrack());
+    })();
   </script>
 </body>
 </html>
