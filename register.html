@@ -10,14 +10,15 @@
     :root{
       --navy:#071426;
       --navy2:#102641;
-      --cream:#f7ead8;
-      --paper:#fff8ef;
+      --cream:#fff3f6;
+      --paper:#fff8f9;
       --gold:#c8a05b;
-      --rose:#c9888b;
-      --line:rgba(139,96,50,.28);
-      --ink:#33242a;
-      --muted:#827067;
-      --shadow:0 22px 58px rgba(48,30,16,.18);
+      --rose:#d99ab0;
+      --rose2:#b96a86;
+      --line:rgba(186,112,137,.28);
+      --ink:#35242d;
+      --muted:#856a72;
+      --shadow:0 24px 62px rgba(91,45,62,.17);
       --zone:#d7bd8c;
       --zone-dark:#8f6a32;
       --zone-soft:#fff5de;
@@ -31,9 +32,9 @@
       color:var(--ink);
       overflow-x:hidden;
       background:
-        linear-gradient(180deg,rgba(7,20,38,.24),rgba(246,231,209,.76)),
+        linear-gradient(180deg,rgba(65,18,38,.10),rgba(255,232,238,.74)),
         url("./pink.png") center/cover fixed,
-        linear-gradient(135deg,#e7d2bd,#f8ead8 48%,#d3bba2);
+        linear-gradient(135deg,#f7d9e3,#fff1f5 48%,#e3bdc8);
     }
     body::before{
       content:"";
@@ -41,19 +42,19 @@
       inset:0;
       pointer-events:none;
       background:
-        radial-gradient(circle at 20% 8%,rgba(255,236,190,.35),transparent 25%),
-        radial-gradient(circle at 82% 12%,rgba(255,255,255,.22),transparent 28%),
-        linear-gradient(rgba(255,255,255,.12) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,.10) 1px,transparent 1px);
+        radial-gradient(circle at 20% 8%,rgba(255,232,240,.58),transparent 25%),
+        radial-gradient(circle at 82% 12%,rgba(255,255,255,.30),transparent 28%),
+        linear-gradient(rgba(255,255,255,.16) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.12) 1px,transparent 1px);
       background-size:auto,auto,56px 56px,56px 56px;
-      opacity:.92;
+      opacity:.94;
     }
     body::after{
       content:"";
       position:fixed;
       inset:0;
       pointer-events:none;
-      background:linear-gradient(90deg,rgba(7,20,38,.22),transparent 18%,transparent 82%,rgba(7,20,38,.18));
+      background:linear-gradient(90deg,rgba(89,33,56,.20),transparent 18%,transparent 82%,rgba(89,33,56,.14));
     }
     a{text-decoration:none;color:inherit}
     button,input,textarea,select{font-family:inherit}
@@ -64,9 +65,9 @@
       position:sticky;
       top:0;
       z-index:30;
-      background:linear-gradient(90deg,#312321 0%,#17263c 22%,#071426 64%,#071a33);
-      border-bottom:1px solid rgba(235,205,147,.5);
-      box-shadow:0 12px 30px rgba(4,12,24,.34);
+      background:linear-gradient(90deg,#35232b 0%,#46263a 22%,#071426 64%,#102641);
+      border-bottom:1px solid rgba(249,208,221,.58);
+      box-shadow:0 12px 30px rgba(52,18,33,.34);
     }
     .header{
       min-height:106px;
@@ -77,476 +78,81 @@
       padding:10px 0;
     }
     .brand{display:flex;align-items:center;gap:16px}
-    .brand img{
-      width:104px;
-      height:88px;
-      object-fit:contain;
-      background:transparent;
-      filter:drop-shadow(0 8px 16px rgba(0,0,0,.24));
-    }
-    .brand h1{
-      font-family:"Cinzel",serif;
-      color:#fff9ee;
-      font-size:clamp(28px,3vw,42px);
-      line-height:1;
-      white-space:nowrap;
-    }
-    .brand small{display:block;color:#dcc28d;margin-top:8px;font-weight:800}
+    .brand img{width:104px;height:88px;object-fit:contain;background:transparent;filter:drop-shadow(0 8px 16px rgba(0,0,0,.24))}
+    .brand h1{font-family:"Cinzel",serif;color:#fff9ee;font-size:clamp(28px,3vw,42px);line-height:1;white-space:nowrap;letter-spacing:.2px}
+    .brand small{display:block;color:#f1c8d4;margin-top:8px;font-weight:800}
     .nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
-    .nav a{
-      color:rgba(255,249,236,.84);
-      padding:10px 15px;
-      border-radius:999px;
-      font-size:14px;
-      font-weight:800;
-    }
-    .nav a:hover,.nav .active{
-      background:rgba(255,255,255,.12);
-      outline:1px solid rgba(235,205,147,.35);
-      color:#fff;
-    }
-    .back{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      padding:13px 24px;
-      border-radius:999px;
-      color:#ffe9b7;
-      font-weight:900;
-      background:linear-gradient(180deg,#2d405f,#132642);
-      border:1px solid rgba(240,211,156,.70);
-      box-shadow:0 8px 18px rgba(0,0,0,.22);
-    }
+    .nav a{color:rgba(255,249,252,.86);padding:10px 15px;border-radius:999px;font-size:14px;font-weight:800}
+    .nav a:hover,.nav .active{background:rgba(255,255,255,.12);outline:1px solid rgba(249,208,221,.42);color:#fff}
+    .back{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 24px;border-radius:999px;color:#ffe9f0;font-weight:900;background:linear-gradient(180deg,#5b2c45,#132642);border:1px solid rgba(249,208,221,.72);box-shadow:0 8px 18px rgba(0,0,0,.22)}
 
     main{padding:32px 0 70px}
-    .hero{
-      display:grid;
-      grid-template-columns:minmax(0,1fr) 420px;
-      gap:24px;
-      align-items:stretch;
-      margin-bottom:24px;
-    }
-    .panel,.card,.upload,.id-card,.zone-box,.success-box{
-      border:1px solid var(--line);
-      box-shadow:var(--shadow);
-      backdrop-filter:blur(16px);
-    }
-    .panel{
-      border-radius:34px;
-      padding:34px;
-      background:linear-gradient(180deg,rgba(255,250,242,.92),rgba(238,221,199,.9));
-    }
-    .hero-main{
-      position:relative;
-      overflow:hidden;
-      background:
-        radial-gradient(circle at 15% 15%,rgba(255,231,186,.44),transparent 28%),
-        linear-gradient(135deg,rgba(255,250,242,.95),rgba(238,221,199,.88));
-    }
-    .hero-main::after{
-      content:"✦";
-      position:absolute;
-      right:34px;
-      top:26px;
-      color:rgba(199,160,91,.45);
-      font-size:42px;
-      animation:floatStar 3s ease-in-out infinite;
-    }
+    .hero{display:grid;grid-template-columns:minmax(0,1fr) 420px;gap:24px;align-items:stretch;margin-bottom:24px}
+    .panel,.card,.upload,.id-card,.zone-box,.success-box{border:1px solid var(--line);box-shadow:var(--shadow);backdrop-filter:blur(16px)}
+    .panel{border-radius:34px;padding:34px;background:linear-gradient(180deg,rgba(255,249,251,.94),rgba(247,224,232,.90))}
+    .hero-main{position:relative;overflow:hidden;background:radial-gradient(circle at 15% 15%,rgba(255,220,232,.62),transparent 28%),linear-gradient(135deg,rgba(255,250,252,.96),rgba(246,221,230,.90))}
+    .hero-main::after{content:"✦";position:absolute;right:34px;top:26px;color:rgba(185,106,134,.45);font-size:42px;animation:floatStar 3s ease-in-out infinite}
     @keyframes floatStar{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-8px) rotate(12deg)}}
-    .eyebrow{
-      width:max-content;
-      padding:8px 15px;
-      border-radius:999px;
-      background:linear-gradient(180deg,#172d4c,#09182b);
-      color:#ffe6b2;
-      border:1px solid rgba(232,203,145,.45);
-      font-size:13px;
-      font-weight:900;
-      margin-bottom:16px;
-    }
+    .eyebrow{width:max-content;padding:8px 15px;border-radius:999px;background:linear-gradient(180deg,#5b2c45,#102641);color:#ffe6ee;border:1px solid rgba(249,208,221,.45);font-size:13px;font-weight:900;margin-bottom:16px;letter-spacing:.3px}
     h1,h2,h3{font-family:"Noto Serif Thai",serif}
-    .hero h1{
-      font-size:clamp(42px,5vw,76px);
-      line-height:1.03;
-      letter-spacing:-1px;
-      color:#2f2428;
-      max-width:850px;
-    }
-    .hero p{margin-top:18px;color:#77645b;line-height:1.85;max-width:850px}
-    .notice-list{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:12px;
-      margin-top:26px;
-    }
-    .notice{
-      min-height:96px;
-      border-radius:24px;
-      padding:15px;
-      background:rgba(255,248,239,.65);
-      border:1px solid rgba(151,112,70,.22);
-    }
+    .hero h1{font-size:clamp(42px,5vw,76px);line-height:1.03;letter-spacing:-1px;color:#382631;max-width:850px;text-shadow:0 1px 0 rgba(255,255,255,.6)}
+    .hero p{margin-top:18px;color:#7d6670;line-height:1.85;max-width:850px}
+    .notice-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:26px}
+    .notice{min-height:96px;border-radius:24px;padding:15px;background:rgba(255,248,251,.68);border:1px solid rgba(186,112,137,.22)}
     .notice b{display:block;color:#102641;font-size:20px;font-family:"Cinzel",serif;margin-bottom:6px}
-    .notice span{font-size:13px;color:#7a675d;font-weight:800;line-height:1.5}
-    .side-status{
-      display:grid;
-      align-content:center;
-      text-align:center;
-      background:linear-gradient(180deg,#102641,#071426);
-      color:#fff4dd;
-      overflow:hidden;
-      position:relative;
-    }
-    .side-status::before{
-      content:"";
-      position:absolute;
-      inset:-80px;
-      background:radial-gradient(circle,rgba(255,224,170,.2),transparent 33%);
-      animation:softGlow 5s ease-in-out infinite;
-    }
+    .notice span{font-size:13px;color:#856a72;font-weight:800;line-height:1.5}
+    .side-status{display:grid;align-content:center;text-align:center;background:linear-gradient(180deg,#5b2c45,#071426);color:#fff4dd;overflow:hidden;position:relative}
+    .side-status::before{content:"";position:absolute;inset:-80px;background:radial-gradient(circle,rgba(255,219,231,.24),transparent 33%);animation:softGlow 5s ease-in-out infinite}
     @keyframes softGlow{50%{transform:scale(1.08);opacity:.7}}
     .side-status img{position:relative;z-index:1;width:150px;height:150px;object-fit:contain;margin:0 auto 14px;filter:drop-shadow(0 12px 22px rgba(0,0,0,.28))}
     .side-status h2{position:relative;z-index:1;font-size:34px;line-height:1.1;color:#fff8ea}
-    .side-status p{position:relative;z-index:1;color:rgba(255,246,228,.72);line-height:1.75;margin-top:12px}
+    .side-status p{position:relative;z-index:1;color:rgba(255,246,250,.76);line-height:1.75;margin-top:12px}
 
-    .steps{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:14px;
-      margin-bottom:24px;
-    }
-    .step{
-      min-height:82px;
-      border-radius:24px;
-      padding:15px;
-      display:flex;
-      align-items:center;
-      gap:13px;
-      background:linear-gradient(180deg,rgba(255,250,242,.88),rgba(238,221,199,.82));
-      border:1px solid rgba(151,112,70,.24);
-      box-shadow:0 14px 32px rgba(48,30,16,.11);
-    }
-    .step-num{
-      width:42px;height:42px;border-radius:999px;
-      display:grid;place-items:center;
-      background:linear-gradient(180deg,var(--zone-soft),var(--zone));
-      color:var(--zone-dark);
-      font-weight:900;
-      border:1px solid rgba(255,255,255,.45);
-    }
-    .step b{display:block;font-size:14px;color:#3b2b2c}
-    .step span{font-size:12px;color:#8a7468;font-weight:700}
+    .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
+    .step{min-height:82px;border-radius:24px;padding:15px;display:flex;align-items:center;gap:13px;background:linear-gradient(180deg,rgba(255,249,251,.90),rgba(246,221,230,.84));border:1px solid rgba(186,112,137,.24);box-shadow:0 14px 32px rgba(91,45,62,.11)}
+    .step-num{width:42px;height:42px;border-radius:999px;display:grid;place-items:center;background:linear-gradient(180deg,var(--zone-soft),var(--zone));color:var(--zone-dark);font-weight:900;border:1px solid rgba(255,255,255,.55)}
+    .step b{display:block;font-size:14px;color:#3b2b33}.step span{font-size:12px;color:#8a6f79;font-weight:700}
 
-    .register-grid{
-      display:grid;
-      grid-template-columns:minmax(420px,.95fr) minmax(340px,.72fr) minmax(420px,.95fr);
-      gap:24px;
-      align-items:start;
-    }
-    .card,.upload,.id-card,.zone-section{
-      border-radius:34px;
-      padding:26px;
-      background:linear-gradient(180deg,rgba(255,250,242,.92),rgba(238,221,199,.88));
-      border:1px solid rgba(151,112,70,.26);
-      box-shadow:var(--shadow);
-    }
-    .section-head{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-      margin-bottom:18px;
-      padding-bottom:14px;
-      border-bottom:1px solid rgba(151,112,70,.18);
-    }
-    .badge-title{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      font-weight:900;
-      color:#6f4f2b;
-    }
-    .circle{
-      width:38px;height:38px;border-radius:999px;
-      display:grid;place-items:center;
-      background:linear-gradient(180deg,var(--zone-soft),var(--zone));
-      color:var(--zone-dark);
-      border:1px solid rgba(255,255,255,.5);
-      font-family:"Cinzel",serif;
-      font-weight:900;
-    }
-    .section-head h2{font-size:26px;color:#3a2a2c}
-    .section-head small{color:#987f6d;font-weight:800}
+    .register-grid{display:grid;grid-template-columns:minmax(420px,.95fr) minmax(340px,.72fr) minmax(420px,.95fr);gap:24px;align-items:start}
+    .card,.upload,.id-card,.zone-section{border-radius:34px;padding:26px;background:linear-gradient(180deg,rgba(255,249,251,.94),rgba(247,224,232,.90));border:1px solid rgba(186,112,137,.26);box-shadow:var(--shadow)}
+    .section-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid rgba(186,112,137,.18)}
+    .badge-title{display:inline-flex;align-items:center;gap:10px;font-weight:900;color:#8a4965}
+    .circle{width:38px;height:38px;border-radius:999px;display:grid;place-items:center;background:linear-gradient(180deg,var(--zone-soft),var(--zone));color:var(--zone-dark);border:1px solid rgba(255,255,255,.58);font-family:"Cinzel",serif;font-weight:900}
+    .section-head h2{font-size:28px;color:#3a2932;letter-spacing:-.2px}.section-head small{color:#a06d80;font-weight:800}
 
-    .form{display:grid;gap:15px}
-    .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    label{display:grid;gap:7px;color:#5f4f48;font-weight:800;font-size:13px}
-    input,select,textarea{
-      width:100%;
-      min-height:44px;
-      border-radius:16px;
-      border:1px solid rgba(151,112,70,.24);
-      background:rgba(255,250,244,.72);
-      color:#594942;
-      outline:none;
-      padding:11px 13px;
-      transition:.18s;
-    }
+    .form{display:grid;gap:15px}.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    label{display:grid;gap:7px;color:#654d58;font-weight:800;font-size:13px}
+    input,select,textarea{width:100%;min-height:44px;border-radius:16px;border:1px solid rgba(186,112,137,.24);background:rgba(255,250,252,.74);color:#59424d;outline:none;padding:11px 13px;transition:.18s}
     textarea{min-height:104px;resize:vertical;line-height:1.7}
-    input:focus,select:focus,textarea:focus{
-      border-color:rgba(199,160,91,.65);
-      box-shadow:0 0 0 4px rgba(199,160,91,.12);
-      background:#fffaf3;
-    }
-    .counter{text-align:right;color:#9a8477;font-size:12px;margin-top:-4px}
-    .hint{font-size:12px;color:#927b6d;line-height:1.6;font-weight:700}
+    input:focus,select:focus,textarea:focus{border-color:rgba(185,106,134,.68);box-shadow:0 0 0 4px rgba(185,106,134,.12);background:#fffafd}
+    .counter{text-align:right;color:#a47d8c;font-size:12px;margin-top:-4px}.hint{font-size:12px;color:#92727f;line-height:1.6;font-weight:700}
 
-    .upload-box{
-      min-height:380px;
-      border-radius:30px;
-      display:grid;
-      place-items:center;
-      text-align:center;
-      padding:22px;
-      border:2px dashed rgba(183,122,124,.40);
-      background:radial-gradient(circle,rgba(255,240,244,.72),rgba(255,250,244,.64));
-      cursor:pointer;
-      transition:.2s;
-    }
-    .upload-box:hover{transform:translateY(-2px);background:rgba(255,246,241,.88)}
-    .portrait-frame{
-      width:210px;
-      height:260px;
-      border-radius:48% 48% 42% 42%;
-      display:grid;
-      place-items:center;
-      margin:auto;
-      border:2px solid rgba(183,122,124,.32);
-      background:linear-gradient(180deg,rgba(255,255,255,.58),rgba(239,213,211,.52));
-      overflow:hidden;
-      box-shadow:inset 0 0 0 10px rgba(255,255,255,.22),0 18px 32px rgba(70,40,28,.11);
-    }
-    .portrait-frame img{width:100%;height:100%;object-fit:cover;display:none}
-    .plus{font-size:58px;color:#9b6d60;line-height:1}
-    .upload-box b{display:block;margin-top:18px;color:#704e46}
-    .upload-box span{font-size:13px;color:#9a7d70;line-height:1.7}
-    #photoInput{display:none}
+    .upload-box{min-height:380px;border-radius:30px;display:grid;place-items:center;text-align:center;padding:22px;border:2px dashed rgba(183,122,146,.42);background:radial-gradient(circle,rgba(255,236,242,.78),rgba(255,250,252,.66));cursor:pointer;transition:.2s}
+    .upload-box:hover{transform:translateY(-2px);background:rgba(255,246,250,.90)}
+    .portrait-frame{width:210px;height:260px;border-radius:48% 48% 42% 42%;display:grid;place-items:center;margin:auto;border:2px solid rgba(183,122,146,.34);background:linear-gradient(180deg,rgba(255,255,255,.62),rgba(242,209,222,.54));overflow:hidden;box-shadow:inset 0 0 0 10px rgba(255,255,255,.24),0 18px 32px rgba(70,40,50,.12)}
+    .portrait-frame img{width:100%;height:100%;object-fit:cover;display:none}.plus{font-size:58px;color:#9b5f76;line-height:1}.upload-box b{display:block;margin-top:18px;color:#70495a}.upload-box span{font-size:13px;color:#9a7484;line-height:1.7}#photoInput{display:none}
 
-    .id-card{
-      position:relative;
-      overflow:hidden;
-      background:
-        radial-gradient(circle at 20% 10%,rgba(255,255,255,.72),transparent 32%),
-        linear-gradient(135deg,#fffaf2,#f1dfc4 62%,var(--zone-soft));
-    }
-    .id-card::before{
-      content:"";
-      position:absolute;
-      inset:16px;
-      border-radius:26px;
-      border:1px solid rgba(151,112,70,.24);
-      pointer-events:none;
-    }
-    .card-top{
-      display:flex;
-      justify-content:space-between;
-      gap:16px;
-      align-items:flex-start;
-      position:relative;
-      z-index:1;
-      margin-bottom:18px;
-    }
-    .card-top h2{
-      font-family:"Cinzel",serif;
-      color:#1d2533;
-      font-size:31px;
-      line-height:1.05;
-    }
-    .card-top span{display:block;color:#735c49;font-size:12px;letter-spacing:1.5px;margin-top:5px;font-weight:900}
-    .card-top img{width:86px;height:86px;object-fit:contain;filter:drop-shadow(0 10px 18px rgba(0,0,0,.14))}
-    .card-body{
-      display:grid;
-      grid-template-columns:170px 1fr;
-      gap:22px;
-      align-items:center;
-      position:relative;
-      z-index:1;
-    }
-    .card-photo{
-      width:170px;
-      height:216px;
-      border-radius:46% 46% 40% 40%;
-      overflow:hidden;
-      border:2px solid rgba(151,112,70,.28);
-      background:rgba(245,235,221,.78);
-      display:grid;
-      place-items:center;
-      box-shadow:inset 0 0 0 8px rgba(255,255,255,.26);
-    }
-    .card-photo img{width:100%;height:100%;object-fit:cover;display:none}
-    .silhouette{font-size:54px;opacity:.35}
-    .card-fields{display:grid;gap:12px}
-    .field{
-      display:grid;
-      grid-template-columns:98px 1fr;
-      gap:12px;
-      align-items:center;
-      color:#615047;
-      font-size:13px;
-      font-weight:800;
-    }
-    .line{
-      min-height:28px;
-      border-bottom:1px dashed rgba(151,112,70,.35);
-      color:#2f2830;
-      display:flex;
-      align-items:center;
-      font-weight:900;
-    }
-    .division{
-      grid-column:1/-1;
-      min-height:46px;
-      border-radius:14px;
-      padding:10px 14px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:linear-gradient(90deg,var(--zone-dark),var(--zone));
-      color:#fff;
-      box-shadow:inset 0 0 0 1px rgba(255,255,255,.32);
-      font-weight:900;
-      margin-top:6px;
-    }
-    .card-foot{
-      position:relative;
-      z-index:1;
-      display:flex;
-      justify-content:space-between;
-      align-items:end;
-      gap:18px;
-      margin-top:18px;
-      color:#806855;
-      font-size:11px;
-      font-weight:900;
-    }
-    .barcode{
-      width:120px;height:42px;
-      background:repeating-linear-gradient(90deg,#2a2525 0 3px,transparent 3px 6px,#2a2525 6px 7px,transparent 7px 11px);
-      opacity:.8;
-    }
+    .id-card{position:relative;overflow:hidden;background:radial-gradient(circle at 20% 10%,rgba(255,255,255,.76),transparent 32%),linear-gradient(135deg,#fffbfc,#f8e1ea 62%,var(--zone-soft))}
+    .id-card::before{content:"";position:absolute;inset:16px;border-radius:26px;border:1px solid rgba(186,112,137,.24);pointer-events:none}
+    .card-top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;position:relative;z-index:1;margin-bottom:18px}
+    .card-top h2{font-family:"Cinzel",serif;color:#1d2533;font-size:31px;line-height:1.05}.card-top span{display:block;color:#765260;font-size:12px;letter-spacing:1.5px;margin-top:5px;font-weight:900}.card-top img{width:86px;height:86px;object-fit:contain;filter:drop-shadow(0 10px 18px rgba(0,0,0,.14))}
+    .card-body{display:grid;grid-template-columns:170px 1fr;gap:22px;align-items:center;position:relative;z-index:1}.card-photo{width:170px;height:216px;border-radius:46% 46% 40% 40%;overflow:hidden;border:2px solid rgba(186,112,137,.28);background:rgba(248,233,239,.80);display:grid;place-items:center;box-shadow:inset 0 0 0 8px rgba(255,255,255,.28)}.card-photo img{width:100%;height:100%;object-fit:cover;display:none}.silhouette{font-size:54px;opacity:.35}
+    .card-fields{display:grid;gap:12px}.field{display:grid;grid-template-columns:98px 1fr;gap:12px;align-items:center;color:#654c58;font-size:13px;font-weight:800}.line{min-height:28px;border-bottom:1px dashed rgba(186,112,137,.35);color:#2f2830;display:flex;align-items:center;font-weight:900}.division{grid-column:1/-1;min-height:46px;border-radius:14px;padding:10px 14px;display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,var(--zone-dark),var(--zone));color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.34);font-weight:900;margin-top:6px}
+    .card-foot{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:end;gap:18px;margin-top:18px;color:#806070;font-size:11px;font-weight:900}.barcode{width:120px;height:42px;background:repeating-linear-gradient(90deg,#2a2525 0 3px,transparent 3px 6px,#2a2525 6px 7px,transparent 7px 11px);opacity:.8}
+    .download-row{position:relative;z-index:1;margin-top:18px;display:flex;justify-content:center}
 
-    .zone-section{margin-top:24px}
-    .zone-grid{
-      display:grid;
-      grid-template-columns:repeat(7,1fr);
-      gap:14px;
-    }
-    .zone-box{
-      position:relative;
-      min-height:230px;
-      border-radius:30px;
-      padding:18px 12px;
-      display:grid;
-      align-content:center;
-      justify-items:center;
-      text-align:center;
-      border:1px solid rgba(255,255,255,.40);
-      cursor:pointer;
-      transition:.22s;
-      overflow:hidden;
-    }
-    .zone-box::after{
-      content:"";
-      position:absolute;
-      inset:-60%;
-      background:linear-gradient(120deg,transparent 35%,rgba(255,255,255,.26),transparent 65%);
-      transform:translateX(-60%) rotate(12deg);
-      transition:.55s;
-    }
-    .zone-box:hover::after{transform:translateX(60%) rotate(12deg)}
-    .zone-box:hover{transform:translateY(-5px)}
-    .zone-box.selected{outline:3px solid rgba(255,255,255,.74);box-shadow:0 18px 38px rgba(47,27,12,.18),0 0 0 4px var(--zone)}
-    .zone-box.disabled{filter:grayscale(.25);opacity:.58;cursor:not-allowed}
-    .zone-box img{width:90px;height:90px;object-fit:contain;filter:drop-shadow(0 12px 16px rgba(32,18,8,.18));position:relative;z-index:1}
-    .zone-box h3{position:relative;z-index:1;margin-top:10px;font-size:20px;color:inherit}
-    .zone-box p{position:relative;z-index:1;margin-top:8px;font-size:12px;line-height:1.55;font-weight:800;max-width:160px}
-    .zone-box small{position:relative;z-index:1;display:inline-flex;margin-top:12px;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.35);font-size:11px;font-weight:900}
+    .zone-section{margin-top:24px}.zone-intro{margin-top:-8px;margin-bottom:18px;color:#7f6570;line-height:1.75;font-weight:700}.zone-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:14px}
+    .zone-box{position:relative;min-height:190px;border-radius:30px;padding:18px 10px;display:grid;align-content:center;justify-items:center;text-align:center;border:1px solid rgba(255,255,255,.42);cursor:pointer;transition:.22s;overflow:hidden}
+    .zone-box::after{content:"";position:absolute;inset:-60%;background:linear-gradient(120deg,transparent 35%,rgba(255,255,255,.28),transparent 65%);transform:translateX(-60%) rotate(12deg);transition:.55s}.zone-box:hover::after{transform:translateX(60%) rotate(12deg)}.zone-box:hover{transform:translateY(-5px)}.zone-box.selected{outline:3px solid rgba(255,255,255,.78);box-shadow:0 18px 38px rgba(47,27,12,.18),0 0 0 4px var(--zone)}.zone-box.disabled{filter:grayscale(.25);opacity:.68;cursor:not-allowed}.zone-box img{width:88px;height:88px;object-fit:contain;filter:drop-shadow(0 12px 16px rgba(32,18,8,.18));position:relative;z-index:1}.zone-box h3{position:relative;z-index:1;margin-top:10px;font-family:"Cinzel",serif;font-size:18px;color:inherit}.zone-box p{position:relative;z-index:1;margin-top:8px;font-size:11.5px;line-height:1.45;font-weight:900;max-width:150px}.zone-box small{position:relative;z-index:1;display:inline-flex;margin-top:12px;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.35);font-size:11px;font-weight:900}
+    .e1{background:linear-gradient(145deg,#071d3d,#2b7fb4);color:#fff2e1}.e2{background:linear-gradient(145deg,#fffdf8,#e5d5b8);color:#71593a}.e3{background:linear-gradient(145deg,#650b18,#b52337);color:#fff2f4}.e4{background:linear-gradient(145deg,#edf6e9,#bad5ad);color:#4f6d45}.e5{background:linear-gradient(145deg,#f2e8ff,#b99add);color:#604482}.e6{background:linear-gradient(145deg,#ffe7ef,#eba0bb);color:#884b62}.e7{background:linear-gradient(145deg,#f4fbff,#a8d6ee);color:#477891}.e8{background:linear-gradient(145deg,#fff2c8,#d0a245);color:#684716}
 
-    .e1{background:linear-gradient(145deg,#071d3d,#2b7fb4);color:#fff2e1}
-    .e2{background:linear-gradient(145deg,#fffdf8,#e5d5b8);color:#71593a}
-    .e3{background:linear-gradient(145deg,#650b18,#b52337);color:#fff2f4}
-    .e4{background:linear-gradient(145deg,#edf6e9,#bad5ad);color:#4f6d45}
-    .e5{background:linear-gradient(145deg,#f2e8ff,#b99add);color:#604482}
-    .e6{background:linear-gradient(145deg,#ffe7ef,#eba0bb);color:#884b62}
-    .e7{background:linear-gradient(145deg,#f4fbff,#a8d6ee);color:#477891}
-    .e8{background:linear-gradient(145deg,#fff2c8,#d0a245);color:#684716}
+    .submit-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;margin-top:24px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:12px 24px;border-radius:999px;border:0;cursor:pointer;font-size:14px;font-weight:900;transition:.18s}.btn:hover{transform:translateY(-2px)}.primary{color:#fff4dc;background:linear-gradient(180deg,#5b2c45,#09182b);border:1px solid rgba(249,208,221,.72);box-shadow:0 10px 24px rgba(8,18,32,.20)}.soft{color:#70485a;background:rgba(255,241,247,.84);border:1px solid rgba(186,112,137,.30)}.danger{color:#8e4b62;background:rgba(255,238,245,.80);border:1px solid rgba(183,122,146,.30)}
 
-    .submit-row{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      flex-wrap:wrap;
-      gap:14px;
-      margin-top:24px;
-    }
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      min-height:48px;
-      padding:12px 24px;
-      border-radius:999px;
-      border:0;
-      cursor:pointer;
-      font-size:14px;
-      font-weight:900;
-      transition:.18s;
-    }
-    .btn:hover{transform:translateY(-2px)}
-    .primary{
-      color:#fff4dc;
-      background:linear-gradient(180deg,#172d4c,#09182b);
-      border:1px solid rgba(226,194,136,.72);
-      box-shadow:0 10px 24px rgba(8,18,32,.20);
-    }
-    .soft{
-      color:#62482f;
-      background:rgba(246,236,222,.82);
-      border:1px solid rgba(151,112,70,.30);
-    }
-    .danger{color:#8e4b4e;background:rgba(255,238,235,.78);border:1px solid rgba(183,122,124,.30)}
+    .status-card{display:none;margin-top:24px;border-radius:28px;padding:22px;background:linear-gradient(180deg,rgba(91,44,69,.96),rgba(7,20,38,.96));color:#fff3db;border:1px solid rgba(249,208,221,.48);box-shadow:0 18px 42px rgba(7,20,38,.25)}.status-card.show{display:block;animation:pop .28s ease-out both}@keyframes pop{from{transform:translateY(10px);opacity:0}to{transform:translateY(0);opacity:1}}.status-card h3{font-size:28px;color:#fff8e9}.status-card p{margin-top:8px;color:rgba(255,246,250,.76);line-height:1.75}.status-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+    .footer{text-align:center;margin-top:42px;color:#806672;font-size:13px;line-height:1.8}
 
-    .status-card{
-      display:none;
-      margin-top:24px;
-      border-radius:28px;
-      padding:22px;
-      background:linear-gradient(180deg,rgba(16,38,65,.96),rgba(7,20,38,.96));
-      color:#fff3db;
-      border:1px solid rgba(226,194,136,.48);
-      box-shadow:0 18px 42px rgba(7,20,38,.25);
-    }
-    .status-card.show{display:block;animation:pop .28s ease-out both}
-    @keyframes pop{from{transform:translateY(10px);opacity:0}to{transform:translateY(0);opacity:1}}
-    .status-card h3{font-size:28px;color:#fff8e9}
-    .status-card p{margin-top:8px;color:rgba(255,246,228,.75);line-height:1.75}
-    .status-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
-
-    .footer{text-align:center;margin-top:42px;color:#78665d;font-size:13px;line-height:1.8}
-
-    @media(max-width:1260px){
-      .header{grid-template-columns:1fr}.nav{justify-content:flex-start}.back{width:max-content}
-      .hero{grid-template-columns:1fr}.register-grid{grid-template-columns:1fr}.zone-grid{grid-template-columns:repeat(4,1fr)}
-    }
-    @media(max-width:760px){
-      .wrap{width:min(100% - 24px,1500px)}
-      .brand img{width:78px;height:72px}.brand h1{font-size:24px;white-space:normal}
-      .panel,.card,.upload,.id-card,.zone-section{border-radius:26px;padding:22px}
-      .notice-list,.steps{grid-template-columns:1fr}.two{grid-template-columns:1fr}.zone-grid{grid-template-columns:repeat(2,1fr)}
-      .card-body{grid-template-columns:1fr}.card-photo{margin:auto}.field{grid-template-columns:82px 1fr}.side-status img{width:110px;height:110px}
-    }
+    @media(max-width:1260px){.header{grid-template-columns:1fr}.nav{justify-content:flex-start}.back{width:max-content}.hero{grid-template-columns:1fr}.register-grid{grid-template-columns:1fr}.zone-grid{grid-template-columns:repeat(4,1fr)}}
+    @media(max-width:760px){.wrap{width:min(100% - 24px,1500px)}.brand img{width:78px;height:72px}.brand h1{font-size:24px;white-space:normal}.panel,.card,.upload,.id-card,.zone-section{border-radius:26px;padding:22px}.notice-list,.steps{grid-template-columns:1fr}.two{grid-template-columns:1fr}.zone-grid{grid-template-columns:repeat(2,1fr)}.card-body{grid-template-columns:1fr}.card-photo{margin:auto}.field{grid-template-columns:82px 1fr}.side-status img{width:110px;height:110px}}
   </style>
 </head>
 <body>
@@ -555,10 +161,7 @@
       <div class="wrap header">
         <a class="brand" href="./index.html">
           <img src="./eden.png" alt="E8’s Eden Academy" />
-          <div>
-            <h1>E8’s Eden Academy</h1>
-            <small>Student Registration ✦ Admission Portal</small>
-          </div>
+          <div><h1>E8’s Eden Academy</h1><small>Student Registration ✦ Admission Portal</small></div>
         </a>
         <nav class="nav">
           <a href="./index.html">หน้าหลัก</a>
@@ -598,76 +201,34 @@
 
       <section class="register-grid">
         <form class="card" id="registerForm">
-          <div class="section-head">
-            <div>
-              <div class="badge-title"><span class="circle">1</span> กรอกข้อมูลผู้สมัคร</div>
-              <h2>ข้อมูลนักเรียน</h2>
-            </div>
-            <small>ไม่ขอข้อมูลสำคัญ</small>
-          </div>
+          <div class="section-head"><div><div class="badge-title"><span class="circle">1</span> กรอกข้อมูลผู้สมัคร</div><h2>ข้อมูลนักเรียน</h2></div><small>ไม่ขอข้อมูลสำคัญ</small></div>
           <div class="form">
             <div class="two">
-              <label>ชื่อที่ใช้ในระบบ
-                <input id="displayName" maxlength="28" placeholder="เช่น Seraphina.lux" required />
-              </label>
-              <label>ชื่อเล่น / นามแฝง
-                <input id="nickname" maxlength="20" placeholder="ใส่หรือไม่ใส่ก็ได้" />
-              </label>
+              <label>ชื่อที่ใช้ในระบบ<input id="displayName" maxlength="28" placeholder="เช่น Seraphina.lux" required /></label>
+              <label>ชื่อเล่น / นามแฝง<input id="nickname" maxlength="20" placeholder="ใส่หรือไม่ใส่ก็ได้" /></label>
             </div>
             <div class="two">
-              <label>ระดับชั้น
-                <select id="level" disabled>
-                  <option>Year 1</option>
-                </select>
-              </label>
-              <label>สถานะผู้สมัคร
-                <select id="status" disabled>
-                  <option>New Student</option>
-                </select>
-              </label>
+              <label>ระดับชั้น<select id="level" disabled><option>Year 1</option></select></label>
+              <label>สถานะผู้สมัคร<select id="status" disabled><option>New Student</option></select></label>
             </div>
-            <label>เหตุผลที่อยากเข้าเรียนที่ E8’s Eden Academy
-              <textarea id="reason" maxlength="240" placeholder="เขียนสั้น ๆ ได้เลยค่ะ เช่น อยากเข้าร่วมกิจกรรมของโซนและติดตามตารางเรียน"></textarea>
-            </label>
+            <label>เหตุผลที่อยากเข้าเรียนที่ E8’s Eden Academy<textarea id="reason" maxlength="240" placeholder="เขียนสั้น ๆ ได้เลยค่ะ เช่น อยากเข้าร่วมกิจกรรมของโซนและติดตามตารางเรียน"></textarea></label>
             <div class="counter"><span id="reasonCount">0</span> / 240</div>
             <p class="hint">ระบบนี้จะบันทึกข้อมูลสมัครไว้ในเครื่องของผู้ใช้ก่อน เพื่อเตรียมต่อยอดระบบสมาชิกจริงในอนาคต</p>
           </div>
         </form>
 
         <section class="upload">
-          <div class="section-head">
-            <div>
-              <div class="badge-title"><span class="circle">2</span> อัปโหลดรูปถ่าย</div>
-              <h2>รูปบัตรนักเรียน</h2>
-            </div>
-            <small>JPG / PNG</small>
-          </div>
+          <div class="section-head"><div><div class="badge-title"><span class="circle">2</span> อัปโหลดรูปถ่าย</div><h2>รูปบัตรนักเรียน</h2></div><small>JPG / PNG</small></div>
           <label class="upload-box" for="photoInput">
-            <div>
-              <div class="portrait-frame">
-                <img id="photoPreview" alt="รูปผู้สมัคร" />
-                <div class="plus" id="photoPlus">＋</div>
-              </div>
-              <b>คลิกเพื่อเลือกไฟล์รูปหน้าตรง</b>
-              <span>แนะนำ: เห็นใบหน้าชัด แสงไม่มืดเกินไป</span>
-            </div>
+            <div><div class="portrait-frame"><img id="photoPreview" alt="รูปผู้สมัคร" /><div class="plus" id="photoPlus">＋</div></div><b>คลิกเพื่อเลือกไฟล์รูปหน้าตรง</b><span>แนะนำ: เห็นใบหน้าชัด แสงไม่มืดเกินไป</span></div>
           </label>
           <input type="file" id="photoInput" accept="image/png,image/jpeg,image/webp" />
         </section>
 
         <section class="id-card" id="idCard">
-          <div class="card-top">
-            <div>
-              <h2>E8’s Eden Academy</h2>
-              <span>STUDENT IDENTITY CARD</span>
-            </div>
-            <img src="./eden.png" alt="Eden Logo" />
-          </div>
+          <div class="card-top"><div><h2>E8’s Eden Academy</h2><span>STUDENT IDENTITY CARD</span></div><img src="./eden.png" alt="Eden Logo" /></div>
           <div class="card-body">
-            <div class="card-photo">
-              <img id="cardPhoto" alt="รูปบนบัตร" />
-              <div class="silhouette" id="cardSilhouette">♙</div>
-            </div>
+            <div class="card-photo"><img id="cardPhoto" alt="รูปบนบัตร" /><div class="silhouette" id="cardSilhouette">♙</div></div>
             <div class="card-fields">
               <div class="field"><span>STUDENT ID</span><div class="line" id="studentId">E8-000000</div></div>
               <div class="field"><span>NAME</span><div class="line" id="cardName">—</div></div>
@@ -675,95 +236,36 @@
               <div class="division" id="cardDivision">PLEASE SELECT ZONE</div>
             </div>
           </div>
-          <div class="card-foot">
-            <div>ISSUE DATE<br><span id="issueDate">—</span></div>
-            <div>AUTHORIZED SIGNATURE<br>Eden Office</div>
-            <div class="barcode" aria-hidden="true"></div>
-          </div>
+          <div class="card-foot"><div>ISSUE DATE<br><span id="issueDate">—</span></div><div>AUTHORIZED SIGNATURE<br>Eden Office</div><div class="barcode" aria-hidden="true"></div></div>
+          <div class="download-row"><button class="btn primary" type="button" id="downloadCardBtn">ดาวน์โหลดบัตรนักเรียน</button></div>
         </section>
       </section>
 
       <section class="zone-section" id="zones">
-        <div class="section-head">
-          <div>
-            <div class="badge-title"><span class="circle">3</span> เลือกโซนประจำตัว</div>
-            <h2>เลือกบ้านสำหรับนักเรียนปี 1</h2>
-          </div>
-          <small>E1 ปิดรับสำหรับปี 1</small>
-        </div>
+        <div class="section-head"><div><div class="badge-title"><span class="circle">3</span> เลือกโซนประจำตัว</div><h2>เลือกโซน</h2></div><small>E1 ปิดรับสำหรับปี 1</small></div>
+        <p class="zone-intro">ในแต่ละโซนจะมีกิจกรรมที่แตกต่างกันอย่างสิ้นเชิง และเมื่อเลือกโซนแล้ว สีของบัตรนักเรียนจะเปลี่ยนตามโซนนั้นทันที</p>
         <div class="zone-grid">
-          <article class="zone-box e1 disabled" title="E1 Zone ไม่เปิดรับสำหรับปี 1">
-            <img src="./e1.png" alt="E1 Zone" />
-            <h3>E1 Zone</h3>
-            <p>เขตพิเศษ ไม่เปิดรับสำหรับนักเรียนปี 1 ในรอบนี้</p>
-            <small>LOCKED</small>
-          </article>
-          <article class="zone-box e2" data-zone="E2 Zone" data-color="#d7bd8c" data-dark="#8f6a32" data-soft="#fff5de">
-            <img src="./e2.png" alt="E2 Zone" />
-            <h3>E2 Zone</h3>
-            <p>ตระกูลเก่า มารยาทสังคม งานพิธี และภาพลักษณ์</p>
-            <small>OLD FAMILY</small>
-          </article>
-          <article class="zone-box e3" data-zone="E3 Zone" data-color="#b52337" data-dark="#650b18" data-soft="#ffe4e8">
-            <img src="./e3.png" alt="E3 Zone" />
-            <h3>E3 Zone</h3>
-            <p>ธุรกิจ การลงทุน อำนาจต่อรอง และการตัดสินใจ</p>
-            <small>BUSINESS</small>
-          </article>
-          <article class="zone-box e4" data-zone="E4 Zone" data-color="#bad5ad" data-dark="#5d8453" data-soft="#edf6e9">
-            <img src="./e4.png" alt="E4 Zone" />
-            <h3>E4 Zone</h3>
-            <p>บริหารทรัพยากร สายสนับสนุน และเครือข่ายตระกูล</p>
-            <small>NETWORK</small>
-          </article>
-          <article class="zone-box e5" data-zone="E5 Zone" data-color="#b99add" data-dark="#704eaa" data-soft="#f2e8ff">
-            <img src="./e5.png" alt="E5 Zone" />
-            <h3>E5 Zone</h3>
-            <p>ศิลปะ ภาพลักษณ์ แบรนด์ส่วนตัว และรสนิยมสังคม</p>
-            <small>ART SOCIETY</small>
-          </article>
-          <article class="zone-box e6" data-zone="E6 Zone" data-color="#eba0bb" data-dark="#b95b7f" data-soft="#ffe7ef">
-            <img src="./e6.png" alt="E6 Zone" />
-            <h3>E6 Zone</h3>
-            <p>กิจกรรม สื่อสารสังคม การต้อนรับ และงานสัมพันธ์</p>
-            <small>SOCIAL</small>
-          </article>
-          <article class="zone-box e7" data-zone="E7 Zone" data-color="#a8d6ee" data-dark="#4d90b4" data-soft="#f4fbff">
-            <img src="./e7.png" alt="E7 Zone" />
-            <h3>E7 Zone</h3>
-            <p>วิชาการ การวิเคราะห์ ข้อมูล และทุนความสามารถ</p>
-            <small>ACADEMIC</small>
-          </article>
-          <article class="zone-box e8" data-zone="E8 Zone" data-color="#d0a245" data-dark="#8a641b" data-soft="#fff2c8">
-            <img src="./e8.png" alt="E8 Zone" />
-            <h3>E8 Zone</h3>
-            <p>ผู้นำรุ่นใหม่ บริหารภาพรวม และสายตระกูลผู้สนับสนุน</p>
-            <small>ELITE</small>
-          </article>
+          <article class="zone-box e1 disabled" title="E1 Zone ไม่เปิดรับสำหรับปี 1"><img src="./e1.png" alt="E1 Zone" /><h3>E1 ZONE</h3><p>ไม่เปิดสำหรับปีที่ 1 ต้องสมัครและไล่ระดับไปทีละโซนเท่านั้น</p><small>LOCKED</small></article>
+          <article class="zone-box e2" data-zone="E2 Zone" data-color="#d7bd8c" data-dark="#8f6a32" data-soft="#fff5de"><img src="./e2.png" alt="E2 Zone" /><h3>E2 ZONE</h3><small>AVAILABLE</small></article>
+          <article class="zone-box e3" data-zone="E3 Zone" data-color="#b52337" data-dark="#650b18" data-soft="#ffe4e8"><img src="./e3.png" alt="E3 Zone" /><h3>E3 ZONE</h3><p>รับทั้งนักเรียนทุนฟรี และนักเรียนแลกเปลี่ยนจากโรงเรียนอื่น</p><small>AVAILABLE</small></article>
+          <article class="zone-box e4" data-zone="E4 Zone" data-color="#bad5ad" data-dark="#5d8453" data-soft="#edf6e9"><img src="./e4.png" alt="E4 Zone" /><h3>E4 ZONE</h3><small>AVAILABLE</small></article>
+          <article class="zone-box e5" data-zone="E5 Zone" data-color="#b99add" data-dark="#704eaa" data-soft="#f2e8ff"><img src="./e5.png" alt="E5 Zone" /><h3>E5 ZONE</h3><small>AVAILABLE</small></article>
+          <article class="zone-box e6" data-zone="E6 Zone" data-color="#eba0bb" data-dark="#b95b7f" data-soft="#ffe7ef"><img src="./e6.png" alt="E6 Zone" /><h3>E6 ZONE</h3><small>AVAILABLE</small></article>
+          <article class="zone-box e7" data-zone="E7 Zone" data-color="#a8d6ee" data-dark="#4d90b4" data-soft="#f4fbff"><img src="./e7.png" alt="E7 Zone" /><h3>E7 ZONE</h3><small>AVAILABLE</small></article>
+          <article class="zone-box e8" data-zone="E8 Zone" data-color="#d0a245" data-dark="#8a641b" data-soft="#fff2c8"><img src="./e8.png" alt="E8 Zone" /><h3>E8 ZONE</h3><small>AVAILABLE</small></article>
         </div>
-
         <div class="submit-row">
           <p class="hint">เมื่อกดส่งใบสมัคร ระบบจะสร้างสถานะสมัครสมาชิกและบันทึกบัตรนักเรียนตัวอย่างไว้ในเครื่องของคุณ</p>
-          <div>
-            <button class="btn danger" type="button" id="resetBtn">ล้างข้อมูล</button>
-            <button class="btn primary" type="submit" form="registerForm">บันทึกใบสมัคร</button>
-          </div>
+          <div><button class="btn danger" type="button" id="resetBtn">ล้างข้อมูล</button><button class="btn primary" type="submit" form="registerForm">บันทึกใบสมัคร</button></div>
         </div>
-
-        <div class="status-card" id="statusCard">
-          <h3>ส่งใบสมัครเรียบร้อยแล้ว</h3>
-          <p id="statusText">สถานะของคุณคือ “รอตรวจสอบ” หลังจากนี้สามารถกลับไปใช้หน้าเว็บและติดตามประกาศของสถาบันได้ทันที</p>
-          <div class="status-actions">
-            <a class="btn primary" href="./index.html">กลับหน้าแรก</a>
-            <a class="btn soft" href="./board.html">ไปกระดานนักเรียน</a>
-          </div>
-        </div>
+        <div class="status-card" id="statusCard"><h3>ส่งใบสมัครเรียบร้อยแล้ว</h3><p id="statusText">สถานะของคุณคือ “รอตรวจสอบ” หลังจากนี้สามารถกลับไปใช้หน้าเว็บและติดตามประกาศของสถาบันได้ทันที</p><div class="status-actions"><a class="btn primary" href="./index.html">กลับหน้าแรก</a><a class="btn soft" href="./board.html">ไปกระดานนักเรียน</a></div></div>
       </section>
 
       <footer class="footer">E8’s Eden Academy © Admission Portal<br>Student Registration • Identity Card • Zone Selection</footer>
     </main>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script>
     const root=document.documentElement;
     const displayName=document.getElementById('displayName');
@@ -783,140 +285,30 @@
     const statusText=document.getElementById('statusText');
     const resetBtn=document.getElementById('resetBtn');
     const registerForm=document.getElementById('registerForm');
+    const downloadCardBtn=document.getElementById('downloadCardBtn');
     const zones=document.querySelectorAll('.zone-box[data-zone]');
     let selectedZone='';
     let uploadedPhoto='';
 
-    function makeId(){
-      const saved=localStorage.getItem('e8StudentId');
-      if(saved)return saved;
-      const id='E8-'+String(Math.floor(100000+Math.random()*899999));
-      localStorage.setItem('e8StudentId',id);
-      return id;
-    }
+    function makeId(){const saved=localStorage.getItem('e8StudentId');if(saved)return saved;const id='E8-'+String(Math.floor(100000+Math.random()*899999));localStorage.setItem('e8StudentId',id);return id}
     studentId.textContent=makeId();
     issueDate.textContent=new Date().toLocaleDateString('en-GB');
-
-    function updateName(){
-      const name=displayName.value.trim()||nickname.value.trim()||'—';
-      cardName.textContent=name;
-    }
+    function updateName(){const name=displayName.value.trim()||nickname.value.trim()||'—';cardName.textContent=name}
     displayName.addEventListener('input',updateName);
     nickname.addEventListener('input',updateName);
     reason.addEventListener('input',()=>{reasonCount.textContent=reason.value.length});
+    zones.forEach(zone=>{zone.addEventListener('click',()=>{zones.forEach(item=>item.classList.remove('selected'));zone.classList.add('selected');selectedZone=zone.dataset.zone;root.style.setProperty('--zone',zone.dataset.color);root.style.setProperty('--zone-dark',zone.dataset.dark);root.style.setProperty('--zone-soft',zone.dataset.soft);cardDivision.textContent=selectedZone.toUpperCase()})});
 
-    zones.forEach(zone=>{
-      zone.addEventListener('click',()=>{
-        zones.forEach(item=>item.classList.remove('selected'));
-        zone.classList.add('selected');
-        selectedZone=zone.dataset.zone;
-        root.style.setProperty('--zone',zone.dataset.color);
-        root.style.setProperty('--zone-dark',zone.dataset.dark);
-        root.style.setProperty('--zone-soft',zone.dataset.soft);
-        cardDivision.textContent=selectedZone.toUpperCase();
-      });
-    });
+    photoInput.addEventListener('change',()=>{const file=photoInput.files&&photoInput.files[0];if(!file)return;if(file.size>5*1024*1024){alert('ไฟล์รูปใหญ่เกินไปค่ะ กรุณาใช้ไฟล์ไม่เกิน 5MB');photoInput.value='';return}const reader=new FileReader();reader.onload=e=>{uploadedPhoto=e.target.result;photoPreview.src=uploadedPhoto;cardPhoto.src=uploadedPhoto;photoPreview.style.display='block';cardPhoto.style.display='block';photoPlus.style.display='none';cardSilhouette.style.display='none'};reader.readAsDataURL(file)});
 
-    photoInput.addEventListener('change',()=>{
-      const file=photoInput.files && photoInput.files[0];
-      if(!file)return;
-      if(file.size>5*1024*1024){
-        alert('ไฟล์รูปใหญ่เกินไปค่ะ กรุณาใช้ไฟล์ไม่เกิน 5MB');
-        photoInput.value='';
-        return;
-      }
-      const reader=new FileReader();
-      reader.onload=e=>{
-        uploadedPhoto=e.target.result;
-        photoPreview.src=uploadedPhoto;
-        cardPhoto.src=uploadedPhoto;
-        photoPreview.style.display='block';
-        cardPhoto.style.display='block';
-        photoPlus.style.display='none';
-        cardSilhouette.style.display='none';
-      };
-      reader.readAsDataURL(file);
-    });
+    registerForm.addEventListener('submit',event=>{event.preventDefault();const name=displayName.value.trim();if(!name){alert('กรุณากรอกชื่อที่ใช้ในระบบก่อนค่ะ');displayName.focus();return}if(!selectedZone){alert('กรุณาเลือกโซน E2-E8 ก่อนค่ะ');document.getElementById('zones').scrollIntoView({behavior:'smooth'});return}const data={studentId:studentId.textContent,displayName:name,nickname:nickname.value.trim(),level:'Year 1',zone:selectedZone,reason:reason.value.trim(),photo:uploadedPhoto,status:'pending_verification',submittedAt:new Date().toISOString()};localStorage.setItem('e8StudentApplication',JSON.stringify(data));localStorage.setItem('e8IsMember','true');statusText.textContent=`ใบสมัครของ ${name} ถูกบันทึกแล้ว โซนที่เลือกคือ ${selectedZone} สถานะปัจจุบันคือ “รอตรวจสอบ”`;statusCard.classList.add('show');statusCard.scrollIntoView({behavior:'smooth',block:'center'})});
 
-    registerForm.addEventListener('submit',event=>{
-      event.preventDefault();
-      const name=displayName.value.trim();
-      if(!name){
-        alert('กรุณากรอกชื่อที่ใช้ในระบบก่อนค่ะ');
-        displayName.focus();
-        return;
-      }
-      if(!selectedZone){
-        alert('กรุณาเลือกโซน E2-E8 ก่อนค่ะ');
-        document.getElementById('zones').scrollIntoView({behavior:'smooth'});
-        return;
-      }
-      const data={
-        studentId:studentId.textContent,
-        displayName:name,
-        nickname:nickname.value.trim(),
-        level:'Year 1',
-        zone:selectedZone,
-        reason:reason.value.trim(),
-        photo:uploadedPhoto,
-        status:'pending_verification',
-        submittedAt:new Date().toISOString()
-      };
-      localStorage.setItem('e8StudentApplication',JSON.stringify(data));
-      localStorage.setItem('e8IsMember','true');
-      statusText.textContent=`ใบสมัครของ ${name} ถูกบันทึกแล้ว โซนที่เลือกคือ ${selectedZone} สถานะปัจจุบันคือ “รอตรวจสอบ”`;
-      statusCard.classList.add('show');
-      statusCard.scrollIntoView({behavior:'smooth',block:'center'});
-    });
+    downloadCardBtn.addEventListener('click',async()=>{if(typeof html2canvas==='undefined'){alert('ระบบดาวน์โหลดยังโหลดไม่เสร็จ กรุณาลองใหม่อีกครั้งค่ะ');return}const button=downloadCardBtn;button.style.display='none';const canvas=await html2canvas(document.getElementById('idCard'),{backgroundColor:null,scale:2,useCORS:true});button.style.display='inline-flex';const link=document.createElement('a');link.download=`E8-student-card-${studentId.textContent}.png`;link.href=canvas.toDataURL('image/png');link.click()});
 
-    resetBtn.addEventListener('click',()=>{
-      if(!confirm('ต้องการล้างข้อมูลในฟอร์มนี้ใช่ไหมคะ'))return;
-      registerForm.reset();
-      zones.forEach(item=>item.classList.remove('selected'));
-      selectedZone='';
-      uploadedPhoto='';
-      cardName.textContent='—';
-      cardDivision.textContent='PLEASE SELECT ZONE';
-      reasonCount.textContent='0';
-      photoPreview.removeAttribute('src');
-      cardPhoto.removeAttribute('src');
-      photoPreview.style.display='none';
-      cardPhoto.style.display='none';
-      photoPlus.style.display='block';
-      cardSilhouette.style.display='block';
-      statusCard.classList.remove('show');
-      root.style.setProperty('--zone','#d7bd8c');
-      root.style.setProperty('--zone-dark','#8f6a32');
-      root.style.setProperty('--zone-soft','#fff5de');
-    });
+    resetBtn.addEventListener('click',()=>{if(!confirm('ต้องการล้างข้อมูลในฟอร์มนี้ใช่ไหมคะ'))return;registerForm.reset();zones.forEach(item=>item.classList.remove('selected'));selectedZone='';uploadedPhoto='';cardName.textContent='—';cardDivision.textContent='PLEASE SELECT ZONE';reasonCount.textContent='0';photoPreview.removeAttribute('src');cardPhoto.removeAttribute('src');photoPreview.style.display='none';cardPhoto.style.display='none';photoPlus.style.display='block';cardSilhouette.style.display='block';statusCard.classList.remove('show');root.style.setProperty('--zone','#d7bd8c');root.style.setProperty('--zone-dark','#8f6a32');root.style.setProperty('--zone-soft','#fff5de')});
 
     const saved=localStorage.getItem('e8StudentApplication');
-    if(saved){
-      try{
-        const data=JSON.parse(saved);
-        displayName.value=data.displayName||'';
-        nickname.value=data.nickname||'';
-        reason.value=data.reason||'';
-        reasonCount.textContent=reason.value.length;
-        updateName();
-        if(data.studentId)studentId.textContent=data.studentId;
-        if(data.zone){
-          const target=[...zones].find(z=>z.dataset.zone===data.zone);
-          if(target)target.click();
-        }
-        if(data.photo){
-          uploadedPhoto=data.photo;
-          photoPreview.src=uploadedPhoto;
-          cardPhoto.src=uploadedPhoto;
-          photoPreview.style.display='block';
-          cardPhoto.style.display='block';
-          photoPlus.style.display='none';
-          cardSilhouette.style.display='none';
-        }
-        statusText.textContent=`พบใบสมัครเดิมของ ${data.displayName||'นักเรียน'} สถานะปัจจุบันคือ “รอตรวจสอบ”`;
-        statusCard.classList.add('show');
-      }catch(e){}
-    }
+    if(saved){try{const data=JSON.parse(saved);displayName.value=data.displayName||'';nickname.value=data.nickname||'';reason.value=data.reason||'';reasonCount.textContent=reason.value.length;updateName();if(data.studentId)studentId.textContent=data.studentId;if(data.zone){const target=[...zones].find(z=>z.dataset.zone===data.zone);if(target)target.click()}if(data.photo){uploadedPhoto=data.photo;photoPreview.src=uploadedPhoto;cardPhoto.src=uploadedPhoto;photoPreview.style.display='block';cardPhoto.style.display='block';photoPlus.style.display='none';cardSilhouette.style.display='none'}statusText.textContent=`พบใบสมัครเดิมของ ${data.displayName||'นักเรียน'} สถานะปัจจุบันคือ “รอตรวจสอบ”`;statusCard.classList.add('show')}catch(e){}}
   </script>
 </body>
 </html>
