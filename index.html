@@ -2297,5 +2297,120 @@
       });
     })();
   </script>
+
+  <style>
+    /* PATCH v29: scroll + mouse movement lock fix */
+    html,
+    body{
+      min-height:100% !important;
+      height:auto !important;
+      overflow-x:hidden !important;
+      overflow-y:auto !important;
+      scroll-behavior:smooth;
+    }
+
+    body{
+      position:relative !important;
+      touch-action:auto !important;
+    }
+
+    main,
+    .page,
+    .site-main,
+    .wrap,
+    .container,
+    .dashboard,
+    .main-grid,
+    .hero-grid,
+    .content-grid,
+    .section-wrap{
+      height:auto !important;
+      min-height:0 !important;
+      overflow:visible !important;
+    }
+
+    /* ปิดเอฟเฟกต์กล่องขยับตามเมาส์ที่ทำให้หน้าเลื่อนไม่ได้ */
+    .hero-card,
+    .status-card,
+    .music-card,
+    .mini-box,
+    .official-card,
+    .voice-card,
+    .note-card,
+    .zone-card,
+    .glass-card,
+    .panel,
+    .card{
+      transform:none !important;
+      will-change:auto !important;
+    }
+
+    .hero-card:hover,
+    .status-card:hover,
+    .music-card:hover,
+    .mini-box:hover,
+    .official-card:hover,
+    .voice-card:hover,
+    .note-card:hover,
+    .zone-card:hover,
+    .glass-card:hover,
+    .panel:hover,
+    .card:hover{
+      transform:none !important;
+    }
+
+    /* เลเยอร์ตกแต่งห้ามบังการ scroll/click */
+    .bg-layer,
+    .background-layer,
+    .noise,
+    .sparkle-layer,
+    .decor-layer,
+    .mouse-light,
+    .cursor-glow,
+    .ambient-light{
+      pointer-events:none !important;
+    }
+  </style>
+
+  <script>
+    /* PATCH v29: stop old wheel/mousemove scripts from locking the page */
+    (function(){
+      function ready(fn){
+        if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", fn);
+        else fn();
+      }
+
+      ready(function(){
+        document.documentElement.style.overflowY = "auto";
+        document.documentElement.style.height = "auto";
+        document.body.style.overflowY = "auto";
+        document.body.style.height = "auto";
+        document.body.style.position = "relative";
+
+        /* กันสคริปต์เก่าที่จับเมาส์แล้วขยับกล่องทั้งหน้า */
+        const movableCards = document.querySelectorAll(".hero-card,.status-card,.music-card,.mini-box,.official-card,.voice-card,.note-card,.zone-card,.glass-card,.panel,.card");
+        movableCards.forEach(function(el){
+          el.style.transform = "none";
+          el.style.willChange = "auto";
+        });
+      });
+
+      /* ถ้ามีโค้ดเก่าที่ preventDefault ตอน wheel/touchmove ให้หยุดไม่ให้มันล็อกหน้า */
+      window.addEventListener("wheel", function(e){
+        e.stopImmediatePropagation();
+      }, {capture:true, passive:true});
+
+      window.addEventListener("touchmove", function(e){
+        e.stopImmediatePropagation();
+      }, {capture:true, passive:true});
+
+      window.addEventListener("mousemove", function(){
+        const movableCards = document.querySelectorAll(".hero-card,.status-card,.music-card,.mini-box,.official-card,.voice-card,.note-card,.zone-card,.glass-card,.panel,.card");
+        movableCards.forEach(function(el){
+          if(el.style.transform && el.style.transform !== "none") el.style.transform = "none";
+        });
+      }, {capture:true, passive:true});
+    })();
+  </script>
 </body>
 </html>
