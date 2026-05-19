@@ -6,366 +6,562 @@
   <title>E8’s Eden Academy</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
   <style>
     :root{
-      --navy:#071524;
-      --navy2:#0e2036;
-      --glass:rgba(10,24,39,.72);
-      --glass2:rgba(255,255,255,.10);
-      --line:rgba(215,190,143,.38);
-      --gold:#e9cf95;
-      --gold2:#b99155;
-      --cream:#fff7e7;
-      --text:#f7ead2;
-      --muted:#c7b99f;
-      --blue:#7fb6e8;
-      --shadow:0 24px 70px rgba(0,0,0,.38);
-      --radius:30px;
+      --navy:#06182d;
+      --navy-2:#0b223c;
+      --ink:#271b22;
+      --muted:#786a67;
+      --cream:#fff8ee;
+      --cream-2:#f3e5d1;
+      --gold:#e9d2a2;
+      --gold-2:#b99055;
+      --line:rgba(232,203,153,.50);
+      --shadow:0 24px 70px rgba(0,0,0,.30);
+      --radius:34px;
     }
 
     *{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
     body{
       min-height:100vh;
-      color:var(--text);
       font-family:"Noto Sans Thai",sans-serif;
+      color:var(--ink);
       background:
-        linear-gradient(180deg,rgba(4,12,22,.48),rgba(5,12,20,.78) 54%,rgba(6,13,18,.94)),
-        url('./black.png') center top / cover fixed no-repeat;
+        linear-gradient(180deg,rgba(4,12,24,.22),rgba(6,13,24,.70)),
+        url("./black.png") center top / cover fixed no-repeat;
       overflow-x:hidden;
     }
     body::before{
       content:"";
       position:fixed;
       inset:0;
+      z-index:-1;
       pointer-events:none;
       background:
-        radial-gradient(circle at 20% 8%,rgba(122,174,221,.28),transparent 28%),
-        radial-gradient(circle at 88% 18%,rgba(232,203,145,.20),transparent 26%),
-        linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px),
-        linear-gradient(0deg,rgba(255,255,255,.026) 1px,transparent 1px);
-      background-size:auto,auto,64px 64px,64px 64px;
-      z-index:-1;
+        radial-gradient(circle at 50% 8%,rgba(255,235,190,.18),transparent 35%),
+        linear-gradient(180deg,rgba(4,11,22,.08),rgba(7,13,23,.74));
     }
+    body::after{
+      content:"";
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      pointer-events:none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+      background-size:70px 70px;
+      mask-image:linear-gradient(to bottom,transparent,black 16%,black 80%,transparent);
+    }
+
     a{text-decoration:none;color:inherit}
+    button{font-family:inherit;cursor:pointer}
     img{max-width:100%;display:block}
 
-    .shell{width:min(1180px,calc(100% - 34px));margin:auto}
+    .container{width:min(1320px,calc(100% - 36px));margin:auto}
 
-    header{
+    .site-header{
       position:sticky;
       top:0;
       z-index:50;
+      background:linear-gradient(180deg,rgba(6,18,33,.94),rgba(4,13,25,.88));
       border-bottom:1px solid var(--line);
-      background:linear-gradient(180deg,rgba(7,18,31,.93),rgba(7,18,31,.76));
-      backdrop-filter:blur(18px);
-      box-shadow:0 12px 35px rgba(0,0,0,.24);
+      box-shadow:0 18px 42px rgba(0,0,0,.35);
+      backdrop-filter:blur(16px);
     }
-    .topbar{min-height:92px;display:flex;align-items:center;justify-content:space-between;gap:22px}
-    .brand{display:flex;align-items:center;gap:18px;min-width:260px}
+    .header-inner{
+      min-height:98px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:24px;
+      padding:12px 0;
+    }
+    .brand{display:flex;align-items:center;gap:18px;color:#fff7e8}
     .brand-logo{
-      width:76px;height:76px;object-fit:contain;
-      filter:drop-shadow(0 8px 14px rgba(0,0,0,.35));
+      width:82px;height:82px;border-radius:50%;object-fit:contain;
+      filter:drop-shadow(0 12px 24px rgba(0,0,0,.28));
     }
     .brand h1{
       font-family:"Cinzel",serif;
-      font-size:clamp(24px,3vw,38px);
+      font-size:clamp(28px,3vw,46px);
       line-height:1;
       letter-spacing:.02em;
-      color:#fff7df;
-      text-shadow:0 0 22px rgba(217,192,140,.24);
+      color:#fff7ea;
+      text-shadow:0 3px 18px rgba(0,0,0,.35);
     }
-    .brand p{margin-top:8px;color:var(--gold);font-weight:800;font-size:13px;letter-spacing:.08em}
-    nav{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex-wrap:wrap}
-    .nav-link{
-      padding:12px 18px;border-radius:999px;color:#f7ead2;font-weight:800;font-size:14px;
-      border:1px solid transparent;transition:.25s ease;background:rgba(255,255,255,.025)
+    .brand p{
+      margin-top:8px;
+      color:#e8c982;
+      font-weight:800;
+      letter-spacing:.04em;
     }
-    .nav-link:hover,.nav-link.active{border-color:rgba(233,207,149,.55);background:rgba(233,207,149,.11);transform:translateY(-2px)}
-    .nav-cta{background:linear-gradient(135deg,#0b2542,#183c60);border-color:rgba(233,207,149,.62);box-shadow:0 10px 28px rgba(0,0,0,.22)}
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .nav a{
+      color:rgba(255,247,234,.86);
+      font-weight:800;
+      padding:12px 18px;
+      border-radius:999px;
+      border:1px solid transparent;
+      transition:.25s ease;
+      white-space:nowrap;
+    }
+    .nav a:hover,.nav a.active{
+      color:#fff2c5;
+      background:rgba(255,255,255,.08);
+      border-color:rgba(232,203,153,.38);
+      transform:translateY(-1px);
+    }
+    .nav a.cta{
+      background:linear-gradient(180deg,#244362,#0b2139);
+      color:#fff1c6;
+      border:1px solid rgba(232,203,153,.68);
+      box-shadow:0 10px 24px rgba(0,0,0,.24);
+    }
 
-    .hero{padding:72px 0 36px}
-    .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:stretch}
+    .hero{padding:78px 0 38px;color:#fff7ea}
+    .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:stretch}
     .hero-card{
-      position:relative;overflow:hidden;border-radius:var(--radius);padding:34px;
-      background:linear-gradient(135deg,rgba(8,22,38,.82),rgba(18,38,58,.58));
-      border:1px solid rgba(233,207,149,.42);box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+      border-radius:42px;
+      background:linear-gradient(180deg,rgba(255,250,242,.91),rgba(239,220,193,.82));
+      border:1px solid rgba(232,203,153,.62);
+      box-shadow:var(--shadow);
+      padding:52px;
+      color:#2b2024;
     }
-    .hero-card::before,.section-card::before{
-      content:"";position:absolute;inset:14px;border-radius:calc(var(--radius) - 10px);
-      border:1px solid rgba(255,255,255,.10);pointer-events:none
+    .hero-card::before{
+      content:"";
+      position:absolute;inset:18px;border-radius:32px;
+      border:1px solid rgba(199,162,105,.33);pointer-events:none;
     }
-    .eyebrow{display:inline-flex;align-items:center;gap:9px;background:rgba(233,207,149,.14);border:1px solid rgba(233,207,149,.42);border-radius:999px;padding:8px 15px;color:#ffdf9c;font-family:"Cinzel",serif;font-weight:800;font-size:13px;letter-spacing:.05em}
-    .hero h2{font-family:"Cinzel",serif;font-size:clamp(44px,7vw,84px);line-height:.95;margin:22px 0;color:#fff7df;text-shadow:0 18px 46px rgba(0,0,0,.34)}
-    .hero h2 span{color:var(--gold)}
-    .hero p{color:#ded1b9;line-height:1.9;font-weight:600;max-width:700px}
-    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
-    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;border-radius:999px;padding:0 22px;font-weight:900;border:1px solid rgba(233,207,149,.45);transition:.25s ease;cursor:pointer}
-    .btn.primary{background:linear-gradient(135deg,#0a233d,#18466c);color:#fff2ca;box-shadow:0 12px 26px rgba(0,0,0,.28)}
-    .btn.soft{background:rgba(255,255,255,.08);color:#fff3d0}
-    .btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
-
-    .live-panel{display:grid;gap:14px}
-    .live-stat{
-      border-radius:24px;padding:20px 22px;background:rgba(255,255,255,.08);border:1px solid rgba(233,207,149,.28);
-      display:flex;align-items:center;justify-content:space-between;gap:14px;backdrop-filter:blur(10px)
+    .kicker{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:10px 18px;border-radius:999px;
+      background:linear-gradient(180deg,#102846,#07182b);
+      color:#ffe8ad;
+      border:1px solid rgba(232,203,153,.56);
+      font-family:"Cinzel",serif;font-weight:800;font-size:14px;
+      box-shadow:0 10px 26px rgba(0,0,0,.22);
     }
-    .live-stat strong{font-family:"Cinzel",serif;font-size:31px;color:#fff3c8}
-    .live-stat span{color:#cabda5;font-size:13px;font-weight:800}
-    .pulse-dot{width:10px;height:10px;border-radius:50%;background:#8ee7ff;box-shadow:0 0 0 7px rgba(142,231,255,.10),0 0 20px rgba(142,231,255,.75);animation:pulse 1.8s infinite}
-
-    .section{padding:38px 0}
-    .section-title{display:flex;justify-content:space-between;align-items:end;gap:18px;margin-bottom:18px}
-    .section-title h2{font-family:"Cinzel",serif;font-size:clamp(30px,4vw,48px);color:#fff7df}
-    .section-title p{color:#cabda5;font-weight:700;line-height:1.7}
-    .section-card{
-      position:relative;overflow:hidden;border-radius:var(--radius);padding:28px;
-      background:linear-gradient(135deg,rgba(11,25,42,.78),rgba(14,30,48,.50));
-      border:1px solid rgba(233,207,149,.36);box-shadow:var(--shadow);
+    .hero-card h2{
+      margin-top:22px;
+      font-family:"Playfair Display","Noto Sans Thai",serif;
+      font-size:clamp(48px,6vw,86px);
+      line-height:.96;
+      color:#2a1b22;
+      letter-spacing:-.03em;
     }
+    .hero-card h2 span{color:#805f3e}
+    .hero-card p{margin-top:26px;max-width:720px;color:rgba(53,38,41,.72);font-weight:700;line-height:1.9}
+    .hero-actions{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      min-height:52px;padding:0 26px;border-radius:999px;
+      border:1px solid rgba(199,162,105,.42);
+      font-weight:900;transition:.24s ease;
+    }
+    .btn.primary{background:linear-gradient(180deg,#17385e,#071a2e);color:#fff2c8;box-shadow:0 14px 28px rgba(0,0,0,.28)}
+    .btn.soft{background:rgba(255,255,255,.56);color:#6a4d35}
+    .btn:hover{transform:translateY(-2px)}
 
-    .carousel-wrap{padding:26px;background:rgba(3,11,19,.46);border:1px solid rgba(233,207,149,.32);border-radius:28px;position:relative;overflow:hidden}
-    .carousel-stage{height:clamp(420px,54vw,680px);border-radius:24px;overflow:hidden;position:relative;border:1px solid rgba(233,207,149,.32);background:#07111e}
-    .slide{position:absolute;inset:0;opacity:0;transition:opacity .8s ease;display:grid;place-items:center;background:rgba(0,0,0,.25)}
-    .slide.active{opacity:1;z-index:2}
-    .slide img{width:100%;height:100%;object-fit:cover;filter:saturate(.94) contrast(1.03)}
-    .slide::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(5,13,23,.72))}
-    .slide-caption{position:absolute;left:26px;right:26px;bottom:24px;z-index:3;display:flex;align-items:end;justify-content:space-between;gap:20px;flex-wrap:wrap}
-    .slide-caption h3{font-family:"Cinzel",serif;font-size:clamp(22px,3vw,36px);color:#fff4cf}
-    .slide-caption p{color:#d9ccb3;font-weight:800;margin-top:4px}
-    .slide-number{border-radius:999px;padding:10px 17px;background:rgba(7,21,36,.78);border:1px solid rgba(233,207,149,.40);color:#ffdf9c;font-family:"Cinzel",serif;font-weight:900}
-    .car-btn{position:absolute;top:50%;transform:translateY(-50%);z-index:4;width:48px;height:48px;border-radius:999px;border:1px solid rgba(233,207,149,.42);background:rgba(7,21,36,.72);color:#ffe4a5;font-size:28px;cursor:pointer;transition:.2s ease}
-    .car-btn:hover{background:rgba(233,207,149,.16)}
-    .car-prev{left:18px}.car-next{right:18px}
-    .dots{display:flex;justify-content:center;gap:8px;margin-top:16px}.dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.32);border:0;cursor:pointer}.dot.active{width:28px;border-radius:999px;background:var(--gold)}
+    .live-card{
+      border-radius:42px;
+      background:linear-gradient(180deg,rgba(5,17,31,.92),rgba(7,21,38,.88));
+      border:1px solid rgba(232,203,153,.52);
+      box-shadow:var(--shadow);
+      padding:32px;
+      color:#fff7ea;
+      display:flex;flex-direction:column;justify-content:space-between;
+      min-height:430px;
+    }
+    .live-card h3{font-size:28px;color:#fff0c7;font-family:"Playfair Display",serif}
+    .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:24px}
+    .stat{padding:20px;border-radius:24px;background:rgba(255,255,255,.08);border:1px solid rgba(232,203,153,.20)}
+    .stat b{font-family:"Cinzel",serif;font-size:34px;color:#ffe4a8}
+    .stat span{display:block;margin-top:4px;color:rgba(255,247,234,.70);font-weight:700}
+    .pulse-row{display:flex;align-items:center;gap:10px;margin-top:24px;color:rgba(255,247,234,.72);font-weight:800}
+    .pulse{width:10px;height:10px;border-radius:50%;background:#9de4ff;box-shadow:0 0 0 0 rgba(157,228,255,.7);animation:pulse 1.8s infinite}
+    @keyframes pulse{70%{box-shadow:0 0 0 12px rgba(157,228,255,0)}100%{box-shadow:0 0 0 0 rgba(157,228,255,0)}}
 
-    .board-list{display:grid;gap:12px}
-    .post{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:18px;padding:18px;border-radius:24px;background:rgba(255,255,255,.08);border:1px solid rgba(233,207,149,.24);transition:.25s ease;position:relative;overflow:hidden}
-    .post::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(var(--gold),var(--blue));opacity:.75}
-    .post:hover{transform:translateY(-3px);background:rgba(255,255,255,.12);border-color:rgba(233,207,149,.46)}
-    .post-icon{width:66px;height:66px;border-radius:18px;background:rgba(233,207,149,.16);display:grid;place-items:center;border:1px solid rgba(233,207,149,.23)}
-    .post-icon img{width:44px;height:44px;object-fit:contain;image-rendering:auto;filter:drop-shadow(0 7px 12px rgba(0,0,0,.28))}
-    .post h3{font-size:20px;color:#fff4d4;margin-bottom:8px;line-height:1.35}
-    .meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;color:#c9baa0;font-weight:800;font-size:13px}
-    .tag{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:6px 12px;font-size:12px;font-weight:900;color:#071524;box-shadow:0 7px 16px rgba(0,0,0,.16)}
-    .tag img{width:18px;height:18px}.tag.important{background:#d9eaff}.tag.zone{background:#dfc8ff}.tag.office{background:#f0ce91}.tag.apply{background:#c8eccd}.tag.schedule{background:#bfe8ff}.tag.activity{background:#f8c3db}.tag.chat{background:#deb39e}
-    .post-mark{text-align:right;color:#ffdf9c;font-family:"Cinzel",serif;font-size:22px;font-weight:900}.post-mark small{display:block;font-family:"Noto Sans Thai";font-size:12px;color:#c7b99f;margin-top:4px}
+    .welcome-modal{
+      position:fixed;inset:0;z-index:100;display:none;place-items:center;padding:22px;
+      background:rgba(3,8,16,.52);backdrop-filter:blur(12px);
+    }
+    .welcome-modal.show{display:grid;animation:fadeIn .2s ease-out both}
+    .modal-card{
+      width:min(620px,100%);border-radius:38px;padding:34px;
+      background:linear-gradient(180deg,rgba(255,250,242,.98),rgba(239,220,193,.96));
+      border:1px solid rgba(232,203,153,.62);
+      box-shadow:0 34px 90px rgba(0,0,0,.42);
+      color:#302126;text-align:center;position:relative;overflow:hidden;
+      animation:floatIn .55s cubic-bezier(.16,1,.3,1) both;
+    }
+    .modal-card::before,.modal-card::after{content:"✦";position:absolute;color:rgba(185,144,80,.42);font-size:34px}
+    .modal-card::before{top:22px;left:28px}.modal-card::after{right:28px;bottom:24px}
+    .modal-card img{width:118px;height:118px;object-fit:contain;margin:0 auto 18px;filter:drop-shadow(0 14px 22px rgba(0,0,0,.12))}
+    .modal-card h2{font-family:"Playfair Display","Noto Sans Thai",serif;font-size:clamp(36px,5vw,58px);line-height:1.05;color:#1e2633}
+    .modal-card p{margin:18px auto 0;max-width:480px;color:#695759;font-weight:700;line-height:1.9}
+    .modal-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:26px}
+    .modal-close{position:absolute;right:18px;top:18px;width:42px;height:42px;border-radius:50%;border:1px solid rgba(199,162,105,.46);background:rgba(255,255,255,.54);font-size:22px;color:#5b3d34}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    @keyframes floatIn{from{opacity:0;transform:translateY(20px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
 
-    .zone-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:12px}
-    .zone-card{min-height:170px;border-radius:24px;padding:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;border:1px solid rgba(255,255,255,.28);transition:.28s ease;position:relative;overflow:hidden;animation:float 4.8s ease-in-out infinite;background:rgba(255,255,255,.10)}
-    .zone-card:nth-child(2){animation-delay:.2s}.zone-card:nth-child(3){animation-delay:.4s}.zone-card:nth-child(4){animation-delay:.6s}.zone-card:nth-child(5){animation-delay:.8s}.zone-card:nth-child(6){animation-delay:1s}.zone-card:nth-child(7){animation-delay:1.2s}.zone-card:nth-child(8){animation-delay:1.4s}
-    .zone-card:hover{transform:translateY(-7px) scale(1.02)}
-    .zone-card img{height:82px;object-fit:contain;filter:drop-shadow(0 12px 18px rgba(0,0,0,.35))}.zone-card b{font-size:15px}.z1{background:linear-gradient(145deg,#0b3d66,#0c6eaa)}.z2{background:linear-gradient(145deg,#fffaf1,#d9c49c);color:#5b4628}.z3{background:linear-gradient(145deg,#7a0718,#c43042)}.z4{background:linear-gradient(145deg,#e9f7e5,#9cca91);color:#254321}.z5{background:linear-gradient(145deg,#eee1ff,#a984df);color:#4b2f76}.z6{background:linear-gradient(145deg,#ffe4ed,#e89bb8);color:#743049}.z7{background:linear-gradient(145deg,#effaff,#9fd7f5);color:#255d80}.z8{background:linear-gradient(145deg,#fff2c7,#d4a947);color:#533a10}
+    section{padding:42px 0}
+    .section-head{margin-bottom:22px;color:#fff7ea}
+    .section-head h2{font-family:"Playfair Display","Noto Sans Thai",serif;font-size:clamp(38px,4vw,58px);line-height:1;color:#fff7ea;text-shadow:0 4px 22px rgba(0,0,0,.35)}
+    .section-head p{margin-top:12px;color:rgba(255,247,234,.78);font-weight:700}
 
-    .split{display:grid;grid-template-columns:1.2fr .8fr;gap:20px}
-    .cta-box{min-height:220px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}.cta-box h2{font-family:"Cinzel",serif;font-size:clamp(30px,4vw,54px);line-height:1.05}.cta-box p{color:#d8c9ac;font-weight:700;line-height:1.9;margin-top:12px}.footer{padding:42px 0;color:#ad9d82;text-align:center;font-weight:700}
+    .slider-shell{
+      border-radius:42px;background:linear-gradient(180deg,rgba(5,17,31,.94),rgba(7,21,38,.90));
+      border:1px solid rgba(232,203,153,.52);box-shadow:var(--shadow);padding:28px;color:#fff7ea;overflow:hidden;
+    }
+    .slider-top{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:18px}
+    .slider-top h2{font-family:"Playfair Display",serif;font-size:30px;color:#fff0c7}
+    .counter{padding:10px 16px;border-radius:999px;border:1px solid rgba(232,203,153,.52);color:#ffe7ad;font-weight:900}
+    .slide-stage{
+      position:relative;height:clamp(440px,52vw,720px);border-radius:30px;overflow:hidden;
+      border:1px solid rgba(232,203,153,.35);background:#111;
+    }
+    .slide-stage img{width:100%;height:100%;object-fit:cover;transition:opacity .35s ease,transform .6s ease}
+    .slide-stage:hover img{transform:scale(1.02)}
+    .slide-btn{position:absolute;top:50%;transform:translateY(-50%);width:54px;height:54px;border-radius:50%;border:1px solid rgba(232,203,153,.54);background:rgba(5,17,31,.78);color:#ffe7ad;font-size:32px;z-index:3}
+    .slide-btn.prev{left:18px}.slide-btn.next{right:18px}
+    .dots{display:flex;justify-content:center;gap:8px;margin-top:18px}
+    .dot{width:10px;height:10px;border-radius:999px;background:rgba(255,255,255,.34);border:0;transition:.2s}
+    .dot.active{width:34px;background:#ffe1a1}
 
-    .modal{position:fixed;inset:0;background:rgba(2,8,14,.58);backdrop-filter:blur(12px);display:grid;place-items:center;z-index:99;padding:20px}.modal.hide{display:none}.modal-card{width:min(620px,100%);border-radius:34px;background:linear-gradient(145deg,rgba(10,24,39,.96),rgba(27,48,70,.93));border:1px solid rgba(233,207,149,.45);box-shadow:0 32px 90px rgba(0,0,0,.45);padding:34px;text-align:center;position:relative;overflow:hidden}.modal-card img{width:110px;margin:0 auto 18px;filter:drop-shadow(0 12px 20px rgba(0,0,0,.3))}.modal-card h2{font-family:"Cinzel",serif;font-size:clamp(32px,5vw,54px);color:#fff2cc;line-height:1.05}.modal-card p{color:#d7c7aa;line-height:1.8;font-weight:700;margin:18px 0 24px}.modal-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    .news-card,.zone-panel,.register-panel{
+      border-radius:42px;background:linear-gradient(180deg,rgba(255,250,242,.91),rgba(239,220,193,.82));
+      border:1px solid rgba(232,203,153,.62);box-shadow:var(--shadow);color:#2c2024;overflow:hidden;
+    }
+    .news-card{padding:22px}
+    .post{
+      display:grid;grid-template-columns:78px 1fr 86px;align-items:center;gap:18px;
+      padding:18px;border-radius:28px;background:linear-gradient(90deg,rgba(255,249,238,.93),rgba(238,222,201,.84));
+      border:1px solid rgba(219,184,132,.50);transition:.22s ease;color:#2e2024;
+    }
+    .post+.post{margin-top:14px}
+    .post:hover{transform:translateY(-2px);box-shadow:0 18px 42px rgba(0,0,0,.18)}
+    .post-icon{width:58px;height:58px;border-radius:18px;background:#f3ddaa;display:grid;place-items:center;box-shadow:0 10px 20px rgba(0,0,0,.10)}
+    .post-icon img{width:38px;height:38px;object-fit:contain;image-rendering:pixelated}
+    .post h3{font-size:20px;color:#2b2024}
+    .post-meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px;color:#8c7c76;font-weight:700}
+    .chip{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;font-size:13px;font-weight:900;border:1px solid rgba(0,0,0,.08);box-shadow:0 6px 12px rgba(0,0,0,.07)}
+    .chip img{width:18px;height:18px;image-rendering:pixelated}
+    .chip.important{background:#163d67;color:#fff4cf}.chip.zone{background:#d8c0f1;color:#5b3a7b}.chip.school{background:#e3bc74;color:#5d4019}.chip.schedule{background:#bfe7fa;color:#2d6381}.chip.activity{background:#f1abc8;color:#7e3858}.chip.apply{background:#bfe5bf;color:#326b38}.chip.talk{background:#d9a28e;color:#683827}
+    .post-side{text-align:right;color:#0f2440;font-weight:900}.post-side b{display:block;font-size:24px;line-height:1}.post-side span{font-size:13px;color:#786a67}
 
-    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
-    @keyframes pulse{0%{transform:scale(.92)}50%{transform:scale(1.15)}100%{transform:scale(.92)}}
+    .tag-board{padding:28px}.tag-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .tag-pill{border:0;border-radius:999px;min-height:44px;font-weight:900;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 10px 18px rgba(0,0,0,.09)}
+    .tag-pill img{width:22px;height:22px;image-rendering:pixelated}
 
-    @media(max-width:960px){.hero-grid,.split{grid-template-columns:1fr}.zone-grid{grid-template-columns:repeat(4,1fr)}.topbar{align-items:flex-start;flex-direction:column;padding:16px 0}nav{justify-content:flex-start}.post{grid-template-columns:auto 1fr}.post-mark{grid-column:2;text-align:left}}
-    @media(max-width:560px){.zone-grid{grid-template-columns:repeat(2,1fr)}.brand{min-width:0}.brand-logo{width:58px;height:58px}.hero-card,.section-card{padding:22px}.carousel-stage{height:420px}.post{grid-template-columns:1fr}.post-icon{width:58px;height:58px}.post-mark{grid-column:auto}.nav-link{padding:10px 13px;font-size:13px}}
+    .zone-panel{padding:28px}.zone-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:14px}
+    .zone-card{min-height:174px;border-radius:28px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;border:1px solid rgba(255,255,255,.42);box-shadow:0 16px 34px rgba(0,0,0,.16);transition:.24s ease;font-weight:900}
+    .zone-card:hover{transform:translateY(-5px) scale(1.02)}
+    .zone-card img{width:82px;height:82px;object-fit:contain;filter:drop-shadow(0 10px 14px rgba(0,0,0,.16))}
+    .e1{background:linear-gradient(150deg,#09315c,#2c87c5);color:#fff}.e2{background:linear-gradient(150deg,#fffaf0,#e7d5ad);color:#6a5539}.e3{background:linear-gradient(150deg,#7a0717,#d0505a);color:#fff}.e4{background:linear-gradient(150deg,#edf8e9,#b8d7ac);color:#42623a}.e5{background:linear-gradient(150deg,#f1e5ff,#b793df);color:#5d3f84}.e6{background:linear-gradient(150deg,#ffe5ef,#eda0be);color:#914866}.e7{background:linear-gradient(150deg,#f0fbff,#a9dbf2);color:#397390}.e8{background:linear-gradient(150deg,#fff2c8,#d7a943);color:#6c4e18}
+
+    .register-panel{padding:38px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+    .register-panel h2{font-family:"Playfair Display","Noto Sans Thai",serif;font-size:clamp(38px,4vw,58px);line-height:1;color:#2a1b22}
+    .register-panel p{margin-top:12px;color:#786a67;font-weight:700;line-height:1.8}
+
+    footer{text-align:center;color:rgba(255,247,234,.74);font-weight:700;padding:38px 0 56px;text-shadow:0 2px 14px rgba(0,0,0,.38)}
+
+    @media(max-width:980px){
+      .hero-grid{grid-template-columns:1fr}.header-inner{align-items:flex-start;flex-direction:column}.nav{justify-content:flex-start}.zone-grid{grid-template-columns:repeat(4,1fr)}.tag-grid{grid-template-columns:repeat(2,1fr)}.post{grid-template-columns:62px 1fr}.post-side{grid-column:2;text-align:left}.register-panel{flex-direction:column;align-items:flex-start}.brand-logo{width:68px;height:68px}.slide-stage{height:520px}
+    }
+    @media(max-width:620px){
+      .container{width:min(100% - 24px,1320px)}.hero-card{padding:34px 24px}.live-card{padding:24px}.zone-grid{grid-template-columns:repeat(2,1fr)}.tag-grid{grid-template-columns:1fr}.post{grid-template-columns:1fr}.post-icon{width:54px;height:54px}.slide-stage{height:420px}.slide-btn{width:44px;height:44px}.brand h1{font-size:28px}
+    }
   </style>
 </head>
 <body>
-  <div class="modal" id="welcomeModal">
+  <div class="welcome-modal" id="welcomeModal" aria-hidden="true">
     <div class="modal-card">
-      <img src="./eden.png" alt="E8’s Eden Academy Logo" onerror="this.style.display='none'">
-      <h2>Welcome to<br>E8’s Eden Academy</h2>
-      <p>กรุณาตรวจสอบตารางเรียนแต่ละโซนของท่านด้วยค่ะ และสมัครสมาชิกเพื่อเข้าสู่ระบบนักเรียนของสถาบัน</p>
+      <button class="modal-close" type="button" id="closeModal">×</button>
+      <img src="./eden.png" alt="E8’s Eden Academy Logo">
+      <h2>ยินดีต้อนรับสู่<br>E8’s Eden Academy</h2>
+      <p>กรุณาตรวจสอบตารางเรียนแต่ละโซนของท่านด้วยค่ะ และสามารถสมัครบัตรนักเรียนเพื่อเข้าใช้ระบบสมาชิกได้</p>
       <div class="modal-actions">
-        <a class="btn primary" href="./register.html">สมัครสมาชิก</a>
+        <a class="btn primary" href="./register.html">สมัครบัตรนักเรียน</a>
         <button class="btn soft" type="button" id="enterSite">เข้าสู่หน้าเว็บ</button>
       </div>
     </div>
   </div>
 
-  <header>
-    <div class="shell topbar">
-      <a class="brand" href="./index.html">
-        <img class="brand-logo" src="./eden.png" alt="E8's Eden Academy Logo">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="./index.html" aria-label="E8 Eden Academy Home">
+        <img class="brand-logo" src="./eden.png" alt="โรงเรียนอีเดน Logo">
         <div>
           <h1>E8’s Eden Academy</h1>
-          <p>STUDENT REGISTRATION PORTAL ✦</p>
+          <p>ระบบการรับสมัครเข้าเรียน ✦</p>
         </div>
       </a>
-      <nav>
-        <a class="nav-link active" href="./index.html">หน้าหลัก</a>
-        <a class="nav-link" href="#news">ข่าวสาร</a>
-        <a class="nav-link" href="#board">กระดานนักเรียน</a>
-        <a class="nav-link" href="#zones">โซนทั้ง 8</a>
-        <a class="nav-link nav-cta" href="./register.html">✦ สมัครสมาชิก</a>
+      <nav class="nav">
+        <a class="active" href="./index.html">หน้าหลัก</a>
+        <a href="#news">ข่าวสาร</a>
+        <a href="#tags">กิจกรรม</a>
+        <a href="#zones">โซนทั้ง 8</a>
+        <a href="./board.html">กระดานนักเรียน</a>
+        <a class="cta" href="./register.html">✦ สมัครบัตรนักเรียน</a>
       </nav>
     </div>
   </header>
 
   <main>
     <section class="hero">
-      <div class="shell hero-grid">
+      <div class="container hero-grid">
         <article class="hero-card">
-          <span class="eyebrow">TODAY'S ANNOUNCEMENT</span>
-          <h2>เปิดระบบ<br><span>สมาชิกนักเรียน</span></h2>
-          <p>นักเรียนสามารถสมัครสมาชิก เลือกโซนประจำตัว ตรวจสอบข่าวสาร และติดตามตารางเรียนของแต่ละโซนได้จากหน้าเว็บของสถาบัน</p>
+          <span class="kicker">TODAY’S ANNOUNCEMENT</span>
+          <h2>เปิดระบบสมัคร<br><span>บัตรนักเรียนใหม่</span></h2>
+          <p>นักเรียนสามารถสมัครบัตร เลือกโซนประจำตัว ตรวจสอบข่าวสาร และติดตามตารางเรียนของแต่ละโซนได้จากหน้าเว็บของสถาบัน</p>
           <div class="hero-actions">
-            <a class="btn primary" href="./register.html">สมัครสมาชิก</a>
+            <a class="btn primary" href="./register.html">สมัครบัตรนักเรียน</a>
             <a class="btn soft" href="#news">อ่านประกาศสถาบัน</a>
           </div>
         </article>
 
-        <aside class="hero-card live-panel">
-          <div class="live-stat"><div><strong id="onlineCount">128</strong><br><span>กำลังใช้งานหน้าเว็บ</span></div><i class="pulse-dot"></i></div>
-          <div class="live-stat"><div><strong id="studentCount">2,407</strong><br><span>จำนวนนักเรียนในระบบ</span></div><span>✦</span></div>
-          <div class="live-stat"><div><strong>8</strong><br><span>โซนประจำสถาบัน</span></div><span>ZONE</span></div>
+        <aside class="live-card">
+          <div>
+            <h3>Academy Live Status</h3>
+            <div class="pulse-row"><span class="pulse"></span><span>กำลังมีผู้ใช้งานหน้าเว็บ</span></div>
+            <div class="stats">
+              <div class="stat"><b id="onlineNow">128</b><span>ผู้เข้าชมตอนนี้</span></div>
+              <div class="stat"><b id="studentTotal">2,684</b><span>จำนวนนักเรียนในระบบ</span></div>
+              <div class="stat"><b>8</b><span>โซนประจำสถาบัน</span></div>
+              <div class="stat"><b>24</b><span>ประกาศเดือนนี้</span></div>
+            </div>
+          </div>
+          <p style="color:rgba(255,247,234,.70);line-height:1.8;font-weight:700;margin-top:24px">ข้อมูลสถานะใช้สำหรับเพิ่มบรรยากาศการใช้งานหน้าเว็บ และเตรียมรองรับระบบสมาชิกในอนาคต</p>
         </aside>
       </div>
     </section>
 
-    <section class="section" id="news">
-      <div class="shell">
-        <div class="section-title">
-          <div>
-            <h2>ภาพประกาศจากสถาบัน</h2>
-            <p>เลื่อนอัตโนมัติ หรือกดลูกศรเพื่อดูรูปประกาศ 1-8</p>
-          </div>
-        </div>
-        <article class="section-card">
-          <div class="carousel-wrap">
-            <button class="car-btn car-prev" type="button" aria-label="Previous">‹</button>
-            <div class="carousel-stage" id="carouselStage">
-              <div class="slide active"><img src="./1.png" alt="ประกาศหมายเลข 1"><div class="slide-caption"><div><h3>ประกาศหมายเลข 1</h3><p>ข่าวสารจากทางสถาบัน</p></div><span class="slide-number">1 / 8</span></div></div>
-              <div class="slide"><img src="./2.png" alt="ประกาศหมายเลข 2"><div class="slide-caption"><div><h3>ประกาศหมายเลข 2</h3><p>ข่าวสารจากทางสถาบัน</p></div><span class="slide-number">2 / 8</span></div></div>
-              <div class="slide"><img src="./3.png" alt="ประกาศหมายเลข 3"><div class="slide-caption"><div><h3>ประกาศหมายเลข 3</h3><p>ข่าวสารจากทางสถาบัน</p></div><span class="slide-number">3 / 8</span></div></div>
-              <div class="slide"><img src="./4.png" alt="ประกาศหมายเลข 4"><div class="slide-caption"><div><h3>ประกาศหมายเลข 4</h3><p>ข่าวสารจากทางสถาบัน</p></div><span class="slide-number">4 / 8</span></div></div>
-              <div class="slide"><img src="./5.png" alt="ประกาศหมายเลข 5"><div class="slide-caption"><div><h3>ประกาศหมายเลข 5</h3><p>ข่าวสารจากทางสถาบัน</p></div><span class="slide-number">5 / 8</span></div></div>
-              <div class="slide"><img src="./6.png" alt="ประกาศหมายเลข 6"><div class="slide-caption"><div><h3>ประกาศหมายเลข 6</h3><p>ข่าวสารจากทางสถาบัน</p></div><span class="slide-number">6 / 8</span></div></div>
-              <div class="slide"><img src="./7.png" alt="ประกาศหมายเลข 7"><div class="slide-caption"><div><h3>ประกาศหมายเลข 7</h3><p>ข่าวสารจากทางสถาบัน</p></div><span class="slide-number">7 / 8</span></div></div>
-              <div class="slide"><img src="./8.png" alt="ประกาศหมายเลข 8"><div class="slide-caption"><div><h3>ประกาศหมายเลข 8</h3><p>ข่าวสารจากทางสถาบัน</p></div><span class="slide-number">8 / 8</span></div></div>
+    <section id="official">
+      <div class="container">
+        <div class="slider-shell">
+          <div class="slider-top">
+            <div>
+              <h2>ภาพประกาศจากสถาบัน</h2>
+              <p style="color:rgba(255,247,234,.70);font-weight:700;margin-top:4px">เลื่อนอัตโนมัติ หรือกดลูกศรเพื่อดูรูป 1-8</p>
             </div>
-            <button class="car-btn car-next" type="button" aria-label="Next">›</button>
-            <div class="dots" id="dots"></div>
+            <div class="counter"><span id="slideNumber">1</span> / 8</div>
           </div>
-        </article>
+          <div class="slide-stage">
+            <button class="slide-btn prev" type="button" id="prevSlide">‹</button>
+            <img id="slideImage" src="./1.png" alt="ประกาศสถาบัน">
+            <button class="slide-btn next" type="button" id="nextSlide">›</button>
+          </div>
+          <div class="dots" id="dots"></div>
+        </div>
       </div>
     </section>
 
-    <section class="section" id="board">
-      <div class="shell">
-        <div class="section-title">
-          <div>
-            <h2>กระทู้แนะนำ</h2>
-            <p>กระทู้ปักหมุด ข่าวสาร กิจกรรม และหัวข้อจากกระดานนักเรียน</p>
-          </div>
+    <section id="news">
+      <div class="container">
+        <div class="section-head">
+          <h2>กระทู้แนะนำ</h2>
+          <p>กระทู้ปักหมุด ข่าวสาร กิจกรรม และหัวข้อจากกระดานนักเรียน</p>
         </div>
-        <article class="section-card board-list">
-          <a class="post" href="./board.html#castle-lords">
+
+        <div class="news-card">
+          <a class="post" href="./board.html#owners">
             <div class="post-icon"><img src="./pin.png" alt="pin"></div>
-            <div><h3>โฉมหน้าของเจ้าของปราสาททั้ง 7 โซน</h3><div class="meta"><span class="tag important"><img src="./b5.png">ข่าวสารสำคัญ</span><span class="tag zone"><img src="./b2.png">เรื่องโซน</span><span>กระดานนักเรียน</span></div></div>
-            <div class="post-mark">PIN<small>เปิดอ่าน</small></div>
+            <div>
+              <h3>โฉมหน้าของเจ้าของปราสาททั้ง 7 โซน</h3>
+              <div class="post-meta">
+                <span class="chip important"><img src="./b5.png" alt="">ข่าวสารสำคัญ</span>
+                <span class="chip zone"><img src="./b2.png" alt="">เรื่องโซน</span>
+                <span>กระดานนักเรียน</span>
+              </div>
+            </div>
+            <div class="post-side"><b>PIN</b><span>เปิดอ่าน</span></div>
           </a>
+
           <a class="post" href="./register.html">
-            <div class="post-icon"><img src="./b4.png" alt="apply"></div>
-            <div><h3>ประกาศเปิดรับสมัครสมาชิกนักเรียนประจำภาคเรียน</h3><div class="meta"><span class="tag apply"><img src="./b4.png">สมัครนักเรียน</span><span class="tag office"><img src="./b6.png">ประกาศสถาบัน</span><span>วันนี้ 09:00</span></div></div>
-            <div class="post-mark">NEW<small>อัปเดตล่าสุด</small></div>
+            <div class="post-icon"><img src="./b4.png" alt="สมัคร"></div>
+            <div>
+              <h3>ประกาศเปิดรับสมัครสมาชิกนักเรียนประจำภาคเรียน</h3>
+              <div class="post-meta">
+                <span class="chip apply"><img src="./b7.png" alt="">สมัครนักเรียน</span>
+                <span class="chip school"><img src="./b6.png" alt="">ประกาศสถาบัน</span>
+                <span>วันนี้ 09:00</span>
+              </div>
+            </div>
+            <div class="post-side"><b>NEW</b><span>อัปเดตล่าสุด</span></div>
           </a>
+
           <a class="post" href="./board.html#schedule">
-            <div class="post-icon"><img src="./b5.png" alt="schedule"></div>
-            <div><h3>คู่มือการตรวจสอบตารางเรียนของแต่ละโซน</h3><div class="meta"><span class="tag schedule"><img src="./b5.png">ตารางเรียน</span><span class="tag zone"><img src="./b2.png">เรื่องโซน</span><span>Academic Office</span></div></div>
-            <div class="post-mark">E1-E8<small>สำหรับสมาชิก</small></div>
+            <div class="post-icon"><img src="./b5.png" alt="ตารางเรียน"></div>
+            <div>
+              <h3>คู่มือการตรวจสอบตารางเรียนของแต่ละโซน</h3>
+              <div class="post-meta">
+                <span class="chip schedule"><img src="./b5.png" alt="">ตารางเรียน</span>
+                <span class="chip zone"><img src="./b2.png" alt="">เรื่องโซน</span>
+                <span>Academic Office</span>
+              </div>
+            </div>
+            <div class="post-side"><b>E1-E8</b><span>สำหรับสมาชิก</span></div>
           </a>
+
           <a class="post" href="./board.html#welcome-week">
-            <div class="post-icon"><img src="./b1.png" alt="activity"></div>
-            <div><h3>กิจกรรมต้อนรับนักเรียนใหม่: Eden Welcome Week</h3><div class="meta"><span class="tag activity"><img src="./b1.png">กิจกรรม</span><span class="tag apply"><img src="./b4.png">สังคมนักเรียน</span><span>Eden Council</span></div></div>
-            <div class="post-mark">08<small>โซนเข้าร่วม</small></div>
+            <div class="post-icon"><img src="./b1.png" alt="กิจกรรม"></div>
+            <div>
+              <h3>กิจกรรมต้อนรับนักเรียนใหม่: Eden Welcome Week</h3>
+              <div class="post-meta">
+                <span class="chip activity"><img src="./b1.png" alt="">กิจกรรม</span>
+                <span class="chip apply"><img src="./b7.png" alt="">สังคมนักเรียน</span>
+                <span>Eden Council</span>
+              </div>
+            </div>
+            <div class="post-side"><b>08</b><span>โซนเข้าร่วม</span></div>
           </a>
-          <a class="post" href="./board.html#social">
-            <div class="post-icon"><img src="./b3.png" alt="chat"></div>
-            <div><h3>กระทู้พูดคุยทั่วไป: แชร์มุมโปรดในโรงเรียน</h3><div class="meta"><span class="tag chat"><img src="./b3.png">พูดคุยทั่วไป</span><span class="tag apply"><img src="./b4.png">สังคมนักเรียน</span><span>Student Board</span></div></div>
-            <div class="post-mark">CHAT<small>กำลังพูดถึง</small></div>
+
+          <a class="post" href="./board.html#talk">
+            <div class="post-icon"><img src="./b3.png" alt="พูดคุย"></div>
+            <div>
+              <h3>กระทู้พูดคุยทั่วไป: แชร์มุมโปรดในโรงเรียน</h3>
+              <div class="post-meta">
+                <span class="chip talk"><img src="./b3.png" alt="">พูดคุยทั่วไป</span>
+                <span class="chip apply"><img src="./b7.png" alt="">สังคมนักเรียน</span>
+                <span>Student Board</span>
+              </div>
+            </div>
+            <div class="post-side"><b>CHAT</b><span>กำลังพูดถึง</span></div>
           </a>
-        </article>
+        </div>
       </div>
     </section>
 
-    <section class="section" id="zones">
-      <div class="shell">
-        <div class="section-title">
-          <div>
-            <h2>สัญลักษณ์ประจำโซน</h2>
-            <p>เลือกโซนที่ตรงกับตัวตนของคุณหลังสมัครสมาชิก</p>
+    <section id="tags">
+      <div class="container">
+        <div class="section-head">
+          <h2>แท็กกระดานนักเรียน</h2>
+          <p>กดแท็กเพื่อไปยังกระดานที่เกี่ยวข้อง แต่ละแท็กมีสัญลักษณ์ B ประจำหมวด</p>
+        </div>
+        <div class="zone-panel tag-board">
+          <div class="tag-grid">
+            <button class="tag-pill chip important"><img src="./b5.png" alt="">ข่าวสารสำคัญ</button>
+            <button class="tag-pill chip zone"><img src="./b2.png" alt="">เรื่องโซน</button>
+            <button class="tag-pill chip school"><img src="./b6.png" alt="">ประกาศสถาบัน</button>
+            <button class="tag-pill chip apply"><img src="./b7.png" alt="">สังคมนักเรียน</button>
+            <button class="tag-pill chip schedule"><img src="./b5.png" alt="">ตารางเรียน</button>
+            <button class="tag-pill chip activity"><img src="./b1.png" alt="">กิจกรรม</button>
+            <button class="tag-pill chip apply"><img src="./b4.png" alt="">สมัครนักเรียน</button>
+            <button class="tag-pill chip talk"><img src="./b3.png" alt="">พูดคุยทั่วไป</button>
           </div>
         </div>
-        <article class="section-card">
-          <div class="zone-grid">
-            <div class="zone-card z1"><img src="./e1.png" alt="E1"><b>E1 Zone</b></div>
-            <div class="zone-card z2"><img src="./e2.png" alt="E2"><b>E2 Zone</b></div>
-            <div class="zone-card z3"><img src="./e3.png" alt="E3"><b>E3 Zone</b></div>
-            <div class="zone-card z4"><img src="./e4.png" alt="E4"><b>E4 Zone</b></div>
-            <div class="zone-card z5"><img src="./e5.png" alt="E5"><b>E5 Zone</b></div>
-            <div class="zone-card z6"><img src="./e6.png" alt="E6"><b>E6 Zone</b></div>
-            <div class="zone-card z7"><img src="./e7.png" alt="E7"><b>E7 Zone</b></div>
-            <div class="zone-card z8"><img src="./e8.png" alt="E8"><b>E8 Zone</b></div>
-          </div>
-        </article>
       </div>
     </section>
 
-    <section class="section">
-      <div class="shell">
-        <article class="section-card cta-box">
-          <div>
-            <h2>สมัครสมาชิกนักเรียน</h2>
-            <p>พื้นที่นี้เตรียมไว้สำหรับเชื่อมระบบสมัครสมาชิก และตรวจสอบตารางเรียนของแต่ละโซนในอนาคต</p>
+    <section id="zones">
+      <div class="container">
+        <div class="section-head">
+          <h2>สัญลักษณ์ประจำโซน</h2>
+          <p>เลือกโซนที่ตรงกับตัวตนของคุณหลังสมัครบัตรนักเรียน</p>
+        </div>
+        <div class="zone-panel">
+          <div class="zone-grid">
+            <div class="zone-card e1"><img src="./e1.png" alt="E1"><span>E1 Zone</span></div>
+            <div class="zone-card e2"><img src="./e2.png" alt="E2"><span>E2 Zone</span></div>
+            <div class="zone-card e3"><img src="./e3.png" alt="E3"><span>E3 Zone</span></div>
+            <div class="zone-card e4"><img src="./e4.png" alt="E4"><span>E4 Zone</span></div>
+            <div class="zone-card e5"><img src="./e5.png" alt="E5"><span>E5 Zone</span></div>
+            <div class="zone-card e6"><img src="./e6.png" alt="E6"><span>E6 Zone</span></div>
+            <div class="zone-card e7"><img src="./e7.png" alt="E7"><span>E7 Zone</span></div>
+            <div class="zone-card e8"><img src="./e8.png" alt="E8"><span>E8 Zone</span></div>
           </div>
-          <a class="btn primary" href="./register.html">ไปหน้าสมัครสมาชิก</a>
-        </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="register">
+      <div class="container">
+        <div class="register-panel">
+          <div>
+            <h2>สมัครบัตรนักเรียน</h2>
+            <p>พื้นที่นี้เตรียมไว้สำหรับเชื่อมระบบสมัครสมาชิกและตรวจสอบตารางเรียนของแต่ละโซนในอนาคต</p>
+          </div>
+          <a class="btn primary" href="./register.html">ไปหน้าสมัครบัตรนักเรียน</a>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="shell">E8’s Eden Academy © Admission Portal · Student Registration · School News · Zone Schedule</div>
+  <footer>
+    E8’s Eden Academy © Admission Portal<br>
+    Student Registration • School News • Zone Schedule
   </footer>
 
   <script>
     const modal=document.getElementById('welcomeModal');
+    const closeModal=document.getElementById('closeModal');
     const enterSite=document.getElementById('enterSite');
-    const modalSeen=sessionStorage.getItem('e8WelcomeSeen');
-    if(modalSeen==='true') modal.classList.add('hide');
-    enterSite.addEventListener('click',()=>{modal.classList.add('hide');sessionStorage.setItem('e8WelcomeSeen','true')});
-
-    const online=document.getElementById('onlineCount');
-    const students=document.getElementById('studentCount');
-    let onlineBase=128;
-    setInterval(()=>{
-      onlineBase+=Math.floor(Math.random()*5)-2;
-      onlineBase=Math.max(96,Math.min(188,onlineBase));
-      online.textContent=onlineBase.toLocaleString('en-US');
-      const studentBase=2407+Math.floor(Math.random()*8);
-      students.textContent=studentBase.toLocaleString('en-US');
-    },2800);
-
-    const slides=[...document.querySelectorAll('.slide')];
-    const dots=document.getElementById('dots');
-    let current=0;
-    slides.forEach((_,i)=>{
-      const dot=document.createElement('button');
-      dot.className='dot'+(i===0?' active':'');
-      dot.type='button';
-      dot.addEventListener('click',()=>showSlide(i));
-      dots.appendChild(dot);
-    });
-    const dotButtons=[...document.querySelectorAll('.dot')];
-    function showSlide(index){
-      current=(index+slides.length)%slides.length;
-      slides.forEach((slide,i)=>slide.classList.toggle('active',i===current));
-      dotButtons.forEach((dot,i)=>dot.classList.toggle('active',i===current));
+    function hideModal(){modal.classList.remove('show');modal.setAttribute('aria-hidden','true')}
+    function showModal(){modal.classList.add('show');modal.setAttribute('aria-hidden','false')}
+    closeModal.addEventListener('click',hideModal);
+    enterSite.addEventListener('click',hideModal);
+    modal.addEventListener('click',event=>{if(event.target===modal)hideModal()});
+    const params=new URLSearchParams(window.location.search);
+    if(!sessionStorage.getItem('e8WelcomeSeen') || params.get('logout')==='1'){
+      setTimeout(showModal,520);
+      sessionStorage.setItem('e8WelcomeSeen','true');
     }
-    document.querySelector('.car-prev').addEventListener('click',()=>showSlide(current-1));
-    document.querySelector('.car-next').addEventListener('click',()=>showSlide(current+1));
-    setInterval(()=>showSlide(current+1),5200);
+
+    const onlineNow=document.getElementById('onlineNow');
+    const studentTotal=document.getElementById('studentTotal');
+    let online=128;
+    let total=2684;
+    setInterval(()=>{
+      online+=Math.floor(Math.random()*7)-3;
+      online=Math.max(96,Math.min(162,online));
+      onlineNow.textContent=online.toLocaleString('en-US');
+    },2600);
+    setInterval(()=>{
+      if(Math.random()>.62) total+=1;
+      studentTotal.textContent=total.toLocaleString('en-US');
+    },5200);
+
+    const slideImage=document.getElementById('slideImage');
+    const slideNumber=document.getElementById('slideNumber');
+    const prevSlide=document.getElementById('prevSlide');
+    const nextSlide=document.getElementById('nextSlide');
+    const dots=document.getElementById('dots');
+    let currentSlide=1;
+    let slideTimer;
+    for(let i=1;i<=8;i++){
+      const dot=document.createElement('button');
+      dot.className='dot';
+      dot.type='button';
+      dot.setAttribute('aria-label','slide '+i);
+      dot.addEventListener('click',()=>goSlide(i,true));
+      dots.appendChild(dot);
+    }
+    function updateDots(){[...dots.children].forEach((dot,index)=>dot.classList.toggle('active',index+1===currentSlide))}
+    function goSlide(num,manual=false){
+      currentSlide=num;
+      if(currentSlide<1)currentSlide=8;
+      if(currentSlide>8)currentSlide=1;
+      slideImage.style.opacity='0';
+      setTimeout(()=>{slideImage.src=`./${currentSlide}.png`;slideNumber.textContent=currentSlide;updateDots();slideImage.style.opacity='1'},160);
+      if(manual)restartSlide();
+    }
+    function restartSlide(){clearInterval(slideTimer);slideTimer=setInterval(()=>goSlide(currentSlide+1),4200)}
+    prevSlide.addEventListener('click',()=>goSlide(currentSlide-1,true));
+    nextSlide.addEventListener('click',()=>goSlide(currentSlide+1,true));
+    updateDots();restartSlide();
   </script>
 </body>
 </html>
