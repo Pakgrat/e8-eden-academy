@@ -274,19 +274,120 @@
     .section-head h2{font-family:"Playfair Display","Noto Sans Thai",serif;font-size:clamp(38px,4vw,58px);line-height:1;color:#fff7ea;text-shadow:0 4px 22px rgba(0,0,0,.35)}
     .section-head p{margin-top:12px;color:rgba(255,247,234,.78);font-weight:700}
 
-    .slider-shell{
-      width:min(1180px,100%);
-      margin:0 auto;
-      border-radius:34px;background:linear-gradient(180deg,rgba(5,17,31,.94),rgba(7,21,38,.90));
-      border:1px solid rgba(232,203,153,.52);box-shadow:0 20px 54px rgba(0,0,0,.28);padding:24px;color:#fff7ea;overflow:hidden;
+    .official-layout{
+      display:grid;
+      grid-template-columns:minmax(260px,1fr) minmax(330px,430px);
+      gap:18px;
+      align-items:stretch;
     }
-    .slider-top{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:18px}
-    .slider-top h2{font-family:"Playfair Display",serif;font-size:30px;color:#fff0c7}
+    .feedback-stack{
+      display:grid;
+      grid-template-rows:1fr 1fr;
+      gap:18px;
+    }
+    .feedback-box{
+      aspect-ratio:1/1;
+      min-height:0;
+      border-radius:34px;
+      background:linear-gradient(180deg,rgba(255,250,242,.92),rgba(239,220,193,.82));
+      border:1px solid rgba(232,203,153,.60);
+      box-shadow:0 20px 54px rgba(0,0,0,.22);
+      padding:24px;
+      color:#2c2024;
+      position:relative;
+      overflow:hidden;
+    }
+    .feedback-box::before{
+      content:"✦";
+      position:absolute;
+      right:22px;
+      top:16px;
+      font-size:34px;
+      color:rgba(164,118,66,.24);
+    }
+    .feedback-box h2,
+    .feedback-box h3{
+      font-family:"Playfair Display","Noto Sans Thai",serif;
+      color:#2b2024;
+      line-height:1.08;
+      position:relative;
+      z-index:2;
+    }
+    .feedback-box h2{font-size:clamp(28px,3vw,40px)}
+    .feedback-box h3{font-size:28px}
+    .feedback-box p{
+      margin-top:9px;
+      color:#7b6a63;
+      font-weight:800;
+      line-height:1.65;
+      position:relative;
+      z-index:2;
+    }
+    .feedback-form{
+      margin-top:16px;
+      display:grid;
+      gap:10px;
+      position:relative;
+      z-index:2;
+    }
+    .feedback-form input,
+    .feedback-form textarea{
+      width:100%;
+      border:1px solid rgba(190,150,91,.35);
+      border-radius:18px;
+      background:rgba(255,255,255,.62);
+      padding:12px 14px;
+      font-family:inherit;
+      font-weight:700;
+      color:#34242a;
+      outline:none;
+    }
+    .feedback-form textarea{
+      min-height:96px;
+      resize:none;
+    }
+    .feedback-form input:focus,
+    .feedback-form textarea:focus{
+      border-color:rgba(20,45,74,.70);
+      box-shadow:0 0 0 4px rgba(20,45,74,.10);
+    }
+    .comment-preview{
+      margin-top:16px;
+      display:grid;
+      gap:10px;
+      position:relative;
+      z-index:2;
+    }
+    .preview-line{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 12px;
+      border-radius:18px;
+      background:rgba(255,255,255,.48);
+      border:1px solid rgba(190,150,91,.22);
+      color:#6f5c58;
+      font-weight:800;
+      font-size:13px;
+    }
+    .preview-dot{
+      width:11px;height:11px;border-radius:50%;background:#e8a7c7;box-shadow:0 0 0 4px rgba(232,167,199,.18);
+      flex:0 0 auto;
+    }
+    .slider-shell{
+      width:100%;
+      height:100%;
+      margin:0;
+      border-radius:34px;background:linear-gradient(180deg,rgba(5,17,31,.94),rgba(7,21,38,.90));
+      border:1px solid rgba(232,203,153,.52);box-shadow:0 20px 54px rgba(0,0,0,.28);padding:22px;color:#fff7ea;overflow:hidden;
+    }
+    .slider-top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:14px}
+    .slider-top h2{font-family:"Playfair Display",serif;font-size:24px;color:#fff0c7;line-height:1.15}
     .counter{padding:10px 16px;border-radius:999px;border:1px solid rgba(232,203,153,.52);color:#ffe7ad;font-weight:900}
     .slide-stage{
       position:relative;
       width:100%;
-      height:clamp(430px,48vw,620px);
+      height:680px;
       border-radius:26px;
       overflow:hidden;
       border:1px solid rgba(232,203,153,.35);
@@ -301,6 +402,36 @@
     .dots{display:flex;justify-content:center;gap:8px;margin-top:18px}
     .dot{width:10px;height:10px;border-radius:999px;background:rgba(255,255,255,.34);border:0;transition:.2s}
     .dot.active{width:34px;background:#ffe1a1}
+
+    .feedback-modal{
+      position:fixed;
+      inset:0;
+      z-index:120;
+      display:none;
+      place-items:center;
+      padding:22px;
+      background:rgba(7,10,18,.44);
+      backdrop-filter:blur(10px);
+    }
+    .feedback-modal.show{display:grid;animation:fadeIn .18s ease-out both}
+    .feedback-popup{
+      width:min(460px,100%);
+      border-radius:34px;
+      padding:34px;
+      text-align:center;
+      color:#3a2630;
+      background:linear-gradient(135deg,#fff8f1,#ffe7f1 58%,#f4deff);
+      border:1px solid rgba(232,185,204,.70);
+      box-shadow:0 34px 90px rgba(0,0,0,.38);
+      position:relative;
+      overflow:hidden;
+      animation:floatIn .45s cubic-bezier(.16,1,.3,1) both;
+    }
+    .feedback-popup::before{content:"✦";position:absolute;right:26px;top:18px;font-size:42px;color:rgba(196,126,164,.35)}
+    .feedback-popup::after{content:"♡";position:absolute;left:28px;bottom:18px;font-size:34px;color:rgba(153,111,178,.25)}
+    .feedback-popup h3{font-family:"Playfair Display","Noto Sans Thai",serif;font-size:34px;color:#38212c}
+    .feedback-popup p{margin-top:10px;color:#7c6070;font-weight:800;line-height:1.75}
+    .feedback-popup button{margin-top:22px;border:0;border-radius:999px;background:linear-gradient(180deg,#5b2d46,#2b1830);color:#fff3f8;font-weight:900;padding:12px 28px;box-shadow:0 12px 26px rgba(72,32,54,.26)}
 
     .news-card,.zone-panel,.register-panel{
       border-radius:42px;background:linear-gradient(180deg,rgba(255,250,242,.91),rgba(239,220,193,.82));
@@ -340,10 +471,13 @@
     footer{text-align:center;color:rgba(255,247,234,.74);font-weight:700;padding:38px 0 56px;text-shadow:0 2px 14px rgba(0,0,0,.38)}
 
     @media(max-width:980px){
-      .hero-grid{grid-template-columns:1fr;width:min(760px,100%)}.header-inner{align-items:flex-start;flex-direction:column}.nav{justify-content:flex-start}.zone-grid{grid-template-columns:repeat(4,1fr)}.tag-grid{grid-template-columns:repeat(2,1fr)}.mini-grid{grid-template-columns:repeat(2,1fr)}.post{grid-template-columns:62px 1fr}.post-side{grid-column:2;text-align:left}.register-panel{flex-direction:column;align-items:flex-start}.brand-logo{width:68px;height:68px}.slide-stage{height:520px}
+      .hero-grid{grid-template-columns:1fr;width:min(760px,100%)}
+      .official-layout{grid-template-columns:1fr;width:min(760px,100%);margin:auto}
+      .feedback-box{aspect-ratio:auto;min-height:270px}
+      .slide-stage{height:620px}.header-inner{align-items:flex-start;flex-direction:column}.nav{justify-content:flex-start}.zone-grid{grid-template-columns:repeat(4,1fr)}.tag-grid{grid-template-columns:repeat(2,1fr)}.mini-grid{grid-template-columns:repeat(2,1fr)}.post{grid-template-columns:62px 1fr}.post-side{grid-column:2;text-align:left}.register-panel{flex-direction:column;align-items:flex-start}.brand-logo{width:68px;height:68px}.slide-stage{height:620px}
     }
     @media(max-width:620px){
-      .container{width:min(100% - 24px,1320px)}.hero-card{padding:30px 24px}.live-card{padding:24px}.zone-grid{grid-template-columns:repeat(2,1fr)}.tag-grid{grid-template-columns:1fr}.post{grid-template-columns:1fr}.post-icon{width:54px;height:54px}.slide-stage{height:430px}.mini-grid{grid-template-columns:1fr}.slide-btn{width:44px;height:44px}.brand h1{font-size:28px}
+      .container{width:min(100% - 24px,1320px)}.hero-card{padding:30px 24px}.live-card{padding:24px}.zone-grid{grid-template-columns:repeat(2,1fr)}.tag-grid{grid-template-columns:1fr}.post{grid-template-columns:1fr}.post-icon{width:54px;height:54px}.slide-stage{height:560px}.mini-grid{grid-template-columns:1fr}.feedback-stack{grid-template-rows:auto}.feedback-box{min-height:280px}.slide-btn{width:44px;height:44px}.brand h1{font-size:28px}
     }
   </style>
 </head>
@@ -434,23 +568,57 @@
 
     <section id="official">
       <div class="container">
-        <div class="slider-shell">
-          <div class="slider-top">
-            <div>
-              <h2>ภาพประกาศจากสถาบัน</h2>
-              <p style="color:rgba(255,247,234,.70);font-weight:700;margin-top:4px">เลื่อนอัตโนมัติ หรือกดลูกศรเพื่อดูรูป 1-8</p>
+        <div class="official-layout">
+          <div class="feedback-stack">
+            <article class="feedback-box">
+              <span class="kicker">STUDENT VOICE</span>
+              <h2>ช่องรับความคิดเห็น<br>นักศึกษาสถาบัน</h2>
+              <p>ส่งข้อความถึงฝ่ายสถาบันได้ที่นี่ ระบบจริงจะเชื่อมกับบัญชีนักเรียนภายหลัง</p>
+              <form class="feedback-form" id="studentFeedbackForm">
+                <input id="feedbackName" type="text" placeholder="ชื่อผู้ส่ง / username" autocomplete="off">
+                <textarea id="feedbackMessage" placeholder="เขียนความคิดเห็นของคุณ..."></textarea>
+                <button class="btn primary" type="submit">ส่งข้อความ</button>
+              </form>
+            </article>
+
+            <article class="feedback-box">
+              <span class="kicker">ACADEMY NOTE</span>
+              <h3>ข้อความล่าสุด</h3>
+              <p>ตัวอย่างบอร์ดข้อความสำหรับประกาศและความเห็นจากนักเรียน</p>
+              <div class="comment-preview">
+                <div class="preview-line"><span class="preview-dot"></span><span>ระบบตารางเรียนของแต่ละโซนกำลังเตรียมเปิดใช้งาน</span></div>
+                <div class="preview-line"><span class="preview-dot" style="background:#9ad8ee;box-shadow:0 0 0 4px rgba(154,216,238,.18)"></span><span>นักเรียนสามารถตรวจประกาศสำคัญได้ในกระทู้หลัก</span></div>
+                <div class="preview-line"><span class="preview-dot" style="background:#b8dcae;box-shadow:0 0 0 4px rgba(184,220,174,.18)"></span><span>กล่องความคิดเห็นจะเปิดให้ใช้กับระบบสมาชิกในอนาคต</span></div>
+              </div>
+            </article>
+          </div>
+
+          <div class="slider-shell">
+            <div class="slider-top">
+              <div>
+                <h2>ภาพประกาศจากสถาบัน</h2>
+                <p>เลื่อนอัตโนมัติ หรือกดลูกศรเพื่อดูรูป 1-8</p>
+              </div>
+              <span class="slide-count"><b id="slideNow">1</b> / 8</span>
             </div>
-            <div class="counter"><span id="slideNumber">1</span> / 8</div>
+            <div class="slide-stage">
+              <button class="slide-btn prev" type="button" aria-label="Previous">‹</button>
+              <img id="announcementSlide" src="1.png" alt="ภาพประกาศจากสถาบัน">
+              <button class="slide-btn next" type="button" aria-label="Next">›</button>
+            </div>
+            <div class="dots" id="slideDots"></div>
           </div>
-          <div class="slide-stage">
-            <button class="slide-btn prev" type="button" id="prevSlide">‹</button>
-            <img id="slideImage" src="./1.png" alt="ประกาศสถาบัน">
-            <button class="slide-btn next" type="button" id="nextSlide">›</button>
-          </div>
-          <div class="dots" id="dots"></div>
         </div>
       </div>
     </section>
+
+    <div class="feedback-modal" id="feedbackModal" aria-hidden="true">
+      <div class="feedback-popup">
+        <h3>ส่งข้อความแล้วค่ะ</h3>
+        <p>ขอบคุณสำหรับความคิดเห็นของคุณ ทางสถาบันได้รับข้อความเรียบร้อยแล้ว ✦</p>
+        <button type="button" id="closeFeedbackModal">ตกลง</button>
+      </div>
+    </div>
 
     <section id="news">
       <div class="container">
@@ -661,7 +829,28 @@
     prevSlide.addEventListener('click',()=>goSlide(currentSlide-1,true));
     nextSlide.addEventListener('click',()=>goSlide(currentSlide+1,true));
     updateDots();restartSlide();
+  
+
+    const feedbackForm = document.getElementById("studentFeedbackForm");
+    const feedbackModal = document.getElementById("feedbackModal");
+    const closeFeedbackModal = document.getElementById("closeFeedbackModal");
+    if(feedbackForm && feedbackModal){
+      feedbackForm.addEventListener("submit", function(event){
+        event.preventDefault();
+        feedbackModal.classList.add("show");
+        feedbackModal.setAttribute("aria-hidden", "false");
+        feedbackForm.reset();
+      });
+    }
+    if(closeFeedbackModal && feedbackModal){
+      closeFeedbackModal.addEventListener("click", function(){
+        feedbackModal.classList.remove("show");
+        feedbackModal.setAttribute("aria-hidden", "true");
+      });
+      feedbackModal.addEventListener("click", function(event){
+        if(event.target === feedbackModal) closeFeedbackModal.click();
+      });
+    }
   </script>
 </body>
 </html>
- 
