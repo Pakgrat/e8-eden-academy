@@ -372,6 +372,30 @@
     .create-thread-card{background:linear-gradient(180deg,rgba(28,43,64,.94),rgba(14,26,43,.96));border-color:rgba(226,194,136,.38);color:#fff4dc}
     .create-thread-card h3,.create-thread-card p{color:#fff4dc}.create-thread-card p{opacity:.72}
 
+    .student-comments{position:relative;z-index:1;margin-top:24px;display:grid;gap:13px}
+    .student-comment{position:relative;overflow:hidden;border-radius:22px;padding:15px 16px;background:rgba(246,236,222,.72);border:1px solid rgba(151,112,70,.22);box-shadow:0 10px 22px rgba(54,34,18,.08);animation:commentRise .55s ease both;transition:.18s ease}
+    .student-comment:hover{transform:translateY(-2px);background:rgba(248,239,227,.96);box-shadow:0 16px 28px rgba(54,34,18,.12)}
+    .student-comment::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--comment-accent)}
+    .comment-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:9px}
+    .comment-user{display:flex;align-items:center;gap:9px;min-width:0}
+    .avatar-dot{width:30px;height:30px;border-radius:999px;display:grid;place-items:center;background:var(--comment-bg);color:var(--comment-text);font-size:12px;font-weight:900;border:1px solid rgba(255,255,255,.48);box-shadow:0 8px 14px rgba(42,25,10,.10)}
+    .comment-name{font-weight:900;color:var(--comment-name);font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .comment-time{color:#8f7c70;font-size:12px;white-space:nowrap}
+    .student-comment p{color:#6e5b52;line-height:1.72;font-size:14px;margin-top:7px}
+    .comment-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+    .e-badge{display:inline-flex;align-items:center;border-radius:999px;padding:3px 9px;font-size:11px;font-weight:900;border:1px solid rgba(255,255,255,.42);color:var(--badge-text);background:var(--badge-bg)}
+    .comment-e1{--comment-accent:#2c7fc0;--comment-bg:linear-gradient(145deg,#071d3d,#5aa7da);--comment-text:#f6fbff;--comment-name:#2778b8;--badge-bg:linear-gradient(145deg,#0b315e,#5aa7da);--badge-text:#f4fbff}
+    .comment-e2{--comment-accent:#d7bd8c;--comment-bg:linear-gradient(145deg,#fffdf8,#dcc39b);--comment-text:#6a5338;--comment-name:#9a7a4f;--badge-bg:linear-gradient(145deg,#fff8e8,#dcc39b);--badge-text:#6a5338}
+    .comment-e3{--comment-accent:#a51f33;--comment-bg:linear-gradient(145deg,#4d0812,#c84a58);--comment-text:#fff6f7;--comment-name:#ae263b;--badge-bg:linear-gradient(145deg,#7b1221,#c84a58);--badge-text:#fff6f7}
+    .comment-e4{--comment-accent:#9ebf91;--comment-bg:linear-gradient(145deg,#edf5e8,#b8d0a9);--comment-text:#4f6a46;--comment-name:#5e8b55;--badge-bg:linear-gradient(145deg,#edf5e8,#b8d0a9);--badge-text:#4f6a46}
+    .comment-e5{--comment-accent:#b494da;--comment-bg:linear-gradient(145deg,#efe7fb,#b494da);--comment-text:#604482;--comment-name:#8360bb;--badge-bg:linear-gradient(145deg,#efe7fb,#b494da);--badge-text:#604482}
+    .comment-e6{--comment-accent:#ea9eb5;--comment-bg:linear-gradient(145deg,#fdebf1,#ea9eb5);--comment-text:#934f67;--comment-name:#c76388;--badge-bg:linear-gradient(145deg,#fdebf1,#ea9eb5);--badge-text:#934f67}
+    .comment-e7{--comment-accent:#8ecbe8;--comment-bg:linear-gradient(145deg,#f5fbff,#add5ea);--comment-text:#4d7893;--comment-name:#4e9cc5;--badge-bg:linear-gradient(145deg,#f5fbff,#add5ea);--badge-text:#4d7893}
+    .comment-e8{--comment-accent:#c4963f;--comment-bg:linear-gradient(145deg,#fff7e6,#c4963f);--comment-text:#6a4716;--comment-name:#a97925;--badge-bg:linear-gradient(145deg,#fff7e6,#c4963f);--badge-text:#6a4716}
+    .board-sparkle{position:absolute;right:28px;top:18px;color:rgba(196,160,106,.42);font-size:18px;animation:floatSpark 3.8s ease-in-out infinite;pointer-events:none}
+    @keyframes commentRise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes floatSpark{0%,100%{opacity:.35;transform:translateY(0) rotate(0deg)}50%{opacity:.9;transform:translateY(-8px) rotate(18deg)}}
+
     .footer{margin-top:38px;text-align:center;color:#7e6a5d;font-size:13px;line-height:1.8}
 
     @media(max-width:1120px){
@@ -610,6 +634,50 @@
       `;
     }
 
+    function renderStudentComments(thread) {
+      const commentPool = thread.official ? [
+        { name:"Aurelia.vv", zone:"E1", cls:"comment-e1", text:"ประกาศอ่านง่ายขึ้นมากค่ะ เห็นภาพรวมของแต่ละโซนชัดเจนดี", tag:"ข่าวสารสำคัญ" },
+        { name:"Celestine.q", zone:"E2", cls:"comment-e2", text:"ชอบที่มีรูปเจ้าของปราสาทรวมไว้ในกระทู้เดียว เวลากลับมาเช็คจะสะดวกมาก", tag:"ประกาศสถาบัน" },
+        { name:"Valentina.m", zone:"E3", cls:"comment-e3", text:"ถ้ามีอัปเดตเรื่องตารางเรียน อยากให้ปักไว้ใต้กระทู้นี้ด้วยค่ะ", tag:"ตารางเรียน" },
+        { name:"Elowen.ivy", zone:"E4", cls:"comment-e4", text:"แท็กชื่อประจำโซนเรียงดูง่ายขึ้นค่ะ แยก E1-E8 ได้ชัดเจน", tag:"เรื่องโซน" },
+        { name:"Livia.rose", zone:"E5", cls:"comment-e5", text:"โทนหน้ากระทู้ดูเป็นทางการดีค่ะ ไม่สว่างเกินไปแล้ว อ่านสบายขึ้น", tag:"ดีไซน์เว็บ" },
+        { name:"Seraphina.lux", zone:"E6", cls:"comment-e6", text:"อยากให้มีปุ่มแจ้งเตือนเมื่อประกาศจากสถาบันอัปเดตใหม่ในอนาคตค่ะ", tag:"ระบบสมาชิก" },
+        { name:"Vivienne.lo", zone:"E7", cls:"comment-e7", text:"ถ้าระบบล็อกอินเปิดแล้ว ขอให้คอมเมนต์ขึ้นตามโซนของนักเรียนด้วยนะคะ", tag:"สังคมนักเรียน" }
+      ] : [
+        { name:"Evangeline.8", zone:"E1", cls:"comment-e1", text:"เข้ามาเช็คข่าวของโซนนี้ค่ะ ถ้ามีกิจกรรมเพิ่มฝากอัปเดตไว้ในกระทู้ด้วยนะคะ", tag:"เรื่องโซน" },
+        { name:"Arabella.n", zone:"E2", cls:"comment-e2", text:"อยากให้มีสรุปตารางเรียนรายสัปดาห์ จะได้ไม่พลาดประกาศสำคัญ", tag:"ตารางเรียน" },
+        { name:"Ophelia.rose", zone:"E3", cls:"comment-e3", text:"กระทู้นี้เหมาะไว้รวมคำถามของเด็กใหม่มากค่ะ อ่านแล้วตามง่าย", tag:"ถามตอบ" },
+        { name:"Juliette.v", zone:"E4", cls:"comment-e4", text:"ถ้ามีรูปกิจกรรมของโซน อยากให้แยกอัลบั้มไว้ใต้กระทู้นี้เลย", tag:"กิจกรรม" },
+        { name:"Rosalind.elle", zone:"E5", cls:"comment-e5", text:"ขอช่องรวมประกาศด่วนของแต่ละโซนด้วยค่ะ จะได้เห็นทันทีตอนเปิดเว็บ", tag:"ข่าวสารสำคัญ" },
+        { name:"Mirabelle.x", zone:"E6", cls:"comment-e6", text:"บอร์ดดูเป็นระเบียบขึ้นค่ะ อยากให้มีระบบค้นหากระทู้ในอนาคต", tag:"ระบบเว็บ" },
+        { name:"Isadora.ln", zone:"E8", cls:"comment-e8", text:"ชอบที่มีแท็กสีตามโซน ช่วยให้รู้ว่าคอมเมนต์มาจากโซนไหน", tag:"สังคมนักเรียน" }
+      ];
+
+      return `
+        <section class="student-comments">
+          <div class="section-title" style="margin:4px 0 6px;">
+            <div><h2>ความคิดเห็นล่าสุด</h2><p>คอมเมนต์ตัวอย่างจากนักเรียนในกระดานนี้</p></div>
+          </div>
+          ${commentPool.map((item, index) => `
+            <article class="student-comment ${item.cls}" style="animation-delay:${index * 0.04}s">
+              <div class="comment-head">
+                <div class="comment-user">
+                  <span class="avatar-dot">${item.zone}</span>
+                  <span class="comment-name">${item.name}</span>
+                </div>
+                <span class="comment-time">ความคิดเห็นที่ ${index + 1}</span>
+              </div>
+              <p>${item.text}</p>
+              <div class="comment-tags">
+                <span class="e-badge">${item.zone}</span>
+                <span class="thread-tag ${tagClass(item.tag)}">${item.tag}</span>
+              </div>
+            </article>
+          `).join("")}
+        </section>
+      `;
+    }
+
     function renderCommentBox() {
       return `
         <section class="comment-box">
@@ -666,6 +734,7 @@
       const tagsHTML = thread.official ? renderTags() : "";
 
       threadContent.innerHTML = `
+        <span class="board-sparkle">✦</span>
         <div class="thread-head">
           <div class="thread-mark ${thread.cls}"><img src="${thread.img}" alt="${thread.title}" /></div>
           <div>
@@ -680,6 +749,7 @@
         ${tagsHTML}
         ${renderArticle(thread)}
         ${renderReactions()}
+        ${renderStudentComments(thread)}
         ${renderCommentBox()}
         ${renderRelatedPosts()}
 
