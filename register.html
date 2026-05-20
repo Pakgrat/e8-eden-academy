@@ -86,7 +86,53 @@
     .student-card.vertical-layout .card-inner{padding:42px 96px 38px 44px;display:flex;flex-direction:column;gap:14px}.student-card.vertical-layout .card-inner::before{left:34px;right:96px;top:26px;height:76px}.student-card.vertical-layout .card-left{align-content:start;justify-items:center;gap:13px}.student-card.vertical-layout .card-photo{width:min(310px,88%);aspect-ratio:4/5;border-radius:22px;border-color:rgba(var(--zone-dark-rgb),.24);background:rgba(255,255,255,.34);box-shadow:inset 0 0 0 8px rgba(255,255,255,.12),0 16px 30px rgba(0,0,0,.18),0 0 0 1px rgba(255,255,255,.44)}.student-card.vertical-layout .card-seal{width:78px;height:78px;filter:drop-shadow(0 10px 16px rgba(0,0,0,.22))}.student-card.vertical-layout .card-right{justify-content:flex-start}.student-card.vertical-layout .card-title{margin-bottom:8px;padding-right:4px}.student-card.vertical-layout .card-title h2{font-size:clamp(28px,6.2vw,43px);line-height:.95;color:var(--zone-ink);text-shadow:0 2px 10px rgba(255,255,255,.38)}.student-card.vertical-layout .card-title span{font-size:10px;color:rgba(var(--zone-dark-rgb),.72);letter-spacing:1.8px}.student-card.vertical-layout .mini-logo{display:none}.student-card.vertical-layout .card-fields{gap:9px}.student-card.vertical-layout .field{grid-template-columns:92px 1fr;gap:10px;color:rgba(var(--zone-dark-rgb),.82);font-size:12px;text-shadow:none}.student-card.vertical-layout .line{min-height:34px;border-radius:12px;border-color:rgba(var(--zone-dark-rgb),.18);background:rgba(255,255,255,.38);color:color-mix(in srgb,var(--zone-dark) 82%,black);box-shadow:inset 0 1px 0 rgba(255,255,255,.36),inset 0 -8px 14px rgba(var(--zone-dark-rgb),.06)}.student-card.vertical-layout .zone-signature{min-height:70px;margin-top:14px;border-radius:18px}.student-card.vertical-layout .zone-script{font-size:clamp(40px,9vw,64px)}.student-card.vertical-layout .card-foot{margin-top:12px;color:rgba(var(--zone-dark-rgb),.78);font-size:10.5px;text-shadow:none}.student-card.vertical-layout .barcode{width:110px;height:38px;background:repeating-linear-gradient(90deg,rgba(var(--zone-dark-rgb),.70) 0 3px,transparent 3px 6px,rgba(var(--zone-dark-rgb),.70) 6px 7px,transparent 7px 11px)}.student-card.vertical-layout .card-hologram{display:none}
     @media(max-width:860px){.card-layout-panel{align-items:flex-start}.student-card.vertical-layout .card-inner{padding:34px 86px 32px 32px}.student-card.vertical-layout .card-photo{width:min(260px,92%)}.student-card.vertical-layout .field{grid-template-columns:82px 1fr}}
 
-    .submit-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;margin-top:24px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:12px 24px;border-radius:999px;border:0;cursor:pointer;font-size:14px;font-weight:900;transition:.18s}.btn:hover{transform:translateY(-2px)}.primary{color:#fff4dc;background:linear-gradient(180deg,#5b2c45,#09182b);border:1px solid rgba(249,208,221,.72);box-shadow:0 10px 24px rgba(8,18,32,.20)}.soft{color:#70485a;background:rgba(255,241,247,.84);border:1px solid rgba(186,112,137,.30)}.danger{color:#8e4b62;background:rgba(255,238,245,.80);border:1px solid rgba(183,122,146,.30)}
+
+    /* Modern ID detail lines: no boxed fields on horizontal/vertical cards */
+    .line{min-height:32px;border:0;border-bottom:1.5px solid rgba(255,255,255,.48);border-radius:0;background:transparent;display:flex;align-items:flex-end;color:#fffdf7;font-family:"Noto Serif Thai","Noto Sans Thai",serif;font-weight:800;padding:0 0 5px;box-shadow:none}
+    .student-card.vertical-layout::after{background:linear-gradient(118deg,rgba(255,255,255,.44) 0%,rgba(255,255,255,.12) 26%,transparent 48%,rgba(255,255,255,.16) 80%,transparent 100%);opacity:.82}
+    .student-card.vertical-layout .card-security-pattern{display:none}
+    .student-card.vertical-layout .card-fields{gap:13px;margin-top:4px}
+    .student-card.vertical-layout .field{display:flex;flex-direction:column-reverse;align-items:stretch;gap:2px;color:rgba(var(--zone-dark-rgb),.78);font-family:"Cinzel","Noto Serif Thai",serif;font-size:8.5px;font-weight:800;letter-spacing:.08em;text-shadow:none}
+    .student-card.vertical-layout .field span{display:block;color:rgba(var(--zone-dark-rgb),.64);font-size:8px;line-height:1;text-transform:uppercase}
+    .student-card.vertical-layout .line{min-height:24px;border:0;border-bottom:1.35px solid rgba(var(--zone-dark-rgb),.38);border-radius:0;background:transparent;color:color-mix(in srgb,var(--zone-dark) 86%,black);font-family:"Noto Serif Thai","Noto Sans Thai",serif;font-weight:800;padding:0 0 3px;box-shadow:none}
+    .student-card.vertical-layout .zone-signature{display:none}
+    .student-card.vertical-layout .card-foot{margin-top:12px;color:rgba(var(--zone-dark-rgb),.78);font-size:10.5px;text-shadow:none}
+
+
+
+    /* FINAL CARD CLEANUP: no striped card background, no field boxes, E4 remains locked */
+    .student-card::after{
+      background:linear-gradient(116deg,rgba(255,255,255,.34) 0%,rgba(255,255,255,.11) 22%,transparent 48%,rgba(255,255,255,.12) 76%,transparent 100%)!important;
+      opacity:.92!important;
+    }
+    .student-card .card-security-pattern{display:none!important;background:none!important}
+    .student-card .watermark,.student-card .corner-rivet,.student-card .card-chip{display:none!important}
+    .student-card .field{font-family:"Cinzel","Noto Serif Thai",serif;letter-spacing:.075em;text-shadow:0 2px 8px rgba(0,0,0,.18)}
+    .student-card .line{
+      min-height:31px!important;
+      border:0!important;
+      border-bottom:1.45px solid rgba(255,255,255,.48)!important;
+      border-radius:0!important;
+      background:transparent!important;
+      box-shadow:none!important;
+      padding:0 0 5px!important;
+      align-items:flex-end!important;
+    }
+    .student-card.vertical-layout::after{
+      background:linear-gradient(118deg,rgba(255,255,255,.42) 0%,rgba(255,255,255,.10) 28%,transparent 52%,rgba(255,255,255,.10) 84%,transparent 100%)!important;
+    }
+    .student-card.vertical-layout .line{
+      min-height:24px!important;
+      border-bottom:1.35px solid rgba(var(--zone-dark-rgb),.40)!important;
+      color:color-mix(in srgb,var(--zone-dark) 86%,black)!important;
+      padding:0 0 3px!important;
+    }
+    .student-card.vertical-layout .card-serial-side{font-family:"Cinzel","Noto Serif Thai",serif;font-weight:900}
+
+    .zone-box.e4.disabled{cursor:not-allowed;filter:grayscale(.10) saturate(.80);opacity:.78}
+    .zone-box.e4.disabled small{background:rgba(255,255,255,.42);color:inherit}
+
+        .submit-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;margin-top:24px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:12px 24px;border-radius:999px;border:0;cursor:pointer;font-size:14px;font-weight:900;transition:.18s}.btn:hover{transform:translateY(-2px)}.primary{color:#fff4dc;background:linear-gradient(180deg,#5b2c45,#09182b);border:1px solid rgba(249,208,221,.72);box-shadow:0 10px 24px rgba(8,18,32,.20)}.soft{color:#70485a;background:rgba(255,241,247,.84);border:1px solid rgba(186,112,137,.30)}.danger{color:#8e4b62;background:rgba(255,238,245,.80);border:1px solid rgba(183,122,146,.30)}
     .status-card{display:none;margin-top:24px;border-radius:28px;padding:22px;background:linear-gradient(180deg,rgba(91,44,69,.96),rgba(7,20,38,.96));color:#fff3db;border:1px solid rgba(249,208,221,.48);box-shadow:0 18px 42px rgba(7,20,38,.25)}.status-card.show{display:block;animation:pop .28s ease-out both}@keyframes pop{from{transform:translateY(10px);opacity:0}to{transform:translateY(0);opacity:1}}.status-card h3{font-size:28px;color:#fff8e9}.status-card p{margin-top:8px;color:rgba(255,246,250,.76);line-height:1.75}.status-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.footer{text-align:center;margin-top:42px;color:#806672;font-size:13px;line-height:1.8}
 
     @media(max-width:1260px){.header{grid-template-columns:1fr}.nav{justify-content:flex-start}.back{width:max-content}.hero{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.zone-grid{grid-template-columns:repeat(4,1fr)}}
@@ -130,7 +176,7 @@
           <div class="eyebrow">E8 ADMISSION FORM</div>
           <h1>สมัครสมาชิกนักเรียนประจำสถาบัน</h1>
           <p>เลือกโซน อัปโหลดรูปหน้าตรง และสร้างบัตรนักเรียนเบื้องต้นของคุณ สีบัตร ลายน้ำ และลายเซ็นประจำโซนจะเปลี่ยนตามโซนที่เลือกทันที</p>
-          <div class="notice-list"><div class="notice"><b>YEAR 1</b><span>ระบบนี้สำหรับนักเรียนปี 1 เท่านั้น</span></div><div class="notice"><b>E2-E8</b><span>ปี 1 ยังไม่เปิดรับเลือก E1 Zone</span></div><div class="notice"><b id="memberCounter">ID</b><span>เลขบัตรจะสุ่มตามโซน เพื่อลดการซ้ำ</span></div></div>
+          <div class="notice-list"><div class="notice"><b>YEAR 1</b><span>ระบบนี้สำหรับนักเรียนปี 1 เท่านั้น</span></div><div class="notice"><b>E2-E8</b><span>ปี 1 ยังไม่เปิดรับเลือก E1 Zone และ E4 มีเงื่อนไขเฉพาะ</span></div><div class="notice"><b id="memberCounter">ID</b><span>เลขบัตรจะสุ่มตามโซน เพื่อลดการซ้ำ</span></div></div>
         </div>
         <aside class="panel side-status"><img src="./eden.png" alt="Eden Logo" /><h2>Admission Status</h2><p>เลือกโซนแล้วระบบจะเปลี่ยนสี ลายน้ำ และลายเซ็นบนบัตรนักเรียน</p></aside>
       </section>
@@ -143,13 +189,13 @@
       </section>
 
       <section class="zone-section" id="zones">
-        <div class="section-head"><div><div class="badge-title"><span class="circle">1</span> เลือกโซนประจำตัว</div><h2>เลือกโซน</h2></div><small>E1 ปิดรับสำหรับปี 1</small></div>
+        <div class="section-head"><div><div class="badge-title"><span class="circle">1</span> เลือกโซนประจำตัว</div><h2>เลือกโซน</h2></div><small>E1 และ E4 ปิดรับสมัครทั่วไปสำหรับปี 1</small></div>
         <p class="zone-intro">ในแต่ละโซนจะมีกิจกรรมที่แตกต่างกันอย่างสิ้นเชิง และเมื่อเลือกโซนแล้ว สีบัตร ลวดลาย ลายน้ำ และฟ้อนต์ลายเซ็นบนบัตรจะเปลี่ยนตามโซนนั้น</p>
         <div class="zone-grid">
           <article class="zone-box e1 disabled" title="E1 Zone ไม่เปิดรับสำหรับปี 1"><img src="./e1.png" alt="E1 Zone" /><h3>E1 ZONE</h3><p>ไม่เปิดสำหรับปีที่ 1 ต้องสมัครและไล่ระดับไปทีละโซนเท่านั้น</p><small>LOCKED</small></article>
           <article class="zone-box e2" data-zone="E2 Zone" data-logo="./e2.png" data-color="#d7bd8c" data-dark="#8f6a32" data-soft="#fff5de" data-ink="#5c3d20" data-signature="#5f4422" data-rgb="215,189,140" data-dark-rgb="143,106,50"><img src="./e2.png" alt="E2 Zone" /><h3>E2 ZONE</h3><small>AVAILABLE</small></article>
           <article class="zone-box e3" data-zone="E3 Zone" data-logo="./e3.png" data-color="#d01845" data-dark="#7a001d" data-soft="#ff9fb2" data-ink="#fff7f9" data-signature="#fff2f6" data-rgb="208,24,69" data-dark-rgb="122,0,29"><img src="./e3.png" alt="E3 Zone" /><h3>E3 ZONE</h3><p>รับทั้งนักเรียนทุนฟรี และนักเรียนแลกเปลี่ยนจากโรงเรียนอื่น</p><small>AVAILABLE</small></article>
-          <article class="zone-box e4" data-zone="E4 Zone" data-logo="./e4.png" data-color="#92c687" data-dark="#335e37" data-soft="#dff1d9" data-ink="#f7fff3" data-signature="#f3fff0" data-rgb="146,198,135" data-dark-rgb="51,94,55"><img src="./e4.png" alt="E4 Zone" /><h3>E4 ZONE</h3><small>AVAILABLE</small></article>
+          <article class="zone-box e4 disabled" title="E4 Zone Locked"><img src="./e4.png" alt="E4 Zone" /><h3>E4 ZONE</h3><p>สำหรับปี 1 ที่เคยมีผู้ปกครองติดต่อแล้ว หรือ ในช่วงปีที่ 2-4</p><small>E4 ZONE LOCKED</small></article>
           <article class="zone-box e5" data-zone="E5 Zone" data-logo="./e5.png" data-color="#ad86de" data-dark="#563081" data-soft="#ead7ff" data-ink="#fbf7ff" data-signature="#fbf3ff" data-rgb="173,134,222" data-dark-rgb="86,48,129"><img src="./e5.png" alt="E5 Zone" /><h3>E5 ZONE</h3><small>AVAILABLE</small></article>
           <article class="zone-box e6" data-zone="E6 Zone" data-logo="./e6.png" data-color="#dd6f9e" data-dark="#7f274d" data-soft="#f9bdd7" data-ink="#fff6fa" data-signature="#fff0f7" data-rgb="221,111,158" data-dark-rgb="127,39,77"><img src="./e6.png" alt="E6 Zone" /><h3>E6 ZONE</h3><small>AVAILABLE</small></article>
           <article class="zone-box e7" data-zone="E7 Zone" data-logo="./e7.png" data-color="#80c3e6" data-dark="#256987" data-soft="#d8f2ff" data-ink="#f6fcff" data-signature="#eefaff" data-rgb="128,195,230" data-dark-rgb="37,105,135"><img src="./e7.png" alt="E7 Zone" /><h3>E7 ZONE</h3><p>รับทั้งนักเรียนทุนฟรี และนักเรียนแลกเปลี่ยนจากโรงเรียนอื่น</p><small>AVAILABLE</small></article>
@@ -556,20 +602,7 @@
       }
 
       function drawSecurityWaves(){
-        ctx.save();
-        roundRect(ctx,0,0,1400,850,58);
-        ctx.clip();
-        ctx.lineWidth=1.2;
-        for(let row=0;row<9;row++){
-          ctx.beginPath();
-          for(let x=0;x<=1400;x+=18){
-            const y=196+row*48+Math.sin((x/78)+row)*13;
-            if(x===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
-          }
-          ctx.strokeStyle=row%2?rgba(gold,.18):'rgba(255,255,255,.075)';
-          ctx.stroke();
-        }
-        ctx.restore();
+        // intentionally empty: card backgrounds should be clean without diagonal/stripe patterns
       }
 
       function drawCornerRivet(x,y){
@@ -617,11 +650,6 @@
         ctx.save();
         roundRect(ctx,0,0,W,H,38);
         ctx.clip();
-        ctx.strokeStyle='rgba(255,255,255,.26)';
-        ctx.lineWidth=1;
-        for(let x=-120;x<W+160;x+=24){
-          ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x+530,H);ctx.stroke();
-        }
         const shine=ctx.createLinearGradient(0,0,W,H);
         shine.addColorStop(0,'rgba(255,255,255,.38)');
         shine.addColorStop(.34,'rgba(255,255,255,.08)');
@@ -683,27 +711,21 @@
 
         const fields=[['NAME',cardName.textContent],['STUDENT ID',studentId.textContent],['LEVEL','YEAR 1']];
         fields.forEach((item,index)=>{
-          const y=622+index*57;
-          fitTextV(item[0],76,y,105,14,'Noto Sans Thai, Tahoma, Arial, sans-serif','900',rgba(darkRgb,.78));
-          ctx.fillStyle='rgba(255,255,255,.42)';roundRect(ctx,178,y-25,270,36,12);ctx.fill();
-          ctx.strokeStyle=rgba(darkRgb,.18);ctx.lineWidth=1.4;ctx.stroke();
-          fitTextV(item[1]||'—',193,y,238,18,'Noto Serif Thai, Noto Sans Thai, Tahoma, Arial, sans-serif','800',rgba(cardDeep,.96));
+          const y=628+index*63;
+          fitTextV(item[1]||'—',76,y,365,18,'Noto Serif Thai, Noto Sans Thai, Tahoma, Arial, sans-serif','800',rgba(cardDeep,.96));
+          ctx.strokeStyle=rgba(darkRgb,.36);ctx.lineWidth=1.4;
+          ctx.beginPath();ctx.moveTo(76,y+10);ctx.lineTo(448,y+10);ctx.stroke();
+          fitTextV(item[0],76,y+27,160,10,'Cinzel, Noto Serif Thai, serif','800',rgba(darkRgb,.62));
         });
 
-        const sig=ctx.createLinearGradient(75,774,448,842);
-        sig.addColorStop(0,rgba(cardDeep,.96));sig.addColorStop(.58,rgba(cardMid,.90));sig.addColorStop(1,rgba(cardGlow,.76));
-        ctx.fillStyle=sig;roundRect(ctx,75,764,373,68,20);ctx.fill();
-        ctx.strokeStyle='rgba(255,255,255,.45)';ctx.lineWidth=1.7;ctx.stroke();
-        fitTextV(cardDivision.textContent,262,812,330,52,'Great Vibes, Georgia, serif','700',textLight,'center');
-
         if(zoneLogo){
-          ctx.save();ctx.shadowColor='rgba(0,0,0,.18)';ctx.shadowBlur=12;ctx.shadowOffsetY=7;drawImageContain(ctx,zoneLogo,366,676,74,74,1);ctx.restore();
+          ctx.save();ctx.shadowColor='rgba(0,0,0,.12)';ctx.shadowBlur=10;ctx.shadowOffsetY=6;drawImageContain(ctx,zoneLogo,376,770,62,62,1);ctx.restore();
         }
-        ctx.fillStyle=rgba(darkRgb,.70);ctx.font='900 11px Noto Sans Thai, Tahoma, Arial, sans-serif';ctx.fillText('ISSUE DATE',76,860);
-        ctx.font='900 13px Noto Serif Thai, Noto Sans Thai, serif';ctx.fillText(issueDate.textContent,76,878);
-        ctx.font='900 11px Noto Sans Thai, Tahoma, Arial, sans-serif';ctx.fillText('AUTHORIZED',226,860);
-        ctx.font='900 13px Noto Serif Thai, Noto Sans Thai, serif';ctx.fillText('Eden Office',226,878);
-        for(let x=358;x<456;x+=7){const w=[2,3,1,5,2][x%5];ctx.fillStyle=rgba(darkRgb,.58);ctx.fillRect(x,852,w,32)}
+        ctx.fillStyle=rgba(darkRgb,.70);ctx.font='900 11px Noto Sans Thai, Tahoma, Arial, sans-serif';ctx.fillText('ISSUE DATE',76,845);
+        ctx.font='900 13px Noto Serif Thai, Noto Sans Thai, serif';ctx.fillText(issueDate.textContent,76,863);
+        ctx.font='900 11px Noto Sans Thai, Tahoma, Arial, sans-serif';ctx.fillText('AUTHORIZED',226,845);
+        ctx.font='900 13px Noto Serif Thai, Noto Sans Thai, serif';ctx.fillText('Eden Office',226,863);
+        for(let x=358;x<456;x+=7){const w=[2,3,1,5,2][x%5];ctx.fillStyle=rgba(darkRgb,.58);ctx.fillRect(x,842,w,30)}
 
         ctx.save();
         roundRect(ctx,0,0,W,H,38);ctx.clip();
@@ -744,23 +766,14 @@
       ctx.fillRect(0,0,1400,850);
 
       for(let i=-2;i<24;i++){
-        ctx.globalAlpha=.045;
+        ctx.globalAlpha=.030;
         ctx.fillStyle=i%2?rgba(zoneRgb,1):'rgba(255,255,255,1)';
         ctx.beginPath();
         ctx.arc(90+i*72,120+(i%5)*126,84,0,Math.PI*2);
         ctx.fill();
       }
       ctx.globalAlpha=1;
-      ctx.strokeStyle='rgba(255,255,255,.055)';
-      ctx.lineWidth=1.3;
-      for(let x=-140;x<1550;x+=28){
-        ctx.beginPath();
-        ctx.moveTo(x,0);
-        ctx.lineTo(x+660,850);
-        ctx.stroke();
-      }
       ctx.restore();
-      drawSecurityWaves();
 
       ctx.save();
       roundRect(ctx,28,28,1344,794,42);
@@ -847,13 +860,13 @@
       fields.forEach((item,index)=>{
         const y=262+index*91;
         fitText(item[0],510,y,178,21,'Noto Sans Thai, Tahoma, Arial, sans-serif','900',textSoft);
-        ctx.fillStyle=fieldFill;
-        roundRect(ctx,704,y-30,522,45,15);
-        ctx.fill();
-        ctx.strokeStyle=detailLine;
-        ctx.lineWidth=1.5;
+        ctx.strokeStyle='rgba(255,255,255,.58)';
+        ctx.lineWidth=1.6;
+        ctx.beginPath();
+        ctx.moveTo(704,y+10);
+        ctx.lineTo(1226,y+10);
         ctx.stroke();
-        fitText(item[1]||'—',726,y,472,27,'Noto Serif Thai, Noto Sans Thai, Tahoma, Arial, sans-serif','800',textLight);
+        fitText(item[1]||'—',704,y,500,27,'Noto Serif Thai, Noto Sans Thai, Tahoma, Arial, sans-serif','800',textLight);
       });
 
       const sig=ctx.createLinearGradient(510,505,1225,614);
@@ -898,20 +911,11 @@
       ctx.fillText('Eden Office',510,766);
 
       ctx.save();
-      roundRect(ctx,1040,707,220,92,14);
-      ctx.fillStyle='rgba(255,255,255,.10)';
-      ctx.fill();
-      ctx.strokeStyle='rgba(255,255,255,.18)';
-      ctx.lineWidth=1.3;
-      ctx.stroke();
       for(let x=1060;x<1245;x+=9){
         const w=[2,4,2,6,3][x%5];
         ctx.fillStyle='rgba(255,255,255,.76)';
         ctx.fillRect(x,724,w,58);
       }
-      ctx.font='900 9px Cinzel, Georgia, serif';
-      ctx.fillStyle='rgba(255,236,219,.68)';
-      ctx.fillText('REGISTRY SERIAL',1074,795);
       ctx.restore();
 
       ctx.save();
