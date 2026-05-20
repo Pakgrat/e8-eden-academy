@@ -3,777 +3,424 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>เปลี่ยนแปลงข้อมูลขึ้นชั้นปี | E8’s Eden Academy</title>
+  <title>Member Update | E8’s Eden Academy</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Great+Vibes&family=Noto+Serif+Thai:wght@500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700;800;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700;800;900&display=swap');
 
     :root{
-      --navy:#071426;
-      --deep:#3e2135;
-      --paper:#fff8fb;
-      --pink:#e9b3c7;
-      --pink2:#b96a86;
-      --gold:#c8a05b;
-      --line:rgba(186,112,137,.28);
-      --ink:#35242d;
-      --muted:#856a72;
-      --shadow:0 24px 62px rgba(91,45,62,.17);
-      --zone:#d7bd8c;
-      --zone-dark:#8f6a32;
-      --zone-soft:#fff5de;
-      --zone-ink:#5c3d20;
-      --zone-rgb:215,189,140;
-      --zone-dark-rgb:143,106,50;
-      --member-accent:#8f6a32;
-      --member-text:#5c3d20;
-      --member-bg:#ffffff;
-      --member-border:#e7e2dc;
-      --member-line:#cbb9b1;
-      --case-width:1;
-      --case-height:1;
-      --case-x:0px;
-      --case-y:0px;
-      --case-stage-ratio:720/1040;
+      --bg:#050608;
+      --panel:#0b0d12;
+      --panel2:#10131a;
+      --line:rgba(255,255,255,.11);
+      --line2:rgba(231,206,151,.28);
+      --gold:#e5c77b;
+      --gold2:#a5772f;
+      --text:#f7f0df;
+      --muted:#aaa7b4;
+      --soft:#171a23;
+      --danger:#ff9fb4;
+      --ok:#9fffd0;
+      --zone:#9b7232;
+      --card-bg:#ffffff;
+      --card-text:#6b4226;
+      --card-line:#c8a89a;
+      --card-border:#e9e4db;
+      --case-scale:.46;
+      --stage-w:850px;
+      --stage-h:1100px;
     }
 
     *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
+    html{scroll-behavior:smooth;background:#050608}
     body{
       min-height:100vh;
-      font-family:"Noto Sans Thai",sans-serif;
-      color:#f4eee8;
-      overflow-x:hidden;
+      font-family:"Noto Sans Thai",system-ui,sans-serif;
+      color:var(--text);
       background:
-        radial-gradient(circle at 12% 4%,rgba(72,121,255,.16),transparent 26%),
-        radial-gradient(circle at 86% 10%,rgba(240,210,150,.09),transparent 28%),
-        radial-gradient(circle at 50% 100%,rgba(255,255,255,.045),transparent 30%),
-        linear-gradient(135deg,#020204 0%,#07080d 48%,#000000 100%);
+        radial-gradient(circle at 18% 5%,rgba(229,199,123,.12),transparent 28%),
+        radial-gradient(circle at 84% 0%,rgba(142,97,255,.10),transparent 26%),
+        linear-gradient(180deg,#06070a 0%,#050608 48%,#030305 100%);
+      overflow-x:hidden;
     }
     body::before{
       content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
       background:
-        linear-gradient(rgba(255,255,255,.042) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,.032) 1px,transparent 1px),
-        radial-gradient(circle at 50% 12%,rgba(255,255,255,.08),transparent 22%);
-      background-size:54px 54px,54px 54px,auto;opacity:.54;
+        linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);
+      background-size:44px 44px;
+      mask-image:linear-gradient(180deg,rgba(0,0,0,.95),rgba(0,0,0,.18));
     }
-    body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:linear-gradient(90deg,rgba(0,0,0,.72),transparent 22%,transparent 78%,rgba(0,0,0,.78))}
-    body,.site{background-color:#020204}
-    a{text-decoration:none;color:inherit} button,input,textarea,select{font-family:inherit}.site{position:relative;z-index:1}.wrap{width:min(1500px,calc(100% - 40px));margin:auto}
+    .shooting-stars{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+    .shooting-stars i{position:absolute;width:150px;height:1px;background:linear-gradient(90deg,transparent,#fff6c9,transparent);opacity:.0;transform:rotate(-28deg);animation:shoot 6.2s linear infinite}
+    .shooting-stars i:nth-child(1){top:10%;left:78%;animation-delay:.3s}.shooting-stars i:nth-child(2){top:25%;left:60%;animation-delay:2.1s}.shooting-stars i:nth-child(3){top:45%;left:88%;animation-delay:3.7s}.shooting-stars i:nth-child(4){top:68%;left:72%;animation-delay:5.2s}
+    @keyframes shoot{0%{opacity:0;transform:translate3d(0,0,0) rotate(-28deg)}8%{opacity:.8}20%{opacity:0;transform:translate3d(-460px,220px,0) rotate(-28deg)}100%{opacity:0}}
 
-    .shooting-stars{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden;mix-blend-mode:screen}
-    .shooting-stars span{position:absolute;width:150px;height:1px;border-radius:999px;background:linear-gradient(90deg,rgba(255,255,255,.95),rgba(255,238,246,.45),transparent);filter:drop-shadow(0 0 6px rgba(255,255,255,.75));transform:rotate(-22deg);opacity:0;animation:shoot 6.5s linear infinite}
-    .shooting-stars span:nth-child(1){top:12%;left:-18%;animation-delay:.2s}.shooting-stars span:nth-child(2){top:24%;left:-18%;animation-delay:1.7s;width:110px}.shooting-stars span:nth-child(3){top:44%;left:-20%;animation-delay:3.4s}.shooting-stars span:nth-child(4){top:62%;left:-18%;animation-delay:5.1s;width:130px}.shooting-stars span:nth-child(5){top:8%;left:-18%;animation-delay:6.2s;width:95px}.shooting-stars span:nth-child(6){top:74%;left:-20%;animation-delay:7.8s;width:170px}
-    @keyframes shoot{0%{opacity:0;transform:translate3d(0,0,0) rotate(-22deg)}7%{opacity:1}22%{opacity:0;transform:translate3d(125vw,48vh,0) rotate(-22deg)}100%{opacity:0;transform:translate3d(125vw,48vh,0) rotate(-22deg)}}
+    a{text-decoration:none;color:inherit}button,input,select,textarea{font-family:inherit}.site{position:relative;z-index:1}.wrap{width:min(1480px,calc(100% - 36px));margin:auto}
 
-    .topbar{position:sticky;top:0;z-index:30;background:rgba(5,5,8,.78);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.10);box-shadow:0 18px 40px rgba(0,0,0,.38)}
-    .header{min-height:106px;display:grid;grid-template-columns:minmax(280px,1fr) auto auto;align-items:center;gap:20px;padding:10px 0}
-    .brand{display:flex;align-items:center;gap:16px}.brand img{width:104px;height:88px;object-fit:contain;background:transparent;filter:drop-shadow(0 8px 16px rgba(0,0,0,.24))}.brand h1{font-family:"Cinzel",serif;color:#fffaf3;font-size:clamp(28px,3vw,42px);line-height:1;white-space:nowrap;letter-spacing:.2px}.brand small{display:block;color:#aeb5c4;margin-top:8px;font-weight:800}
-    .nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}.nav a{color:rgba(255,249,252,.86);padding:10px 15px;border-radius:999px;font-size:14px;font-weight:800}.nav a:hover,.nav .active{background:rgba(255,255,255,.12);outline:1px solid rgba(249,208,221,.42);color:#fff}
-    .back{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 24px;border-radius:999px;color:#fffaf0;font-weight:900;background:linear-gradient(180deg,#24252d,#08090d);border:1px solid rgba(255,255,255,.16);box-shadow:0 10px 24px rgba(0,0,0,.32)}
+    .topbar{position:sticky;top:0;z-index:60;background:rgba(5,6,8,.82);backdrop-filter:blur(18px);border-bottom:1px solid var(--line);box-shadow:0 18px 40px rgba(0,0,0,.45)}
+    .header{min-height:82px;display:grid;grid-template-columns:minmax(260px,1fr) auto auto;align-items:center;gap:16px}
+    .brand{display:flex;align-items:center;gap:14px;min-width:0}.brand img{width:72px;height:64px;object-fit:contain;filter:drop-shadow(0 10px 22px rgba(229,199,123,.16))}.brand h1{font-family:"Cinzel",serif;font-size:clamp(24px,2.8vw,40px);letter-spacing:.4px;line-height:.95;color:#fff}.brand small{display:block;color:var(--muted);font-weight:900;margin-top:7px;font-size:12px}.nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.nav a{border:1px solid var(--line);background:rgba(255,255,255,.045);color:#e9e4db;border-radius:999px;padding:10px 16px;font-weight:900;font-size:13px}.nav a.active{background:linear-gradient(180deg,rgba(229,199,123,.28),rgba(165,119,47,.16));border-color:rgba(229,199,123,.45)}.back{background:#111827;color:#fff;border:1px solid var(--line);border-radius:999px;padding:11px 18px;font-weight:900}
 
-    main{padding:32px 0 70px}.panel,.card,.upload,.zone-section,.id-preview,.case-section{border:1px solid rgba(255,255,255,.10);box-shadow:0 24px 70px rgba(0,0,0,.52);backdrop-filter:blur(18px);border-radius:34px;background:linear-gradient(180deg,rgba(14,15,20,.94),rgba(4,5,8,.92))}
-    .hero{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:24px;align-items:stretch;margin-bottom:24px}.panel{padding:34px}.hero-main{position:relative;overflow:hidden;background:radial-gradient(circle at 15% 10%,rgba(255,255,255,.10),transparent 28%),linear-gradient(135deg,rgba(24,24,31,.96),rgba(7,8,12,.90))}.hero-main::after{content:"✦";position:absolute;right:34px;top:26px;color:rgba(185,106,134,.45);font-size:42px;animation:floatStar 3s ease-in-out infinite}@keyframes floatStar{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-8px) rotate(12deg)}}
-    .eyebrow{width:max-content;padding:8px 15px;border-radius:999px;background:linear-gradient(180deg,#2a2b33,#090a0f);color:#f7e7c1;border:1px solid rgba(255,255,255,.18);font-size:13px;font-weight:900;margin-bottom:16px;letter-spacing:.3px}h1,h2,h3{font-family:"Noto Serif Thai",serif}.hero h1{font-size:clamp(36px,4.8vw,70px);line-height:1.03;letter-spacing:-1px;color:#fffaf3;max-width:900px;text-shadow:0 18px 34px rgba(0,0,0,.44)}.hero p{margin-top:18px;color:#c4bdc4;line-height:1.85;max-width:850px}
-    .notice-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:26px}.notice{min-height:96px;border-radius:24px;padding:15px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.10)}.notice b{display:block;color:#f7e7c1;font-size:20px;font-family:"Cinzel",serif;margin-bottom:6px}.notice span{font-size:13px;color:#bdb6bd;font-weight:800;line-height:1.5}
-    .side-status{display:grid;align-content:center;text-align:center;background:linear-gradient(180deg,#191a22,#050609);color:#fff4dd;overflow:hidden;position:relative}.side-status::before{content:"";position:absolute;inset:-80px;background:radial-gradient(circle,rgba(255,219,231,.24),transparent 33%);animation:softGlow 5s ease-in-out infinite}@keyframes softGlow{50%{transform:scale(1.08);opacity:.7}}.side-status img{position:relative;z-index:1;width:150px;height:150px;object-fit:contain;margin:0 auto 14px;filter:drop-shadow(0 12px 22px rgba(0,0,0,.28))}.side-status h2{position:relative;z-index:1;font-size:34px;line-height:1.1;color:#fff8ea}.side-status p{position:relative;z-index:1;color:rgba(255,246,250,.76);line-height:1.75;margin-top:12px}
+    main{padding:28px 0 80px}.panel{background:linear-gradient(180deg,rgba(16,19,26,.92),rgba(7,8,12,.94));border:1px solid var(--line);border-radius:28px;box-shadow:0 28px 80px rgba(0,0,0,.35);overflow:hidden}.section{padding:26px;margin-bottom:24px}.hero{display:grid;grid-template-columns:1fr 360px;gap:22px;margin-bottom:24px}.hero .main-title{padding:34px;background:radial-gradient(circle at 0 0,rgba(229,199,123,.16),transparent 34%),linear-gradient(135deg,rgba(255,255,255,.04),transparent)}.eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(229,199,123,.40);background:rgba(229,199,123,.10);color:#f5d994;padding:8px 13px;border-radius:999px;font-size:12px;font-weight:900;letter-spacing:.6px}.hero h2{font-family:"Cinzel",serif;font-size:clamp(40px,5vw,74px);line-height:.95;margin-top:18px;color:#fff}.hero p{margin-top:16px;color:#c4c0ca;line-height:1.8;max-width:860px;font-weight:700}.hero-side{display:grid;place-items:center;text-align:center;padding:28px;background:linear-gradient(180deg,#11131a,#050608)}.hero-side img{width:126px;height:126px;object-fit:contain;filter:drop-shadow(0 10px 20px rgba(229,199,123,.20))}.hero-side b{display:block;margin-top:12px;font-family:"Cinzel",serif;font-size:24px}.hero-side span{display:block;color:var(--muted);line-height:1.7;margin-top:8px;font-weight:800}
 
-    .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}.step{min-height:82px;border-radius:24px;padding:15px;display:flex;align-items:center;gap:13px;background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.10);box-shadow:0 14px 32px rgba(0,0,0,.26)}.step-num{width:42px;height:42px;border-radius:999px;display:grid;place-items:center;background:linear-gradient(180deg,var(--zone-soft),var(--zone));color:var(--zone-dark);font-weight:900;border:1px solid rgba(255,255,255,.55)}.step b{display:block;font-size:14px;color:#fffaf3}.step span{font-size:12px;color:#aaa4ad;font-weight:700}
+    .section-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;padding-bottom:18px;margin-bottom:20px;border-bottom:1px solid var(--line)}.label{display:flex;align-items:center;gap:10px;color:#ead08c;font-weight:900}.num{width:36px;height:36px;border-radius:999px;display:grid;place-items:center;background:#11131a;border:1px solid var(--line2);font-family:"Cinzel",serif}.section-head h2{font-family:"Cinzel",serif;font-size:28px;color:#fff;margin-top:4px}.section-head small{color:#b9b5c1;font-weight:900;text-align:right}
 
-    .section-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.10)}.badge-title{display:inline-flex;align-items:center;gap:10px;font-weight:900;color:#f2d7a2}.circle{width:38px;height:38px;border-radius:999px;display:grid;place-items:center;background:linear-gradient(180deg,#25262d,#08090d);color:#f3dfad;border:1px solid rgba(255,255,255,.14);font-family:"Cinzel",serif;font-weight:900}.section-head h2{font-size:28px;color:#fffaf3;letter-spacing:-.2px}.section-head small{color:#aeb5c4;font-weight:800}
+    .grid-main{display:grid;grid-template-columns:minmax(360px,.55fr) minmax(540px,1fr);gap:22px;align-items:start}.form{display:grid;gap:14px}.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{display:grid;gap:7px;color:#d5d1dc;font-weight:900;font-size:13px}input,select{width:100%;height:46px;border-radius:15px;border:1px solid var(--line);background:#07090d;color:#fff;padding:0 14px;outline:none;font-weight:800}input[type="color"]{padding:4px;cursor:pointer}input[type="range"]{padding:0;accent-color:var(--gold);background:transparent}input:focus,select:focus{border-color:rgba(229,199,123,.55);box-shadow:0 0 0 4px rgba(229,199,123,.08)}.hint{font-size:12px;line-height:1.65;color:#aaa7b4;font-weight:800}
 
-    .zone-section,.case-section{padding:26px;margin-bottom:24px}.zone-intro{margin-top:-8px;margin-bottom:18px;color:#c4bdc4;line-height:1.75;font-weight:700}.zone-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:14px}.zone-box{position:relative;min-height:170px;border-radius:30px;padding:18px 10px;display:grid;align-content:center;justify-items:center;text-align:center;border:1px solid rgba(255,255,255,.14);cursor:pointer;transition:.22s;overflow:hidden}.zone-box::after{content:"";position:absolute;inset:-60%;background:linear-gradient(120deg,transparent 35%,rgba(255,255,255,.28),transparent 65%);transform:translateX(-60%) rotate(12deg);transition:.55s}.zone-box:hover::after{transform:translateX(60%) rotate(12deg)}.zone-box:hover{transform:translateY(-5px)}.zone-box.selected{outline:2px solid rgba(243,223,173,.72);box-shadow:0 18px 38px rgba(0,0,0,.28),0 0 0 4px color-mix(in srgb,var(--zone) 45%,transparent)}.zone-box img{width:88px;height:88px;object-fit:contain;filter:drop-shadow(0 12px 16px rgba(32,18,8,.18));position:relative;z-index:1}.zone-box h3{position:relative;z-index:1;margin-top:10px;font-family:"Cinzel",serif;font-size:18px;color:inherit}.zone-box small{position:relative;z-index:1;display:inline-flex;margin-top:12px;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.35);font-size:11px;font-weight:900}.e1{background:linear-gradient(145deg,#050505,#1b1b20);color:#f5f0e8}.e2{background:linear-gradient(145deg,#fffdf8,#e5d5b8);color:#71593a}.e3{background:linear-gradient(145deg,#7f071e,#c2183a);color:#fff2f4}.e4{background:linear-gradient(145deg,#edf6e9,#bad5ad);color:#4f6d45}.e5{background:linear-gradient(145deg,#f2e8ff,#b99add);color:#604482}.e6{background:linear-gradient(145deg,#ffe7ef,#eba0bb);color:#884b62}.e7{background:linear-gradient(145deg,#f4fbff,#a8d6ee);color:#477891}.e8{background:linear-gradient(145deg,#fff2c8,#d0a245);color:#684716}
+    .zone-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.zone-btn{min-height:92px;border-radius:18px;border:1px solid var(--line);background:#0a0c11;color:#fff;display:grid;place-items:center;gap:4px;cursor:pointer;font-weight:900;transition:.16s}.zone-btn:hover{transform:translateY(-2px);border-color:rgba(229,199,123,.36)}.zone-btn.active{border-color:var(--zone);box-shadow:0 0 0 3px rgba(229,199,123,.12);background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.015))}.zone-dot{width:24px;height:24px;border-radius:999px;background:var(--z);border:1px solid rgba(255,255,255,.28)}.upload-box{height:250px;border-radius:22px;border:1px dashed rgba(255,255,255,.22);display:grid;place-items:center;text-align:center;background:#07090d;cursor:pointer;overflow:hidden}.upload-box img{width:100%;height:100%;object-fit:cover;display:none}.upload-box b{display:block;color:#fff;margin-bottom:6px}.upload-box span{color:#aaa7b4;font-size:12px;font-weight:800}.upload-box .icon{font-size:54px;color:#575b65}#photoInput{display:none}
 
-    .form-grid{display:grid;grid-template-columns:minmax(420px,1fr) minmax(380px,.76fr);gap:24px;align-items:start;margin-bottom:24px}.card,.upload{padding:26px}.form{display:grid;gap:15px}.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}label{display:grid;gap:7px;color:#d8d2d8;font-weight:800;font-size:13px}input,select,textarea{width:100%;min-height:44px;border-radius:16px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.065);color:#f4eee8;outline:none;padding:11px 13px;transition:.18s}input[type=color]{padding:4px;height:48px;cursor:pointer}textarea{min-height:104px;resize:vertical;line-height:1.7}input:focus,select:focus,textarea:focus{border-color:rgba(247,231,193,.62);box-shadow:0 0 0 4px rgba(247,231,193,.10);background:rgba(255,255,255,.09)}.counter{text-align:right;color:#aaa4ad;font-size:12px;margin-top:-4px}.hint{font-size:12px;color:#aaa4ad;line-height:1.6;font-weight:700}
-    .upload-box{min-height:390px;border-radius:30px;display:grid;place-items:center;text-align:center;padding:22px;border:1px dashed rgba(255,255,255,.18);background:radial-gradient(circle,rgba(255,255,255,.075),rgba(255,255,255,.035));cursor:pointer;transition:.2s}.upload-box:hover{transform:translateY(-2px);background:rgba(255,255,255,.07)}.portrait-frame{width:210px;height:260px;border-radius:28px;display:grid;place-items:center;margin:auto;border:1px solid rgba(255,255,255,.16);background:#0b0c10;overflow:hidden;box-shadow:inset 0 0 0 10px rgba(255,255,255,.03),0 18px 32px rgba(0,0,0,.28)}.portrait-frame img{width:100%;height:100%;object-fit:cover;display:none}.plus{font-size:58px;color:#f3dfad;line-height:1}.upload-box b{display:block;margin-top:18px;color:#fffaf3}.upload-box span{font-size:13px;color:#aaa4ad;line-height:1.7}#photoInput{display:none}
+    .palette-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}.palette-btn,.btn{border:0;border-radius:999px;min-height:44px;padding:10px 18px;font-weight:950;cursor:pointer;transition:.15s}.btn:hover,.palette-btn:hover{transform:translateY(-2px)}.primary{background:linear-gradient(180deg,#f3dda1,#bd8d3c);color:#0a0b0e}.soft{background:#151923;color:#fff;border:1px solid var(--line)}.danger{background:#2a1219;color:#ffd9e2;border:1px solid rgba(255,159,180,.25)}.palette-btn{background:#10131a;color:#fff;border:1px solid var(--line);font-size:12px}.palette-btn span{display:inline-flex;width:12px;height:12px;border-radius:999px;margin-right:4px;border:1px solid rgba(255,255,255,.3)}.color-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 
-    .id-preview{padding:26px;margin-top:24px;margin-bottom:24px}.preview-shell{display:grid;place-items:center;overflow:auto;padding:8px 0 14px}.vertical-card{position:relative;width:min(430px,100%);aspect-ratio:560/840;border-radius:32px;background:var(--member-bg);border:1px solid var(--member-border);box-shadow:0 34px 80px rgba(0,0,0,.32),inset 0 0 0 1px rgba(255,255,255,.75);overflow:hidden;color:var(--member-text)}.vertical-card::before{content:"";position:absolute;inset:20px;border:1px solid color-mix(in srgb,var(--member-border) 76%,transparent);border-radius:25px;pointer-events:none}.vertical-card .right-band{position:absolute;top:0;right:0;width:74px;height:100%;background:linear-gradient(180deg,var(--member-accent),color-mix(in srgb,var(--member-accent) 76%,#000));box-shadow:inset 1px 0 0 rgba(255,255,255,.18)}.vertical-card .band-text{position:absolute;right:19px;top:52%;transform:translateY(-50%) rotate(90deg);transform-origin:center;white-space:nowrap;color:#fff;font-family:"Cinzel",serif;font-weight:800;font-size:18px;letter-spacing:1.55px;text-shadow:0 1px 8px rgba(0,0,0,.25)}.v-content{position:absolute;left:46px;right:112px;top:46px;bottom:40px;display:flex;flex-direction:column;align-items:stretch}.v-photo{width:100%;max-width:304px;aspect-ratio:3/4;margin:0 auto 18px;border-radius:20px;overflow:hidden;background:#fff;border:1px solid rgba(70,54,48,.16);box-shadow:0 16px 32px rgba(42,28,28,.13)}.v-photo img{width:100%;height:100%;object-fit:cover;display:none}.v-silhouette{height:100%;display:grid;place-items:center;font-size:72px;color:rgba(30,20,20,.18)}.v-seal{width:62px;height:62px;object-fit:contain;margin:0 auto 12px;filter:drop-shadow(0 8px 14px rgba(40,22,20,.18))}.v-title{font-family:"Cinzel",serif;font-size:34px;line-height:1.03;color:var(--member-text);font-weight:700;letter-spacing:-.35px;white-space:nowrap}.v-sub{margin-top:8px;font-family:"Cinzel",serif;font-size:10px;letter-spacing:2.1px;color:var(--member-text);font-weight:800}.v-fields{display:grid;gap:15px;margin-top:22px}.v-field .value{font-size:13px;font-weight:900;color:var(--member-text);line-height:1.15;min-height:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.v-field .line{height:1px;background:var(--member-line);margin-top:4px}.v-field .label{font-family:"Cinzel",serif;font-size:8px;letter-spacing:.9px;color:color-mix(in srgb,var(--member-text) 66%,#888);font-weight:800;margin-top:4px;text-transform:uppercase}.v-foot{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:auto;color:var(--member-text)}.v-foot b{display:block;font-family:"Cinzel",serif;font-size:8px;letter-spacing:.72px;color:color-mix(in srgb,var(--member-text) 72%,#777)}.v-foot span{font-size:11px;font-weight:800;line-height:1.3}.download-row{margin-top:20px;display:flex;justify-content:center;gap:10px;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:12px 24px;border-radius:999px;border:0;cursor:pointer;font-size:14px;font-weight:900;transition:.18s}.btn:hover{transform:translateY(-2px)}.primary{color:#050506;background:linear-gradient(180deg,#f3dfad,#c9a96a);border:1px solid rgba(255,255,255,.16);box-shadow:0 12px 28px rgba(0,0,0,.34)}.soft{color:#f4eee8;background:rgba(255,255,255,.075);border:1px solid rgba(255,255,255,.14)}.danger{color:#ffceda;background:rgba(255,80,120,.10);border:1px solid rgba(255,120,150,.24)}
+    .card-solo-wrap{display:flex;justify-content:center}.member-card-preview{width:220px;height:auto;border-radius:20px;box-shadow:0 22px 60px rgba(0,0,0,.42);background:#fff}.result-card-img{width:180px;border-radius:18px;box-shadow:0 18px 46px rgba(0,0,0,.35);background:#fff}.result-case-img{width:190px;border-radius:18px;box-shadow:0 18px 46px rgba(0,0,0,.35);background:transparent}.download-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:18px}
 
-    .palette-box{margin-top:4px;border-radius:22px;padding:14px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.10)}.palette-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}.palette-head b{color:#fffaf3;font-size:13px}.palette-head button{min-height:34px;padding:7px 13px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.08);color:#f2d7a2;font-weight:900;cursor:pointer}.palette-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.palette-btn{min-height:44px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:#111;color:#fff;font-weight:900;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;overflow:hidden}.palette-btn:hover{transform:translateY(-1px);border-color:rgba(243,223,173,.55)}.swatches{display:flex;gap:3px}.swatches i{width:10px;height:10px;border-radius:999px;border:1px solid rgba(255,255,255,.28);display:block}.case-layout{display:grid;grid-template-columns:minmax(300px,.68fr) minmax(860px,1120px);gap:26px;align-items:start}.case-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}.case-option{min-height:96px;border-radius:22px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.045);cursor:pointer;display:grid;place-items:center;padding:8px;transition:.18s;overflow:hidden;color:#f2d7a2;font-weight:900}.case-option:hover{transform:translateY(-3px);background:rgba(255,255,255,.08)}.case-option.selected{outline:2px solid rgba(243,223,173,.70);box-shadow:0 0 0 4px color-mix(in srgb,var(--member-accent) 45%,transparent)}.case-option img{max-width:100%;max-height:74px;object-fit:contain;display:block}.case-option span{font-family:"Cinzel",serif;font-size:15px}.case-work{border-radius:30px;background:linear-gradient(180deg,rgba(7,8,12,.98),rgba(0,0,0,.96));border:1px solid rgba(255,255,255,.14);padding:18px;box-shadow:0 24px 64px rgba(0,0,0,.46)}.case-stage{position:relative;width:100%;aspect-ratio:var(--case-stage-ratio);min-height:1180px;border-radius:28px;background:radial-gradient(circle at 50% 18%,rgba(255,255,255,.08),transparent 32%),linear-gradient(135deg,rgba(13,15,21,.96),rgba(2,3,6,.98));border:1px dashed rgba(255,255,255,.22);overflow:hidden;touch-action:none}.case-stage::before{content:"พื้นที่จัดวางขนาดใหญ่: ลากบัตร / ปรับเคสให้ตรงกับภาพที่ดาวน์โหลด";position:absolute;left:18px;top:16px;z-index:0;color:rgba(255,255,255,.34);font-weight:900;font-size:12px;letter-spacing:.2px}.case-card{position:absolute;left:calc(50% - 260px);top:300px;width:520px;aspect-ratio:560/840;transform-origin:center;z-index:1;cursor:grab}.case-card:active{cursor:grabbing}.case-card .vertical-card{width:100%;height:100%;border-radius:24px;box-shadow:0 18px 38px rgba(0,0,0,.26)}.case-card .vertical-card::before{inset:13px;border-radius:18px}.case-card .right-band{width:52px}.case-card .band-text{right:12px;font-size:12px}.case-card .v-content{left:30px;right:72px;top:30px;bottom:26px}.case-card .v-photo{max-width:210px;border-radius:14px;margin-bottom:12px}.case-card .v-seal{width:44px;height:44px;margin-bottom:8px}.case-card .v-title{font-size:24px}.case-card .v-sub{font-size:6.8px;letter-spacing:1.25px;margin-top:5px}.case-card .v-fields{gap:8px;margin-top:13px}.case-card .v-field .value{font-size:8.8px;min-height:11px}.case-card .v-field .line{margin-top:2px}.case-card .v-field .label{font-size:5.4px;margin-top:2px}.case-card .v-foot{gap:8px}.case-card .v-foot b{font-size:5.4px}.case-card .v-foot span{font-size:7px}.case-overlay{position:absolute;inset:0;z-index:2;pointer-events:none}.case-overlay img{position:absolute;left:50%;top:50%;width:100%;height:100%;object-fit:fill;display:none;transform:translate(-50%,-50%);transform-origin:center}.case-placeholder{position:absolute;left:50%;top:50%;font-family:"Cinzel",serif;font-size:54px;font-weight:800;color:rgba(255,255,255,.16);transform:translate(-50%,-50%);transform-origin:center}.edit-toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:16px;padding:12px;border-radius:18px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.10)}.tool-btn{min-height:38px;padding:8px 15px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.065);color:#e9e2e8;font-weight:900;cursor:pointer}.tool-btn.active,.tool-btn:hover{background:linear-gradient(180deg,#f3dfad,#c9a96a);color:#050506}.tool-note{font-size:12px;color:#aaa4ad;font-weight:800}.controls{display:grid;gap:12px;margin-top:16px}.control-line{display:grid;grid-template-columns:104px 1fr 62px;align-items:center;gap:10px;color:#d8d2d8;font-weight:900;font-size:12px}.control-line input{min-height:34px;padding:0}.control-line output{text-align:right;color:#f2d7a2}.generated-card-box{display:none;margin-top:22px;border-radius:28px;padding:22px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.11);box-shadow:0 18px 46px rgba(0,0,0,.34);text-align:center}.generated-card-box.show{display:block}.generated-card-box h3{font-size:24px;color:#fffaf3}.generated-card-box p{color:#c4bdc4;line-height:1.7;margin:8px auto 16px;font-weight:700}.generated-card-box img{width:min(220px,100%);border-radius:16px;border:1px solid rgba(255,255,255,.14);box-shadow:0 16px 34px rgba(0,0,0,.32)}
+    .case-layout{display:grid;grid-template-columns:420px minmax(430px,560px);gap:24px;align-items:start;justify-content:center}.case-list{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.case-btn{height:118px;border-radius:20px;border:1px solid var(--line);background:#0c0f15;display:grid;place-items:center;cursor:pointer;overflow:hidden;position:relative}.case-btn.active{border-color:#edd28f;box-shadow:0 0 0 3px rgba(229,199,123,.15)}.case-btn img{max-width:90%;max-height:90%;object-fit:contain}.case-btn b{position:absolute;left:8px;bottom:6px;font-size:11px;color:#f3dda1;background:rgba(0,0,0,.54);border-radius:999px;padding:2px 7px}.case-btn.missing::after{content:"PNG";color:#565b66;font-size:10px;font-weight:900}
 
-    .submit-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;margin-top:24px}.status-card{display:none;margin-top:24px;border-radius:28px;padding:22px;background:linear-gradient(180deg,rgba(32,33,40,.96),rgba(6,7,10,.96));color:#fff3db;border:1px solid rgba(249,208,221,.48);box-shadow:0 18px 42px rgba(7,20,38,.25)}.status-card.show{display:block;animation:pop .28s ease-out both}@keyframes pop{from{transform:translateY(10px);opacity:0}to{transform:translateY(0);opacity:1}}.status-card h3{font-size:28px;color:#fff8e9}.status-card p{margin-top:8px;color:rgba(255,246,250,.76);line-height:1.75}.status-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.footer{text-align:center;margin-top:42px;color:#aaa4ad;font-size:13px;line-height:1.8}
+    .editor-tools{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px}.tool-toggle{border:1px solid var(--line);background:#11141c;color:#fff;border-radius:999px;min-height:42px;padding:9px 16px;font-weight:950;cursor:pointer}.tool-toggle.active{background:linear-gradient(180deg,#f3dda1,#bd8d3c);color:#0a0b0e;border-color:transparent}.sliders{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:16px}.slider-box{background:#0a0c11;border:1px solid var(--line);border-radius:16px;padding:12px}.slider-box label{font-size:12px}.slider-box output{color:#f3dda1;margin-left:auto;font-size:12px}
 
-    .web-modal{position:fixed;inset:0;z-index:80;display:none;place-items:center;padding:22px;background:rgba(20,10,18,.46);backdrop-filter:blur(10px)}.web-modal.show{display:grid;animation:fadeIn .18s ease-out both}.modal-card{width:min(560px,100%);border-radius:30px;padding:28px;background:linear-gradient(180deg,rgba(22,22,28,.98),rgba(8,9,13,.96));border:1px solid rgba(255,255,255,.14);box-shadow:0 30px 80px rgba(40,16,28,.38);position:relative;overflow:hidden;text-align:center}.modal-card img{width:86px;height:86px;object-fit:contain;margin-bottom:10px;filter:drop-shadow(0 10px 18px rgba(40,16,28,.18))}.modal-card::before{content:"✦";position:absolute;right:24px;top:18px;color:rgba(185,106,134,.32);font-size:34px}.modal-card h3{font-size:30px;color:#fffaf3;margin-bottom:10px}.modal-card p{color:#d8d2d8;line-height:1.8;font-weight:700;text-align:left}.modal-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:20px}.modal-actions .btn{min-height:44px}@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    .editor-shell{background:#050609;border:1px solid var(--line);border-radius:26px;padding:16px;overflow:auto;max-width:620px;margin:auto}.editor-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.editor-title b{color:#fff}.editor-title span{color:#aaa7b4;font-size:12px;font-weight:900}.stage-viewport{width:calc(var(--stage-w) * var(--case-scale));height:calc(var(--stage-h) * var(--case-scale));margin:0 auto;overflow:hidden;background:radial-gradient(circle at 50% 30%,rgba(229,199,123,.08),transparent 45%),#020304;border:1px dashed rgba(255,255,255,.18);border-radius:18px;position:relative}.stage{width:var(--stage-w);height:var(--stage-h);position:relative;transform:scale(var(--case-scale));transform-origin:0 0;cursor:grab;user-select:none}.stage:active{cursor:grabbing}.stage-guide{position:absolute;inset:0;background:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:50px 50px;opacity:.16}.stage-note{position:absolute;left:20px;top:18px;font-weight:950;color:rgba(255,255,255,.42);font-size:22px}.composition-card,.composition-case{position:absolute;transform-origin:center center;will-change:transform}.composition-card{filter:drop-shadow(0 18px 26px rgba(0,0,0,.35));z-index:2}.composition-case{z-index:3;pointer-events:none}.selection-frame{position:absolute;z-index:5;border:3px solid #f3dda1;border-radius:14px;pointer-events:none;box-shadow:0 0 0 9999px rgba(0,0,0,.0)}.generated{display:none;margin-top:20px;text-align:center}.generated.show{display:block}.generated-grid{display:flex;justify-content:center;align-items:flex-start;gap:18px;flex-wrap:wrap}.generated h3{font-family:"Cinzel",serif;margin-bottom:8px}.generated p{color:#aaa7b4;font-weight:800;line-height:1.6;font-size:12px;margin-bottom:12px}.footer{text-align:center;color:#7f8390;line-height:1.8;font-size:12px;font-weight:800;margin-top:34px}
 
-    @media(max-width:1260px){.header{grid-template-columns:1fr}.nav{justify-content:flex-start}.back{width:max-content}.hero{grid-template-columns:1fr}.form-grid,.case-layout{grid-template-columns:1fr}.zone-grid{grid-template-columns:repeat(4,1fr)}.case-grid{grid-template-columns:repeat(4,1fr)}.case-work{max-width:1000px;margin:auto;width:100%}}
-    @media(max-width:860px){.wrap{width:min(100% - 24px,1500px)}.brand img{width:78px;height:72px}.brand h1{font-size:24px;white-space:normal}.panel,.card,.upload,.zone-section,.id-preview,.case-section{border-radius:26px;padding:22px}.notice-list,.steps,.two{grid-template-columns:1fr}.zone-grid{grid-template-columns:repeat(2,1fr)}.side-status img{width:110px;height:110px}.case-grid{grid-template-columns:repeat(3,1fr)}.case-stage{min-height:760px}.case-card{left:calc(50% - 180px);top:190px;width:360px}.vertical-card{width:min(390px,100%)}}
-
-
-    /* FINAL FIX: black hi-tech UI + exact stage/download coordinates */
-    body{background:#000 !important;color:#f5f5f5 !important;}
-    body::before{opacity:.28 !important;background:
-      linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
-      linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px),
-      radial-gradient(circle at 18% 8%,rgba(124,154,255,.13),transparent 25%) !important;background-size:64px 64px,64px 64px,auto !important;}
-    .site,.topbar,main{background:transparent !important;}
-    .panel,.card,.upload,.zone-section,.id-preview,.case-section{background:linear-gradient(180deg,rgba(15,16,22,.96),rgba(2,3,5,.96)) !important;border-color:rgba(255,255,255,.12) !important;}
-    .id-preview{padding:20px !important;}
-    .id-preview .section-head{margin-bottom:10px !important;}
-    .preview-shell{padding:8px 0 !important;max-height:none !important;}
-    .id-preview .vertical-card{width:min(260px,100%) !important;border-radius:22px !important;box-shadow:0 18px 38px rgba(0,0,0,.30),inset 0 0 0 1px rgba(255,255,255,.78) !important;}
-    .id-preview .vertical-card::before{inset:12px !important;border-radius:16px !important;}
-    .id-preview .right-band{width:44px !important;}
-    .id-preview .band-text{right:9px !important;font-size:10px !important;letter-spacing:1px !important;}
-    .id-preview .v-content{left:24px !important;right:58px !important;top:24px !important;bottom:22px !important;}
-    .id-preview .v-photo{max-width:145px !important;border-radius:12px !important;margin-bottom:8px !important;}
-    .id-preview .v-seal{width:34px !important;height:34px !important;margin-bottom:5px !important;}
-    .id-preview .v-title{font-size:17px !important;}
-    .id-preview .v-sub{font-size:5.2px !important;letter-spacing:.8px !important;margin-top:3px !important;}
-    .id-preview .v-fields{gap:5px !important;margin-top:8px !important;}
-    .id-preview .v-field .value{font-size:6.2px !important;min-height:8px !important;}
-    .id-preview .v-field .line{margin-top:2px !important;}
-    .id-preview .v-field .label{font-size:4.2px !important;margin-top:1px !important;}
-    .id-preview .v-foot{gap:8px !important;}
-    .id-preview .v-foot b{font-size:4.2px !important;}
-    .id-preview .v-foot span{font-size:5.4px !important;}
-
-    .palette-head button,#randomPaletteBtnCase{background:linear-gradient(180deg,#f3dfad,#b88a43) !important;color:#050506 !important;border-color:rgba(255,255,255,.22) !important;box-shadow:0 10px 24px rgba(0,0,0,.28) !important;}
-    .case-layout{grid-template-columns:minmax(260px,.42fr) minmax(760px,1fr) !important;align-items:start !important;}
-    .case-work{background:#050609 !important;border-color:rgba(255,255,255,.18) !important;}
-    .case-stage{min-height:1180px !important;background:radial-gradient(circle at 50% 18%,rgba(255,255,255,.055),transparent 32%),#050609 !important;border:1px dashed rgba(255,255,255,.28) !important;}
-    .case-stage::before{content:"พื้นที่ใหญ่สำหรับปรับเคสและบัตร — สิ่งที่เห็นตรงนี้คือสิ่งที่จะดาวน์โหลด" !important;color:rgba(255,255,255,.48) !important;}
-    .case-card{left:50% !important;top:50% !important;width:520px !important;transform-origin:center !important;transform:translate(-50%,-50%) translate(var(--card-x,0px),var(--card-y,0px)) scale(var(--card-scale,1.5)) rotate(var(--card-rotate,0deg)) !important;}
-    .case-overlay img,.case-placeholder{transform-origin:center !important;}
-    .case-stage[data-edit="case"] .case-overlay::after{content:"กำลังปรับเคส";position:absolute;left:14px;bottom:14px;padding:7px 12px;border-radius:999px;background:rgba(243,223,173,.92);color:#050506;font-weight:900;font-size:12px;}
-    .case-stage[data-edit="card"] .case-card::after{content:"กำลังปรับบัตร";position:absolute;left:10px;top:10px;padding:6px 10px;border-radius:999px;background:rgba(243,223,173,.9);color:#050506;font-weight:900;font-size:11px;pointer-events:none;}
-    .generated-card-box{max-width:620px;margin:22px auto 0 !important;padding:16px !important;}
-    .generated-card-box img{width:auto !important;max-width:210px !important;max-height:330px !important;object-fit:contain !important;display:block;margin:0 auto !important;}
-    .generated-card-box.case-result{max-width:760px !important;}
-    .generated-card-box.case-result img{max-width:min(360px,100%) !important;max-height:560px !important;}
-    .generated-card-box h3{font-size:20px !important;}
-    .generated-card-box p{font-size:12px !important;}
-    @media(max-width:1260px){.case-layout{grid-template-columns:1fr !important}.case-stage{min-height:900px !important}.case-card{width:430px !important}}
-    @media(max-width:860px){.case-stage{min-height:760px !important}.case-card{width:340px !important}.id-preview .vertical-card{width:min(230px,100%) !important}}
-
+    @media(max-width:1180px){.header{grid-template-columns:1fr}.nav{justify-content:flex-start}.hero,.grid-main,.case-layout{grid-template-columns:1fr}.case-list{grid-template-columns:repeat(7,1fr)}.editor-shell{overflow:auto}.stage-viewport{--case-scale:.48}}
+    @media(max-width:760px){.wrap{width:min(100% - 22px,1480px)}.section{padding:20px;border-radius:22px}.two,.color-grid,.sliders{grid-template-columns:1fr}.zone-grid{grid-template-columns:repeat(2,1fr)}.case-list{grid-template-columns:repeat(4,1fr)}.stage-viewport{--case-scale:.38}.brand h1{font-size:24px}.hero h2{font-size:42px}}
   </style>
 </head>
 <body>
-  <div class="shooting-stars" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+  <div class="shooting-stars"><i></i><i></i><i></i><i></i></div>
   <div class="site">
     <header class="topbar">
       <div class="wrap header">
-        <a class="brand" href="./index.html"><img src="./eden.png" alt="E8’s Eden Academy" /><div><h1>E8’s Eden Academy</h1><small>Member Update ✦ Student Affairs Office</small></div></a>
-        <nav class="nav"><a href="./index.html">หน้าหลัก</a><a href="./board.html">ข่าวสาร</a><a href="./zone.html">โซน</a><a href="./shop.html">ร้านค้า</a><a href="./register.html">สมัครบัตร</a><a class="active" href="./member.html">สมาชิก</a></nav>
+        <a class="brand" href="./index.html"><img src="./eden.png" alt="E8's Eden Academy"><div><h1>E8’S EDEN ACADEMY</h1><small>Member Update ✦ Student Affairs Office</small></div></a>
+        <nav class="nav"><a href="./index.html">หน้าหลัก</a><a href="./board.html">ข่าวสาร</a><a href="./register.html">สมัครปี 1</a><a class="active" href="./member.html">สมาชิก</a></nav>
         <a class="back" href="./index.html">← กลับหน้าแรก</a>
       </div>
     </header>
 
     <main class="wrap">
       <section class="hero">
-        <div class="panel hero-main">
-          <div class="eyebrow">MEMBER UPDATE FORM</div>
-          <h1>เปลี่ยนแปลงข้อมูลขึ้นชั้นปี</h1>
-          <p>สำหรับนักเรียนที่ต้องการอัปเดตชั้นปีและเปลี่ยนโซนประจำตัวในระดับ Year 2-4 สามารถเลือกโซนได้ครบ E1-E8 ปรับสีบัตรเองได้ และสร้างบัตรแนวตั้งพร้อมเคสสำหรับใช้งานต่อได้ทันที</p>
-          <div class="notice-list"><div class="notice"><b>YEAR 2-4</b><span>เลือกชั้นปีใหม่ได้ตามข้อมูลสมาชิก</span></div><div class="notice"><b>E1-E8</b><span>หน้านี้ไม่มีโซนล็อค เลือกได้ครบทุกบ้าน</span></div><div class="notice"><b>C1-C21</b><span>เลือกเคส PNG แล้วลาก/ขยายบัตรให้พอดีได้</span></div></div>
+        <div class="panel main-title">
+          <div class="eyebrow">MEMBER UPDATE PORTAL</div>
+          <h2>เปลี่ยนแปลงข้อมูลขึ้นชั้นปี</h2>
+          <p>สำหรับนักเรียน Year 2-4 สามารถเปลี่ยนชั้นปี เปลี่ยนโซน ปรับสีบัตร และเลือกเคส C1-C21 ได้เอง บัตรทั้งหมดเป็นแนวตั้ง และสามารถดาวน์โหลดเฉพาะบัตรหรือดาวน์โหลดพร้อมเคสได้</p>
         </div>
-        <aside class="panel side-status"><img src="./eden.png" alt="Eden Logo" /><h2>Member Card</h2><p>บัตรแนวตั้งเท่านั้น ปรับสีพื้นบัตร ขอบ เส้น ฟ้อนต์ และขอบขวาได้ตามต้องการ</p></aside>
+        <aside class="panel hero-side">
+          <div><img src="./eden.png" alt="Eden Logo"><b>Vertical Member Card</b><span>ปรับสี ลากตำแหน่ง ย่อขยาย และดาวน์โหลดให้ตรงกับพรีวิว</span></div>
+        </aside>
       </section>
 
-      <section class="steps">
-        <div class="step"><div class="step-num">1</div><div><b>เลือกชั้นปี</b><span>Year 2 / Year 3 / Year 4</span></div></div>
-        <div class="step"><div class="step-num">2</div><div><b>เลือกโซน</b><span>E1-E8 ไม่มี Locked</span></div></div>
-        <div class="step"><div class="step-num">3</div><div><b>ปรับสีและรูป</b><span>สีพื้น/ขอบ/เส้น/ฟ้อนต์เปลี่ยนได้</span></div></div>
-        <div class="step"><div class="step-num">4</div><div><b>โหลดบัตร/เคส</b><span>โหลดเฉพาะบัตรหรือโหลดพร้อมเคส</span></div></div>
-      </section>
-
-      <section class="zone-section" id="zones">
-        <div class="section-head"><div><div class="badge-title"><span class="circle">1</span> เลือกโซนสำหรับชั้นปีใหม่</div><h2>Zone Selection</h2></div><small>E1-E8 AVAILABLE</small></div>
-        <p class="zone-intro">เลือกได้ทุกโซน ไม่มีสถานะ Locked และไม่มีข้อความรายละเอียดแบบหน้าสมัครปี 1 เพื่อให้หน้าข้อมูลสมาชิกดูเรียบและเป็นทางการ</p>
-        <div class="zone-grid">
-          <article class="zone-box e1" data-zone="E1 Zone" data-logo="./e1.png" data-color="#111111" data-dark="#000000" data-soft="#f7f7f7" data-ink="#111111" data-signature="#111111" data-rgb="17,17,17" data-dark-rgb="0,0,0"><img src="./e1.png" alt="E1 Zone" /><h3>E1 ZONE</h3><small>AVAILABLE</small></article>
-          <article class="zone-box e2" data-zone="E2 Zone" data-logo="./e2.png" data-color="#d7bd8c" data-dark="#8f6a32" data-soft="#fff5de" data-ink="#5c3d20" data-signature="#5f4422" data-rgb="215,189,140" data-dark-rgb="143,106,50"><img src="./e2.png" alt="E2 Zone" /><h3>E2 ZONE</h3><small>AVAILABLE</small></article>
-          <article class="zone-box e3" data-zone="E3 Zone" data-logo="./e3.png" data-color="#c2183a" data-dark="#7f071e" data-soft="#ffe4e8" data-ink="#8b0a24" data-signature="#8b0a24" data-rgb="194,24,58" data-dark-rgb="127,7,30"><img src="./e3.png" alt="E3 Zone" /><h3>E3 ZONE</h3><small>AVAILABLE</small></article>
-          <article class="zone-box e4" data-zone="E4 Zone" data-logo="./e4.png" data-color="#bad5ad" data-dark="#5d8453" data-soft="#edf6e9" data-ink="#33502d" data-signature="#315829" data-rgb="186,213,173" data-dark-rgb="93,132,83"><img src="./e4.png" alt="E4 Zone" /><h3>E4 ZONE</h3><small>AVAILABLE</small></article>
-          <article class="zone-box e5" data-zone="E5 Zone" data-logo="./e5.png" data-color="#b99add" data-dark="#704eaa" data-soft="#f2e8ff" data-ink="#4b3171" data-signature="#41246a" data-rgb="185,154,221" data-dark-rgb="112,78,170"><img src="./e5.png" alt="E5 Zone" /><h3>E5 ZONE</h3><small>AVAILABLE</small></article>
-          <article class="zone-box e6" data-zone="E6 Zone" data-logo="./e6.png" data-color="#eba0bb" data-dark="#b95b7f" data-soft="#ffe7ef" data-ink="#843653" data-signature="#8d2c52" data-rgb="235,160,187" data-dark-rgb="185,91,127"><img src="./e6.png" alt="E6 Zone" /><h3>E6 ZONE</h3><small>AVAILABLE</small></article>
-          <article class="zone-box e7" data-zone="E7 Zone" data-logo="./e7.png" data-color="#a8d6ee" data-dark="#4d90b4" data-soft="#f4fbff" data-ink="#2f6b88" data-signature="#275d78" data-rgb="168,214,238" data-dark-rgb="77,144,180"><img src="./e7.png" alt="E7 Zone" /><h3>E7 ZONE</h3><small>AVAILABLE</small></article>
-          <article class="zone-box e8" data-zone="E8 Zone" data-logo="./e8.png" data-color="#d0a245" data-dark="#8a641b" data-soft="#fff2c8" data-ink="#5c3e12" data-signature="#5a3b0f" data-rgb="208,162,69" data-dark-rgb="138,100,27"><img src="./e8.png" alt="E8 Zone" /><h3>E8 ZONE</h3><small>AVAILABLE</small></article>
-        </div>
-      </section>
-
-      <section class="form-grid">
-        <form class="card" id="memberForm">
-          <div class="section-head"><div><div class="badge-title"><span class="circle">2</span> กรอกข้อมูลสมาชิก</div><h2>ข้อมูลขึ้นชั้นปี</h2></div><small>Year 2-4</small></div>
-          <div class="form">
-            <div class="two"><label>ชื่อที่ใช้ในระบบ<input id="displayName" maxlength="28" placeholder="เช่น Seraphina.lux" required /></label><label>ชื่อเล่น / นามแฝง<input id="nickname" maxlength="20" placeholder="ใส่หรือไม่ใส่ก็ได้" /></label></div>
-            <div class="two"><label>ระดับชั้น<select id="level"><option value="Year 2">Year 2</option><option value="Year 3">Year 3</option><option value="Year 4">Year 4</option></select></label><label>สถานะสมาชิก<select id="status" disabled><option>Member Update</option></select></label></div>
-            <div class="two"><label>สีขอบขวาบัตร<input id="accentColor" type="color" value="#8f6a32" /></label><label>สีฟ้อนต์บัตร<input id="textColor" type="color" value="#5c3d20" /></label></div>
-            <div class="two"><label>สีพื้นบัตร<input id="cardBgColor" type="color" value="#ffffff" /></label><label>สีขอบบัตร<input id="cardBorderColor" type="color" value="#e7e2dc" /></label></div>
-            <label>สีเส้นรายละเอียด<input id="lineColor" type="color" value="#cbb9b1" /></label>
-            <div class="palette-box">
-              <div class="palette-head"><b>ชุดสีสำเร็จ / สุ่มสีสวย</b><button type="button" id="randomPaletteBtn">🎲 สุ่มสีบัตร</button></div>
-              <div class="palette-grid" id="paletteGrid"></div>
-              <p class="hint" style="margin-top:8px">กดเลือกชุดสีแล้วค่อยปรับเองต่อได้ทุกช่องค่ะ</p>
+      <section class="grid-main">
+        <div>
+          <section class="panel section">
+            <div class="section-head"><div><div class="label"><span class="num">1</span> ข้อมูลสมาชิก</div><h2>Student Info</h2></div><small>Year 2-4</small></div>
+            <div class="form">
+              <div class="two"><label>ชื่อที่ใช้บนบัตร<input id="displayName" maxlength="24" placeholder="เช่น HIMEUME"></label><label>ชั้นปี<select id="yearLevel"><option>Year 2</option><option>Year 3</option><option>Year 4</option></select></label></div>
+              <div class="form-field"><label>รูปบัตรสมาชิก</label><label class="upload-box" for="photoInput"><img id="photoPreview" alt="Preview"><div id="photoPlaceholder"><div class="icon">♙</div><b>คลิกเพื่ออัปโหลดรูป</b><span>PNG / JPG / WEBP ไม่เกิน 6MB</span></div></label><input id="photoInput" type="file" accept="image/png,image/jpeg,image/webp"></div>
+              <p class="hint">เลขบัตรจะสุ่มให้อัตโนมัติ และตัวอักษร 4 หลักท้ายจะกันซ้ำในเครื่องนี้</p>
             </div>
-            <label>หมายเหตุการเปลี่ยนข้อมูล<textarea id="reason" maxlength="240" placeholder="เขียนสั้น ๆ ได้เลยค่ะ เช่น ขึ้นชั้นปีใหม่และต้องการเปลี่ยนโซน"></textarea></label>
-            <div class="counter"><span id="reasonCount">0</span> / 240</div>
-            <p class="hint">หน้านี้จะบันทึกข้อมูลไว้ในเครื่องผู้ใช้ก่อน และสามารถสร้างบัตรแนวตั้งใหม่หรือบัตรพร้อมเคสได้ทันที</p>
-          </div>
-          <div class="submit-row"><p class="hint">เลือกโซนแล้วระบบจะสุ่มรหัสบัตรสมาชิกให้อัตโนมัติ</p><div><button class="btn danger" type="button" id="resetBtn">ล้างข้อมูล</button><button class="btn primary" type="submit" form="memberForm">บันทึกข้อมูลสมาชิก</button></div></div>
-        </form>
+          </section>
 
-        <section class="upload">
-          <div class="section-head"><div><div class="badge-title"><span class="circle">3</span> อัปโหลดรูปถ่าย</div><h2>รูปบัตรสมาชิก</h2></div><small>JPG / PNG</small></div>
-          <label class="upload-box" for="photoInput"><div><div class="portrait-frame"><img id="photoPreview" alt="รูปสมาชิก" /><div class="plus" id="photoPlus">＋</div></div><b>คลิกเพื่อเลือกไฟล์รูปหน้าตรง</b><span>รูปนี้จะใช้ทั้งบัตรเดี่ยวและบัตรที่อยู่ในเคส</span></div></label>
-          <input type="file" id="photoInput" accept="image/png,image/jpeg,image/webp" />
-        </section>
-      </section>
+          <section class="panel section">
+            <div class="section-head"><div><div class="label"><span class="num">2</span> เลือกโซน</div><h2>Zone E1-E8</h2></div><small>ไม่มี LOCKED</small></div>
+            <div class="zone-grid" id="zoneGrid"></div>
+          </section>
 
-      <section class="id-preview">
-        <div class="section-head"><div><div class="badge-title"><span class="circle">4</span> ตัวอย่างบัตรสมาชิก</div><h2>Vertical Member Card</h2></div><small>Custom colors + right zone band</small></div>
-        <div class="preview-shell">
-          <article class="vertical-card" id="memberCard">
-            <div class="right-band"><div class="band-text" id="bandText">E2 ZONE</div></div>
-            <div class="v-content">
-              <div class="v-photo"><img id="cardPhoto" alt="รูปบนบัตร" /><div class="v-silhouette" id="cardSilhouette">♙</div></div>
-              <img class="v-seal" id="cardSeal" src="./e2.png" alt="zone seal" />
-              <div class="v-title">E8’s Eden Academy</div>
-              <div class="v-sub">STUDENT IDENTITY CARD</div>
-              <div class="v-fields"><div class="v-field"><div class="value" id="studentId">E2-000000-001-XXXX</div><div class="line"></div><div class="label">Student ID</div></div><div class="v-field"><div class="value" id="cardName">—</div><div class="line"></div><div class="label">Name</div></div><div class="v-field"><div class="value" id="cardLevel">YEAR 2</div><div class="line"></div><div class="label">Level</div></div></div>
-              <div class="v-foot"><div><b>ISSUE DATE</b><span id="issueDate">—</span></div><div><b>AUTHORIZED SIGNATURE</b><span>Eden Office</span></div></div>
+          <section class="panel section">
+            <div class="section-head"><div><div class="label"><span class="num">3</span> ปรับสีบัตร</div><h2>Card Colors</h2></div><small>สุ่มหรือแก้เองได้</small></div>
+            <div class="color-grid">
+              <label>พื้นบัตร<input id="cardBg" type="color" value="#ffffff"></label>
+              <label>แถบขวา / สีโซน<input id="stripeColor" type="color" value="#9b7232"></label>
+              <label>ตัวอักษร<input id="textColor" type="color" value="#6b4226"></label>
+              <label>เส้นรายละเอียด<input id="lineColor" type="color" value="#c8a89a"></label>
+              <label>ขอบบัตร<input id="borderColor" type="color" value="#e9e4db"></label>
+              <label>เงาบัตร<select id="shadowMode"><option value="soft">Soft luxury</option><option value="clean">Clean minimal</option><option value="deep">Deep shadow</option></select></label>
             </div>
-          </article>
+            <div class="palette-row">
+              <button class="btn primary" type="button" id="randomPaletteBtn">🎲 สุ่มสีบัตร + ตัวอักษร</button>
+              <button class="btn soft" type="button" id="resetPaletteBtn">รีเซ็ตตามโซน</button>
+            </div>
+            <div class="palette-row" id="presetPalettes"></div>
+          </section>
         </div>
-        <div class="download-row"><button class="btn primary" type="button" id="downloadCardBtn">ดาวน์โหลดเฉพาะบัตร</button><a class="btn soft" href="./register.html">กลับหน้าสมัครปี 1</a></div>
+
+        <div>
+          <section class="panel section">
+            <div class="section-head"><div><div class="label"><span class="num">4</span> ตัวอย่างบัตรสมาชิก</div><h2>Member Card</h2></div><small>โหลดเฉพาะบัตรได้</small></div>
+            <div class="card-solo-wrap"><img id="singleCardPreview" class="member-card-preview" alt="Member Card Preview"></div>
+            <div class="download-actions"><button class="btn primary" type="button" id="downloadCardOnlyBtn">ดาวน์โหลดเฉพาะบัตร</button></div>
+          </section>
+        </div>
       </section>
 
-      <section class="case-section" id="caseSection">
-        <div class="section-head"><div><div class="badge-title"><span class="circle">5</span> เลือกเคสและจัดวางบัตร</div><h2>Card Case C1-C21</h2></div><small>ลาก / ขยาย / ดาวน์โหลดพร้อมเคส</small></div>
+      <section class="panel section">
+        <div class="section-head"><div><div class="label"><span class="num">5</span> เลือกเคสและจัดวางบัตร</div><h2>Card Case C1-C21</h2></div><small>ลาก / ย่อขยาย / ดาวน์โหลดพร้อมเคส</small></div>
         <div class="case-layout">
           <div>
-            <p class="zone-intro">เลือกเคส PNG จากไฟล์ชื่อ <b>c1.png - c21.png</b> แล้วลากบัตรในกรอบพรีวิวหรือปรับสไลเดอร์ให้พอดี ถ้าเคสเป็น PNG โปร่งใส ตรงช่องบัตรจะมองเห็นบัตรด้านล่างได้พอดีค่ะ</p>
-            <div class="case-grid" id="caseGrid"></div>
+            <p class="hint" style="margin-bottom:14px">เลือกเคส PNG จากไฟล์ชื่อ <b>c1.png - c21.png</b> แล้วปรับเคสกับบัตรให้พอดีกัน พื้นที่ด้านขวาคือหน้าตาที่จะใช้ตอนดาวน์โหลดจริง</p>
+            <div class="case-list" id="caseList"></div>
           </div>
-          <div class="case-work">
-            <div class="case-stage" id="caseStage">
-              <div class="case-card" id="caseCard">
-                <article class="vertical-card">
-                  <div class="right-band"><div class="band-text caseBandText">E2 ZONE</div></div>
-                  <div class="v-content">
-                    <div class="v-photo"><img class="casePhoto" alt="รูปบนบัตรในเคส" /><div class="v-silhouette caseSilhouette">♙</div></div>
-                    <img class="v-seal caseSeal" src="./e2.png" alt="zone seal" />
-                    <div class="v-title">E8’s Eden Academy</div>
-                    <div class="v-sub">STUDENT IDENTITY CARD</div>
-                    <div class="v-fields"><div class="v-field"><div class="value caseStudentId">E2-000000-001-XXXX</div><div class="line"></div><div class="label">Student ID</div></div><div class="v-field"><div class="value caseCardName">—</div><div class="line"></div><div class="label">Name</div></div><div class="v-field"><div class="value caseCardLevel">YEAR 2</div><div class="line"></div><div class="label">Level</div></div></div>
-                    <div class="v-foot"><div><b>ISSUE DATE</b><span class="caseIssueDate">—</span></div><div><b>AUTHORIZED SIGNATURE</b><span>Eden Office</span></div></div>
-                  </div>
-                </article>
+          <div>
+            <div class="editor-tools">
+              <button class="tool-toggle active" type="button" data-target="card">ปรับบัตร</button>
+              <button class="tool-toggle" type="button" data-target="case">ปรับเคส</button>
+              <button class="btn soft" type="button" id="fitDefaultBtn">จัดให้พอดี</button>
+              <button class="btn danger" type="button" id="resetPositionBtn">รีเซ็ตตำแหน่ง</button>
+              <button class="btn primary" type="button" id="downloadWithCaseBtn">ดาวน์โหลดพร้อมเคส</button>
+            </div>
+
+            <div class="editor-shell">
+              <div class="editor-title"><b>พื้นที่จัดวางจริง</b><span>ลากพื้นที่นี้เพื่อขยับสิ่งที่เลือกอยู่</span></div>
+              <div class="stage-viewport" id="stageViewport">
+                <div class="stage" id="stage">
+                  <div class="stage-guide"></div>
+                  <div class="stage-note" id="stageNote">C1</div>
+                  <img class="composition-card" id="cardLayer" alt="Card layer">
+                  <img class="composition-case" id="caseLayer" alt="Case layer">
+                  <div class="selection-frame" id="selectionFrame"></div>
+                </div>
               </div>
-              <div class="case-overlay"><img id="caseOverlayImg" src="./c1.png" alt="เคสบัตร" /><div class="case-placeholder" id="casePlaceholder">C1</div></div>
             </div>
-            <div class="edit-toolbar">
-              <button class="tool-btn active" type="button" id="editCardBtn">ปรับบัตร</button>
-              <button class="tool-btn" type="button" id="editCaseBtn">ปรับเคส</button>
-              <button class="tool-btn" type="button" id="randomPaletteBtnCase">🎲 สุ่มสีบัตร + ตัวอักษร</button>
-              <span class="tool-note" id="editModeNote">ตอนนี้ลากบัตรได้ / ใช้สไลเดอร์ปรับขนาดบัตร</span>
+
+            <div class="sliders">
+              <div class="slider-box"><label>ซูมพื้นที่ทำงาน <output id="zoomOut">56%</output><input id="workZoom" type="range" min="35" max="80" value="56"></label></div>
+              <div class="slider-box"><label>หมุนสิ่งที่เลือก <output id="rotateOut">0°</output><input id="rotateRange" type="range" min="-25" max="25" value="0"></label></div>
+              <div class="slider-box"><label>ขยับซ้าย-ขวา <output id="xOut">0</output><input id="xRange" type="range" min="-350" max="1000" value="0"></label></div>
+              <div class="slider-box"><label>ขยับขึ้น-ลง <output id="yOut">0</output><input id="yRange" type="range" min="-350" max="1300" value="0"></label></div>
+              <div class="slider-box"><label>ขนาด/ความกว้าง <output id="wOut">0</output><input id="wRange" type="range" min="90" max="1100" value="0"></label></div>
+              <div class="slider-box"><label>ความสูงเคส <output id="hOut">0</output><input id="hRange" type="range" min="120" max="1450" value="0"></label></div>
             </div>
-            <div class="controls">
-              <div class="control-line"><span>ขนาดบัตร</span><input id="scaleRange" type="range" min="40" max="360" value="150" /><output id="scaleValue">150%</output></div>
-              <div class="control-line"><span>บัตร ซ้าย/ขวา</span><input id="xRange" type="range" min="-900" max="900" value="0" /><output id="xValue">0</output></div>
-              <div class="control-line"><span>บัตร บน/ล่าง</span><input id="yRange" type="range" min="-1000" max="1000" value="0" /><output id="yValue">0</output></div>
-              <div class="control-line"><span>หมุนบัตร</span><input id="rotateRange" type="range" min="-18" max="18" value="0" /><output id="rotateValue">0°</output></div>
-              <div class="control-line"><span>กว้างเคส</span><input id="caseWidthRange" type="range" min="35" max="260" value="100" /><output id="caseWidthValue">100%</output></div>
-              <div class="control-line"><span>สูงเคส</span><input id="caseHeightRange" type="range" min="35" max="260" value="100" /><output id="caseHeightValue">100%</output></div>
-              <div class="control-line"><span>เคส ซ้าย/ขวา</span><input id="caseXRange" type="range" min="-900" max="900" value="0" /><output id="caseXValue">0</output></div>
-              <div class="control-line"><span>เคส บน/ล่าง</span><input id="caseYRange" type="range" min="-1100" max="1100" value="0" /><output id="caseYValue">0</output></div>
-            </div>
-            <div class="download-row"><button class="btn soft" type="button" id="resetCaseBtn">รีเซ็ตตำแหน่ง</button><button class="btn primary" type="button" id="downloadCaseBtn">ดาวน์โหลดบัตรพร้อมเคส</button></div>
           </div>
         </div>
-        <div class="generated-card-box" id="generatedCardBox"><h3>ไฟล์ที่สร้างแล้ว</h3><p>แสดงผลลัพธ์ขนาดเล็กเท่านั้น ไฟล์จริงจะดาวน์โหลดตามตำแหน่งในกรอบจัดวางด้านบน</p><img id="generatedCardImage" alt="ไฟล์บัตรที่สร้างแล้ว" /><div class="download-row"><a class="btn primary" id="openCardImage" href="#" target="_blank" rel="noopener">เปิดรูป</a></div></div>
       </section>
 
-      <div class="status-card" id="statusCard"><h3>บันทึกข้อมูลสมาชิกเรียบร้อยแล้ว</h3><p id="statusText">ระบบบันทึกข้อมูลการขึ้นชั้นปีไว้ในเครื่องนี้แล้ว</p><div class="status-actions"><a class="btn primary" href="./shop.html">ไปที่ร้านค้า</a><a class="btn soft" href="./board.html">ไปกระดานนักเรียน</a></div></div>
-      <footer class="footer">E8’s Eden Academy © Member Update Portal<br>Year 2-4 • Zone Transfer • Vertical Member Card • Card Case</footer>
+      <section class="panel section generated" id="generatedBox">
+        <div class="section-head"><div><div class="label"><span class="num">✓</span> ไฟล์ที่สร้างแล้ว</div><h2>Generated Files</h2></div><small>ตัวอย่างขนาดเล็ก</small></div>
+        <p>ถ้าปุ่มดาวน์โหลดไม่เด้ง ให้กดเปิดรูปแล้วคลิกขวา/กดค้างเพื่อบันทึก</p>
+        <div class="generated-grid">
+          <div><h3>Card</h3><img id="generatedCardImg" class="result-card-img" alt="Generated Card"><div class="download-actions"><a class="btn soft" id="openCardLink" target="_blank" rel="noopener">เปิดรูปบัตร</a></div></div>
+          <div><h3>Card + Case</h3><img id="generatedCaseImg" class="result-case-img" alt="Generated Case"><div class="download-actions"><a class="btn soft" id="openCaseLink" target="_blank" rel="noopener">เปิดรูปพร้อมเคส</a></div></div>
+        </div>
+      </section>
+
+      <footer class="footer">E8’s Eden Academy © Member Update Portal<br>Year 2-4 • Zone Transfer • Vertical Member Card • Case Composer</footer>
     </main>
   </div>
 
-  <div class="web-modal" id="webModal" aria-hidden="true"><div class="modal-card"><img src="./eden.png" alt="Eden Logo" /><h3 id="modalTitle">แจ้งเตือน</h3><p id="modalMessage">ข้อความแจ้งเตือน</p><div class="modal-actions" id="modalActions"><button class="btn primary" type="button" id="modalOk">ตกลง</button></div></div></div>
-
   <script>
-    const root=document.documentElement;
-    const displayName=document.getElementById('displayName');
-    const nickname=document.getElementById('nickname');
-    const level=document.getElementById('level');
-    const reason=document.getElementById('reason');
-    const reasonCount=document.getElementById('reasonCount');
-    const accentColor=document.getElementById('accentColor');
-    const textColor=document.getElementById('textColor');
-    const cardBgColor=document.getElementById('cardBgColor');
-    const cardBorderColor=document.getElementById('cardBorderColor');
-    const lineColor=document.getElementById('lineColor');
-    const paletteGrid=document.getElementById('paletteGrid');
-    const randomPaletteBtn=document.getElementById('randomPaletteBtn');
-    const randomPaletteBtnCase=document.getElementById('randomPaletteBtnCase');
-    const editCardBtn=document.getElementById('editCardBtn');
-    const editCaseBtn=document.getElementById('editCaseBtn');
-    const editModeNote=document.getElementById('editModeNote');
-    const cardName=document.getElementById('cardName');
-    const cardLevel=document.getElementById('cardLevel');
-    const studentId=document.getElementById('studentId');
-    const issueDate=document.getElementById('issueDate');
-    const photoInput=document.getElementById('photoInput');
-    const photoPreview=document.getElementById('photoPreview');
-    const photoPlus=document.getElementById('photoPlus');
-    const cardPhoto=document.getElementById('cardPhoto');
-    const cardSilhouette=document.getElementById('cardSilhouette');
-    const cardSeal=document.getElementById('cardSeal');
-    const bandText=document.getElementById('bandText');
-    const memberForm=document.getElementById('memberForm');
-    const resetBtn=document.getElementById('resetBtn');
-    const statusCard=document.getElementById('statusCard');
-    const statusText=document.getElementById('statusText');
-    const zones=document.querySelectorAll('.zone-box[data-zone]');
-    const downloadCardBtn=document.getElementById('downloadCardBtn');
-    const downloadCaseBtn=document.getElementById('downloadCaseBtn');
-    const generatedCardBox=document.getElementById('generatedCardBox');
-    const generatedCardImage=document.getElementById('generatedCardImage');
-    const openCardImage=document.getElementById('openCardImage');
-    const webModal=document.getElementById('webModal');
-    const modalTitle=document.getElementById('modalTitle');
-    const modalMessage=document.getElementById('modalMessage');
-    const modalActions=document.getElementById('modalActions');
-    const caseGrid=document.getElementById('caseGrid');
-    const caseStage=document.getElementById('caseStage');
-    const caseCard=document.getElementById('caseCard');
-    const caseOverlayImg=document.getElementById('caseOverlayImg');
-    const casePlaceholder=document.getElementById('casePlaceholder');
-    const scaleRange=document.getElementById('scaleRange');
-    const xRange=document.getElementById('xRange');
-    const yRange=document.getElementById('yRange');
-    const rotateRange=document.getElementById('rotateRange');
-    const caseWidthRange=document.getElementById('caseWidthRange');
-    const caseHeightRange=document.getElementById('caseHeightRange');
-    const caseXRange=document.getElementById('caseXRange');
-    const caseYRange=document.getElementById('caseYRange');
-    const scaleValue=document.getElementById('scaleValue');
-    const xValue=document.getElementById('xValue');
-    const yValue=document.getElementById('yValue');
-    const rotateValue=document.getElementById('rotateValue');
-    const caseWidthValue=document.getElementById('caseWidthValue');
-    const caseHeightValue=document.getElementById('caseHeightValue');
-    const caseXValue=document.getElementById('caseXValue');
-    const caseYValue=document.getElementById('caseYValue');
-    const resetCaseBtn=document.getElementById('resetCaseBtn');
-    let selectedZone='E2 Zone';
-    let selectedLogo='./e2.png';
-    let uploadedPhoto='';
-    let selectedCase='c1';
-    let caseState={x:0,y:0,scale:1.5,rotate:0,caseWidth:1,caseHeight:1,caseX:0,caseY:0};
-    let editTarget='card';
+    const STAGE_W=850, STAGE_H=1100, CARD_W=560, CARD_H=900;
+    const qs=id=>document.getElementById(id);
+    const zones=[
+      {id:'E1',name:'E1 ZONE',color:'#050505',text:'#111111',card:'#ffffff',line:'#111111',border:'#dedede'},
+      {id:'E2',name:'E2 ZONE',color:'#9b7232',text:'#6b4226',card:'#ffffff',line:'#b89a88',border:'#e9e4db'},
+      {id:'E3',name:'E3 ZONE',color:'#a70f36',text:'#8b1232',card:'#ffffff',line:'#c8899b',border:'#f2dce3'},
+      {id:'E4',name:'E4 ZONE',color:'#477346',text:'#305a35',card:'#ffffff',line:'#8fb28c',border:'#e0eadf'},
+      {id:'E5',name:'E5 ZONE',color:'#7251a4',text:'#563783',card:'#ffffff',line:'#aa96cb',border:'#e9e1f7'},
+      {id:'E6',name:'E6 ZONE',color:'#c56d90',text:'#974262',card:'#ffffff',line:'#d7a2b6',border:'#f4dce6'},
+      {id:'E7',name:'E7 ZONE',color:'#4e92b6',text:'#326b8a',card:'#ffffff',line:'#99bed2',border:'#dfedf5'},
+      {id:'E8',name:'E8 ZONE',color:'#c3973f',text:'#6d4a14',card:'#ffffff',line:'#c4a168',border:'#f1e3c5'}
+    ];
+    const palettes=[
+      {label:'Black Gold',bg:'#ffffff',stripe:'#050505',text:'#1b1713',line:'#b99b62',border:'#e7dec9'},
+      {label:'Cherry Noir',bg:'#ffffff',stripe:'#a70f36',text:'#7f1230',line:'#d59aaa',border:'#f2dce3'},
+      {label:'Icy Blue',bg:'#ffffff',stripe:'#4e92b6',text:'#255d7d',line:'#93bfd5',border:'#e2f0f6'},
+      {label:'Royal Green',bg:'#ffffff',stripe:'#477346',text:'#31552e',line:'#96b88f',border:'#e4edde'},
+      {label:'Soft Pink',bg:'#ffffff',stripe:'#c56d90',text:'#8f3e60',line:'#d7a2b6',border:'#f4dce6'},
+      {label:'Purple Glass',bg:'#ffffff',stripe:'#7251a4',text:'#51317d',line:'#af9bd0',border:'#ede3f8'}
+    ];
 
-    issueDate.textContent=new Date().toLocaleDateString('en-GB');
+    const state={
+      zone:zones[1], year:'Year 2', name:'', photo:'', studentId:'', caseIndex:1, caseSrc:'./c1.png',
+      colors:{bg:'#ffffff',stripe:'#9b7232',text:'#6b4226',line:'#b89a88',border:'#e9e4db'},
+      active:'card',
+      viewScale:.56,
+      card:{x:258,y:255,w:334,h:334*CARD_H/CARD_W,r:0},
+      case:{x:78,y:45,w:690,h:970,r:0},
+      caseNatural:null
+    };
 
-    function showModal(title,message){
-      modalTitle.textContent=title;modalMessage.textContent=message;
-      modalActions.innerHTML='<button class="btn primary" type="button" id="modalOkDynamic">ตกลง</button>';
-      webModal.classList.add('show');webModal.setAttribute('aria-hidden','false');
-      document.getElementById('modalOkDynamic').onclick=closeModal;
-    }
-    function closeModal(){webModal.classList.remove('show');webModal.setAttribute('aria-hidden','true')}
-    function showConfirmModal(title,message,onConfirm){
-      modalTitle.textContent=title;modalMessage.textContent=message;
-      modalActions.innerHTML='<button class="btn soft" type="button" id="modalCancelDynamic">ยกเลิก</button><button class="btn primary" type="button" id="modalConfirmDynamic">ตกลง</button>';
-      webModal.classList.add('show');webModal.setAttribute('aria-hidden','false');
-      document.getElementById('modalCancelDynamic').onclick=closeModal;
-      document.getElementById('modalConfirmDynamic').onclick=()=>{closeModal();onConfirm()};
-    }
-    webModal.addEventListener('click',event=>{if(event.target===webModal)closeModal()});
+    const els={
+      zoneGrid:qs('zoneGrid'), displayName:qs('displayName'), yearLevel:qs('yearLevel'), photoInput:qs('photoInput'), photoPreview:qs('photoPreview'), photoPlaceholder:qs('photoPlaceholder'),
+      cardBg:qs('cardBg'), stripeColor:qs('stripeColor'), textColor:qs('textColor'), lineColor:qs('lineColor'), borderColor:qs('borderColor'), shadowMode:qs('shadowMode'),
+      singleCardPreview:qs('singleCardPreview'), cardLayer:qs('cardLayer'), caseLayer:qs('caseLayer'), stage:qs('stage'), stageViewport:qs('stageViewport'), stageNote:qs('stageNote'), selectionFrame:qs('selectionFrame'),
+      caseList:qs('caseList'), presetPalettes:qs('presetPalettes'), randomPaletteBtn:qs('randomPaletteBtn'), resetPaletteBtn:qs('resetPaletteBtn'),
+      toolToggles:[...document.querySelectorAll('.tool-toggle')], fitDefaultBtn:qs('fitDefaultBtn'), resetPositionBtn:qs('resetPositionBtn'),
+      downloadCardOnlyBtn:qs('downloadCardOnlyBtn'), downloadWithCaseBtn:qs('downloadWithCaseBtn'), generatedBox:qs('generatedBox'), generatedCardImg:qs('generatedCardImg'), generatedCaseImg:qs('generatedCaseImg'), openCardLink:qs('openCardLink'), openCaseLink:qs('openCaseLink'),
+      workZoom:qs('workZoom'), zoomOut:qs('zoomOut'), rotateRange:qs('rotateRange'), rotateOut:qs('rotateOut'), xRange:qs('xRange'), xOut:qs('xOut'), yRange:qs('yRange'), yOut:qs('yOut'), wRange:qs('wRange'), wOut:qs('wOut'), hRange:qs('hRange'), hOut:qs('hOut')
+    };
 
-    function randomCode(length=4){
+    function normalize(v){return String(v||'').trim().toUpperCase()}
+    function randomCode(){
       const chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-      const used=JSON.parse(localStorage.getItem('e8MemberUsedCodes')||'[]');
-      let code='';let guard=0;
-      do{
-        const bytes=new Uint8Array(length);
-        if(window.crypto&&crypto.getRandomValues)crypto.getRandomValues(bytes);else for(let i=0;i<length;i++)bytes[i]=Math.floor(Math.random()*chars.length);
-        code=[...bytes].map(value=>chars[value%chars.length]).join('');guard++;
-      }while(used.includes(code)&&guard<200);
-      if(!used.includes(code)){used.push(code);localStorage.setItem('e8MemberUsedCodes',JSON.stringify(used.slice(-500)))}
+      let used=[];try{used=JSON.parse(localStorage.getItem('e8MemberCodeUsed')||'[]')}catch(e){}
+      let code='';let tries=0;
+      do{code=Array.from({length:4},()=>chars[Math.floor(Math.random()*chars.length)]).join('');tries++}while(used.includes(code)&&tries<200);
+      used.push(code);localStorage.setItem('e8MemberCodeUsed',JSON.stringify([...new Set(used)].slice(-1000)));
       return code;
     }
-    function zonePrefix(){return selectedZone ? selectedZone.replace(' Zone','').toUpperCase() : 'E2'}
-    function makeMemberId(){
-      const now=new Date();
-      const year=String(now.getFullYear()).slice(-2);
-      const month=String(now.getMonth()+1).padStart(2,'0');
-      const day=String(now.getDate()).padStart(2,'0');
+    function makeId(){
+      const now=new Date();const y=String(now.getFullYear()).slice(-2);const m=String(now.getMonth()+1).padStart(2,'0');const d=String(now.getDate()).padStart(2,'0');
       const seq=String(Number(localStorage.getItem('e8MemberSeq')||'0')+1).padStart(3,'0');
-      return `${zonePrefix()}-${year}${month}${day}-${seq}-${randomCode(4)}`;
-    }
-    function ensureMemberId(force=false){
-      const saved=localStorage.getItem('e8MemberId')||'';
-      const prefix=zonePrefix()+'-';
-      if(!force && saved.startsWith(prefix)){studentId.textContent=saved;syncCaseCard();return saved}
-      const id=makeMemberId();
-      studentId.textContent=id;
-      localStorage.setItem('e8MemberId',id);
-      syncCaseCard();saveDraft();
+      const id=`${state.zone.id}-${y}${m}${d}-${seq}-${randomCode()}`;
+      localStorage.setItem('e8MemberSeq',String(Number(seq)));
+      localStorage.setItem('e8MemberStudentId',id);
       return id;
     }
-    function commitSequence(){
-      if(localStorage.getItem('e8MemberCurrentCounted')==='true')return;
-      const next=Number(localStorage.getItem('e8MemberSeq')||'0')+1;
-      localStorage.setItem('e8MemberSeq',String(next));
-      localStorage.setItem('e8MemberCurrentCounted','true');
-    }
+    function ensureId(){if(!state.studentId || !state.studentId.startsWith(state.zone.id+'-')) state.studentId=makeId();return state.studentId}
 
-    const colorPalettes=[
-      {name:'Noir Gold',accent:'#161616',text:'#5b4631',bg:'#ffffff',border:'#d9d3c9',line:'#b9a47d'},
-      {name:'Cherry Ivory',accent:'#9b1632',text:'#8a1028',bg:'#fffdfc',border:'#ead4da',line:'#bb6b7a'},
-      {name:'Blue Steel',accent:'#143a5a',text:'#17384d',bg:'#ffffff',border:'#d8e2ea',line:'#8aa7b9'},
-      {name:'Mint Elite',accent:'#527d64',text:'#31523d',bg:'#ffffff',border:'#dce8dd',line:'#86a98e'},
-      {name:'Orchid Luxe',accent:'#6a4c93',text:'#4a3471',bg:'#ffffff',border:'#e4d9ef',line:'#a88acb'},
-      {name:'Rose Tech',accent:'#b85f7b',text:'#873852',bg:'#ffffff',border:'#efd7df',line:'#d18ba0'},
-      {name:'Graphite',accent:'#262a33',text:'#30323a',bg:'#ffffff',border:'#dcdde1',line:'#9a9da6'},
-      {name:'Royal Wine',accent:'#641225',text:'#641225',bg:'#fffefe',border:'#ead4d9',line:'#9d4052'},
-      {name:'Sky Pearl',accent:'#4d90b4',text:'#2f6b88',bg:'#ffffff',border:'#d7edf7',line:'#87bbd5'}
-    ];
-    function renderPalettes(){
-      if(!paletteGrid)return;
-      paletteGrid.innerHTML='';
-      colorPalettes.forEach((p,i)=>{
-        const btn=document.createElement('button');btn.type='button';btn.className='palette-btn';btn.dataset.palette=i;
-        btn.innerHTML=`<span class="swatches"><i style="background:${p.accent}"></i><i style="background:${p.text}"></i><i style="background:${p.line}"></i></span>${p.name}`;
-        btn.addEventListener('click',()=>applyPalette(p));
-        paletteGrid.appendChild(btn);
-      });
+    function buildZones(){
+      els.zoneGrid.innerHTML='';
+      zones.forEach(z=>{const b=document.createElement('button');b.type='button';b.className='zone-btn';b.dataset.zone=z.id;b.style.setProperty('--z',z.color);b.innerHTML=`<span class="zone-dot"></span><span>${z.name}</span>`;b.onclick=()=>selectZone(z.id);els.zoneGrid.appendChild(b)});
     }
-    function applyPalette(p){
-      accentColor.value=p.accent;textColor.value=p.text;cardBgColor.value=p.bg;cardBorderColor.value=p.border;lineColor.value=p.line;updateColors();
-    }
-    if(randomPaletteBtn){randomPaletteBtn.addEventListener('click',()=>applyPalette(colorPalettes[Math.floor(Math.random()*colorPalettes.length)]))}
-    if(randomPaletteBtnCase){randomPaletteBtnCase.addEventListener('click',()=>applyPalette(colorPalettes[Math.floor(Math.random()*colorPalettes.length)]))}
-    renderPalettes();
-
-    function saveDraft(){
-      const draft={displayName:displayName.value.trim(),nickname:nickname.value.trim(),level:level.value,reason:reason.value.trim(),zone:selectedZone,logo:selectedLogo,photo:uploadedPhoto,studentId:studentId.textContent,accent:accentColor.value,text:textColor.value,bg:cardBgColor.value,border:cardBorderColor.value,line:lineColor.value,case:selectedCase,caseState};
-      localStorage.setItem('e8MemberDraft',JSON.stringify(draft));
-    }
-    function updateName(){
-      cardName.textContent=displayName.value.trim()||nickname.value.trim()||'—';
-      syncCaseCard();saveDraft();
-    }
-    function updateLevel(){cardLevel.textContent=String(level.value||'Year 2').toUpperCase();syncCaseCard();saveDraft()}
-    function updateColors(){
-      root.style.setProperty('--member-accent',accentColor.value);
-      root.style.setProperty('--member-text',textColor.value);
-      root.style.setProperty('--member-bg',cardBgColor.value);
-      root.style.setProperty('--member-border',cardBorderColor.value);
-      root.style.setProperty('--member-line',lineColor.value);
-      root.style.setProperty('--zone-dark',accentColor.value);
-      syncCaseCard();saveDraft();
-    }
-    displayName.addEventListener('input',updateName);
-    nickname.addEventListener('input',updateName);
-    level.addEventListener('change',updateLevel);
-    reason.addEventListener('input',()=>{reasonCount.textContent=reason.value.length;saveDraft()});
-    accentColor.addEventListener('input',updateColors);
-    textColor.addEventListener('input',updateColors);
-    cardBgColor.addEventListener('input',updateColors);
-    cardBorderColor.addEventListener('input',updateColors);
-    lineColor.addEventListener('input',updateColors);
-
-    function applyZone(zone,forceNewId=true){
-      zones.forEach(item=>item.classList.remove('selected'));
-      zone.classList.add('selected');
-      selectedZone=zone.dataset.zone;
-      selectedLogo=zone.dataset.logo;
-      root.style.setProperty('--zone',zone.dataset.color);
-      root.style.setProperty('--zone-dark',zone.dataset.dark);
-      root.style.setProperty('--zone-soft',zone.dataset.soft);
-      root.style.setProperty('--zone-ink',zone.dataset.ink);
-      root.style.setProperty('--zone-rgb',zone.dataset.rgb);
-      root.style.setProperty('--zone-dark-rgb',zone.dataset.darkRgb);
-      accentColor.value=zone.dataset.dark;
-      textColor.value=zone.dataset.ink;
-      cardBgColor.value='#ffffff';
-      cardBorderColor.value='#e7e2dc';
-      lineColor.value=zone.dataset.ink;
-      root.style.setProperty('--member-accent',accentColor.value);
-      root.style.setProperty('--member-text',textColor.value);
-      root.style.setProperty('--member-bg',cardBgColor.value);
-      root.style.setProperty('--member-border',cardBorderColor.value);
-      root.style.setProperty('--member-line',lineColor.value);
-      cardSeal.src=selectedLogo;
-      bandText.textContent=zonePrefix()+' ZONE';
-      document.querySelectorAll('.caseSeal').forEach(img=>img.src=selectedLogo);
-      document.querySelectorAll('.caseBandText').forEach(el=>el.textContent=zonePrefix()+' ZONE');
-      ensureMemberId(forceNewId);
-      syncCaseCard();saveDraft();
-    }
-    zones.forEach(zone=>zone.addEventListener('click',()=>applyZone(zone,true)));
-
-    photoInput.addEventListener('change',()=>{
-      const file=photoInput.files&&photoInput.files[0];
-      if(!file)return;
-      if(file.size>5*1024*1024){showModal('ไฟล์รูปใหญ่เกินไป','กรุณาใช้ไฟล์รูปไม่เกิน 5MB นะคะ');photoInput.value='';return}
-      const reader=new FileReader();
-      reader.onload=e=>{
-        uploadedPhoto=e.target.result;
-        photoPreview.src=uploadedPhoto;cardPhoto.src=uploadedPhoto;
-        photoPreview.style.display='block';cardPhoto.style.display='block';
-        photoPlus.style.display='none';cardSilhouette.style.display='none';
-        syncCaseCard();saveDraft();
-      };
-      reader.readAsDataURL(file);
-    });
-
-    function syncCaseCard(){
-      document.querySelectorAll('.caseStudentId').forEach(el=>el.textContent=studentId.textContent);
-      document.querySelectorAll('.caseCardName').forEach(el=>el.textContent=cardName.textContent);
-      document.querySelectorAll('.caseCardLevel').forEach(el=>el.textContent=cardLevel.textContent);
-      document.querySelectorAll('.caseIssueDate').forEach(el=>el.textContent=issueDate.textContent);
-      document.querySelectorAll('.caseBandText').forEach(el=>el.textContent=zonePrefix()+' ZONE');
-      document.querySelectorAll('.caseSeal').forEach(img=>img.src=selectedLogo);
-      document.querySelectorAll('.casePhoto').forEach(img=>{if(uploadedPhoto){img.src=uploadedPhoto;img.style.display='block'}});
-      document.querySelectorAll('.caseSilhouette').forEach(el=>el.style.display=uploadedPhoto?'none':'grid');
-    }
-
-    function buildCaseGrid(){
+    function buildCases(){
+      els.caseList.innerHTML='';
       for(let i=1;i<=21;i++){
-        const btn=document.createElement('button');btn.type='button';btn.className='case-option'+(i===1?' selected':'');btn.dataset.case=`c${i}`;
-        btn.innerHTML=`<img src="./c${i}.png" alt="C${i}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span style="display:none">C${i}</span>`;
-        btn.addEventListener('click',()=>selectCase(`c${i}`));
-        caseGrid.appendChild(btn);
+        const b=document.createElement('button');b.type='button';b.className='case-btn';b.dataset.case=String(i);b.innerHTML=`<img src="./c${i}.png" alt="C${i}"><b>C${i}</b>`;
+        const img=b.querySelector('img');img.onerror=()=>{b.classList.add('missing');img.style.display='none'};
+        b.onclick=()=>selectCase(i);
+        els.caseList.appendChild(b);
       }
     }
-    function selectCase(name){
-      selectedCase=name;
-      document.querySelectorAll('.case-option').forEach(b=>b.classList.toggle('selected',b.dataset.case===name));
-      caseOverlayImg.src=`./${name}.png`;
-      casePlaceholder.textContent=name.toUpperCase();
-      caseOverlayImg.style.display='none';casePlaceholder.style.display='block';
-      saveDraft();
-    }
-    caseOverlayImg.onload=()=>{caseOverlayImg.style.display='block';casePlaceholder.style.display='none';if(caseOverlayImg.naturalWidth&&caseOverlayImg.naturalHeight){root.style.setProperty('--case-stage-ratio',`${caseOverlayImg.naturalWidth}/${caseOverlayImg.naturalHeight}`)}};
-    caseOverlayImg.onerror=()=>{caseOverlayImg.style.display='none';casePlaceholder.style.display='block'};
-    buildCaseGrid();
-
-    function updateCaseTransform(){
-      caseState={
-        x:Number(xRange.value),
-        y:Number(yRange.value),
-        scale:Number(scaleRange.value)/100,
-        rotate:Number(rotateRange.value),
-        caseWidth:Number(caseWidthRange.value)/100,
-        caseHeight:Number(caseHeightRange.value)/100,
-        caseX:Number(caseXRange.value),
-        caseY:Number(caseYRange.value)
-      };
-      caseCard.style.setProperty('--card-x',caseState.x+'px');
-      caseCard.style.setProperty('--card-y',caseState.y+'px');
-      caseCard.style.setProperty('--card-scale',String(caseState.scale));
-      caseCard.style.setProperty('--card-rotate',caseState.rotate+'deg');
-      [caseOverlayImg,casePlaceholder].forEach(el=>{
-        if(!el)return;
-        el.style.width=(caseState.caseWidth*100)+'%';
-        el.style.height=(caseState.caseHeight*100)+'%';
-        el.style.transform=`translate(-50%,-50%) translate(${caseState.caseX}px,${caseState.caseY}px)`;
-      });
-      scaleValue.textContent=Math.round(caseState.scale*100)+'%';
-      xValue.textContent=caseState.x;yValue.textContent=caseState.y;rotateValue.textContent=caseState.rotate+'°';
-      caseWidthValue.textContent=Math.round(caseState.caseWidth*100)+'%';
-      caseHeightValue.textContent=Math.round(caseState.caseHeight*100)+'%';
-      caseXValue.textContent=caseState.caseX;caseYValue.textContent=caseState.caseY;
-      saveDraft();
-    }
-    function setEditTarget(target){
-      editTarget=target;
-      caseStage.dataset.edit=target;
-      if(editCardBtn)editCardBtn.classList.toggle('active',target==='card');
-      if(editCaseBtn)editCaseBtn.classList.toggle('active',target==='case');
-      if(editModeNote)editModeNote.textContent=target==='card'?'ตอนนี้ลากบัตรได้ / ใช้สไลเดอร์ปรับขนาดบัตร':'ตอนนี้ลากเคสได้ / ใช้สไลเดอร์ปรับขนาดและตำแหน่งเคส';
-    }
-    if(editCardBtn)editCardBtn.addEventListener('click',()=>setEditTarget('card'));
-    if(editCaseBtn)editCaseBtn.addEventListener('click',()=>setEditTarget('case'));
-    [scaleRange,xRange,yRange,rotateRange,caseWidthRange,caseHeightRange,caseXRange,caseYRange].forEach(input=>input.addEventListener('input',updateCaseTransform));
-    resetCaseBtn.addEventListener('click',()=>{scaleRange.value=150;xRange.value=0;yRange.value=0;rotateRange.value=0;caseWidthRange.value=100;caseHeightRange.value=100;caseXRange.value=0;caseYRange.value=0;updateCaseTransform()});
-    updateCaseTransform();
-    setEditTarget('card');
-
-    let dragging=false;let dragStart={x:0,y:0,baseX:0,baseY:0,target:'card'};
-    function clamp(value,min,max){return Math.max(min,Math.min(max,value))}
-    caseCard.addEventListener('pointerdown',event=>{
-      if(editTarget!=='card')return;
-      dragging=true;event.stopPropagation();caseCard.setPointerCapture(event.pointerId);
-      dragStart={x:event.clientX,y:event.clientY,baseX:Number(xRange.value),baseY:Number(yRange.value),target:'card'};
-    });
-    caseStage.addEventListener('pointerdown',event=>{
-      if(editTarget!=='case')return;
-      dragging=true;caseStage.setPointerCapture(event.pointerId);
-      dragStart={x:event.clientX,y:event.clientY,baseX:Number(caseXRange.value),baseY:Number(caseYRange.value),target:'case'};
-    });
-    function handleDragMove(event){
-      if(!dragging)return;
-      const dx=event.clientX-dragStart.x;const dy=event.clientY-dragStart.y;
-      if(dragStart.target==='case'){
-        caseXRange.value=clamp(dragStart.baseX+dx,-900,900);
-        caseYRange.value=clamp(dragStart.baseY+dy,-1100,1100);
-      }else{
-        xRange.value=clamp(dragStart.baseX+dx,-900,900);
-        yRange.value=clamp(dragStart.baseY+dy,-1000,1000);
-      }
-      updateCaseTransform();
-    }
-    caseCard.addEventListener('pointermove',handleDragMove);
-    caseStage.addEventListener('pointermove',handleDragMove);
-    caseCard.addEventListener('pointerup',()=>{dragging=false});
-    caseStage.addEventListener('pointerup',()=>{dragging=false});
-    caseCard.addEventListener('pointercancel',()=>{dragging=false});
-    caseStage.addEventListener('pointercancel',()=>{dragging=false});
-
-    memberForm.addEventListener('submit',event=>{
-      event.preventDefault();
-      const name=displayName.value.trim();
-      if(!name){showModal('กรุณากรอกชื่อ','กรอกชื่อที่ใช้ในระบบก่อนนะคะ');displayName.focus();return}
-      ensureMemberId(false);commitSequence();
-      const data={studentId:studentId.textContent,displayName:name,nickname:nickname.value.trim(),level:level.value,zone:selectedZone,reason:reason.value.trim(),photo:uploadedPhoto,accent:accentColor.value,text:textColor.value,bg:cardBgColor.value,border:cardBorderColor.value,line:lineColor.value,status:'member_update_saved',submittedAt:new Date().toISOString()};
-      localStorage.setItem('e8MemberApplication',JSON.stringify(data));
-      localStorage.setItem('e8StudentId',studentId.textContent);
-      localStorage.setItem('e8StudentApplication',JSON.stringify(data));
-      statusText.textContent=`ข้อมูลของ ${name} ถูกบันทึกแล้ว เลขบัตรคือ ${studentId.textContent} ชั้นปี ${level.value} โซน ${selectedZone}`;
-      statusCard.classList.add('show');
-      statusCard.scrollIntoView({behavior:'smooth',block:'center'});
-    });
-
-    resetBtn.addEventListener('click',()=>{
-      showConfirmModal('ล้างข้อมูลสมาชิก','ต้องการล้างข้อมูลในฟอร์มนี้ใช่ไหมคะ',()=>{
-        memberForm.reset();uploadedPhoto='';selectedCase='c1';
-        localStorage.removeItem('e8MemberId');localStorage.removeItem('e8MemberDraft');localStorage.removeItem('e8MemberCurrentCounted');
-        reasonCount.textContent='0';photoPreview.removeAttribute('src');cardPhoto.removeAttribute('src');photoPreview.style.display='none';cardPhoto.style.display='none';photoPlus.style.display='block';cardSilhouette.style.display='grid';
-        statusCard.classList.remove('show');selectCase('c1');applyZone(document.querySelector('.zone-box[data-zone="E2 Zone"]'),true);updateName();updateLevel();resetCaseBtn.click();
-      })
-    });
-
-    function loadCanvasImage(src){return new Promise(resolve=>{if(!src){resolve(null);return}const img=new Image();img.onload=()=>resolve(img);img.onerror=()=>resolve(null);img.src=src})}
-    function roundRect(ctx,x,y,w,h,r){const radius=Math.min(r,w/2,h/2);ctx.beginPath();ctx.moveTo(x+radius,y);ctx.arcTo(x+w,y,x+w,y+h,radius);ctx.arcTo(x+w,y+h,x,y+h,radius);ctx.arcTo(x,y+h,x,y,radius);ctx.arcTo(x,y,x+w,y,radius);ctx.closePath()}
-    function drawImageCover(ctx,img,x,y,w,h){if(!img)return;const ratio=Math.max(w/img.width,h/img.height);const nw=img.width*ratio;const nh=img.height*ratio;ctx.drawImage(img,x+(w-nw)/2,y+(h-nh)/2,nw,nh)}
-    function drawImageContain(ctx,img,x,y,w,h,alpha=1){if(!img)return;const oldAlpha=ctx.globalAlpha;ctx.globalAlpha=alpha;const ratio=Math.min(w/img.width,h/img.height);const nw=img.width*ratio;const nh=img.height*ratio;ctx.drawImage(img,x+(w-nw)/2,y+(h-nh)/2,nw,nh);ctx.globalAlpha=oldAlpha}
-    function hexToRgb(hex){const clean=String(hex||'#111111').replace('#','');const bigint=parseInt(clean,16);return {r:(bigint>>16)&255,g:(bigint>>8)&255,b:bigint&255}}
-    function fitText(ctx,text,x,y,maxWidth,fontSize,fontFamily,weight='800',color='#111',align='left'){
-      let size=fontSize;ctx.textAlign=align;
-      do{ctx.font=`${weight} ${size}px ${fontFamily}`;if(ctx.measureText(String(text)).width<=maxWidth||size<=12)break;size-=1}while(size>12);
-      ctx.fillStyle=color;ctx.fillText(String(text),x,y);ctx.textAlign='left';
+    function buildPalettes(){
+      els.presetPalettes.innerHTML='';
+      palettes.forEach(p=>{const b=document.createElement('button');b.type='button';b.className='palette-btn';b.innerHTML=`<span style="background:${p.stripe}"></span><span style="background:${p.text}"></span>${p.label}`;b.onclick=()=>applyPalette(p);els.presetPalettes.appendChild(b)});
     }
 
-    async function createVerticalCardCanvas(multiplier=2){
-      ensureMemberId(false);
+    function selectZone(id){
+      const z=zones.find(item=>item.id===id)||zones[1];state.zone=z;ensureId();
+      document.querySelectorAll('.zone-btn').forEach(btn=>btn.classList.toggle('active',btn.dataset.zone===id));
+      applyPalette({bg:z.card,stripe:z.color,text:z.text,line:z.line,border:z.border},false);
+      renderAll();
+    }
+    function applyPalette(p,render=true){
+      state.colors={bg:p.bg,stripe:p.stripe,text:p.text,line:p.line,border:p.border};
+      els.cardBg.value=p.bg;els.stripeColor.value=p.stripe;els.textColor.value=p.text;els.lineColor.value=p.line;els.borderColor.value=p.border;
+      document.documentElement.style.setProperty('--zone',p.stripe);
+      if(render)renderAll();
+    }
+    function randomPalette(){
+      const hue=Math.floor(Math.random()*360);const hue2=(hue+Math.floor(24+Math.random()*60))%360;
+      const stripe=`hsl(${hue} 55% 35%)`;const text=`hsl(${hue} 48% 27%)`;const line=`hsl(${hue2} 34% 68%)`;const border=`hsl(${hue2} 40% 88%)`;
+      applyPalette({bg:'#ffffff',stripe,text,line,border});
+    }
+    function selectCase(i){
+      state.caseIndex=i;state.caseSrc=`./c${i}.png`;els.caseLayer.src=state.caseSrc;els.stageNote.textContent=`C${i}`;
+      document.querySelectorAll('.case-btn').forEach(btn=>btn.classList.toggle('active',btn.dataset.case===String(i)));
+      const img=new Image();img.onload=()=>{state.caseNatural={w:img.width,h:img.height};fitCaseAndCard(false);renderComposition()};img.onerror=()=>{state.caseNatural=null;renderComposition()};img.src=state.caseSrc;
+    }
+
+    function fitCaseAndCard(force=true){
+      const ratio=state.caseNatural ? state.caseNatural.h/state.caseNatural.w : 1.43;
+      state.case.w=690;state.case.h=Math.round(state.case.w*ratio);if(state.case.h>1030){state.case.h=1030;state.case.w=Math.round(state.case.h/ratio)}
+      state.case.x=Math.round((STAGE_W-state.case.w)/2);state.case.y=Math.round((STAGE_H-state.case.h)/2);
+      state.card.w=330;state.card.h=Math.round(state.card.w*CARD_H/CARD_W);state.card.x=Math.round((STAGE_W-state.card.w)/2);state.card.y=Math.round((STAGE_H-state.card.h)/2)+18;state.card.r=0;state.case.r=0;
+      if(force){setActive(state.active);renderComposition()}
+    }
+    function resetPosition(){fitCaseAndCard(true);saveState()}
+
+    function loadSaved(){
+      try{
+        const data=JSON.parse(localStorage.getItem('e8StudentApplication')||localStorage.getItem('e8StudentDraft')||'{}');
+        if(data.displayName){state.name=data.displayName;els.displayName.value=data.displayName}
+        if(data.photo){state.photo=data.photo;els.photoPreview.src=data.photo;els.photoPreview.style.display='block';els.photoPlaceholder.style.display='none'}
+      }catch(e){}
+      const savedId=localStorage.getItem('e8MemberStudentId');if(savedId)state.studentId=savedId;
+    }
+    function saveState(){
+      const data={name:state.name,year:state.year,zone:state.zone.id,photo:state.photo,studentId:state.studentId,colors:state.colors,card:state.card,case:state.case,caseIndex:state.caseIndex,viewScale:state.viewScale};
+      localStorage.setItem('e8MemberDraft',JSON.stringify(data));
+    }
+
+    function roundRect(ctx,x,y,w,h,r){const rr=Math.min(r,w/2,h/2);ctx.beginPath();ctx.moveTo(x+rr,y);ctx.arcTo(x+w,y,x+w,y+h,rr);ctx.arcTo(x+w,y+h,x,y+h,rr);ctx.arcTo(x,y+h,x,y,rr);ctx.arcTo(x,y,x+w,y,rr);ctx.closePath()}
+    function drawCover(ctx,img,x,y,w,h){if(!img)return;const ratio=Math.max(w/img.width,h/img.height);const nw=img.width*ratio,nh=img.height*ratio;ctx.drawImage(img,x+(w-nw)/2,y+(h-nh)/2,nw,nh)}
+    function drawContain(ctx,img,x,y,w,h,alpha=1){if(!img)return;const old=ctx.globalAlpha;ctx.globalAlpha=alpha;const ratio=Math.min(w/img.width,h/img.height);const nw=img.width*ratio,nh=img.height*ratio;ctx.drawImage(img,x+(w-nw)/2,y+(h-nh)/2,nw,nh);ctx.globalAlpha=old}
+    function loadImage(src){return new Promise(resolve=>{if(!src){resolve(null);return}const img=new Image();img.onload=()=>resolve(img);img.onerror=()=>resolve(null);img.src=src})}
+
+    async function cardDataURL(){
       await document.fonts.ready;
-      const W=560*multiplier,H=840*multiplier;
-      const canvas=document.createElement('canvas');canvas.width=W;canvas.height=H;const ctx=canvas.getContext('2d');
-      ctx.scale(multiplier,multiplier);
-      const accent=accentColor.value;
-      const text=textColor.value;
-      const bg=cardBgColor.value;
-      const border=cardBorderColor.value;
-      const line=lineColor.value;
-      const rgb=hexToRgb(accent);
-      const [photoImg,logoImg]=await Promise.all([uploadedPhoto?loadCanvasImage(uploadedPhoto):Promise.resolve(null),loadCanvasImage(selectedLogo)]);
+      const [photo,logo]=await Promise.all([loadImage(state.photo),loadImage('./eden.png')]);
+      const c=document.createElement('canvas');c.width=CARD_W;c.height=CARD_H;const ctx=c.getContext('2d');
+      const {bg,stripe,text,line,border}=state.colors;
+      ctx.clearRect(0,0,CARD_W,CARD_H);
+      ctx.shadowColor=els.shadowMode.value==='deep'?'rgba(0,0,0,.28)':els.shadowMode.value==='clean'?'rgba(0,0,0,.08)':'rgba(0,0,0,.16)';ctx.shadowBlur=26;ctx.shadowOffsetY=14;
+      ctx.fillStyle=bg;roundRect(ctx,16,16,CARD_W-32,CARD_H-32,36);ctx.fill();ctx.shadowColor='transparent';
+      ctx.strokeStyle=border;ctx.lineWidth=3;roundRect(ctx,16,16,CARD_W-32,CARD_H-32,36);ctx.stroke();
+      ctx.fillStyle=stripe;roundRect(ctx,CARD_W-76,16,60,CARD_H-32,0);ctx.fill();
+      ctx.save();ctx.translate(CARD_W-46,CARD_H/2);ctx.rotate(-Math.PI/2);ctx.fillStyle='#fff';ctx.font='800 24px Cinzel, Georgia, serif';ctx.textAlign='center';ctx.fillText(`${state.zone.id} ZONE`,0,8);ctx.restore();
 
-      ctx.clearRect(0,0,560,840);
-      ctx.save();
-      ctx.shadowColor='rgba(0,0,0,.30)';ctx.shadowBlur=28;ctx.shadowOffsetY=16;
-      ctx.fillStyle=bg;roundRect(ctx,8,8,544,824,32);ctx.fill();ctx.restore();
-      ctx.strokeStyle=border;ctx.lineWidth=1.4;roundRect(ctx,8,8,544,824,32);ctx.stroke();
-      ctx.strokeStyle=border;ctx.globalAlpha=.76;ctx.lineWidth=1;roundRect(ctx,28,28,484,784,24);ctx.stroke();ctx.globalAlpha=1;
+      const contentW=CARD_W-118;
+      ctx.save();roundRect(ctx,154,64,252,328,22);ctx.fillStyle='#fbfbfb';ctx.fill();ctx.strokeStyle='#dddddd';ctx.lineWidth=2;ctx.stroke();ctx.clip();
+      if(photo){drawCover(ctx,photo,154,64,252,328)}else{ctx.fillStyle='#f8f8f8';ctx.fillRect(154,64,252,328);ctx.fillStyle='#cfcfcf';ctx.font='64px Georgia, serif';ctx.textAlign='center';ctx.fillText('♙',280,235);ctx.textAlign='left'}ctx.restore();
+      if(logo)drawContain(ctx,logo,238,416,84,84,.92);
 
-      const band=ctx.createLinearGradient(478,8,552,832);
-      band.addColorStop(0,accent);
-      band.addColorStop(1,`rgba(${rgb.r},${rgb.g},${rgb.b},.80)`);
-      ctx.fillStyle=band;ctx.fillRect(478,8,74,824);
-      ctx.save();ctx.translate(515,420);ctx.rotate(Math.PI/2);ctx.font='800 18px Cinzel, Georgia, serif';ctx.fillStyle='#fff';ctx.textAlign='center';ctx.fillText(zonePrefix()+' ZONE',0,0);ctx.restore();
-
-      const left=46,right=448;
-      roundRect(ctx,128,56,304,405,20);ctx.fillStyle='#fff';ctx.fill();ctx.strokeStyle='rgba(70,54,48,.18)';ctx.stroke();ctx.save();roundRect(ctx,128,56,304,405,20);ctx.clip();
-      if(photoImg)drawImageCover(ctx,photoImg,128,56,304,405);else{ctx.fillStyle='rgba(30,20,20,.04)';ctx.fillRect(128,56,304,405);ctx.fillStyle='rgba(30,20,20,.18)';ctx.font='78px Georgia, serif';ctx.textAlign='center';ctx.fillText('♙',280,278)}ctx.restore();
-      drawImageContain(ctx,logoImg,249,478,62,62,.96);
-      fitText(ctx,'E8’s Eden Academy',left,584,390,34,'Cinzel, Georgia, serif','700',text);
-      ctx.font='800 10px Cinzel, Georgia, serif';ctx.fillStyle=text;ctx.globalAlpha=.78;ctx.fillText('STUDENT IDENTITY CARD',left,610);ctx.globalAlpha=1;
-
-      const textRgb=hexToRgb(line);
-      const fields=[['STUDENT ID',studentId.textContent],['NAME',cardName.textContent],['LEVEL',cardLevel.textContent]];
-      let y=650;fields.forEach(([label,value])=>{
-        fitText(ctx,value,left,y,395,13,'Noto Sans Thai, Tahoma, Arial, sans-serif','900',text);
-        ctx.strokeStyle=`rgba(${textRgb.r},${textRgb.g},${textRgb.b},.82)`;ctx.lineWidth=1;
-        ctx.beginPath();ctx.moveTo(left,y+10);ctx.lineTo(right,y+10);ctx.stroke();
-        ctx.font='800 7.5px Cinzel, Georgia, serif';ctx.fillStyle=text;ctx.globalAlpha=.58;ctx.fillText(label,left,y+22);ctx.globalAlpha=1;
-        y+=47;
-      });
-      ctx.font='800 8px Cinzel, Georgia, serif';ctx.fillStyle=text;ctx.globalAlpha=.72;ctx.fillText('ISSUE DATE',left,800);ctx.fillText('AUTHORIZED SIGNATURE',292,800);ctx.globalAlpha=1;ctx.font='800 10px Noto Sans Thai, Tahoma, Arial, sans-serif';ctx.fillText(issueDate.textContent,left,815);ctx.fillText('Eden Office',292,815);
-      return canvas;
+      ctx.fillStyle=text;ctx.textAlign='left';ctx.font='700 34px Cinzel, Georgia, serif';ctx.fillText('E8’s Eden Academy',44,532);
+      ctx.font='800 12px Cinzel, Georgia, serif';ctx.letterSpacing='2px';ctx.fillText('STUDENT IDENTITY CARD',46,556);
+      ctx.letterSpacing='0px';
+      const fields=[['STUDENT ID',ensureId()],['NAME',state.name||'—'],['LEVEL',state.year]];
+      let y=594;
+      fields.forEach(([label,val])=>{ctx.font='900 16px Noto Sans Thai, Arial, sans-serif';ctx.fillStyle=text;ctx.fillText(String(val).toUpperCase(),46,y);ctx.strokeStyle=line;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(46,y+13);ctx.lineTo(contentW,y+13);ctx.stroke();ctx.font='800 9px Cinzel, Georgia, serif';ctx.fillStyle=text;ctx.globalAlpha=.72;ctx.fillText(label,46,y+30);ctx.globalAlpha=1;y+=66});
+      ctx.font='800 10px Cinzel, Georgia, serif';ctx.fillStyle=text;ctx.globalAlpha=.8;ctx.fillText('ISSUE DATE',46,832);ctx.fillText('AUTHORIZED SIGNATURE',314,832);ctx.font='900 13px Noto Sans Thai, Arial, sans-serif';ctx.globalAlpha=1;ctx.fillText(new Date().toLocaleDateString('en-GB'),46,850);ctx.fillText('Eden Office',314,850);
+      return c.toDataURL('image/png');
     }
-    async function downloadCard(){
-      if(!displayName.value.trim()){showModal('กรุณากรอกชื่อ','กรอกชื่อที่ใช้ในระบบก่อนดาวน์โหลดค่ะ');displayName.focus();return}
-      downloadCardBtn.disabled=true;const oldText=downloadCardBtn.textContent;downloadCardBtn.textContent='กำลังสร้างไฟล์...';
-      try{const canvas=await createVerticalCardCanvas(3);const dataUrl=canvas.toDataURL('image/png');showGenerated(dataUrl,'card');const link=document.createElement('a');link.download=`E8-member-card-${studentId.textContent}.png`;link.href=dataUrl;document.body.appendChild(link);link.click();link.remove()}
-      catch(error){console.error(error);showModal('สร้างรูปไม่สำเร็จ','ลองรีเฟรชแล้วกดดาวน์โหลดใหม่อีกครั้งค่ะ')}
-      finally{downloadCardBtn.disabled=false;downloadCardBtn.textContent=oldText}
+
+    async function renderAll(){
+      const url=await cardDataURL();
+      els.singleCardPreview.src=url;els.cardLayer.src=url;renderComposition();saveState();
     }
-    downloadCardBtn.addEventListener('click',downloadCard);
-
-    async function downloadCase(){
-      if(!displayName.value.trim()){showModal('กรุณากรอกชื่อ','กรอกชื่อที่ใช้ในระบบก่อนดาวน์โหลดค่ะ');displayName.focus();return}
-      downloadCaseBtn.disabled=true;const oldText=downloadCaseBtn.textContent;downloadCaseBtn.textContent='กำลังสร้างไฟล์...';
-      try{
-        updateCaseTransform();
-        const cardCanvas=await createVerticalCardCanvas(3);
-        const caseImg=await loadCanvasImage(`./${selectedCase}.png`);
-        const stageRect=caseStage.getBoundingClientRect();
-        const stageW=stageRect.width;
-        const stageH=stageRect.height;
-        const outW=2200;
-        const outH=Math.round(outW*(stageH/stageW));
-        const sx=outW/stageW;
-        const sy=outH/stageH;
-        const canvas=document.createElement('canvas');canvas.width=outW;canvas.height=outH;const ctx=canvas.getContext('2d');
-        ctx.clearRect(0,0,outW,outH);
-
-        const cardBaseW=caseCard.offsetWidth;
-        const cardBaseH=caseCard.offsetHeight;
-        const cardCenterX=(stageW/2+caseState.x)*sx;
-        const cardCenterY=(stageH/2+caseState.y)*sy;
-        const drawW=cardBaseW*caseState.scale*sx;
-        const drawH=cardBaseH*caseState.scale*sy;
-        ctx.save();
-        ctx.translate(cardCenterX,cardCenterY);
-        ctx.rotate(caseState.rotate*Math.PI/180);
-        ctx.drawImage(cardCanvas,-drawW/2,-drawH/2,drawW,drawH);
-        ctx.restore();
-
-        if(caseImg){
-          const caseW=stageW*caseState.caseWidth*sx;
-          const caseH=stageH*caseState.caseHeight*sy;
-          const caseX=(stageW/2+caseState.caseX)*sx-caseW/2;
-          const caseY=(stageH/2+caseState.caseY)*sy-caseH/2;
-          ctx.drawImage(caseImg,caseX,caseY,caseW,caseH);
-        }else{
-          ctx.fillStyle='rgba(255,255,255,.10)';ctx.font='900 120px Cinzel, Georgia, serif';ctx.textAlign='center';ctx.fillText(selectedCase.toUpperCase(),outW/2,outH/2);
-        }
-        const dataUrl=canvas.toDataURL('image/png');showGenerated(dataUrl,'case');const link=document.createElement('a');link.download=`E8-member-card-case-${selectedCase}-${studentId.textContent}.png`;link.href=dataUrl;document.body.appendChild(link);link.click();link.remove();
-      }catch(error){console.error(error);showModal('สร้างรูปพร้อมเคสไม่สำเร็จ','ตรวจสอบว่าไฟล์เคส c1-c21 เป็น PNG และอยู่ในโฟลเดอร์เดียวกับ member.html ค่ะ')}
-      finally{downloadCaseBtn.disabled=false;downloadCaseBtn.textContent=oldText}
+    function renderComposition(){
+      document.documentElement.style.setProperty('--case-scale',state.viewScale);
+      els.workZoom.value=Math.round(state.viewScale*100);els.zoomOut.textContent=Math.round(state.viewScale*100)+'%';
+      const card=state.card, cs=state.case;
+      card.h=Math.round(card.w*CARD_H/CARD_W);
+      els.cardLayer.style.left=card.x+'px';els.cardLayer.style.top=card.y+'px';els.cardLayer.style.width=card.w+'px';els.cardLayer.style.height=card.h+'px';els.cardLayer.style.transform=`rotate(${card.r}deg)`;
+      els.caseLayer.style.left=cs.x+'px';els.caseLayer.style.top=cs.y+'px';els.caseLayer.style.width=cs.w+'px';els.caseLayer.style.height=cs.h+'px';els.caseLayer.style.transform=`rotate(${cs.r}deg)`;
+      const activeObj=state[state.active];const frame=els.selectionFrame;frame.style.left=activeObj.x+'px';frame.style.top=activeObj.y+'px';frame.style.width=activeObj.w+'px';frame.style.height=activeObj.h+'px';frame.style.transform=`rotate(${activeObj.r}deg)`;
+      syncSliders();
     }
-    downloadCaseBtn.addEventListener('click',downloadCase);
-
-    function showGenerated(dataUrl,type='card'){generatedCardImage.src=dataUrl;openCardImage.href=dataUrl;generatedCardBox.classList.add('show');generatedCardBox.classList.toggle('case-result',type==='case');generatedCardBox.scrollIntoView({behavior:'smooth',block:'center'})}
-
-    function restoreSavedData(){
-      const draft=localStorage.getItem('e8MemberDraft');
-      if(!draft){applyZone(document.querySelector('.zone-box[data-zone="E2 Zone"]'),true);updateName();updateLevel();return}
-      try{
-        const data=JSON.parse(draft);
-        displayName.value=data.displayName||'';nickname.value=data.nickname||'';level.value=data.level||'Year 2';reason.value=data.reason||'';reasonCount.textContent=reason.value.length;
-        const target=[...zones].find(z=>z.dataset.zone===data.zone)||document.querySelector('.zone-box[data-zone="E2 Zone"]');applyZone(target,false);
-        if(data.accent){accentColor.value=data.accent}if(data.text){textColor.value=data.text}if(data.bg){cardBgColor.value=data.bg}if(data.border){cardBorderColor.value=data.border}if(data.line){lineColor.value=data.line}updateColors();
-        if(data.studentId){studentId.textContent=data.studentId;localStorage.setItem('e8MemberId',data.studentId)}
-        if(data.photo){uploadedPhoto=data.photo;photoPreview.src=uploadedPhoto;cardPhoto.src=uploadedPhoto;photoPreview.style.display='block';cardPhoto.style.display='block';photoPlus.style.display='none';cardSilhouette.style.display='none'}
-        if(data.case){selectCase(data.case)}
-        if(data.caseState){scaleRange.value=Math.round((data.caseState.scale||1.5)*100);xRange.value=data.caseState.x||0;yRange.value=data.caseState.y||0;rotateRange.value=data.caseState.rotate||0;caseWidthRange.value=Math.round((data.caseState.caseWidth||1)*100);caseHeightRange.value=Math.round((data.caseState.caseHeight||1)*100);caseXRange.value=data.caseState.caseX||0;caseYRange.value=data.caseState.caseY||0;updateCaseTransform()}
-        updateName();updateLevel();syncCaseCard();
-      }catch(e){applyZone(document.querySelector('.zone-box[data-zone="E2 Zone"]'),true);updateName();updateLevel()}
+    function setActive(target){state.active=target;els.toolToggles.forEach(b=>b.classList.toggle('active',b.dataset.target===target));syncSliders();renderComposition()}
+    function syncSliders(){
+      const obj=state[state.active];
+      els.xRange.value=Math.round(obj.x);els.yRange.value=Math.round(obj.y);els.wRange.value=Math.round(obj.w);els.hRange.value=Math.round(obj.h);els.rotateRange.value=Math.round(obj.r||0);
+      els.xOut.textContent=Math.round(obj.x);els.yOut.textContent=Math.round(obj.y);els.wOut.textContent=Math.round(obj.w);els.hOut.textContent=Math.round(obj.h);els.rotateOut.textContent=Math.round(obj.r||0)+'°';
+      els.hRange.disabled=state.active==='card';
     }
-    restoreSavedData();
+    function updateActiveFromSliders(){
+      const obj=state[state.active];obj.x=Number(els.xRange.value);obj.y=Number(els.yRange.value);obj.w=Number(els.wRange.value);obj.r=Number(els.rotateRange.value);if(state.active==='case')obj.h=Number(els.hRange.value);else obj.h=Math.round(obj.w*CARD_H/CARD_W);renderComposition();saveState();
+    }
+
+    async function downloadCardOnly(){
+      const data=await cardDataURL();showGenerated('card',data);const a=document.createElement('a');a.href=data;a.download=`E8-member-card-${ensureId()}.png`;document.body.appendChild(a);a.click();a.remove();
+    }
+    function drawRotated(ctx,img,obj){
+      if(!img)return;ctx.save();ctx.translate(obj.x+obj.w/2,obj.y+obj.h/2);ctx.rotate((obj.r||0)*Math.PI/180);ctx.drawImage(img,-obj.w/2,-obj.h/2,obj.w,obj.h);ctx.restore();
+    }
+    async function downloadWithCase(){
+      const cardUrl=await cardDataURL();const [cardImg,caseImg]=await Promise.all([loadImage(cardUrl),loadImage(state.caseSrc)]);
+      const c=document.createElement('canvas');c.width=STAGE_W;c.height=STAGE_H;const ctx=c.getContext('2d');ctx.clearRect(0,0,STAGE_W,STAGE_H);
+      drawRotated(ctx,cardImg,state.card);drawRotated(ctx,caseImg,state.case);
+      const data=c.toDataURL('image/png');showGenerated('case',data);const a=document.createElement('a');a.href=data;a.download=`E8-member-card-case-C${state.caseIndex}-${ensureId()}.png`;document.body.appendChild(a);a.click();a.remove();
+    }
+    function showGenerated(type,data){
+      els.generatedBox.classList.add('show');
+      if(type==='card'){els.generatedCardImg.src=data;els.openCardLink.href=data}else{els.generatedCaseImg.src=data;els.openCaseLink.href=data}
+      els.generatedBox.scrollIntoView({behavior:'smooth',block:'nearest'});
+    }
+
+    let drag=null;
+    els.stage.addEventListener('pointerdown',e=>{const rect=els.stage.getBoundingClientRect();const scale=state.viewScale;drag={x:(e.clientX-rect.left)/scale,y:(e.clientY-rect.top)/scale,startX:state[state.active].x,startY:state[state.active].y};els.stage.setPointerCapture(e.pointerId)});
+    els.stage.addEventListener('pointermove',e=>{if(!drag)return;const rect=els.stage.getBoundingClientRect();const scale=state.viewScale;const x=(e.clientX-rect.left)/scale;const y=(e.clientY-rect.top)/scale;state[state.active].x=Math.round(drag.startX+x-drag.x);state[state.active].y=Math.round(drag.startY+y-drag.y);renderComposition()});
+    els.stage.addEventListener('pointerup',()=>{drag=null;saveState()});
+    els.stage.addEventListener('pointercancel',()=>{drag=null});
+
+    els.displayName.addEventListener('input',()=>{state.name=els.displayName.value.trim();renderAll()});
+    els.yearLevel.addEventListener('change',()=>{state.year=els.yearLevel.value;renderAll()});
+    els.photoInput.addEventListener('change',()=>{const f=els.photoInput.files&&els.photoInput.files[0];if(!f)return;if(f.size>6*1024*1024){alert('ไฟล์รูปใหญ่เกินไปค่ะ กรุณาใช้ไม่เกิน 6MB');return}const r=new FileReader();r.onload=e=>{state.photo=e.target.result;els.photoPreview.src=state.photo;els.photoPreview.style.display='block';els.photoPlaceholder.style.display='none';renderAll()};r.readAsDataURL(f)});
+    ['cardBg','stripeColor','textColor','lineColor','borderColor'].forEach(id=>els[id].addEventListener('input',()=>{state.colors={bg:els.cardBg.value,stripe:els.stripeColor.value,text:els.textColor.value,line:els.lineColor.value,border:els.borderColor.value};document.documentElement.style.setProperty('--zone',state.colors.stripe);renderAll()}));
+    els.shadowMode.addEventListener('change',renderAll);
+    els.randomPaletteBtn.addEventListener('click',randomPalette);els.resetPaletteBtn.addEventListener('click',()=>applyPalette({bg:state.zone.card,stripe:state.zone.color,text:state.zone.text,line:state.zone.line,border:state.zone.border}));
+    els.toolToggles.forEach(b=>b.addEventListener('click',()=>setActive(b.dataset.target)));
+    els.fitDefaultBtn.addEventListener('click',()=>{fitCaseAndCard(true);saveState()});els.resetPositionBtn.addEventListener('click',resetPosition);
+    els.downloadCardOnlyBtn.addEventListener('click',downloadCardOnly);els.downloadWithCaseBtn.addEventListener('click',downloadWithCase);
+    [els.xRange,els.yRange,els.wRange,els.hRange,els.rotateRange].forEach(input=>input.addEventListener('input',updateActiveFromSliders));
+    els.workZoom.addEventListener('input',()=>{state.viewScale=Number(els.workZoom.value)/100;renderComposition();saveState()});
+
+    buildZones();buildCases();buildPalettes();loadSaved();selectZone('E2');selectCase(1);setActive('card');ensureId();renderAll();
   </script>
 </body>
 </html>
