@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>E8’s Eden Academy | E1 GUCCI Boutique</title>
+  <title>E8’s Eden Academy | Luxury Brand Mall</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Noto+Sans+Thai:wght@400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800;900&display=swap" rel="stylesheet">
@@ -13,7 +13,7 @@
       --panel:#0b0c10;
       --panel2:#121318;
       --ink:#f7efe2;
-      --muted:#a9a198;
+      --muted:#aaa29b;
       --muted2:#756f68;
       --gold:#d7bd82;
       --gold2:#a9824d;
@@ -46,7 +46,9 @@
       inset:0;
       pointer-events:none;
       z-index:-1;
-      background:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+      background:
+        linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
       background-size:80px 80px;
       mask-image:linear-gradient(to bottom,rgba(0,0,0,.7),transparent 78%);
     }
@@ -70,6 +72,7 @@
       pointer-events:none;
       background:radial-gradient(circle at 18% 0%,rgba(181,31,40,.14),transparent 36%),radial-gradient(circle at 92% 0%,rgba(215,189,130,.12),transparent 34%);
     }
+    .panel > *{position:relative;z-index:2}
     .btn{
       min-height:46px;
       border-radius:999px;
@@ -83,11 +86,14 @@
       letter-spacing:.02em;
       transition:.2s ease;
       white-space:nowrap;
+      background:rgba(255,255,255,.045);
+      color:#ffe8b7;
     }
     .btn.primary{background:linear-gradient(135deg,var(--gold),#f4dcaa);color:#15100a;border-color:rgba(255,229,172,.56);box-shadow:0 12px 32px rgba(215,189,130,.18)}
     .btn.ghost{background:rgba(255,255,255,.045);color:#ffe8b7}
     .btn.danger{background:rgba(255,108,143,.08);color:#ffd2dd;border-color:rgba(255,108,143,.25)}
-    .btn:hover{transform:translateY(-2px);filter:brightness(1.05)}
+    .btn:disabled{opacity:.48;cursor:not-allowed;transform:none;filter:none}
+    .btn:not(:disabled):hover{transform:translateY(-2px);filter:brightness(1.05)}
 
     header{
       position:sticky;
@@ -123,27 +129,28 @@
     .hero-card p{margin-top:18px;max-width:680px;color:rgba(247,239,226,.78);font-size:16px;font-weight:780;line-height:1.75}
     .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
     .pay-card{padding:24px;display:grid;gap:16px;align-content:start}
-    .pay-card > *{position:relative;z-index:2}
-    .pay-top{display:flex;align-items:center;justify-content:space-between;gap:12px}.pay-top h3{font-family:"Cinzel",serif;letter-spacing:.13em;color:#fff2ca}.online{display:inline-flex;gap:8px;align-items:center;border:1px solid rgba(158,255,200,.18);background:rgba(158,255,200,.06);color:#caffde;border-radius:999px;padding:8px 10px;font-size:12px;font-weight:950}.online i{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green)}
-    .balance-box{border:1px solid var(--line);border-radius:24px;padding:18px;background:rgba(255,255,255,.035)}
-    .balance-label{font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:var(--muted);font-weight:950}.balance{margin-top:8px;font-family:"Cinzel",serif;color:var(--gold);font-size:clamp(32px,4vw,46px);font-weight:900;line-height:1}.pay-meta{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}.meta{border-radius:17px;background:rgba(255,255,255,.045);border:1px solid var(--line2);padding:12px}.meta span{display:block;font-size:11px;color:var(--muted);font-weight:900}.meta b{display:block;margin-top:4px;font-size:13px;color:#fff}
-    .terminal{border-radius:20px;border:1px solid rgba(255,255,255,.08);background:#050608;padding:14px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:#e3d0aa;font-size:12px;line-height:1.7;min-height:116px}.terminal .muted{color:#746e65}
+    .pay-top{display:flex;align-items:center;justify-content:space-between;gap:12px}.pay-top h3{font-family:"Cinzel",serif;letter-spacing:.13em;color:#fff2ca}.online{display:inline-flex;gap:8px;align-items:center;border:1px solid rgba(158,255,200,.18);background:rgba(158,255,200,.06);color:#caffde;border-radius:999px;padding:8px 10px;font-size:12px;font-weight:950}.online i{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 14px var(--green)}
+    .balance-box{padding:20px;border-radius:24px;background:linear-gradient(145deg,rgba(215,189,130,.10),rgba(255,255,255,.04));border:1px solid var(--line)}
+    .balance-box small{display:block;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.14em}.balance-box b{display:block;margin-top:6px;font-family:"Cinzel",serif;font-size:clamp(30px,4vw,50px);line-height:1;color:#fff1c6}.balance-box span{display:block;margin-top:6px;color:#d3cac0;font-size:12px;font-weight:800}
+    .terminal{min-height:118px;border-radius:22px;background:#050506;border:1px solid rgba(255,255,255,.07);padding:14px;color:#aaf0c7;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;line-height:1.8;box-shadow:inset 0 0 0 1px rgba(158,255,200,.03)}.terminal .muted{color:#7a9185}
+    .pay-meta{display:grid;grid-template-columns:1fr 1fr;gap:10px}.meta-card{border-radius:18px;border:1px solid var(--line2);background:rgba(255,255,255,.035);padding:12px}.meta-card b{display:block;color:#ffe7ac}.meta-card span{display:block;margin-top:4px;color:var(--muted);font-size:12px;font-weight:800}
 
-    .section-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:16px}.section-head h2{font-family:"Playfair Display","Noto Sans Thai",serif;font-size:clamp(36px,4.2vw,62px);line-height:.95;letter-spacing:-.05em}.section-head p{margin-top:10px;color:var(--muted);font-weight:800;line-height:1.7}.section-chip{font-family:"Cinzel",serif;font-weight:900;color:var(--gold);letter-spacing:.15em;text-transform:uppercase}
-    .zone-shelf{padding:18px}.zone-grid{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:10px;position:relative;z-index:2}.zone-card{min-height:132px;border-radius:22px;padding:14px 10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;text-align:center;border:1px solid rgba(255,255,255,.12);font-weight:950;transition:.2s ease}.zone-card:hover{transform:translateY(-3px);filter:brightness(1.05)}.zone-card img{width:66px;height:66px;object-fit:contain;filter:drop-shadow(0 12px 14px rgba(0,0,0,.32))}.zone-card small{opacity:.72;letter-spacing:.12em;text-transform:uppercase;font-size:10px}.e1{background:linear-gradient(145deg,#100707,#5a0d13 55%,#c59a59);color:#fff5d9}.e2{background:linear-gradient(145deg,#241d16,#ae8f64);color:#fff8e8}.e3{background:linear-gradient(145deg,#060606,#2a2a2d);color:#fff}.e4{background:linear-gradient(145deg,#1b1511,#a46a33);color:#fff4e9}.e5{background:linear-gradient(145deg,#0b0b0d,#3a3a43);color:#f1f1f4}.e6{background:linear-gradient(145deg,#351624,#c37694);color:#fff1f7}.e7{background:linear-gradient(145deg,#0f1114,#c9c7bd);color:#fff}.e8{background:linear-gradient(145deg,#2d2113,#c39b3e);color:#fff4d0}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:16px}.section-head h2{font-family:"Playfair Display","Noto Sans Thai",serif;font-size:clamp(34px,5vw,62px);line-height:.96;color:#fff7e7}.section-head p{margin-top:8px;color:var(--muted);font-weight:750;line-height:1.7}.section-chip{border:1px solid var(--line);border-radius:999px;padding:10px 14px;color:#f5dc9d;font-size:12px;font-weight:950;letter-spacing:.13em;text-transform:uppercase}
+    .zone-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+    .zone-card{border-radius:24px;border:1px solid var(--line2);padding:18px;background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.02));min-height:158px;transition:.2s ease;position:relative;overflow:hidden}.zone-card:hover{transform:translateY(-4px);border-color:var(--line)}.zone-card img{width:58px;height:58px;object-fit:contain;filter:drop-shadow(0 12px 18px rgba(0,0,0,.32))}.zone-card b{display:block;margin-top:14px;font-family:"Cinzel",serif;color:#fff3c8;letter-spacing:.05em}.zone-card small{display:block;margin-top:6px;color:var(--muted);font-weight:900}.zone-card::after{content:"";position:absolute;inset:auto -10% -50% auto;width:160px;height:160px;border-radius:50%;background:rgba(215,189,130,.07)}
+    .e1{background:linear-gradient(145deg,rgba(84,10,19,.34),rgba(255,255,255,.035))}.e2{background:linear-gradient(145deg,rgba(116,90,55,.28),rgba(255,255,255,.035))}.e3{background:linear-gradient(145deg,rgba(30,30,36,.50),rgba(255,255,255,.035))}.e4{background:linear-gradient(145deg,rgba(123,102,45,.27),rgba(255,255,255,.035))}.e5{background:linear-gradient(145deg,rgba(33,39,50,.52),rgba(255,255,255,.035))}.e6{background:linear-gradient(145deg,rgba(133,66,100,.24),rgba(255,255,255,.035))}.e7{background:linear-gradient(145deg,rgba(42,84,76,.24),rgba(255,255,255,.035))}.e8{background:linear-gradient(145deg,rgba(118,70,36,.26),rgba(255,255,255,.035))}
 
-    .shop-shell{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:18px;align-items:start}.catalog-panel{padding:22px}.catalog-panel > *{position:relative;z-index:2}.toolbar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;margin-bottom:14px}.search-box{position:relative}.search-box input{width:100%;height:50px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.055);color:#fff;outline:none;padding:0 18px 0 46px;font-weight:900}.search-box::before{content:"⌕";position:absolute;left:18px;top:50%;transform:translateY(-50%);color:var(--gold);font-weight:900}.filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.filter-btn{border:1px solid var(--line);background:rgba(255,255,255,.045);color:rgba(247,239,226,.74);min-height:38px;padding:0 14px;border-radius:999px;font-weight:950;transition:.2s}.filter-btn:hover,.filter-btn.active{background:rgba(215,189,130,.13);border-color:rgba(215,189,130,.4);color:#ffe9b6}
-    .product-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.product-card{border-radius:26px;background:linear-gradient(180deg,rgba(255,255,255,.065),rgba(255,255,255,.028));border:1px solid var(--line);overflow:hidden;transition:.22s ease}.product-card:hover{transform:translateY(-5px);border-color:rgba(215,189,130,.45);box-shadow:0 24px 50px rgba(0,0,0,.36)}
-    .product-media{width:100%;aspect-ratio:1/1;background:#fff;overflow:hidden;border:0;display:block;padding:0;position:relative}.product-media img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;border:0;margin:0}.product-media::after{content:"ดูรูปเต็ม";position:absolute;right:12px;bottom:12px;border:1px solid rgba(0,0,0,.12);background:rgba(255,255,255,.82);color:#111;border-radius:999px;padding:7px 10px;font-size:11px;font-weight:950;opacity:0;transform:translateY(6px);transition:.18s}.product-media:hover::after{opacity:1;transform:translateY(0)}
-    .product-body{padding:15px 16px 16px}.product-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}.sku{font-family:"Cinzel",serif;color:#ffe2a6;border:1px solid rgba(215,189,130,.26);background:rgba(215,189,130,.08);border-radius:999px;padding:5px 8px;font-size:11px;font-weight:900;letter-spacing:.04em}.brand-tag{font-size:11px;font-weight:950;color:#ffe2a6;letter-spacing:.12em;text-transform:uppercase}.product-card h3{font-size:17px;line-height:1.25;color:#fff;min-height:43px}.product-card p{margin-top:6px;color:rgba(247,239,226,.56);font-size:12px;font-weight:800;line-height:1.4;min-height:18px}.product-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px}.price{font-family:"Cinzel",serif;color:var(--gold);font-size:19px;font-weight:900;white-space:nowrap}.mini-actions{display:flex;gap:7px}.icon-btn,.add-btn{border:1px solid rgba(215,189,130,.32);background:rgba(215,189,130,.10);color:#ffe8af;border-radius:999px;padding:9px 12px;font-weight:950;white-space:nowrap}.icon-btn{padding:9px 10px;background:rgba(255,255,255,.045)}
+    .shop-shell{display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:18px;align-items:start}.catalog-panel{padding:20px}.toolbar{display:grid;grid-template-columns:1fr auto;gap:12px;margin-bottom:14px}.search-box input{width:100%;height:48px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.055);color:#fff;padding:0 18px;outline:none;font-weight:850}.search-box input:focus{box-shadow:0 0 0 4px rgba(215,189,130,.07);border-color:rgba(215,189,130,.48)}
+    .filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}.filter-btn{border:1px solid var(--line2);background:rgba(255,255,255,.045);color:#cfc3b6;border-radius:999px;padding:9px 12px;font-weight:950}.filter-btn.active,.filter-btn:hover{background:rgba(215,189,130,.12);border-color:var(--line);color:#ffe5a8}
+    .product-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.product-card{border-radius:24px;border:1px solid var(--line2);background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.023));overflow:hidden}.product-media{width:100%;height:210px;background:radial-gradient(circle at 40% 22%,rgba(215,189,130,.15),transparent 38%),#090a0c;border:0;border-bottom:1px solid var(--line2);display:grid;place-items:center;overflow:hidden}.product-media img{width:100%;height:100%;object-fit:cover;transition:.24s ease}.product-media:hover img{transform:scale(1.04)}.product-body{padding:15px}.product-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}.sku,.brand-tag{border-radius:999px;font-size:10px;font-weight:950;letter-spacing:.10em;text-transform:uppercase}.sku{padding:5px 8px;background:rgba(215,189,130,.10);border:1px solid rgba(215,189,130,.24);color:#ffd991}.brand-tag{color:#a99f94}.product-card h3{font-family:"Playfair Display","Noto Sans Thai",serif;color:#fff7e8;font-size:24px;line-height:1.05;min-height:52px}.product-card p{margin-top:9px;color:#afa59b;font-size:12px;font-weight:760;line-height:1.55;min-height:58px}.buy-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:13px}.price{font-family:"Cinzel",serif;color:#ffe2a2;font-size:17px}.add-btn{min-height:38px;padding:0 13px;border-radius:999px;border:1px solid var(--line);background:linear-gradient(135deg,var(--gold),#f4dcaa);color:#15100a;font-weight:950}.add-btn:hover{filter:brightness(1.06)}
+    .cart-panel{padding:20px;position:sticky;top:110px}.cart-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.cart-head h3{font-family:"Playfair Display","Noto Sans Thai",serif;font-size:32px;color:#fff2ca}.cart-count{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:rgba(215,189,130,.16);border:1px solid var(--line);font-weight:950;color:#ffe1a0}.active-student{display:none;margin-bottom:12px;border-radius:18px;padding:12px;background:rgba(158,255,200,.08);border:1px solid rgba(158,255,200,.18);color:#ceffdf;font-weight:900;line-height:1.55}.active-student.show{display:block}.cart-items{display:grid;gap:10px;max-height:360px;overflow:auto;padding-right:3px}.cart-empty{padding:22px;border-radius:18px;background:rgba(255,255,255,.035);border:1px solid var(--line2);color:var(--muted);font-weight:800;text-align:center}.cart-item{display:grid;grid-template-columns:54px 1fr auto;gap:10px;align-items:center;border-radius:18px;border:1px solid var(--line2);background:rgba(255,255,255,.035);padding:10px}.cart-thumb{width:54px;height:54px;border-radius:14px;object-fit:cover;background:#111}.cart-item b{display:block;color:#fff4d8;font-size:13px}.cart-item span{display:block;color:var(--muted);font-size:11px;font-weight:800;margin-top:3px}.qty-controls{display:flex;align-items:center;gap:6px}.qty-controls button{width:28px;height:28px;border-radius:999px;border:1px solid var(--line2);background:rgba(255,255,255,.05);color:#fff;font-weight:950}.qty-controls .remove{color:#ffc0cf;border-color:rgba(255,138,164,.25)}
+    .cart-total{margin-top:14px;border-top:1px solid var(--line2);padding-top:14px;display:grid;gap:9px}.total-row{display:flex;justify-content:space-between;gap:12px;color:#c5bbb1;font-weight:850}.total-row b{color:#ffe4a6}.total-row.final{font-size:18px;color:#fff}.card-connect{display:grid;gap:9px;margin-top:16px}
 
-    .cart-panel{padding:22px;position:sticky;top:112px}.cart-panel > *{position:relative;z-index:2}.cart-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.cart-head h3{font-family:"Cinzel",serif;font-size:23px;letter-spacing:.04em}.cart-count{min-width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:rgba(215,189,130,.10);border:1px solid rgba(215,189,130,.25);color:#ffe2a6;font-weight:950}.active-student{padding:13px;border-radius:18px;border:1px solid rgba(158,255,200,.18);background:rgba(158,255,200,.06);color:#c9ffe0;font-size:12px;font-weight:900;line-height:1.6;display:none;margin-bottom:10px}.active-student.show{display:block}.cart-items{display:grid;gap:10px;max-height:330px;overflow:auto;padding-right:4px}.cart-empty{color:var(--muted);font-weight:800;line-height:1.7;padding:18px;border-radius:18px;border:1px dashed rgba(215,189,130,.20);background:rgba(255,255,255,.035)}.cart-item{display:grid;grid-template-columns:1fr auto;gap:10px;padding:12px;border-radius:18px;background:rgba(255,255,255,.045);border:1px solid var(--line)}.cart-item b{font-size:13px}.cart-item span{display:block;margin-top:4px;color:var(--muted);font-size:12px;font-weight:800}.cart-item button{border:0;background:transparent;color:var(--danger);font-weight:950}.cart-total{margin-top:16px;padding:16px;border-radius:20px;background:rgba(2,2,3,.46);border:1px solid var(--line)}.total-row{display:flex;align-items:center;justify-content:space-between;gap:10px;color:rgba(247,239,226,.70);font-weight:850;margin-bottom:8px}.total-row.final{margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:18px;color:#fff}.total-row.final b{font-family:"Cinzel",serif;color:var(--gold);font-size:24px}.card-connect{margin-top:14px;display:grid;gap:10px}
+    .payment-modal,.toast-modal,.image-modal{position:fixed;inset:0;z-index:200;display:none;place-items:center;padding:18px;background:rgba(0,0,0,.64);backdrop-filter:blur(10px)}.payment-modal.show,.toast-modal.show,.image-modal.show{display:grid}.modal-card{width:min(560px,100%);border-radius:28px;border:1px solid var(--line);background:linear-gradient(145deg,rgba(28,25,23,.98),rgba(5,5,8,.98));box-shadow:0 28px 90px rgba(0,0,0,.65);padding:20px}.modal-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}.modal-head h3{font-family:"Playfair Display","Noto Sans Thai",serif;font-size:32px;color:#fff3d7}.modal-head p{margin-top:4px;color:#bdb2a7;font-weight:800;line-height:1.5}.modal-close{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.06);color:#fff;font-size:24px;font-weight:700}.modal-body{margin-top:16px}.card-input{width:100%;height:58px;border-radius:18px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:#fff;padding:0 16px;font-size:17px;font-weight:950;letter-spacing:.04em;outline:none}.card-input:focus{border-color:rgba(215,189,130,.56);box-shadow:0 0 0 5px rgba(215,189,130,.09)}.code-hint{margin-top:10px;color:#91877e;font-size:12px;font-weight:800;line-height:1.6}.modal-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}.modal-result{display:none;margin-top:16px;border-radius:18px;padding:14px;background:rgba(158,255,200,.08);border:1px solid rgba(158,255,200,.20);color:#d2ffe4;font-weight:900;line-height:1.65}.modal-result.show{display:block}.modal-result.error{background:rgba(255,108,143,.08);border-color:rgba(255,108,143,.20);color:#ffd1dc}.receipt{text-align:center}.check{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;margin:0 auto 12px;background:rgba(158,255,200,.12);border:1px solid rgba(158,255,200,.24);color:#caffde;font-size:38px}.receipt h3{font-family:"Playfair Display","Noto Sans Thai",serif;font-size:34px}.receipt p{margin-top:8px;color:#c4bab0;font-weight:800;line-height:1.7}.receipt-code{margin-top:16px;border-radius:18px;border:1px dashed rgba(215,189,130,.34);padding:13px;color:#ffe1a1;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-weight:900}.image-viewer{width:min(980px,100%);position:relative}.image-viewer img{max-height:78vh;width:100%;object-fit:contain;border-radius:22px;background:#09090b;border:1px solid var(--line)}.image-caption{position:absolute;left:12px;right:12px;bottom:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-radius:18px;background:rgba(0,0,0,.65);backdrop-filter:blur(10px);border:1px solid var(--line2);padding:12px;color:#ffe0a2;font-weight:950}
+    footer{text-align:center;padding:34px 18px 52px;color:#8f877e;font-size:13px;font-weight:800;line-height:1.8}
 
-    .payment-modal,.toast-modal,.image-modal{position:fixed;inset:0;z-index:180;display:none;place-items:center;padding:20px;background:rgba(0,0,0,.72);backdrop-filter:blur(14px)}.payment-modal.show,.toast-modal.show,.image-modal.show{display:grid;animation:fadeIn .18s ease-out both}@keyframes fadeIn{from{opacity:0}to{opacity:1}}.modal-card{width:min(560px,100%);border-radius:30px;background:linear-gradient(145deg,rgba(18,19,24,.98),rgba(5,5,7,.98));border:1px solid rgba(215,189,130,.26);box-shadow:0 36px 100px rgba(0,0,0,.66);overflow:hidden;position:relative}.modal-card::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 16% 0%,rgba(181,31,40,.16),transparent 30%),radial-gradient(circle at 90% 0%,rgba(215,189,130,.15),transparent 28%);pointer-events:none}.modal-head{padding:24px 24px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;position:relative;z-index:2}.modal-head h3{font-family:"Playfair Display","Noto Sans Thai",serif;font-size:32px;line-height:1;color:#fff}.modal-head p{margin-top:8px;color:var(--muted);font-weight:800;line-height:1.6}.modal-close{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.06);color:#fff;font-size:22px;flex:0 0 auto}.modal-body{padding:0 24px 24px;position:relative;z-index:2}.card-input{width:100%;height:58px;border-radius:18px;border:1px solid rgba(215,189,130,.28);background:rgba(255,255,255,.055);outline:none;color:#fff;padding:0 16px;font-size:16px;font-weight:950;letter-spacing:.06em;text-transform:uppercase}.code-hint{margin-top:12px;color:rgba(247,239,226,.56);font-size:12px;font-weight:800;line-height:1.6}.modal-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.modal-result{display:none;margin-top:18px;padding:18px;border-radius:20px;border:1px solid rgba(158,255,200,.18);background:rgba(158,255,200,.06);color:#d8ffe8;font-weight:850;line-height:1.75}.modal-result.show{display:block}.modal-result.error{border-color:rgba(255,140,165,.25);background:rgba(255,140,165,.08);color:#ffd7e0}.receipt{padding:24px;text-align:center;position:relative;z-index:2}.receipt .check{width:78px;height:78px;margin:0 auto 16px;border-radius:50%;display:grid;place-items:center;background:rgba(158,255,200,.10);border:1px solid rgba(158,255,200,.26);color:var(--green);font-size:34px}.receipt h3{font-family:"Playfair Display","Noto Sans Thai",serif;font-size:38px;line-height:1;color:#fff}.receipt p{margin:12px auto 0;max-width:420px;color:var(--muted);font-weight:800;line-height:1.75}.receipt-code{margin-top:18px;padding:14px;border-radius:18px;background:rgba(255,255,255,.05);border:1px solid var(--line);font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:#ffe8af}.image-viewer{width:min(980px,96vw);max-height:92vh;border-radius:30px;background:#fff;overflow:hidden;box-shadow:0 38px 120px rgba(0,0,0,.76);position:relative}.image-viewer img{width:100%;height:auto;max-height:88vh;object-fit:contain;background:#fff}.image-viewer .modal-close{position:absolute;right:14px;top:14px;background:rgba(0,0,0,.65);border-color:rgba(255,255,255,.2);z-index:2}.image-caption{position:absolute;left:16px;bottom:16px;right:16px;border-radius:18px;padding:12px 14px;background:rgba(0,0,0,.62);color:#fff;font-weight:900;display:flex;justify-content:space-between;gap:12px}
-    footer{text-align:center;color:rgba(247,239,226,.56);font-weight:800;padding:42px 0 58px;line-height:1.75}
-
-    @media(max-width:1100px){.hero-grid,.shop-shell{grid-template-columns:1fr}.cart-panel{position:relative;top:auto}.product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.zone-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
-    @media(max-width:760px){.header-inner{align-items:flex-start;flex-direction:column}.nav{justify-content:flex-start}.hero-card{padding:28px;min-height:360px}.toolbar{grid-template-columns:1fr}.section-head{align-items:flex-start;flex-direction:column}.pay-meta{grid-template-columns:1fr}.product-grid,.zone-grid{grid-template-columns:1fr}.product-card h3{min-height:auto}.image-caption{position:static;border-radius:0;background:#111}.hero-card h2{font-size:48px}}
+    @media(max-width:1160px){.hero-grid,.shop-shell{grid-template-columns:1fr}.cart-panel{position:relative;top:auto}.product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.zone-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+    @media(max-width:760px){.header-inner{align-items:flex-start;flex-direction:column}.nav{justify-content:flex-start}.hero-card{padding:28px;min-height:360px}.toolbar{grid-template-columns:1fr}.section-head{align-items:flex-start;flex-direction:column}.pay-meta{grid-template-columns:1fr}.product-grid,.zone-grid{grid-template-columns:1fr}.product-card h3{min-height:auto}.product-card p{min-height:auto}.image-caption{position:static;border-radius:0;background:#111}.hero-card h2{font-size:48px}}
   </style>
 </head>
 <body>
@@ -188,49 +195,47 @@
           </div>
         </article>
 
-        <aside class="panel pay-card" aria-label="Academy credit gateway">
+        <aside class="panel pay-card" id="academyPay">
           <div class="pay-top">
             <h3>ACADEMY PAY</h3>
-            <span class="online"><i></i>Online</span>
+            <div class="online"><i></i> ONLINE</div>
           </div>
           <div class="balance-box">
-            <div class="balance-label">Available Student Credit</div>
-            <div class="balance" id="heroBalance">LOCKED</div>
-            <div class="pay-meta">
-              <div class="meta"><span>Student Rank</span><b id="heroRank">Year 1 / Pending</b></div>
-              <div class="meta"><span>Currency</span><b>THB</b></div>
-            </div>
+            <small>Student Credit Line</small>
+            <b id="heroBalance">5,000,000 THB</b>
+            <span id="heroRank">Waiting for Academy Card Auth</span>
           </div>
           <div class="terminal" id="terminalLog">
-            <div>&gt; academy-pay.gateway.boot()</div>
-            <div class="muted">&gt; waiting for academy card number...</div>
-            <div class="muted">&gt; credit vault locked</div>
+            <div>&gt; academy-pay.ready</div>
+            <div class="muted">&gt; enter registered academy card</div>
+            <div class="muted">&gt; register.html card codes are accepted</div>
           </div>
-          <button class="btn primary" type="button" data-open-payment>กรอกรหัสบัตรนักเรียน</button>
+          <div class="pay-meta">
+            <div class="meta-card"><b>5,000,000</b><span>เครดิตเริ่มต้นต่อรหัส</span></div>
+            <div class="meta-card"><b>Y1</b><span>Academy Card Verified</span></div>
+          </div>
         </aside>
       </div>
     </section>
 
-    <section aria-label="Zone shop categories">
+    <section aria-label="Zone mall">
       <div class="container">
         <div class="section-head">
           <div>
-            <h2>Luxury Brand Mall</h2>
-            <p>เลือกโซนแบรนด์ของสถาบัน ตอนนี้เปิดขายคอลเลกชัน E1 GUCCI ก่อน</p>
+            <h2>Luxury Zone Houses</h2>
+            <p>ชั้นร้านค้าของแต่ละโซน กดเลือกเพื่อดูช็อปและคอลเลกชันที่เปิดในระบบ</p>
           </div>
-          <div class="section-chip">E1 ACTIVE</div>
+          <div class="section-chip">E1-E8 PRIVATE FLOOR</div>
         </div>
-        <div class="panel zone-shelf">
-          <div class="zone-grid">
-            <a class="zone-card e1" href="#catalog" data-zone-link="E1"><img src="./e1m.png" alt="e1m โซนE1"><b>E1 / GUCCI</b><small>Open</small></a>
-            <a class="zone-card e2" href="#catalog" data-zone-link="E2"><img src="./e2m.png" alt="e2m โซนE2"><b>E2 / LV</b><small>Coming</small></a>
-            <a class="zone-card e3" href="#catalog" data-zone-link="E3"><img src="./e3m.png" alt="e3m โซนE3"><b>E3 / CHANEL</b><small>Coming</small></a>
-            <a class="zone-card e4" href="#catalog" data-zone-link="E4"><img src="./e4m.png" alt="e4m โซนE4"><b>E4 / VERSACE</b><small>Coming</small></a>
-            <a class="zone-card e5" href="#catalog" data-zone-link="E5"><img src="./e5m.png" alt="e5m โซนE5"><b>E5 / BALENCIAGA</b><small>Coming</small></a>
-            <a class="zone-card e6" href="#catalog" data-zone-link="E6"><img src="./e6m.png" alt="e6m โซนE6"><b>E6 / DIOR</b><small>Coming</small></a>
-            <a class="zone-card e7" href="#catalog" data-zone-link="E7"><img src="./e7m.png" alt="e7m โซนE7"><b>E7 / PRADA</b><small>Coming</small></a>
-            <a class="zone-card e8" href="#catalog" data-zone-link="E8"><img src="./e8m.png" alt="e8m โซนE8"><b>E8 / BURBERRY</b><small>Coming</small></a>
-          </div>
+        <div class="zone-grid">
+          <a class="zone-card e1" href="#catalog" data-zone-link="E1"><img src="./e1m.png" alt="e1m โซนE1"><b>E1 / GUCCI</b><small>Open</small></a>
+          <a class="zone-card e2" href="#catalog" data-zone-link="E2"><img src="./e2m.png" alt="e2m โซนE2"><b>E2 / LV</b><small>Coming</small></a>
+          <a class="zone-card e3" href="#catalog" data-zone-link="E3"><img src="./e3m.png" alt="e3m โซนE3"><b>E3 / CHANEL</b><small>Coming</small></a>
+          <a class="zone-card e4" href="#catalog" data-zone-link="E4"><img src="./e4m.png" alt="e4m โซนE4"><b>E4 / VERSACE</b><small>Coming</small></a>
+          <a class="zone-card e5" href="#catalog" data-zone-link="E5"><img src="./e5m.png" alt="e5m โซนE5"><b>E5 / BALENCIAGA</b><small>Coming</small></a>
+          <a class="zone-card e6" href="#catalog" data-zone-link="E6"><img src="./e6m.png" alt="e6m โซนE6"><b>E6 / DIOR</b><small>Coming</small></a>
+          <a class="zone-card e7" href="#catalog" data-zone-link="E7"><img src="./e7m.png" alt="e7m โซนE7"><b>E7 / PRADA</b><small>Coming</small></a>
+          <a class="zone-card e8" href="#catalog" data-zone-link="E8"><img src="./e8m.png" alt="e8m โซนE8"><b>E8 / BURBERRY</b><small>Coming</small></a>
         </div>
       </div>
     </section>
@@ -257,7 +262,7 @@
 
           <aside class="panel cart-panel" aria-label="Shopping cart">
             <div class="cart-head">
-              <h3>Cart</h3>
+              <h3>Shopping Bag</h3>
               <span class="cart-count" id="cartCount">0</span>
             </div>
             <div class="active-student" id="activeStudentBox"></div>
@@ -295,8 +300,8 @@
         <button class="modal-close" type="button" data-close-modal aria-label="Close">×</button>
       </div>
       <div class="modal-body">
-        <input class="card-input" id="cardInput" type="text" placeholder="ACADEMY CARD NUMBER" autocomplete="off">
-        <div class="code-hint">รหัสบัตรจะไม่แสดงบนหน้าเว็บ ใช้เฉพาะรหัสที่แอดมินแจกเท่านั้น</div>
+        <input class="card-input" id="cardInput" type="text" placeholder="เช่น E2-260520-003-GGSS" autocomplete="off">
+        <div class="code-hint">รองรับรหัสบัตรจาก register.html และรหัสบัตรรูปแบบ E1-E8-วันเดือนปี-ลำดับ-รหัสท้าย 4 หลัก</div>
         <div class="modal-actions">
           <button class="btn primary" type="button" id="verifyBtn">Verify Academy Card</button>
         </div>
@@ -342,19 +347,21 @@
     ];
 
     const startingCredit = 5000000;
-    let activeCardHash = null;
+    let activeCardHash = localStorage.getItem("e8AcademyCardHash") || null;
     let activeBalance = 0;
-    let cart = [];
+    let cart = JSON.parse(localStorage.getItem("e8GucciCart") || "[]");
     let currentCategory = "ALL";
 
     const products = [
-      {id:"gu-wj01", sku:"GU-E1-WJ-01", name:"Women's Tailored Jacket", category:"UNIFORM", collection:"GUCCI SET", price:520000, image:"sug1.png", note:"E1 GUCCI"},
-      {id:"gu-mj01", sku:"GU-E1-MJ-01", name:"Men's Tailored Jacket", category:"UNIFORM", collection:"GUCCI SET", price:540000, image:"sub1.png", note:"E1 GUCCI"},
-      {id:"gu-tr01", sku:"GU-E1-TR-01", name:"Tailored Trousers", category:"UNIFORM", collection:"GUCCI SET", price:390000, image:"sub2.png", note:"E1 GUCCI"},
-      {id:"gu-sh01", sku:"GU-E1-SH-01", name:"Horsebit Loafer", category:"FOOTWEAR", collection:"GUCCI FOOTWEAR", price:460000, image:"s1.png", note:"E1 GUCCI"},
-      {id:"gu-bg01", sku:"GU-E1-BG-01", name:"Boston Carry Bag", category:"LEATHER GOODS", collection:"GUCCI BAG", price:890000, image:"bag1.png", note:"E1 GUCCI"},
-      {id:"gu-ac01", sku:"GU-E1-AC-01", name:"Formal Accessory Kit", category:"ACCESSORIES", collection:"GUCCI ACCESSORY", price:430000, image:"s2.png", note:"E1 GUCCI"},
-      {id:"gu-ac02", sku:"GU-E1-AC-02", name:"Signature Accessory Set", category:"ACCESSORIES", collection:"GUCCI ACCESSORY", price:480000, image:"as1.png", note:"E1 GUCCI"}
+      {id:"smg1", sku:"SMG1", name:"Summer Set Gucci", category:"SET", collection:"GUCCI SUMMER", price:880000, image:"smg1.png", note:"เซ็ตหลักประจำบ้าน E1 โทนดำ ขอบแดงเข้ม และ hardware ทอง"},
+      {id:"smg2", sku:"SMG2", name:"Female Bottom / Pants", category:"FEMALE", collection:"GUCCI SUMMER", price:360000, image:"smg2.png", note:"กางเกงผู้หญิงหรือทรงสคอร์ตสีดำ ดีเทลขอบ crimson"},
+      {id:"smb1", sku:"SMB1", name:"Male Sleeveless Turtleneck", category:"MALE", collection:"GUCCI SUMMER", price:295000, image:"smb1.png", note:"เสื้อผู้ชายคอเต่าแขนกุด rib knit สีดำ พร้อม crest ทอง"},
+      {id:"smb2", sku:"SMB2", name:"Male Tailored Academy Pants", category:"MALE", collection:"GUCCI SUMMER", price:390000, image:"smb2.png", note:"กางเกงผู้ชายทรง tailored สีดำ ขอบแดงเข้ม เข็มขัดและโซ่เหรียญ"},
+      {id:"s1", sku:"S1", name:"Black Horsebit Academy Loafer", category:"SHOES", collection:"GUCCI FOOTWEAR", price:420000, image:"S1.png", note:"รองเท้าหนังสีดำทรง loafer หน้าเพรียว hardware ทอง"},
+      {id:"sb1", sku:"SB1", name:"Premium Academy Duffle Bag", category:"BAG", collection:"GUCCI LEATHER", price:690000, image:"Sb1.png", note:"กระเป๋าหนังสั่งตัดพิเศษ สีดำ แถบแดงเข้ม และโลหะทอง"},
+      {id:"as1", sku:"AS1", name:"Gold Crest Brooch", category:"ACCESSORY", collection:"GUCCI ACCESSORY", price:188000, image:"as1.png", note:"เข็มกลัด crest ทองประจำบ้าน สำหรับติดเครื่องแบบ"},
+      {id:"as2", sku:"AS2", name:"Chain & Medallion Set", category:"ACCESSORY", collection:"GUCCI ACCESSORY", price:248000, image:"as2.png", note:"โซ่ทองพร้อมเหรียญตรา J.E.LLY สำหรับติดกางเกงหรือกระเป๋า"},
+      {id:"as3", sku:"AS3", name:"Leather Belt Hardware Set", category:"ACCESSORY", collection:"GUCCI ACCESSORY", price:285000, image:"as3.png", note:"เข็มขัดหนังดำพร้อมหัวเข็มขัดทองและชุด hardware เสริม"}
     ];
 
     const formatMoney = (value) => new Intl.NumberFormat("th-TH").format(Math.max(0, Math.round(value))) + " THB";
@@ -390,7 +397,6 @@
     function setTerminal(lines){
       els.terminalLog.innerHTML = lines.map((line, i) => `<div class="${i > 0 ? "muted" : ""}">&gt; ${line}</div>`).join("");
     }
-
     function openPaymentModal(){
       els.paymentModal.classList.add("show");
       setTimeout(() => els.cardInput.focus(), 80);
@@ -404,33 +410,65 @@
       els.modalResult.className = ok ? "modal-result show" : "modal-result show error";
       els.modalResult.innerHTML = message;
     }
+    function normalizeCardCode(value){
+      return String(value || "").trim().toUpperCase().replace(/\s+/g, "");
+    }
+    function isAcademyCardPattern(code){
+      return /^E[1-8]-\d{6}-\d{3}-[A-Z0-9]{4}$/.test(code);
+    }
+    function getRegisteredAcademyCards(){
+      const cards = new Set();
+      const directId = normalizeCardCode(localStorage.getItem("e8StudentId"));
+      if(directId) cards.add(directId);
+      ["e8StudentApplication", "e8StudentDraft", "e8MemberApplication", "e8MemberDraft"].forEach(key => {
+        try{
+          const data = JSON.parse(localStorage.getItem(key) || "{}");
+          const id = normalizeCardCode(data.studentId || data.cardId || data.id || data.academyCard);
+          if(id) cards.add(id);
+        }catch(error){}
+      });
+      return cards;
+    }
     async function sha256(text){
-      const data = new TextEncoder().encode(text.trim().toUpperCase());
+      const data = new TextEncoder().encode(normalizeCardCode(text));
       const hash = await crypto.subtle.digest("SHA-256", data);
-      return [...new Uint8Array(hash)].map(b => b.toString(16).padStart(2,"0")).join("");
+      return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2,"0")).join("");
     }
     async function activateCard(){
-      const input = els.cardInput.value.trim().toUpperCase();
+      const input = normalizeCardCode(els.cardInput.value);
       if(!input){
         showResult("กรุณากรอกรหัสบัตร Academy Card", false);
         return;
       }
       const digest = await sha256(input);
-      if(!cardHashes.includes(digest)){
+      const registeredCards = getRegisteredAcademyCards();
+      const isAdminCard = cardHashes.includes(digest);
+      const isRegisteredCard = registeredCards.has(input);
+      const isValidPatternCard = isAcademyCardPattern(input);
+
+      if(!isAdminCard && !isRegisteredCard && !isValidPatternCard){
         showResult("ไม่พบรหัสนี้ในระบบ Academy Pay", false);
         setTerminal(["auth.request.failed", "unknown academy card", "credit vault remains locked"]);
         return;
       }
+
       activeCardHash = digest;
+      localStorage.setItem("e8AcademyCardHash", activeCardHash);
+      localStorage.setItem("e8AcademyCardCode", input);
       const saved = localStorage.getItem(storageKey(activeCardHash));
       activeBalance = saved ? Number(saved) : startingCredit;
       localStorage.setItem(storageKey(activeCardHash), String(activeBalance));
+
       els.heroBalance.textContent = formatMoney(activeBalance);
-      els.heroRank.textContent = "Year 1 / Verified";
+      els.heroRank.textContent = isRegisteredCard ? "Registered Student / Verified" : isValidPatternCard ? "Academy Card Format / Verified" : "Admin Card / Verified";
       els.activeStudentBox.classList.add("show");
-      els.activeStudentBox.innerHTML = `เชื่อมต่อบัตรสำเร็จ<br>ยอดเครดิตนักเรียนปี 1: <b>${formatMoney(activeBalance)}</b>`;
-      showResult(`<b>ACCESS GRANTED</b><br>ยืนยันบัตรนักเรียนปี 1 สำเร็จ<br>เครดิตคงเหลือ: <b>${formatMoney(activeBalance)}</b>`, true);
-      setTerminal(["academy-card.auth.success", "student.year = 1", `active.balance = ${formatMoney(activeBalance)}`]);
+      els.activeStudentBox.innerHTML = `เชื่อมต่อบัตรสำเร็จ<br>รหัสบัตร: <b>${input}</b><br>ยอดเครดิตนักเรียน: <b>${formatMoney(activeBalance)}</b>`;
+      showResult(`<b>ACCESS GRANTED</b><br>ยืนยันบัตรนักเรียนสำเร็จ<br>เครดิตคงเหลือ: <b>${formatMoney(activeBalance)}</b>`, true);
+      setTerminal([
+        "academy-card.auth.success",
+        isRegisteredCard ? "source = register.html" : isValidPatternCard ? "source = academy card format" : "source = admin card",
+        `active.balance = ${formatMoney(activeBalance)}`
+      ]);
       renderCart();
     }
 
@@ -459,127 +497,153 @@
       els.productGrid.innerHTML = filtered.length ? filtered.map(p => `
         <article class="product-card">
           <button class="product-media" type="button" data-view="${p.id}" aria-label="ดูรูปเต็ม ${p.name}">
-            <img src="./${p.image}" alt="${p.name}" loading="lazy" onerror="this.closest('.product-media').innerHTML='<b style=&quot;color:#111;font-family:Cinzel,serif;font-size:24px&quot;>${p.sku}</b>'">
+            <img src="./${p.image}" alt="${p.name}" loading="lazy" onerror="this.closest('.product-media').innerHTML='<b style=&quot;color:#d7bd82;font-family:Cinzel,serif;font-size:24px&quot;>${p.sku}</b>'">
           </button>
           <div class="product-body">
             <div class="product-top"><span class="sku">${p.sku}</span><span class="brand-tag">GUCCI</span></div>
             <h3>${p.name}</h3>
-            <p>${p.collection}</p>
-            <div class="product-foot">
-              <div class="price">${formatMoney(p.price)}</div>
-              <div class="mini-actions">
-                <button class="icon-btn" type="button" data-view="${p.id}">ดูรูป</button>
-                <button class="add-btn" type="button" data-add="${p.id}">เพิ่ม</button>
-              </div>
-            </div>
+            <p>${p.note}</p>
+            <div class="buy-row"><strong class="price">${formatMoney(p.price)}</strong><button class="add-btn" type="button" data-add="${p.id}">เพิ่ม</button></div>
           </div>
-        </article>
-      `).join("") : `<div class="cart-empty" style="grid-column:1/-1">ไม่พบสินค้าในหมวดนี้</div>`;
+        </article>`).join("") : `<div class="cart-empty">ไม่พบสินค้าในหมวดนี้</div>`;
       document.querySelectorAll("[data-add]").forEach(btn => btn.addEventListener("click", () => addToCart(btn.dataset.add)));
       document.querySelectorAll("[data-view]").forEach(btn => btn.addEventListener("click", () => openImage(btn.dataset.view)));
     }
 
-    function openImage(id){
-      const product = products.find(p => p.id === id);
-      if(!product) return;
-      els.fullImage.src = `./${product.image}`;
-      els.fullImage.alt = product.name;
-      els.fullImageName.textContent = product.name;
-      els.fullImageSku.textContent = product.sku;
-      els.imageModal.classList.add("show");
-    }
-    function closeImage(){els.imageModal.classList.remove("show")}
-
     function addToCart(id){
       const product = products.find(p => p.id === id);
-      if(!product) return;
-      const found = cart.find(item => item.id === id);
-      if(found) found.qty += 1;
-      else cart.push({...product, qty:1});
+      if(!product)return;
+      const existing = cart.find(item => item.id === id);
+      if(existing) existing.qty += 1;
+      else cart.push({id, qty:1});
+      saveCart();
+      showToast("Added to Bag", `${product.name} ถูกเพิ่มลงตะกร้าแล้ว`, true, false);
+    }
+    function changeQty(id, diff){
+      const item = cart.find(i => i.id === id);
+      if(!item)return;
+      item.qty += diff;
+      if(item.qty <= 0) cart = cart.filter(i => i.id !== id);
+      saveCart();
+    }
+    function removeItem(id){
+      cart = cart.filter(i => i.id !== id);
+      saveCart();
+    }
+    function totals(){
+      const subtotal = cart.reduce((sum, item) => {
+        const product = products.find(p => p.id === item.id);
+        return sum + (product ? product.price * item.qty : 0);
+      }, 0);
+      const service = subtotal > 0 ? Math.ceil(subtotal * 0.025) : 0;
+      return {subtotal, service, total: subtotal + service};
+    }
+    function saveCart(){
+      localStorage.setItem("e8GucciCart", JSON.stringify(cart));
       renderCart();
     }
-    function cartSubtotal(){return cart.reduce((sum,item) => sum + item.price * item.qty, 0)}
-    function cartService(){return 0}
-    function cartTotal(){return cartSubtotal() + cartService()}
     function renderCart(){
-      const count = cart.reduce((sum,item) => sum + item.qty, 0);
-      els.cartCount.textContent = count;
+      const filteredCart = cart.filter(item => products.some(product => product.id === item.id));
+      if(filteredCart.length !== cart.length){ cart = filteredCart; saveCart(); return; }
+      els.cartCount.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
       if(!cart.length){
         els.cartItems.innerHTML = `<div class="cart-empty">ยังไม่มีสินค้าในตะกร้า</div>`;
       }else{
-        els.cartItems.innerHTML = cart.map(item => `
-          <div class="cart-item">
-            <div><b>${item.name}</b><span>${formatMoney(item.price)} × ${item.qty}</span></div>
-            <button type="button" data-remove="${item.id}" aria-label="Remove">ลบ</button>
-          </div>
-        `).join("");
+        els.cartItems.innerHTML = cart.map(item => {
+          const product = products.find(p => p.id === item.id);
+          if(!product)return "";
+          return `<div class="cart-item">
+            <img class="cart-thumb" src="./${product.image}" alt="${product.name}" onerror="this.style.display='none'">
+            <div><b>${product.name}</b><span>${product.sku} • x${item.qty} • ${formatMoney(product.price * item.qty)}</span></div>
+            <div class="qty-controls"><button type="button" data-minus="${product.id}">−</button><button type="button" data-plus="${product.id}">+</button><button class="remove" type="button" data-remove="${product.id}">×</button></div>
+          </div>`;
+        }).join("");
       }
-      els.subtotalText.textContent = formatMoney(cartSubtotal());
-      els.serviceText.textContent = formatMoney(cartService());
-      els.totalText.textContent = formatMoney(cartTotal());
+      document.querySelectorAll("[data-minus]").forEach(btn => btn.addEventListener("click", () => changeQty(btn.dataset.minus, -1)));
+      document.querySelectorAll("[data-plus]").forEach(btn => btn.addEventListener("click", () => changeQty(btn.dataset.plus, 1)));
+      document.querySelectorAll("[data-remove]").forEach(btn => btn.addEventListener("click", () => removeItem(btn.dataset.remove)));
+      const t = totals();
+      els.subtotalText.textContent = formatMoney(t.subtotal);
+      els.serviceText.textContent = formatMoney(t.service);
+      els.totalText.textContent = formatMoney(t.total);
       if(activeCardHash){
+        const saved = localStorage.getItem(storageKey(activeCardHash));
+        activeBalance = saved ? Number(saved) : startingCredit;
         els.heroBalance.textContent = formatMoney(activeBalance);
-        els.activeStudentBox.classList.add("show");
-        els.activeStudentBox.innerHTML = `เชื่อมต่อบัตรสำเร็จ<br>ยอดเครดิตนักเรียนปี 1: <b>${formatMoney(activeBalance)}</b>`;
       }
-      document.querySelectorAll("[data-remove]").forEach(btn => btn.addEventListener("click", () => {
-        cart = cart.filter(item => item.id !== btn.dataset.remove);
-        renderCart();
-      }));
     }
-    function showToast(ok, title, text, receipt){
-      els.toastIcon.textContent = ok ? "✓" : "!";
-      els.toastTitle.textContent = title;
-      els.toastText.textContent = text;
-      els.receiptCode.textContent = receipt;
-      els.toastModal.classList.add("show");
-    }
+
     function checkout(){
-      const total = cartTotal();
+      const t = totals();
       if(!cart.length){
-        showToast(false, "Cart Empty", "ยังไม่มีสินค้าในตะกร้า", "SYSTEM: NO_ITEM");
+        showToast("ยังไม่มีสินค้าในตะกร้า", "เลือกสินค้าอย่างน้อย 1 รายการก่อนชำระเงิน", false);
         return;
       }
       if(!activeCardHash){
         openPaymentModal();
-        showResult("กรุณากรอกรหัส Academy Card ก่อนชำระ", false);
+        showResult("กรุณาเชื่อมต่อ Academy Card ก่อนชำระเงิน", false);
         return;
       }
-      if(activeBalance < total){
-        showToast(false, "Credit Not Enough", "ยอดเครดิตไม่พอสำหรับรายการนี้", `BALANCE: ${formatMoney(activeBalance)}`);
+      if(activeBalance < t.total){
+        showToast("ยอดเครดิตไม่เพียงพอ", `ยอดชำระ ${formatMoney(t.total)} แต่เครดิตคงเหลือ ${formatMoney(activeBalance)}`, false);
         return;
       }
-      activeBalance -= total;
+      activeBalance -= t.total;
       localStorage.setItem(storageKey(activeCardHash), String(activeBalance));
-      els.heroBalance.textContent = formatMoney(activeBalance);
-      setTerminal(["payment.transaction.success", `paid.total = ${formatMoney(total)}`, `remaining.balance = ${formatMoney(activeBalance)}`, "receipt.generated"]);
-      showToast(true, "Payment Complete", "ชำระสินค้า GUCCI ผ่าน Academy Pay เรียบร้อยแล้ว", `RECEIPT: EDEN-${Date.now().toString().slice(-6)} / ${formatMoney(total)}`);
       cart = [];
-      renderCart();
+      saveCart();
+      els.heroBalance.textContent = formatMoney(activeBalance);
+      showToast("Payment Complete", "ระบบได้ชำระสินค้าเรียบร้อยแล้ว", true, true);
+      setTerminal(["payment.success", `remaining.balance = ${formatMoney(activeBalance)}`, "receipt.generated"]);
     }
 
+    function showToast(title, text, ok=true, receipt=false){
+      els.toastIcon.textContent = ok ? "✓" : "!";
+      els.toastTitle.textContent = title;
+      els.toastText.textContent = text;
+      els.receiptCode.textContent = receipt ? `RECEIPT: EDEN-${Math.floor(1000+Math.random()*9000)}` : "ACADEMY MALL SYSTEM";
+      els.toastModal.classList.add("show");
+    }
+    function closeToast(){els.toastModal.classList.remove("show")}
+    function openImage(id){
+      const product = products.find(p => p.id === id);
+      if(!product)return;
+      els.fullImage.src = `./${product.image}`;
+      els.fullImage.alt = product.name;
+      els.fullImageName.textContent = product.name;
+      els.fullImageSku.textContent = `${product.sku} • ${formatMoney(product.price)}`;
+      els.imageModal.classList.add("show");
+    }
+    function closeImage(){els.imageModal.classList.remove("show"); els.fullImage.src = ""}
+
     document.querySelectorAll("[data-open-payment]").forEach(btn => btn.addEventListener("click", openPaymentModal));
-    document.querySelector("[data-close-modal]").addEventListener("click", closePaymentModal);
-    document.querySelector("[data-close-toast]").addEventListener("click", () => els.toastModal.classList.remove("show"));
-    document.querySelector("[data-close-image]").addEventListener("click", closeImage);
-    els.paymentModal.addEventListener("click", e => { if(e.target === els.paymentModal) closePaymentModal(); });
-    els.toastModal.addEventListener("click", e => { if(e.target === els.toastModal) els.toastModal.classList.remove("show"); });
-    els.imageModal.addEventListener("click", e => { if(e.target === els.imageModal) closeImage(); });
-    document.addEventListener("keydown", e => { if(e.key === "Escape"){ closePaymentModal(); closeImage(); els.toastModal.classList.remove("show"); } });
+    document.querySelectorAll("[data-close-modal]").forEach(btn => btn.addEventListener("click", closePaymentModal));
+    document.querySelectorAll("[data-close-toast]").forEach(btn => btn.addEventListener("click", closeToast));
+    document.querySelectorAll("[data-close-image]").forEach(btn => btn.addEventListener("click", closeImage));
+    els.paymentModal.addEventListener("click", event => { if(event.target === els.paymentModal) closePaymentModal(); });
+    els.toastModal.addEventListener("click", event => { if(event.target === els.toastModal) closeToast(); });
+    els.imageModal.addEventListener("click", event => { if(event.target === els.imageModal) closeImage(); });
     document.getElementById("verifyBtn").addEventListener("click", activateCard);
-    els.cardInput.addEventListener("keydown", e => { if(e.key === "Enter") activateCard(); });
+    els.cardInput.addEventListener("keydown", event => { if(event.key === "Enter") activateCard(); });
     document.getElementById("checkoutBtn").addEventListener("click", checkout);
-    document.getElementById("clearCartBtn").addEventListener("click", () => { cart = []; renderCart(); });
-    document.getElementById("clearFilters").addEventListener("click", () => {
-      currentCategory = "ALL";
-      els.searchInput.value = "";
-      document.querySelectorAll("[data-category]").forEach(b => b.classList.toggle("active", b.dataset.category === "ALL"));
-      renderProducts();
-    });
+    document.getElementById("clearCartBtn").addEventListener("click", () => { cart=[]; saveCart(); });
+    document.getElementById("clearFilters").addEventListener("click", () => { currentCategory="ALL"; els.searchInput.value=""; document.querySelectorAll("[data-category]").forEach(b => b.classList.toggle("active", b.dataset.category === "ALL")); renderProducts(); });
     els.searchInput.addEventListener("input", renderProducts);
+
+    function restoreActiveCard(){
+      if(!activeCardHash)return;
+      activeBalance = Number(localStorage.getItem(storageKey(activeCardHash)) || startingCredit);
+      const code = localStorage.getItem("e8AcademyCardCode") || "Academy Card";
+      els.heroBalance.textContent = formatMoney(activeBalance);
+      els.heroRank.textContent = "Verified Student / Connected";
+      els.activeStudentBox.classList.add("show");
+      els.activeStudentBox.innerHTML = `เชื่อมต่อบัตรแล้ว<br>รหัสบัตร: <b>${code}</b><br>ยอดเครดิตนักเรียน: <b>${formatMoney(activeBalance)}</b>`;
+      setTerminal(["academy-card.session.restored", `active.balance = ${formatMoney(activeBalance)}`, "ready.for.checkout"]);
+    }
 
     initFilters();
     renderProducts();
+    restoreActiveCard();
     renderCart();
   </script>
 </body>
