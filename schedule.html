@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EDEN Academy | Smart Timetable</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@600;700;800;900&family=Noto+Sans+Thai:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f3f7f6;
+      --paper:#fffdfa;
+      --ink:#182734;
+      --muted:#6d7a86;
+      --line:rgba(34,55,70,.12);
+      --deep:#263f4a;
+      --teal:#7fb7b1;
+      --sage:#dcebe6;
+      --cream:#fbf4df;
+      --champagne:#d7b878;
+      --rose:#ead8df;
+      --lavender:#ddd8ed;
+      --blue:#d9e8f0;
+      --shadow:0 22px 70px rgba(36,57,68,.12);
+      --radius:24px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      min-height:100vh;
+      color:var(--ink);
+      font-family:"Noto Sans Thai","Inter",system-ui,sans-serif;
+      background:
+        radial-gradient(circle at 12% 8%,rgba(127,183,177,.20),transparent 30%),
+        radial-gradient(circle at 86% 18%,rgba(215,184,120,.18),transparent 34%),
+        linear-gradient(135deg,#eff6f4 0%,#fffaf1 58%,#eef4f7 100%);
+      overflow-x:hidden;
+    }
+    body:before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background:
+        linear-gradient(rgba(38,63,74,.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(38,63,74,.035) 1px,transparent 1px);
+      background-size:58px 58px;
+      mask-image:linear-gradient(to bottom,#000,transparent 92%);
+    }
+    a{color:inherit;text-decoration:none}
+    button,input,select{font:inherit}
+    button{cursor:pointer}
+    .wrap{width:min(1240px,calc(100% - 32px));margin:0 auto}
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter:blur(22px);
+      background:rgba(247,250,248,.82);
+      border-bottom:1px solid rgba(34,55,70,.10);
+    }
+    .header{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:18px;
+      align-items:center;
+      padding:14px 0;
+    }
+    .brand{display:flex;align-items:center;gap:12px;min-width:0}
+    .brand img{width:46px;height:46px;object-fit:contain;border-radius:16px;background:#fff;box-shadow:0 12px 28px rgba(36,57,68,.12)}
+    .brand h1{margin:0;font-family:"Cinzel",serif;font-size:20px;letter-spacing:.04em}
+    .brand small{display:block;color:var(--muted);font-weight:900;font-size:11px;text-transform:uppercase;letter-spacing:.08em}
+    .nav{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:7px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:rgba(255,255,255,.68);
+      box-shadow:0 16px 38px rgba(36,57,68,.09);
+      overflow:auto;
+      scrollbar-width:none;
+    }
+    .nav::-webkit-scrollbar{display:none}
+    .nav a{
+      white-space:nowrap;
+      border-radius:999px;
+      padding:10px 16px;
+      color:#586674;
+      font-weight:950;
+      font-size:13px;
+      transition:.18s ease;
+    }
+    .nav a:hover{background:rgba(127,183,177,.14);color:#263f4a}
+    .nav .active{
+      color:#16242d;
+      background:linear-gradient(135deg,#fff8dc,#d7b878);
+      box-shadow:0 12px 30px rgba(188,151,82,.18);
+    }
+    .glass{
+      position:relative;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:linear-gradient(145deg,rgba(255,255,255,.86),rgba(255,255,255,.62));
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .glass:before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:linear-gradient(120deg,rgba(255,255,255,.46),transparent 34%,rgba(127,183,177,.05));
+    }
+    .hero{
+      display:grid;
+      grid-template-columns:minmax(0,1.12fr) .88fr;
+      gap:20px;
+      padding:32px 0 20px;
+      align-items:stretch;
+    }
+    .hero-main{padding:32px;min-height:330px}
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 13px;
+      border:1px solid rgba(215,184,120,.28);
+      border-radius:999px;
+      background:rgba(255,250,232,.72);
+      color:#8d6c30;
+      font-weight:950;
+      font-size:12px;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+    .kicker:before{content:"";width:8px;height:8px;border-radius:999px;background:#7fb7b1;box-shadow:0 0 0 5px rgba(127,183,177,.14)}
+    h1,h2,p{position:relative}
+    .hero h1{
+      margin:18px 0 12px;
+      max-width:760px;
+      font-size:clamp(40px,6vw,72px);
+      line-height:1;
+      letter-spacing:-.02em;
+      color:#182734;
+    }
+    .hero h1 span{
+      display:block;
+      color:#5f817f;
+    }
+    .hero p{max-width:680px;color:#667684;font-weight:800;line-height:1.8;margin:0 0 22px}
+    .hero-actions{position:relative;display:flex;gap:10px;flex-wrap:wrap}
+    .btn{
+      border:0;
+      min-height:44px;
+      border-radius:999px;
+      padding:10px 17px;
+      font-weight:950;
+      transition:.18s ease;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+    }
+    .btn:hover{transform:translateY(-2px)}
+    .primary{background:linear-gradient(135deg,#263f4a,#6ca9a5);color:#fff;box-shadow:0 16px 30px rgba(59,103,107,.18)}
+    .gold{background:linear-gradient(135deg,#fff4c7,#d2ad62);color:#182734;box-shadow:0 16px 30px rgba(188,151,82,.16)}
+    .soft{background:rgba(255,255,255,.82);color:#253743;border:1px solid var(--line)}
+    .danger{background:#fff3f4;color:#87465b;border:1px solid rgba(135,70,91,.12)}
+    .command-card{padding:24px;display:grid;gap:16px}
+    .ai-panel{
+      position:relative;
+      min-height:150px;
+      border-radius:22px;
+      background:
+        radial-gradient(circle at 50% 48%,rgba(255,255,255,.95),rgba(255,255,255,.38) 42%,transparent 44%),
+        conic-gradient(from 30deg,#9ccbc6,#ead29a,#ead8df,#d9e8f0,#9ccbc6);
+      box-shadow:inset 0 0 42px rgba(255,255,255,.78),0 20px 46px rgba(36,57,68,.12);
+    }
+    .ai-panel:after{
+      content:"EDEN ACADEMIC GRID";
+      position:absolute;
+      inset:25px;
+      display:grid;
+      place-items:center;
+      text-align:center;
+      border-radius:18px;
+      background:rgba(255,255,255,.76);
+      color:#263f4a;
+      font-family:"Cinzel",serif;
+      font-weight:800;
+      letter-spacing:.10em;
+    }
+    .mini-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .mini-stat{padding:14px;border-radius:18px;background:rgba(255,255,255,.68);border:1px solid var(--line)}
+    .mini-stat b{display:block;font-size:22px;color:#263f4a}
+    .mini-stat span{font-size:11px;color:var(--muted);font-weight:900}
+    .insight-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+    .insight{
+      padding:17px;
+      border-radius:22px;
+      background:rgba(255,255,255,.62);
+      border:1px solid var(--line);
+      box-shadow:0 16px 40px rgba(36,57,68,.07);
+    }
+    .insight b{display:block;font-size:24px;color:#263f4a}
+    .insight span{color:#6e7c87;font-weight:900;font-size:12px;line-height:1.65}
+    .builder{
+      display:grid;
+      grid-template-columns:360px minmax(0,1fr);
+      gap:18px;
+      margin:0 auto 24px;
+      align-items:start;
+    }
+    .panel{padding:22px}
+    .section-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-end;margin-bottom:16px}
+    .label{color:#5f817f;font-weight:950;font-size:12px;text-transform:uppercase;letter-spacing:.07em}
+    .section-head h2{font-size:28px;margin:3px 0 0;line-height:1.08}
+    .section-head small{color:var(--muted);font-weight:900;font-size:12px;line-height:1.5}
+    .form{display:grid;gap:12px}
+    label{display:grid;gap:7px;color:#2e3c47;font-weight:950;font-size:13px}
+    input,select{
+      width:100%;
+      border:1px solid rgba(34,55,70,.13);
+      border-radius:16px;
+      min-height:44px;
+      padding:10px 13px;
+      background:rgba(255,255,255,.82);
+      color:#182734;
+      outline:none;
+      font-weight:850;
+    }
+    input:focus,select:focus{border-color:rgba(127,183,177,.75);box-shadow:0 0 0 4px rgba(127,183,177,.14)}
+    .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .subject-palette{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:9px;
+      margin-top:12px;
+      max-height:520px;
+      overflow:auto;
+      padding-right:5px;
+    }
+    .subject-pill{
+      display:grid;
+      grid-template-columns:12px 1fr auto;
+      align-items:center;
+      gap:10px;
+      padding:11px;
+      border-radius:18px;
+      background:rgba(255,255,255,.70);
+      border:1px solid var(--line);
+      transition:.16s ease;
+      text-align:left;
+    }
+    .subject-pill:hover{transform:translateY(-1px);border-color:rgba(127,183,177,.38)}
+    .subject-pill b{font-size:13px}
+    .subject-pill span{font-size:11px;color:var(--muted);font-weight:900;line-height:1.45}
+    .subject-pill i{width:10px;height:10px;border-radius:999px;background:var(--dot,#7fb7b1);box-shadow:0 0 0 5px rgba(127,183,177,.12)}
+    .timeline-shell{display:grid;gap:14px}
+    .toolbar{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+      padding:12px;
+      border-radius:22px;
+      background:rgba(255,255,255,.56);
+      border:1px solid var(--line);
+    }
+    .chips{display:flex;gap:8px;flex-wrap:wrap}
+    .chip{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.82);
+      color:#344653;
+      min-height:38px;
+      border-radius:999px;
+      padding:8px 13px;
+      font-weight:950;
+    }
+    .chip.active{background:#263f4a;color:#fff;border-color:#263f4a}
+    .table-wrap{
+      position:relative;
+      overflow:auto;
+      border:1px solid var(--line);
+      border-radius:22px;
+      background:rgba(255,255,255,.48);
+    }
+    .schedule-table{
+      display:grid;
+      grid-template-columns:92px repeat(5,minmax(156px,1fr));
+      min-width:900px;
+    }
+    .time-head,.day-head,.time-cell,.slot{
+      border-right:1px solid rgba(34,55,70,.10);
+      border-bottom:1px solid rgba(34,55,70,.10);
+    }
+    .time-head,.day-head{
+      position:sticky;
+      top:0;
+      z-index:3;
+      padding:13px 10px;
+      background:rgba(248,250,247,.94);
+      backdrop-filter:blur(16px);
+      font-weight:950;
+      text-align:center;
+      color:#263f4a;
+    }
+    .time-head{left:0;z-index:4}
+    .time-cell{
+      position:sticky;
+      left:0;
+      z-index:2;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      padding:18px 8px;
+      background:rgba(248,250,247,.88);
+      color:#697783;
+      font-weight:950;
+      min-height:112px;
+    }
+    .slot{
+      min-height:112px;
+      padding:8px;
+      background:rgba(255,255,255,.36);
+      transition:.16s ease;
+    }
+    .slot:hover{
+      background:rgba(220,235,230,.45);
+      box-shadow:inset 0 0 0 2px rgba(127,183,177,.18);
+    }
+    .empty-slot{
+      width:100%;
+      min-height:92px;
+      border:1px dashed rgba(38,63,74,.14);
+      border-radius:16px;
+      background:rgba(255,255,255,.32);
+      color:#7c8b94;
+      font-weight:900;
+    }
+    .lesson{
+      position:relative;
+      display:block;
+      width:100%;
+      min-height:92px;
+      padding:11px;
+      border:1px solid rgba(34,55,70,.10);
+      border-left:5px solid var(--accent,#7fb7b1);
+      border-radius:16px;
+      background:linear-gradient(135deg,rgba(255,255,255,.94),rgba(255,255,255,.72));
+      box-shadow:0 12px 28px rgba(36,57,68,.08);
+      text-align:left;
+      color:#223340;
+      transition:.16s ease;
+    }
+    .lesson:hover{transform:translateY(-1px);box-shadow:0 16px 34px rgba(36,57,68,.12)}
+    .lesson.dragging{opacity:.45}
+    .lesson .tag{
+      display:inline-flex;
+      margin-bottom:6px;
+      padding:3px 8px;
+      border-radius:999px;
+      background:rgba(127,183,177,.14);
+      color:#3f6e6d;
+      font-size:10px;
+      font-weight:950;
+    }
+    .lesson strong{display:block;font-size:13px;line-height:1.35;margin-bottom:5px}
+    .lesson small{display:block;color:#6f7e89;font-weight:850;line-height:1.5}
+    .table-hint{color:#75828c;font-weight:900;font-size:12px;line-height:1.6}
+    .modal{
+      position:fixed;
+      inset:0;
+      z-index:90;
+      display:none;
+      place-items:center;
+      padding:18px;
+      background:rgba(24,39,52,.28);
+      backdrop-filter:blur(12px);
+    }
+    .modal.show{display:grid}
+    .modal-card{
+      width:min(560px,100%);
+      max-height:min(88vh,720px);
+      overflow:auto;
+      border-radius:26px;
+      border:1px solid rgba(255,255,255,.58);
+      background:linear-gradient(145deg,rgba(255,255,255,.96),rgba(248,251,249,.92));
+      box-shadow:0 28px 90px rgba(24,39,52,.24);
+      padding:22px;
+    }
+    .modal-card h3{margin:0 0 6px;font-size:28px}
+    .modal-card p{margin:0 0 16px;color:var(--muted);font-weight:850;line-height:1.65}
+    .modal-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;margin-top:16px}
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:22px;
+      transform:translate(-50%,24px);
+      opacity:0;
+      pointer-events:none;
+      z-index:100;
+      padding:13px 18px;
+      border-radius:999px;
+      color:#fff;
+      background:rgba(24,39,52,.92);
+      box-shadow:0 18px 44px rgba(24,39,52,.20);
+      font-weight:950;
+      transition:.22s ease;
+    }
+    .toast.show{opacity:1;transform:translate(-50%,0)}
+    .footer{text-align:center;color:#71808d;font-size:12px;font-weight:850;line-height:1.8;padding:18px 0 34px}
+    @media(max-width:980px){
+      .header{grid-template-columns:1fr}
+      .nav{justify-content:flex-start}
+      .hero,.builder{grid-template-columns:1fr}
+      .insight-grid{grid-template-columns:1fr}
+    }
+    @media(max-width:640px){
+      .wrap{width:min(100% - 22px,1240px)}
+      .hero-main,.panel{padding:18px}
+      .hero h1{font-size:40px}
+      .two,.mini-stats{grid-template-columns:1fr}
+      .toolbar{align-items:stretch}
+      .toolbar .btn{width:100%}
+      .chips{width:100%}
+      .chip{flex:1}
+      .modal{place-items:start center;padding-top:12px}
+      .modal-card{max-height:84vh}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap header">
+      <a class="brand" href="./index.html">
+        <img src="./eden.png" alt="Eden Academy">
+        <div>
+          <h1>EDEN ACADEMY</h1>
+          <small>Smart Timetable System</small>
+        </div>
+      </a>
+      <nav class="nav" aria-label="เมนูหลัก">
+        <a href="./index.html">หน้าหลัก</a>
+        <a href="./board.html">กระทู้</a>
+        <a href="./member.html">โซน</a>
+        <a class="active" href="./schedule.html">ตารางเรียน</a>
+        <a href="./regsiter.html">สมัครบัตรสถาบัน</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="glass hero-main">
+        <div class="kicker">Calm Academic Grid</div>
+        <h1>ตารางเรียน EDEN <span>เรียบหรู สบายตา และแก้ไขได้</span></h1>
+        <p>เลือกชั้นปี 1-4 เพิ่มวิชาพื้นฐานหรือวิชาพิเศษ กดช่องเวลาเพื่อเพิ่มวิชา และกดการ์ดวิชาเพื่อแก้วัน เวลา ห้องเรียน หรืออาจารย์ได้ทันที ระบบจะบันทึกไว้ในเครื่องอัตโนมัติ</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#builder">จัดตารางเรียน</a>
+          <button class="btn gold" type="button" id="autoPlanBtn">สร้างตารางอัจฉริยะ</button>
+          <button class="btn soft" type="button" id="printBtn">พิมพ์ / บันทึก PDF</button>
+        </div>
+      </div>
+      <aside class="glass command-card">
+        <div class="ai-panel" aria-hidden="true"></div>
+        <div class="mini-stats">
+          <div class="mini-stat"><b id="totalStat">0</b><span>วิชาที่เลือก</span></div>
+          <div class="mini-stat"><b id="specialStat">0</b><span>วิชาพิเศษ</span></div>
+          <div class="mini-stat"><b id="hourStat">0h</b><span>ชั่วโมงต่อสัปดาห์</span></div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="insight-grid">
+      <article class="insight"><b>Core</b><span>วิชาพื้นฐานครบทั้งภาษา คณิตศาสตร์ วิทยาศาสตร์ สังคม เทคโนโลยี สุขศึกษา และศิลปะ</span></article>
+      <article class="insight"><b>Elite</b><span>วิชาพิเศษแนวสถาบันหรู เช่น ขี่ม้า มารยาทสังคม ดนตรีคลาสสิก แบรนด์หรู การบิน และการลงทุน</span></article>
+      <article class="insight"><b>Click</b><span>กดช่องเวลาเพื่อเพิ่ม กดการ์ดวิชาเพื่อแก้ไขวัน/เวลา และลากการ์ดข้ามช่องเพื่อย้ายตารางได้</span></article>
+    </section>
+
+    <section class="builder" id="builder">
+      <aside class="glass panel">
+        <div class="section-head">
+          <div>
+            <div class="label">Schedule Builder</div>
+            <h2>เพิ่มรายวิชา</h2>
+          </div>
+          <small id="saveState">พร้อมบันทึก</small>
+        </div>
+        <form class="form" id="lessonForm">
+          <label>เลือกระดับชั้น
+            <select id="yearSelect">
+              <option value="1">Year 1</option>
+              <option value="2">Year 2</option>
+              <option value="3">Year 3</option>
+              <option value="4">Year 4</option>
+            </select>
+          </label>
+          <div class="two">
+            <label>วัน
+              <select id="dayInput"></select>
+            </label>
+            <label>เวลา
+              <select id="timeInput"></select>
+            </label>
+          </div>
+          <label>รายวิชา
+            <input id="subjectInput" list="subjectList" placeholder="เช่น Equestrian Art & Riding" required>
+            <datalist id="subjectList"></datalist>
+          </label>
+          <div class="two">
+            <label>ประเภท
+              <select id="typeInput">
+                <option value="พื้นฐาน">พื้นฐาน</option>
+                <option value="พิเศษ">พิเศษ</option>
+              </select>
+            </label>
+            <label>ห้อง / สถานที่
+              <input id="roomInput" placeholder="เช่น Crystal Hall" required>
+            </label>
+          </div>
+          <label>อาจารย์ / ผู้ดูแล
+            <input id="teacherInput" placeholder="เช่น Lady Aurelia" required>
+          </label>
+          <button class="btn primary" type="submit">เพิ่มลงตาราง</button>
+          <button class="btn soft" type="button" id="saveBtn">บันทึกตาราง</button>
+        </form>
+
+        <div class="subject-palette" id="subjectPalette" aria-label="วิชาแนะนำ"></div>
+      </aside>
+
+      <section class="glass panel timeline-shell">
+        <div class="section-head">
+          <div>
+            <div class="label">Interactive Timetable</div>
+            <h2 id="tableTitle">ตาราง Year 1</h2>
+          </div>
+          <small>กดช่องว่างเพื่อเพิ่มวิชา กดการ์ดวิชาเพื่อแก้ไขวันและเวลา</small>
+        </div>
+        <div class="toolbar">
+          <div class="chips" id="yearChips">
+            <button class="chip active" type="button" data-year="1">Year 1</button>
+            <button class="chip" type="button" data-year="2">Year 2</button>
+            <button class="chip" type="button" data-year="3">Year 3</button>
+            <button class="chip" type="button" data-year="4">Year 4</button>
+          </div>
+          <div class="chips">
+            <button class="btn soft" type="button" id="sortBtn">เรียงตามเวลา</button>
+            <button class="btn danger" type="button" id="clearBtn">ล้างตารางชั้นนี้</button>
+          </div>
+        </div>
+        <p class="table-hint">ตารางนี้ไม่เกี่ยวกับโซน เลือกได้เฉพาะชั้นปี 1-4 เท่านั้นค่ะ</p>
+        <div class="table-wrap">
+          <div class="schedule-table" id="scheduleTable"></div>
+        </div>
+      </section>
+    </section>
+
+    <footer class="footer">EDEN Academy Smart Timetable System<br>Core Class • Elite Program • Local Save</footer>
+  </main>
+
+  <div class="modal" id="editModal" aria-hidden="true">
+    <form class="modal-card" id="editForm">
+      <h3>แก้ไขรายวิชา</h3>
+      <p>ปรับวัน เวลา หรือรายละเอียดของวิชานี้ได้เลยค่ะ</p>
+      <div class="two">
+        <label>วัน
+          <select id="editDay"></select>
+        </label>
+        <label>เวลา
+          <select id="editTime"></select>
+        </label>
+      </div>
+      <label>รายวิชา
+        <input id="editSubject" required>
+      </label>
+      <div class="two">
+        <label>ประเภท
+          <select id="editType">
+            <option value="พื้นฐาน">พื้นฐาน</option>
+            <option value="พิเศษ">พิเศษ</option>
+          </select>
+        </label>
+        <label>ห้อง / สถานที่
+          <input id="editRoom" required>
+        </label>
+      </div>
+      <label>อาจารย์ / ผู้ดูแล
+        <input id="editTeacher" required>
+      </label>
+      <div class="modal-actions">
+        <button class="btn danger" type="button" id="deleteLessonBtn">ลบวิชา</button>
+        <button class="btn soft" type="button" id="closeModalBtn">ยกเลิก</button>
+        <button class="btn primary" type="submit">บันทึกการแก้ไข</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="toast" id="toast">บันทึกแล้วค่ะ</div>
+
+  <script>
+    const days=["จันทร์","อังคาร","พุธ","พฤหัส","ศุกร์"];
+    const times=["08:30","09:30","10:30","11:30","13:00","14:00","15:00","16:00"];
+    const storageKey="edenSmartTimetableV2";
+    const palette=[
+      {name:"ภาษาไทยเชิงวรรณศิลป์",type:"พื้นฐาน",room:"Ivory Class",teacher:"อ.ลลิตา",color:"#7fb7b1"},
+      {name:"English Communication",type:"พื้นฐาน",room:"Oxford Studio",teacher:"Ms. Celeste",color:"#8aa7c8"},
+      {name:"Mathematics & Logic",type:"พื้นฐาน",room:"Atlas Room",teacher:"Prof. Elian",color:"#9aa7cf"},
+      {name:"Integrated Science Lab",type:"พื้นฐาน",room:"Nova Lab",teacher:"Dr. Mira",color:"#8dbf9c"},
+      {name:"Social Studies & Diplomacy",type:"พื้นฐาน",room:"Civic Hall",teacher:"อ.กวิน",color:"#d7b878"},
+      {name:"AI & Digital Literacy",type:"พื้นฐาน",room:"Quantum Lab",teacher:"Dr. Noelle",color:"#6ca9a5"},
+      {name:"Health & Wellness Science",type:"พื้นฐาน",room:"Aster Clinic",teacher:"Dr. Liora",color:"#9cc9bc"},
+      {name:"World History Archive",type:"พื้นฐาน",room:"Chronos Library",teacher:"Mr. Arden",color:"#b9a989"},
+      {name:"Creative Art Foundation",type:"พื้นฐาน",room:"Atelier One",teacher:"Ms. Iris",color:"#d5a5b5"},
+      {name:"Environmental Design",type:"พื้นฐาน",room:"Greenhouse Lab",teacher:"อ.ธารา",color:"#91b986"},
+      {name:"Research & Presentation",type:"พื้นฐาน",room:"Orion Seminar",teacher:"Prof. Sera",color:"#9ab4bd"},
+      {name:"Thai Classical Culture",type:"พื้นฐาน",room:"Heritage Room",teacher:"อ.มัลลิกา",color:"#c8ad7f"},
+      {name:"Equestrian Art & Riding",type:"พิเศษ",room:"Royal Stable",teacher:"Lady Aurelia",color:"#b99a72"},
+      {name:"Classical Piano Ensemble",type:"พิเศษ",room:"Grand Salon",teacher:"Maestro Lucien",color:"#d3a6b7"},
+      {name:"Violin & Chamber Music",type:"พิเศษ",room:"Opal Hall",teacher:"Maestro Etienne",color:"#c9a4c6"},
+      {name:"French Etiquette & Tea Ceremony",type:"พิเศษ",room:"Rose Parlour",teacher:"Madame Elise",color:"#d9b4bf"},
+      {name:"Luxury Brand Strategy",type:"พิเศษ",room:"Maison Studio",teacher:"Ms. Vivienne",color:"#739aa3"},
+      {name:"Fine Art Curation",type:"พิเศษ",room:"Gallery Atrium",teacher:"Sir Adrian",color:"#aaa0ca"},
+      {name:"Aviation & Navigation Basics",type:"พิเศษ",room:"Sky Dome",teacher:"Capt. Iris",color:"#89b6cb"},
+      {name:"Yacht Protocol & Marine Map",type:"พิเศษ",room:"Harbor Suite",teacher:"Lord Alistair",color:"#7da8b4"},
+      {name:"Architecture of Palaces",type:"พิเศษ",room:"Marble Studio",teacher:"Prof. Valen",color:"#b8b0a2"},
+      {name:"Perfume Atelier",type:"พิเศษ",room:"Scent Lab",teacher:"Ms. Odette",color:"#d9b0c0"},
+      {name:"Culinary Plating & Patisserie",type:"พิเศษ",room:"Pearl Kitchen",teacher:"Chef Amelie",color:"#d3bd8a"},
+      {name:"Jewelry Design",type:"พิเศษ",room:"Gem Atelier",teacher:"Ms. Elara",color:"#b6a8d7"},
+      {name:"Investment & Private Banking",type:"พิเศษ",room:"Vault Class",teacher:"Mr. Laurent",color:"#9aa884"},
+      {name:"Robotics Concierge Lab",type:"พิเศษ",room:"Eden Robotics",teacher:"Dr. Aria",color:"#85b9b4"},
+      {name:"Public Speaking for Leaders",type:"พิเศษ",room:"Regal Theatre",teacher:"Lady Seraphine",color:"#c7a675"},
+      {name:"Fashion House Illustration",type:"พิเศษ",room:"Silk Studio",teacher:"Ms. Colette",color:"#d3a9be"},
+      {name:"Global Affairs Simulation",type:"พิเศษ",room:"Embassy Room",teacher:"Sir Rafael",color:"#8da6c3"},
+      {name:"Mindfulness & Noble Poise",type:"พิเศษ",room:"Lotus Pavilion",teacher:"อ.รินลดา",color:"#a8c7b0"}
+    ];
+    const defaultPlans={
+      1:[
+        lesson("จันทร์","08:30","ภาษาไทยเชิงวรรณศิลป์","พื้นฐาน","Ivory Class","อ.ลลิตา","#7fb7b1"),
+        lesson("จันทร์","09:30","Mathematics & Logic","พื้นฐาน","Atlas Room","Prof. Elian","#9aa7cf"),
+        lesson("อังคาร","10:30","English Communication","พื้นฐาน","Oxford Studio","Ms. Celeste","#8aa7c8"),
+        lesson("พุธ","13:00","Equestrian Art & Riding","พิเศษ","Royal Stable","Lady Aurelia","#b99a72"),
+        lesson("พฤหัส","14:00","AI & Digital Literacy","พื้นฐาน","Quantum Lab","Dr. Noelle","#6ca9a5"),
+        lesson("ศุกร์","15:00","French Etiquette & Tea Ceremony","พิเศษ","Rose Parlour","Madame Elise","#d9b4bf")
+      ],
+      2:[
+        lesson("จันทร์","08:30","Integrated Science Lab","พื้นฐาน","Nova Lab","Dr. Mira","#8dbf9c"),
+        lesson("จันทร์","13:00","Creative Art Foundation","พื้นฐาน","Atelier One","Ms. Iris","#d5a5b5"),
+        lesson("อังคาร","09:30","Classical Piano Ensemble","พิเศษ","Grand Salon","Maestro Lucien","#d3a6b7"),
+        lesson("พุธ","10:30","Social Studies & Diplomacy","พื้นฐาน","Civic Hall","อ.กวิน","#d7b878"),
+        lesson("พฤหัส","14:00","Fine Art Curation","พิเศษ","Gallery Atrium","Sir Adrian","#aaa0ca"),
+        lesson("ศุกร์","15:00","Perfume Atelier","พิเศษ","Scent Lab","Ms. Odette","#d9b0c0")
+      ],
+      3:[
+        lesson("จันทร์","08:30","Luxury Brand Strategy","พิเศษ","Maison Studio","Ms. Vivienne","#739aa3"),
+        lesson("จันทร์","10:30","Research & Presentation","พื้นฐาน","Orion Seminar","Prof. Sera","#9ab4bd"),
+        lesson("อังคาร","13:00","Investment & Private Banking","พิเศษ","Vault Class","Mr. Laurent","#9aa884"),
+        lesson("พุธ","15:00","Aviation & Navigation Basics","พิเศษ","Sky Dome","Capt. Iris","#89b6cb"),
+        lesson("พฤหัส","09:30","Environmental Design","พื้นฐาน","Greenhouse Lab","อ.ธารา","#91b986"),
+        lesson("ศุกร์","14:00","Robotics Concierge Lab","พิเศษ","Eden Robotics","Dr. Aria","#85b9b4")
+      ],
+      4:[
+        lesson("จันทร์","09:30","Global Affairs Simulation","พิเศษ","Embassy Room","Sir Rafael","#8da6c3"),
+        lesson("จันทร์","13:00","Luxury Brand Strategy","พิเศษ","Maison Studio","Ms. Vivienne","#739aa3"),
+        lesson("อังคาร","08:30","AI & Digital Literacy","พื้นฐาน","Quantum Lab","Dr. Noelle","#6ca9a5"),
+        lesson("พุธ","10:30","Public Speaking for Leaders","พิเศษ","Regal Theatre","Lady Seraphine","#c7a675"),
+        lesson("พฤหัส","14:00","Architecture of Palaces","พิเศษ","Marble Studio","Prof. Valen","#b8b0a2"),
+        lesson("ศุกร์","15:00","Yacht Protocol & Marine Map","พิเศษ","Harbor Suite","Lord Alistair","#7da8b4")
+      ]
+    };
+    let state=loadState();
+    let currentYear="1";
+    let draggingId=null;
+    let editingId=null;
+
+    const subjectInput=document.getElementById("subjectInput");
+    const typeInput=document.getElementById("typeInput");
+    const roomInput=document.getElementById("roomInput");
+    const teacherInput=document.getElementById("teacherInput");
+    const dayInput=document.getElementById("dayInput");
+    const timeInput=document.getElementById("timeInput");
+    const yearSelect=document.getElementById("yearSelect");
+    const editModal=document.getElementById("editModal");
+    const editDay=document.getElementById("editDay");
+    const editTime=document.getElementById("editTime");
+    const editSubject=document.getElementById("editSubject");
+    const editType=document.getElementById("editType");
+    const editRoom=document.getElementById("editRoom");
+    const editTeacher=document.getElementById("editTeacher");
+
+    function uid(){return "lsn_"+Math.random().toString(36).slice(2,9)+"_"+Date.now().toString(36)}
+    function lesson(day,time,subject,type,room,teacher,color){return{id:uid(),day,time,subject,type,room,teacher,color}}
+    function cloneDefaults(){return JSON.parse(JSON.stringify(defaultPlans))}
+    function loadState(){
+      try{
+        const saved=JSON.parse(localStorage.getItem(storageKey)||"null");
+        if(saved&&saved["1"])return saved;
+      }catch(e){}
+      return cloneDefaults();
+    }
+    function fillSelect(select,items){
+      select.innerHTML=items.map(item=>`<option value="${item}">${item}</option>`).join("");
+    }
+    function persist(silent=false){
+      localStorage.setItem(storageKey,JSON.stringify(state));
+      const saveState=document.getElementById("saveState");
+      saveState.textContent="บันทึกแล้ว";
+      if(!silent)showToast("บันทึกตารางเรียบร้อยค่ะ");
+      setTimeout(()=>saveState.textContent="พร้อมบันทึก",1300);
+    }
+    function showToast(text){
+      const toast=document.getElementById("toast");
+      toast.textContent=text;
+      toast.classList.add("show");
+      clearTimeout(showToast.timer);
+      showToast.timer=setTimeout(()=>toast.classList.remove("show"),1800);
+    }
+    function timeValue(t){return Number(String(t).replace(":",""))}
+    function getPalette(subject){
+      return palette.find(item=>item.name===subject)||palette.find(item=>item.type==="พื้นฐาน");
+    }
+    function renderPalette(){
+      document.getElementById("subjectList").innerHTML=palette.map(item=>`<option value="${item.name}"></option>`).join("");
+      document.getElementById("subjectPalette").innerHTML=palette.map(item=>`
+        <button class="subject-pill" type="button" data-name="${item.name}">
+          <i style="--dot:${item.color}"></i>
+          <span><b>${item.name}</b><br>${item.type} • ${item.room}</span>
+          <b>+</b>
+        </button>
+      `).join("");
+      document.querySelectorAll(".subject-pill").forEach(btn=>btn.addEventListener("click",()=>{
+        applyPalette(btn.dataset.name);
+      }));
+    }
+    function applyPalette(name){
+      const item=palette.find(x=>x.name===name);
+      if(!item)return;
+      subjectInput.value=item.name;
+      typeInput.value=item.type;
+      roomInput.value=item.room;
+      teacherInput.value=item.teacher;
+    }
+    function renderYear(){
+      yearSelect.value=currentYear;
+      document.getElementById("tableTitle").textContent=`ตาราง Year ${currentYear}`;
+      document.querySelectorAll("#yearChips .chip").forEach(btn=>btn.classList.toggle("active",btn.dataset.year===currentYear));
+      const lessons=[...(state[currentYear]||[])];
+      const table=document.getElementById("scheduleTable");
+      let html=`<div class="time-head">เวลา</div>${days.map(day=>`<div class="day-head">${day}</div>`).join("")}`;
+      times.forEach(time=>{
+        html+=`<div class="time-cell">${time}</div>`;
+        days.forEach(day=>{
+          const items=lessons
+            .filter(item=>item.day===day&&item.time===time)
+            .sort((a,b)=>a.subject.localeCompare(b.subject));
+          html+=`<div class="slot" data-day="${day}" data-time="${time}">
+            ${items.length?items.map(cardTemplate).join(""):`<button class="empty-slot" type="button" data-day="${day}" data-time="${time}">+ เพิ่มวิชา</button>`}
+          </div>`;
+        });
+      });
+      table.innerHTML=html;
+      attachTableEvents();
+      updateStats();
+    }
+    function cardTemplate(item){
+      return `<button class="lesson" draggable="true" type="button" data-id="${item.id}" style="--accent:${item.color||"#7fb7b1"}">
+        <span class="tag">${item.type} • ${item.time}</span>
+        <strong>${item.subject}</strong>
+        <small>${item.room}<br>${item.teacher}</small>
+      </button>`;
+    }
+    function attachTableEvents(){
+      document.querySelectorAll(".empty-slot").forEach(btn=>btn.addEventListener("click",()=>{
+        dayInput.value=btn.dataset.day;
+        timeInput.value=btn.dataset.time;
+        subjectInput.focus();
+        showToast(`เลือก ${btn.dataset.day} เวลา ${btn.dataset.time} แล้วค่ะ`);
+      }));
+      document.querySelectorAll(".lesson").forEach(card=>{
+        card.addEventListener("click",()=>openEdit(card.dataset.id));
+        card.addEventListener("dragstart",()=>{draggingId=card.dataset.id;card.classList.add("dragging")});
+        card.addEventListener("dragend",()=>{draggingId=null;card.classList.remove("dragging")});
+      });
+      document.querySelectorAll(".slot").forEach(slot=>{
+        slot.addEventListener("dragover",event=>event.preventDefault());
+        slot.addEventListener("drop",event=>{
+          event.preventDefault();
+          const item=(state[currentYear]||[]).find(x=>x.id===draggingId);
+          if(item){
+            item.day=slot.dataset.day;
+            item.time=slot.dataset.time;
+            persist();
+            renderYear();
+          }
+        });
+      });
+    }
+    function updateStats(){
+      const arr=state[currentYear]||[];
+      document.getElementById("totalStat").textContent=arr.length;
+      document.getElementById("specialStat").textContent=arr.filter(x=>x.type==="พิเศษ").length;
+      document.getElementById("hourStat").textContent=`${arr.length}h`;
+    }
+    function addLessonFromForm(event){
+      event.preventDefault();
+      const subject=subjectInput.value.trim();
+      if(!subject)return;
+      const found=getPalette(subject);
+      const item=lesson(dayInput.value,timeInput.value,subject,typeInput.value,roomInput.value.trim()||found.room,teacherInput.value.trim()||found.teacher,found.color);
+      state[currentYear]=state[currentYear]||[];
+      state[currentYear].push(item);
+      persist();
+      renderYear();
+      event.target.reset();
+      yearSelect.value=currentYear;
+      dayInput.value=days[0];
+      timeInput.value=times[0];
+    }
+    function sortCurrent(){
+      state[currentYear]=(state[currentYear]||[]).sort((a,b)=>days.indexOf(a.day)-days.indexOf(b.day)||timeValue(a.time)-timeValue(b.time)||a.subject.localeCompare(b.subject));
+      persist();
+      renderYear();
+    }
+    function makeAutoPlan(){
+      state[currentYear]=JSON.parse(JSON.stringify(defaultPlans[currentYear]||defaultPlans["1"])).map(item=>({...item,id:uid()}));
+      persist();
+      renderYear();
+      showToast(`สร้างตาราง Year ${currentYear} แล้วค่ะ`);
+    }
+    function openEdit(id){
+      const item=(state[currentYear]||[]).find(x=>x.id===id);
+      if(!item)return;
+      editingId=id;
+      editDay.value=item.day;
+      editTime.value=item.time;
+      editSubject.value=item.subject;
+      editType.value=item.type;
+      editRoom.value=item.room;
+      editTeacher.value=item.teacher;
+      editModal.classList.add("show");
+      editModal.setAttribute("aria-hidden","false");
+    }
+    function closeEdit(){
+      editingId=null;
+      editModal.classList.remove("show");
+      editModal.setAttribute("aria-hidden","true");
+    }
+    function saveEdit(event){
+      event.preventDefault();
+      const item=(state[currentYear]||[]).find(x=>x.id===editingId);
+      if(!item)return;
+      const found=getPalette(editSubject.value.trim());
+      item.day=editDay.value;
+      item.time=editTime.value;
+      item.subject=editSubject.value.trim();
+      item.type=editType.value;
+      item.room=editRoom.value.trim();
+      item.teacher=editTeacher.value.trim();
+      item.color=found.color||item.color;
+      persist();
+      renderYear();
+      closeEdit();
+    }
+    function deleteEdit(){
+      state[currentYear]=(state[currentYear]||[]).filter(x=>x.id!==editingId);
+      persist();
+      renderYear();
+      closeEdit();
+    }
+
+    fillSelect(dayInput,days);
+    fillSelect(timeInput,times);
+    fillSelect(document.getElementById("editDay"),days);
+    fillSelect(document.getElementById("editTime"),times);
+    renderPalette();
+    renderYear();
+    document.getElementById("lessonForm").addEventListener("submit",addLessonFromForm);
+    document.getElementById("saveBtn").addEventListener("click",()=>persist());
+    document.getElementById("sortBtn").addEventListener("click",sortCurrent);
+    document.getElementById("autoPlanBtn").addEventListener("click",makeAutoPlan);
+    document.getElementById("printBtn").addEventListener("click",()=>window.print());
+    document.getElementById("clearBtn").addEventListener("click",()=>{
+      if(confirm("ล้างตารางของชั้นนี้ใช่ไหมคะ")){
+        state[currentYear]=[];
+        persist();
+        renderYear();
+      }
+    });
+    yearSelect.addEventListener("change",()=>{
+      currentYear=yearSelect.value;
+      renderYear();
+    });
+    document.querySelectorAll("#yearChips .chip").forEach(btn=>btn.addEventListener("click",()=>{
+      currentYear=btn.dataset.year;
+      renderYear();
+    }));
+    document.getElementById("editForm").addEventListener("submit",saveEdit);
+    document.getElementById("deleteLessonBtn").addEventListener("click",deleteEdit);
+    document.getElementById("closeModalBtn").addEventListener("click",closeEdit);
+    document.getElementById("editModal").addEventListener("click",event=>{
+      if(event.target.id==="editModal")closeEdit();
+    });
+    window.addEventListener("keydown",event=>{
+      if(event.key==="Escape")closeEdit();
+    });
+  </script>
+</body>
+</html>
