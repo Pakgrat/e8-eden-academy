@@ -471,5 +471,119 @@
 
     buildZones();buildCases();buildPalettes();loadSaved();selectZone('E2');selectCase(1);setActive('card');ensureId();renderAll();
   </script>
+  <style>
+    /* Member mobile popup close fix only */
+    .generated{
+      position:relative;
+      scroll-margin-top:96px;
+    }
+    .member-popup-close{
+      position:absolute;
+      top:14px;
+      right:14px;
+      z-index:20;
+      width:42px;
+      height:42px;
+      border-radius:999px;
+      border:1px solid rgba(229,199,123,.35);
+      background:rgba(5,6,8,.86);
+      color:#f3dda1;
+      font-size:22px;
+      font-weight:900;
+      line-height:1;
+      display:none;
+      place-items:center;
+      cursor:pointer;
+      box-shadow:0 14px 34px rgba(0,0,0,.34);
+    }
+    .generated.show .member-popup-close{display:grid}
+
+    .web-modal{
+      overflow:auto !important;
+      -webkit-overflow-scrolling:touch;
+      align-items:start !important;
+      place-items:start center !important;
+      padding:clamp(12px,5vh,36px) 14px !important;
+    }
+    .web-modal .modal-card{
+      max-height:none !important;
+      overflow:visible !important;
+      margin:0 auto !important;
+      padding-bottom:74px !important;
+      position:relative;
+    }
+    .web-modal .modal-actions,
+    .web-modal .modal-footer{
+      position:sticky;
+      bottom:0;
+      z-index:10;
+      background:linear-gradient(180deg,rgba(5,6,8,0),rgba(5,6,8,.96) 30%);
+      padding-top:14px;
+    }
+    @media(max-width:760px){
+      .generated.show{
+        max-height:78vh !important;
+        overflow:auto !important;
+        -webkit-overflow-scrolling:touch;
+        padding-top:58px !important;
+      }
+      .member-popup-close{
+        top:10px;
+        right:10px;
+        width:40px;
+        height:40px;
+      }
+      .web-modal .modal-card{
+        width:min(380px,calc(100vw - 28px)) !important;
+      }
+    }
+  </style>
+
+  <script>
+    /* Member popup close behavior fix only */
+    (function(){
+      function ready(fn){
+        if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", fn);
+        else fn();
+      }
+
+      ready(function(){
+        const generatedBox = document.getElementById("generatedBox");
+        if(generatedBox && !generatedBox.querySelector(".member-popup-close")){
+          const closeButton = document.createElement("button");
+          closeButton.className = "member-popup-close";
+          closeButton.type = "button";
+          closeButton.setAttribute("aria-label", "ปิดหน้าต่างไฟล์ที่สร้างแล้ว");
+          closeButton.textContent = "×";
+          closeButton.addEventListener("click", function(){
+            generatedBox.classList.remove("show");
+          });
+          generatedBox.appendChild(closeButton);
+        }
+
+        document.querySelectorAll(".web-modal").forEach(function(modal){
+          modal.addEventListener("click", function(event){
+            if(event.target === modal) modal.classList.remove("show");
+          });
+          const card = modal.querySelector(".modal-card");
+          if(card){
+            card.addEventListener("touchmove", function(event){
+              event.stopPropagation();
+            }, { passive:true });
+          }
+        });
+
+        document.addEventListener("keydown", function(event){
+          if(event.key !== "Escape") return;
+          document.querySelectorAll(".web-modal.show").forEach(function(modal){
+            modal.classList.remove("show");
+          });
+          if(generatedBox && generatedBox.classList.contains("show")){
+            generatedBox.classList.remove("show");
+          }
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
