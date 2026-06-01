@@ -1365,7 +1365,6 @@
     document.addEventListener("DOMContentLoaded", function academyMusicBox(){
       const tracks = [
         { title:"PLAVE-1232", base:"PLAVE-1232", video:"seNgeyf93p4", url:"https://www.youtube.com/watch?v=seNgeyf93p4" },
-        { title:"PLAVE-2", base:"Plave-2", video:"seIrfH92Zkk", url:"https://www.youtube.com/watch?v=seIrfH92Zkk" },
         { title:"PLAVE-Lunar", base:"PLAVE-Lunar", video:"HzABxw3MoJ0", url:"https://www.youtube.com/watch?v=HzABxw3MoJ0" },
         { title:"PLAVE-SO", base:"PLAVE-SO", video:"K-F7906Jq9U", url:"https://www.youtube.com/watch?v=K-F7906Jq9U" },
         { title:"borrow", base:"borrow", video:"eDlYB_e5k3c", url:"https://www.youtube.com/watch?v=eDlYB_e5k3c" },
@@ -1584,7 +1583,6 @@
         /* ---------- music player ---------- */
         const tracks = [
           { title:"PLAVE-1232", file:"PLAVE-1232.mp3", video:"seNgeyf93p4", url:"https://www.youtube.com/watch?v=seNgeyf93p4" },
-          { title:"PLAVE-2", file:"PLAVE-2.mp3", video:"seIrfH92Zkk", url:"https://www.youtube.com/watch?v=seIrfH92Zkk" },
           { title:"PLAVE-Lunar", file:"PLAVE-Lunar.mp3", video:"HzABxw3MoJ0", url:"https://www.youtube.com/watch?v=HzABxw3MoJ0" },
           { title:"PLAVE-SO", file:"PLAVE-SO.mp3", video:"K-F7906Jq9U", url:"https://www.youtube.com/watch?v=K-F7906Jq9U" },
           { title:"borrow", file:"borrow.mp3", video:"eDlYB_e5k3c", url:"https://www.youtube.com/watch?v=eDlYB_e5k3c" },
@@ -2022,7 +2020,6 @@
 
         const tracks = [
           { title:"PLAVE-1232", file:"PLAVE-1232.mp3", video:"seNgeyf93p4", url:"https://www.youtube.com/watch?v=seNgeyf93p4" },
-          { title:"PLAVE-2", file:"PLAVE-2.mp3", video:"seIrfH92Zkk", url:"https://www.youtube.com/watch?v=seIrfH92Zkk" },
           { title:"PLAVE-Lunar", file:"PLAVE-Lunar.mp3", video:"HzABxw3MoJ0", url:"https://www.youtube.com/watch?v=HzABxw3MoJ0" },
           { title:"PLAVE-SO", file:"PLAVE-SO.mp3", video:"K-F7906Jq9U", url:"https://www.youtube.com/watch?v=K-F7906Jq9U" },
           { title:"borrow", file:"borrow.mp3", video:"eDlYB_e5k3c", url:"https://www.youtube.com/watch?v=eDlYB_e5k3c" },
@@ -2489,7 +2486,6 @@
 
         const tracks = [
           { title:"PLAVE-1232", file:"PLAVE-1232.mp3", video:"seNgeyf93p4", url:"https://www.youtube.com/watch?v=seNgeyf93p4" },
-          { title:"PLAVE-2", file:"PLAVE-2.mp3", video:"seIrfH92Zkk", url:"https://www.youtube.com/watch?v=seIrfH92Zkk" },
           { title:"PLAVE-Lunar", file:"PLAVE-Lunar.mp3", video:"HzABxw3MoJ0", url:"https://www.youtube.com/watch?v=HzABxw3MoJ0" },
           { title:"PLAVE-SO", file:"PLAVE-SO.mp3", video:"K-F7906Jq9U", url:"https://www.youtube.com/watch?v=K-F7906Jq9U" },
           { title:"borrow", file:"borrow.mp3", video:"eDlYB_e5k3c", url:"https://www.youtube.com/watch?v=eDlYB_e5k3c" },
@@ -2497,7 +2493,7 @@
           { title:"supernova", file:"supernova.mp3", video:"1o7zm815PqQ", url:"https://www.youtube.com/watch?v=1o7zm815PqQ" }
         ];
 
-        let index = Math.max(0, tracks.findIndex(function(track){ return track.file === "PLAVE-2.mp3"; }));
+        let index = 0;
         audio.volume = volumeInput ? Number(volumeInput.value || 70) / 100 : 0.7;
 
         function setNotice(message){
@@ -2538,7 +2534,7 @@
               setUI(true);
             }).catch(function(){
               setUI(false);
-              setNotice("ถ้าเพลงยังไม่เริ่ม ให้กดเล่นอีกครั้งค่ะ หรือเช็กว่าไฟล์อยู่ข้าง index.html และชื่อไฟล์ตรงเป๊ะ เช่น PLAVE-2.mp3");
+              setNotice("ถ้าเพลงยังไม่เริ่ม ให้กดเล่นอีกครั้งค่ะ หรือเช็กว่าไฟล์ MP3 อยู่ข้าง index.html และชื่อไฟล์ตรงกับในระบบ");
             });
           }else{
             setUI(true);
@@ -2603,5 +2599,225 @@
       });
     })();
   </script>
+  <style>
+    /* EDEN high-tech luxury final layer */
+    :root{
+      --eden-bg:#030914;
+      --eden-panel:rgba(8,18,32,.78);
+      --eden-panel-2:rgba(12,26,45,.66);
+      --eden-line:rgba(221,186,111,.30);
+      --eden-gold:#d9b36a;
+      --eden-text:#f7f1e4;
+      --eden-muted:rgba(247,241,228,.68);
+      --eden-blue:#6ea8d9;
+    }
+
+    body{
+      color:var(--eden-text);
+      background:
+        radial-gradient(circle at 22% 0%,rgba(110,168,217,.20),transparent 32%),
+        radial-gradient(circle at 76% 12%,rgba(217,179,106,.16),transparent 28%),
+        linear-gradient(180deg,rgba(3,9,20,.72),rgba(3,9,20,.94)),
+        url("./black.png") center top / cover fixed no-repeat !important;
+    }
+    body::before{
+      opacity:.72;
+      background:
+        linear-gradient(90deg,rgba(110,168,217,.08) 1px,transparent 1px),
+        linear-gradient(rgba(110,168,217,.055) 1px,transparent 1px),
+        linear-gradient(135deg,transparent 0 45%,rgba(217,179,106,.08) 45% 46%,transparent 46% 100%) !important;
+      background-size:82px 82px,82px 82px,100% 100% !important;
+    }
+    body::after{
+      background:
+        radial-gradient(circle at 50% -10%,rgba(255,255,255,.12),transparent 35%),
+        linear-gradient(180deg,transparent,rgba(3,9,20,.38)) !important;
+    }
+
+    .welcome-modal{
+      background:
+        radial-gradient(circle at 50% 0%,rgba(110,168,217,.18),transparent 36%),
+        rgba(2,7,15,.76) !important;
+      backdrop-filter:blur(22px) !important;
+    }
+    .welcome-modal .modal-card{
+      max-width:560px !important;
+      border-radius:28px !important;
+      background:
+        linear-gradient(145deg,rgba(10,24,42,.94),rgba(5,13,25,.96)) !important;
+      border:1px solid var(--eden-line) !important;
+      color:var(--eden-text) !important;
+      box-shadow:0 34px 90px rgba(0,0,0,.48), inset 0 1px 0 rgba(255,255,255,.06) !important;
+    }
+    .welcome-modal .modal-card::before,
+    .welcome-modal .modal-card::after{
+      content:"" !important;
+      position:absolute;
+      border:1px solid rgba(217,179,106,.22);
+      pointer-events:none;
+    }
+    .welcome-modal .modal-card::before{
+      inset:14px;
+      border-radius:22px;
+    }
+    .welcome-modal .modal-card::after{
+      width:92px;
+      height:1px;
+      left:50%;
+      top:28px;
+      transform:translateX(-50%);
+      background:linear-gradient(90deg,transparent,var(--eden-gold),transparent);
+      border:0;
+    }
+    .welcome-modal .modal-card h2{color:#fff6df !important}
+    .welcome-modal .modal-card p{color:var(--eden-muted) !important}
+    .welcome-modal .modal-close{
+      background:rgba(255,255,255,.08) !important;
+      color:#fff3cf !important;
+      border-color:rgba(217,179,106,.28) !important;
+    }
+
+    .hero{padding-top:48px !important}
+    .hero-grid{align-items:stretch !important}
+    .hero-card{
+      min-height:430px !important;
+      padding:clamp(34px,5vw,58px) !important;
+      border-radius:28px !important;
+      background:
+        linear-gradient(135deg,rgba(10,24,42,.88),rgba(6,14,27,.92)) !important;
+      border:1px solid var(--eden-line) !important;
+      box-shadow:0 30px 80px rgba(0,0,0,.36), inset 0 1px 0 rgba(255,255,255,.06) !important;
+    }
+    .hero-card::before,
+    .hero-card::after{
+      display:none !important;
+    }
+    .hero-card .kicker{
+      background:rgba(217,179,106,.10) !important;
+      color:#f4d79a !important;
+      border:1px solid rgba(217,179,106,.34) !important;
+      box-shadow:none !important;
+      letter-spacing:.12em;
+    }
+    .hero-card h2{
+      color:#f8f1e2 !important;
+      text-shadow:0 18px 45px rgba(0,0,0,.36);
+    }
+    .hero-card h2 span{
+      color:#e2b763 !important;
+      text-shadow:0 0 28px rgba(217,179,106,.18) !important;
+    }
+    .hero-card p{
+      color:var(--eden-muted) !important;
+      max-width:640px !important;
+    }
+
+    .btn.primary{
+      background:linear-gradient(135deg,#e6c779,#a77831) !important;
+      color:#07101d !important;
+      border-color:rgba(255,239,198,.42) !important;
+      box-shadow:0 16px 40px rgba(166,119,49,.22) !important;
+    }
+    .btn.soft{
+      background:rgba(255,255,255,.08) !important;
+      color:#f5ead0 !important;
+      border-color:rgba(217,179,106,.26) !important;
+      box-shadow:none !important;
+    }
+    .btn.soft:hover{
+      background:rgba(255,255,255,.13) !important;
+    }
+
+    #music.music-card{
+      background:
+        linear-gradient(145deg,rgba(9,22,39,.88),rgba(5,13,25,.92)) !important;
+      border-color:rgba(217,179,106,.24) !important;
+      color:var(--eden-text) !important;
+    }
+    #music .music-info h3,
+    #music #musicTitle{color:#fff3d8 !important}
+    #music .music-info::after{color:#d8b66f !important}
+    #music .music-nav,
+    #music .music-actions button,
+    #music .music-volume{
+      background:rgba(255,255,255,.08) !important;
+      color:#f5ead0 !important;
+      border-color:rgba(217,179,106,.24) !important;
+    }
+    #music .music-actions button:first-child{
+      background:linear-gradient(135deg,#e6c779,#a77831) !important;
+      color:#07101d !important;
+    }
+    #music .music-notice{
+      background:rgba(255,255,255,.06) !important;
+      color:rgba(247,241,228,.72) !important;
+      border-color:rgba(217,179,106,.22) !important;
+    }
+
+    .mini-grid{gap:14px !important}
+    .mini-box{
+      min-height:118px !important;
+      border-radius:22px !important;
+      background:
+        linear-gradient(145deg,rgba(10,24,42,.84),rgba(5,13,25,.88)) !important;
+      border:1px solid rgba(217,179,106,.22) !important;
+      box-shadow:0 20px 54px rgba(0,0,0,.24) !important;
+      color:var(--eden-text) !important;
+    }
+    .mini-box b{
+      color:#fff3d8 !important;
+      font-family:"Noto Sans Thai",sans-serif !important;
+      font-size:18px !important;
+    }
+    .mini-box span{color:var(--eden-muted) !important}
+
+    #news .news-card,
+    #tags .zone-panel,
+    #shop .register-panel,
+    #register .register-panel,
+    #zones .zone-panel{
+      background:
+        linear-gradient(145deg,rgba(9,22,39,.84),rgba(5,13,25,.88)) !important;
+      border:1px solid rgba(217,179,106,.22) !important;
+      box-shadow:0 26px 70px rgba(0,0,0,.30) !important;
+      color:var(--eden-text) !important;
+    }
+    #news .post{
+      background:rgba(255,255,255,.055) !important;
+      border-color:rgba(255,255,255,.08) !important;
+      color:var(--eden-text) !important;
+    }
+    #news .post:hover{
+      background:rgba(255,255,255,.09) !important;
+      border-color:rgba(217,179,106,.30) !important;
+    }
+    #news .post h3{color:#fff4df !important}
+    #news .post-meta{color:rgba(247,241,228,.58) !important}
+    #news .post-icon{
+      background:rgba(255,255,255,.07) !important;
+      border-color:rgba(217,179,106,.22) !important;
+    }
+    #news .chip,
+    #tags .tag-pill{
+      background:rgba(255,255,255,.07) !important;
+      color:#f3e7c9 !important;
+      border-color:rgba(217,179,106,.18) !important;
+    }
+    #news .post-side{
+      background:rgba(255,255,255,.07) !important;
+      color:#f3d38a !important;
+    }
+    #news .post-side span{color:rgba(247,241,228,.55) !important}
+    .register-panel h2{color:#fff3d8 !important}
+    .register-panel p{color:var(--eden-muted) !important}
+
+    @media(max-width:760px){
+      .hero-card{min-height:auto !important}
+      .mini-grid{grid-template-columns:1fr 1fr !important}
+    }
+    @media(max-width:520px){
+      .mini-grid{grid-template-columns:1fr !important}
+    }
+  </style>
 </body>
 </html>
