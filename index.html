@@ -1584,7 +1584,7 @@
         /* ---------- music player ---------- */
         const tracks = [
           { title:"PLAVE-1232", file:"PLAVE-1232.mp3", video:"seNgeyf93p4", url:"https://www.youtube.com/watch?v=seNgeyf93p4" },
-          { title:"PLAVE-2", file:"Plave-2.mp3", video:"seIrfH92Zkk", url:"https://www.youtube.com/watch?v=seIrfH92Zkk" },
+          { title:"PLAVE-2", file:"PLAVE-2.mp3", video:"seIrfH92Zkk", url:"https://www.youtube.com/watch?v=seIrfH92Zkk" },
           { title:"PLAVE-Lunar", file:"PLAVE-Lunar.mp3", video:"HzABxw3MoJ0", url:"https://www.youtube.com/watch?v=HzABxw3MoJ0" },
           { title:"PLAVE-SO", file:"PLAVE-SO.mp3", video:"K-F7906Jq9U", url:"https://www.youtube.com/watch?v=K-F7906Jq9U" },
           { title:"borrow", file:"borrow.mp3", video:"eDlYB_e5k3c", url:"https://www.youtube.com/watch?v=eDlYB_e5k3c" },
@@ -2022,7 +2022,7 @@
 
         const tracks = [
           { title:"PLAVE-1232", file:"PLAVE-1232.mp3", video:"seNgeyf93p4", url:"https://www.youtube.com/watch?v=seNgeyf93p4" },
-          { title:"PLAVE-2", file:"Plave-2.mp3", video:"seIrfH92Zkk", url:"https://www.youtube.com/watch?v=seIrfH92Zkk" },
+          { title:"PLAVE-2", file:"PLAVE-2.mp3", video:"seIrfH92Zkk", url:"https://www.youtube.com/watch?v=seIrfH92Zkk" },
           { title:"PLAVE-Lunar", file:"PLAVE-Lunar.mp3", video:"HzABxw3MoJ0", url:"https://www.youtube.com/watch?v=HzABxw3MoJ0" },
           { title:"PLAVE-SO", file:"PLAVE-SO.mp3", video:"K-F7906Jq9U", url:"https://www.youtube.com/watch?v=K-F7906Jq9U" },
           { title:"borrow", file:"borrow.mp3", video:"eDlYB_e5k3c", url:"https://www.youtube.com/watch?v=eDlYB_e5k3c" },
@@ -2188,6 +2188,418 @@
             }
           });
         });
+      });
+    })();
+  </script>
+  <style>
+    /* FINAL POLISH: music fix + smart board cards */
+    #music.music-card{
+      isolation:isolate;
+      overflow:visible !important;
+      padding:24px !important;
+      min-height:0 !important;
+      border-radius:26px !important;
+      background:
+        linear-gradient(145deg,rgba(255,255,255,.96),rgba(250,242,224,.90)) !important;
+      border:1px solid rgba(217,180,111,.36) !important;
+      box-shadow:0 22px 60px rgba(2,8,18,.22) !important;
+    }
+    #music::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:-1;
+      border-radius:inherit;
+      background:
+        radial-gradient(circle at 16% 10%,rgba(217,180,111,.22),transparent 30%),
+        radial-gradient(circle at 92% 80%,rgba(19,48,80,.10),transparent 34%);
+    }
+    #music::after{
+      content:"";
+      right:18px;
+      top:18px;
+      width:64px;
+      height:64px;
+      border-radius:50%;
+      background:linear-gradient(145deg,rgba(217,180,111,.14),rgba(255,255,255,.06)) !important;
+      border:1px solid rgba(217,180,111,.22);
+      color:transparent !important;
+      pointer-events:none;
+    }
+    #music .music-modern-layout{
+      grid-template-columns:112px minmax(0,1fr) !important;
+      gap:18px !important;
+      align-items:center !important;
+    }
+    #music .music-cover-column .disc{
+      width:104px !important;
+      height:104px !important;
+      border-radius:24px !important;
+      animation:none !important;
+      background:linear-gradient(145deg,#0b1b31,#d7b471) !important;
+      border:1px solid rgba(255,240,204,.72) !important;
+      box-shadow:0 16px 36px rgba(26,25,28,.20) !important;
+      overflow:hidden;
+    }
+    #music .music-cover-column .disc::after{display:none !important}
+    #music .music-cover-column .disc img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      filter:saturate(.96) contrast(1.04);
+    }
+    #music .music-player-head{
+      grid-template-columns:40px minmax(0,1fr) 40px !important;
+      gap:10px !important;
+    }
+    #music .music-info h3,
+    #music #musicTitle{
+      font-size:clamp(22px,2.5vw,28px) !important;
+      color:#171b24 !important;
+      letter-spacing:-.01em !important;
+    }
+    #music .music-info::after{
+      content:"Academy playlist";
+      display:block;
+      margin-top:5px;
+      color:#80633b;
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    #music .music-nav{
+      width:40px !important;
+      height:40px !important;
+      border-radius:14px !important;
+      background:rgba(255,255,255,.70) !important;
+      color:#1a2638 !important;
+      border:1px solid rgba(27,34,46,.12) !important;
+      box-shadow:0 10px 22px rgba(2,8,18,.10) !important;
+      font-size:24px !important;
+    }
+    #music .music-nav:hover{
+      background:#17243a !important;
+      color:#fff0c8 !important;
+      transform:translateY(-2px);
+    }
+    #music .music-bar{
+      height:7px !important;
+      margin-top:14px !important;
+      background:rgba(27,34,46,.10) !important;
+    }
+    #music .music-actions{
+      margin-top:14px !important;
+      gap:8px !important;
+    }
+    #music .music-actions button,
+    #music .music-volume{
+      border-radius:999px !important;
+    }
+    #music .music-actions button{
+      min-height:38px !important;
+      padding:0 15px !important;
+      background:rgba(255,255,255,.72) !important;
+      color:#243149 !important;
+      border:1px solid rgba(27,34,46,.12) !important;
+      box-shadow:0 10px 22px rgba(2,8,18,.09) !important;
+      transition:transform .2s ease, background .2s ease, color .2s ease;
+    }
+    #music .music-actions button:first-child{
+      background:linear-gradient(135deg,#1b2c45,#071322) !important;
+      color:#fff0c8 !important;
+      border-color:rgba(255,231,181,.36) !important;
+    }
+    #music .music-actions button:hover{transform:translateY(-2px)}
+    #music .music-volume{
+      width:max-content;
+      max-width:100%;
+      padding:8px 12px;
+      background:rgba(255,255,255,.54);
+      border:1px solid rgba(27,34,46,.10);
+    }
+    #music .music-notice{
+      display:none;
+      margin-top:12px;
+      padding:11px 13px;
+      border-radius:16px;
+      background:rgba(23,36,58,.07);
+      border:1px solid rgba(217,180,111,.28);
+      color:#5d4a35;
+      font-size:12px;
+      font-weight:800;
+      line-height:1.55;
+    }
+    #music .music-notice.show{display:block}
+
+    #news .news-card{
+      display:grid;
+      gap:12px;
+      padding:18px !important;
+      border-radius:26px !important;
+      background:
+        linear-gradient(145deg,rgba(255,255,255,.92),rgba(250,242,226,.84)) !important;
+    }
+    #news .post{
+      grid-template-columns:52px minmax(0,1fr) auto !important;
+      gap:16px !important;
+      padding:16px 18px !important;
+      border-radius:20px !important;
+      background:rgba(255,255,255,.56) !important;
+      border:1px solid rgba(27,34,46,.09) !important;
+      box-shadow:none !important;
+      position:relative;
+      overflow:hidden;
+    }
+    #news .post::before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:14px;
+      bottom:14px;
+      width:3px;
+      border-radius:999px;
+      background:linear-gradient(180deg,#f1ddab,#a77a38);
+      opacity:.72;
+    }
+    #news .post:hover{
+      transform:translateY(-3px) !important;
+      background:rgba(255,255,255,.78) !important;
+      border-color:rgba(217,180,111,.40) !important;
+      box-shadow:0 18px 44px rgba(2,8,18,.13) !important;
+    }
+    #news .post-icon{
+      width:52px !important;
+      height:52px !important;
+      border-radius:16px !important;
+      background:linear-gradient(145deg,rgba(255,255,255,.82),rgba(217,180,111,.28)) !important;
+      border:1px solid rgba(217,180,111,.30);
+      box-shadow:none !important;
+    }
+    #news .post h3{
+      color:#171b24 !important;
+      font-size:18px !important;
+      line-height:1.35;
+      letter-spacing:-.01em;
+    }
+    #news .post-meta{
+      gap:7px !important;
+      color:#766a5d !important;
+      font-size:12px;
+    }
+    #news .chip,
+    #tags .tag-pill{
+      background:rgba(255,255,255,.62) !important;
+      color:#3d4658 !important;
+      border:1px solid rgba(27,34,46,.10) !important;
+      box-shadow:none !important;
+    }
+    #news .post-side{
+      min-width:70px;
+      padding:8px 10px;
+      border-radius:14px;
+      background:rgba(23,36,58,.06);
+      color:#1d2940 !important;
+      text-align:center !important;
+    }
+    #news .post-side b{font-size:17px !important}
+    #news .post-side span{font-size:11px !important}
+
+    #tags .zone-panel,
+    #shop .register-panel,
+    #zones .zone-panel,
+    #register .register-panel{
+      border-radius:26px !important;
+    }
+    #tags .tag-grid{gap:10px !important}
+    #tags .tag-pill{
+      min-height:46px !important;
+      padding:0 15px;
+      justify-content:flex-start !important;
+      transition:transform .2s ease, background .2s ease, border-color .2s ease;
+    }
+    #tags .tag-pill:hover{
+      background:#17243a !important;
+      color:#fff0c8 !important;
+      border-color:rgba(255,231,181,.36) !important;
+    }
+    #shop .register-panel,
+    #register .register-panel{
+      align-items:center;
+      background:
+        radial-gradient(circle at 94% 14%,rgba(217,180,111,.22),transparent 28%),
+        linear-gradient(145deg,rgba(255,255,255,.94),rgba(250,242,226,.84)) !important;
+    }
+    #shop .btn.soft,
+    #register .btn.soft,
+    #register .btn.primary{
+      min-width:190px;
+      justify-content:center;
+    }
+
+    @media(max-width:620px){
+      #music .music-modern-layout{grid-template-columns:1fr !important}
+      #music .music-cover-column .disc{width:118px !important;height:118px !important}
+      #news .post{grid-template-columns:46px minmax(0,1fr) !important}
+      #news .post-side{grid-column:2;justify-self:start;text-align:left !important}
+      #shop .btn.soft,#register .btn.soft,#register .btn.primary{width:100%}
+    }
+  </style>
+
+  <script>
+    /* FINAL POLISH: stable local/GitHub-ready music player */
+    (function(){
+      function ready(fn){
+        if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", fn);
+        else fn();
+      }
+
+      ready(function(){
+        const musicCard = document.getElementById("music");
+        const audio = document.getElementById("academyAudio");
+        if(!musicCard || !audio) return;
+
+        function cloneButton(id){
+          const oldButton = document.getElementById(id);
+          if(!oldButton) return null;
+          const newButton = oldButton.cloneNode(true);
+          oldButton.replaceWith(newButton);
+          return newButton;
+        }
+
+        const playBtn = cloneButton("musicPlayBtn");
+        const randomBtn = cloneButton("musicRandomBtn");
+        const prevBtn = cloneButton("musicPrevBtn");
+        const nextBtn = cloneButton("musicNextBtn");
+        const title = document.getElementById("musicTitle");
+        const cover = document.getElementById("musicCover");
+        const link = document.getElementById("musicYoutube");
+        const progress = document.getElementById("musicProgress");
+        const disc = document.getElementById("musicDisc");
+        const volumeInput = document.getElementById("musicVolume");
+        const volumeValue = document.getElementById("musicVolumeValue");
+
+        let notice = musicCard.querySelector(".music-notice");
+        if(!notice){
+          notice = document.createElement("div");
+          notice.className = "music-notice";
+          const contentColumn = musicCard.querySelector(".music-content-column") || musicCard;
+          contentColumn.appendChild(notice);
+        }
+
+        const tracks = [
+          { title:"PLAVE-1232", file:"PLAVE-1232.mp3", video:"seNgeyf93p4", url:"https://www.youtube.com/watch?v=seNgeyf93p4" },
+          { title:"PLAVE-2", file:"PLAVE-2.mp3", video:"seIrfH92Zkk", url:"https://www.youtube.com/watch?v=seIrfH92Zkk" },
+          { title:"PLAVE-Lunar", file:"PLAVE-Lunar.mp3", video:"HzABxw3MoJ0", url:"https://www.youtube.com/watch?v=HzABxw3MoJ0" },
+          { title:"PLAVE-SO", file:"PLAVE-SO.mp3", video:"K-F7906Jq9U", url:"https://www.youtube.com/watch?v=K-F7906Jq9U" },
+          { title:"borrow", file:"borrow.mp3", video:"eDlYB_e5k3c", url:"https://www.youtube.com/watch?v=eDlYB_e5k3c" },
+          { title:"exoFirstSnow", file:"exoFirstSnow.mp3", video:"h0b4nw7NDhA", url:"https://www.youtube.com/watch?v=h0b4nw7NDhA" },
+          { title:"supernova", file:"supernova.mp3", video:"1o7zm815PqQ", url:"https://www.youtube.com/watch?v=1o7zm815PqQ" }
+        ];
+
+        let index = Math.max(0, tracks.findIndex(function(track){ return track.file === "PLAVE-2.mp3"; }));
+        audio.volume = volumeInput ? Number(volumeInput.value || 70) / 100 : 0.7;
+
+        function setNotice(message){
+          notice.textContent = message || "";
+          notice.classList.toggle("show", Boolean(message));
+        }
+
+        function setUI(isPlaying){
+          if(playBtn) playBtn.textContent = isPlaying ? "หยุดเพลง" : "เล่นเพลง";
+          if(disc) disc.classList.toggle("paused", !isPlaying);
+          musicCard.classList.toggle("is-playing", isPlaying);
+        }
+
+        function loadTrack(nextIndex, autoplay){
+          index = (nextIndex + tracks.length) % tracks.length;
+          const track = tracks[index];
+          audio.pause();
+          audio.src = encodeURI("./" + track.file);
+          audio.load();
+          if(title) title.textContent = track.title;
+          if(cover){
+            cover.src = "https://img.youtube.com/vi/" + track.video + "/hqdefault.jpg";
+            cover.alt = "หน้าปกเพลง " + track.title;
+            cover.style.display = "";
+          }
+          if(link) link.href = track.url;
+          if(progress) progress.style.width = "0%";
+          setNotice("");
+          setUI(false);
+          if(autoplay) playTrack();
+        }
+
+        function playTrack(){
+          setNotice("");
+          const result = audio.play();
+          if(result && typeof result.then === "function"){
+            result.then(function(){
+              setUI(true);
+            }).catch(function(){
+              setUI(false);
+              setNotice("ถ้าเพลงยังไม่เริ่ม ให้กดเล่นอีกครั้งค่ะ หรือเช็กว่าไฟล์อยู่ข้าง index.html และชื่อไฟล์ตรงเป๊ะ เช่น PLAVE-2.mp3");
+            });
+          }else{
+            setUI(true);
+          }
+        }
+
+        function pauseTrack(){
+          audio.pause();
+          setUI(false);
+        }
+
+        function pickTrack(step){
+          loadTrack(index + step, true);
+        }
+
+        function randomTrack(){
+          let next = Math.floor(Math.random() * tracks.length);
+          if(tracks.length > 1){
+            while(next === index) next = Math.floor(Math.random() * tracks.length);
+          }
+          loadTrack(next, true);
+        }
+
+        if(playBtn) playBtn.onclick = function(event){
+          event.preventDefault();
+          audio.paused ? playTrack() : pauseTrack();
+        };
+        if(prevBtn) prevBtn.onclick = function(event){
+          event.preventDefault();
+          pickTrack(-1);
+        };
+        if(nextBtn) nextBtn.onclick = function(event){
+          event.preventDefault();
+          pickTrack(1);
+        };
+        if(randomBtn) randomBtn.onclick = function(event){
+          event.preventDefault();
+          randomTrack();
+        };
+        if(volumeInput){
+          volumeInput.oninput = function(){
+            const value = Number(volumeInput.value || 70);
+            audio.volume = value / 100;
+            if(volumeValue) volumeValue.textContent = value + "%";
+          };
+        }
+
+        audio.ontimeupdate = function(){
+          if(progress && audio.duration){
+            progress.style.width = Math.min((audio.currentTime / audio.duration) * 100, 100) + "%";
+          }
+        };
+        audio.onplay = function(){ setUI(true); };
+        audio.onpause = function(){ if(!audio.ended) setUI(false); };
+        audio.onended = function(){ randomTrack(); };
+        audio.onerror = function(){
+          setUI(false);
+          setNotice("โหลดไฟล์เพลงไม่ได้ค่ะ ตรวจชื่อไฟล์ใน GitHub ให้ตรงตัวพิมพ์ใหญ่-เล็ก: " + tracks[index].file);
+        };
+
+        loadTrack(index, false);
       });
     })();
   </script>
