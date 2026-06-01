@@ -3,833 +3,508 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>กระดานนักเรียน | E8's Eden Academy</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <title>กระดานนักเรียน | E8’s Eden Academy</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Noto+Serif+Thai:wght@500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap');
+
     :root{
-      --bg:#030914;
-      --panel:rgba(8,18,32,.78);
-      --panel-2:rgba(12,26,45,.66);
-      --panel-3:rgba(255,255,255,.055);
-      --line:rgba(217,179,106,.24);
-      --line-2:rgba(255,255,255,.09);
+      --navy:#071426;--navy2:#102641;--cream:#f5eadb;--paper:#fbf3e8;--paper2:#ead8c0;
+      --gold:#c7a267;--line:rgba(145,105,61,.28);--ink:#302329;--muted:#7b695f;
+      --shadow:0 18px 42px rgba(38,24,13,.16);
+    }
+    *{box-sizing:border-box;margin:0;padding:0} html{scroll-behavior:smooth}
+    body{
+      min-height:100vh;font-family:"Noto Sans Thai",sans-serif;color:var(--ink);overflow-x:hidden;
+      background:radial-gradient(circle at 10% 0%,rgba(199,162,103,.28),transparent 30%),linear-gradient(135deg,#d5c0aa,#f2e5d2 48%,#cbb79f);
+    }
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.15) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.12) 1px,transparent 1px);background-size:54px 54px;opacity:.42}
+    a{text-decoration:none;color:inherit} button,input,textarea{font-family:inherit}
+    .site{position:relative;z-index:1}.wrap{width:min(1440px,calc(100% - 40px));margin:auto}
+
+    .topbar{position:sticky;top:0;z-index:50;background:linear-gradient(90deg,#302321 0%,#142238 22%,#071426 64%,#081a32);border-bottom:1px solid rgba(235,205,147,.48);box-shadow:0 12px 30px rgba(4,12,24,.32)}
+    .header{min-height:104px;display:grid;grid-template-columns:minmax(280px,1fr) auto auto;align-items:center;gap:20px;padding:10px 0}
+    .brand{display:flex;align-items:center;gap:16px}.brand img{width:102px;height:88px;object-fit:contain;background:transparent;filter:drop-shadow(0 8px 14px rgba(0,0,0,.24))}
+    .brand h1{font-family:"Cinzel",serif;color:#fff9ee;font-size:clamp(28px,3vw,42px);line-height:1;white-space:nowrap}.brand small{display:block;color:#dcc28d;margin-top:8px;font-weight:700}
+    .nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}.nav a{color:rgba(255,249,236,.84);padding:10px 15px;border-radius:999px;font-size:14px;font-weight:700}.nav a:hover,.nav .active{background:rgba(255,255,255,.12);outline:1px solid rgba(235,205,147,.35);color:#fff}
+    .apply{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 24px;border-radius:999px;color:#ffe9b7;font-weight:900;background:linear-gradient(180deg,#2d405f,#132642);border:1px solid rgba(240,211,156,.70);box-shadow:0 8px 18px rgba(0,0,0,.22)}
+
+    main{padding:30px 0 58px}.panel,.article,.comment,.compose,.related{border:1px solid var(--line);box-shadow:var(--shadow);backdrop-filter:blur(14px)}
+    .panel,.article,.comment,.compose,.related{background:linear-gradient(180deg,rgba(252,244,234,.9),rgba(236,222,204,.9));border-radius:30px}.panel{padding:28px}.dark{background:radial-gradient(circle at 20% 0%,rgba(255,224,169,.15),transparent 36%),linear-gradient(180deg,#102641,#071426);color:#fff3db}
+    .hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:22px;align-items:center;margin-bottom:24px}.eyebrow{display:inline-flex;align-items:center;gap:8px;width:max-content;padding:8px 14px;border-radius:999px;background:#102641;color:#ffe6b2;border:1px solid rgba(232,203,145,.45);font-size:13px;font-weight:900;margin-bottom:12px}.eyebrow img{width:22px;height:22px;object-fit:contain}
+    h1,h2,h3{font-family:"Noto Serif Thai",serif}.hero h1{font-size:clamp(36px,4vw,60px);line-height:1.05;color:#fff7e8}.hero p{margin-top:12px;color:rgba(255,246,228,.72);line-height:1.75;max-width:820px}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;min-width:360px}.stat{padding:14px;border-radius:22px;background:rgba(255,255,255,.08);border:1px solid rgba(226,194,136,.24)}.stat b{display:block;color:#ffe7b5;font-family:"Cinzel",serif;font-size:25px;line-height:1}.stat span{color:rgba(255,246,228,.70);font-size:12px;font-weight:800}
+
+    .layout{display:grid;grid-template-columns:360px minmax(0,1fr);gap:24px;align-items:start}.side{display:grid;gap:18px;position:sticky;top:130px}.sidebox{padding:20px;border-radius:28px;background:rgba(250,243,232,.76);border:1px solid rgba(151,112,70,.25);box-shadow:0 14px 35px rgba(38,24,13,.12)}.sidebox h3{font-size:24px;margin-bottom:14px}
+    .thread-list{display:grid;gap:12px}.thread{display:grid;grid-template-columns:52px minmax(0,1fr);gap:13px;align-items:center;min-height:78px;padding:12px;border-radius:22px;border:1px solid rgba(151,112,70,.20);background:rgba(246,236,222,.68);cursor:pointer;text-align:left;transition:.18s}.thread:hover,.thread.active{transform:translateY(-2px);background:rgba(255,249,239,.95);box-shadow:0 12px 24px rgba(54,34,18,.10)}.thread.active{outline:2px solid rgba(199,162,103,.34)}.thread img{width:46px;height:46px;object-fit:contain;filter:drop-shadow(0 7px 8px rgba(34,20,9,.12))}.thread b{display:block;font-size:15px;line-height:1.32}.thread span{color:#7f6d62;font-size:12px}
+    .zone-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.zone-mini{display:grid;place-items:center;gap:7px;min-height:108px;padding:12px;border-radius:20px;border:1px solid rgba(151,112,70,.20);background:rgba(246,236,222,.68);transition:.18s}.zone-mini:hover{transform:translateY(-2px);background:#fff9ef}.zone-mini img{width:58px;height:58px;object-fit:contain}.zone-mini b{font-size:13px;color:#5d4a40}
+
+    .content{display:grid;gap:20px}.article{padding:34px 36px;position:relative;overflow:hidden}.official{display:flex;justify-content:center;margin-bottom:20px}.official img{width:132px;height:132px;object-fit:contain;background:transparent;filter:drop-shadow(0 12px 20px rgba(34,20,9,.12))}
+    .article-head{display:flex;justify-content:space-between;gap:18px;border-bottom:1px solid rgba(151,112,70,.22);padding-bottom:20px;margin-bottom:24px}.title h2{font-size:clamp(30px,3vw,46px);line-height:1.15}.title p{margin-top:8px;color:#7a675d;line-height:1.75}.meta{text-align:right;min-width:150px;color:#7d6a5e;font-size:13px}.meta b{display:block;color:#102641;font-size:25px;font-family:"Cinzel",serif}
+    .cover{margin:22px 0;border-radius:28px;overflow:hidden;border:1px solid rgba(151,112,70,.28);background:rgba(0,0,0,.08);box-shadow:0 14px 35px rgba(38,24,13,.12)}.cover img{display:block;width:100%;height:auto;object-fit:contain;background:rgba(244,231,213,.62)}
+    .body{display:grid;gap:14px;color:#6b5a51;line-height:1.9;font-size:15px}.bodybox{padding:18px 20px;border-radius:22px;background:rgba(250,243,232,.66);border:1px solid rgba(151,112,70,.20)}.bodybox h3{font-size:22px;color:#33262a;margin-bottom:8px}
+    .reacts{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.react{min-height:42px;display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;border:1px solid rgba(151,112,70,.24);background:rgba(250,243,232,.78);font-weight:900;cursor:pointer;transition:.18s}.react:hover{transform:translateY(-2px);background:#fff7eb}.react.liked{background:linear-gradient(180deg,#fff0f5,#f2cfda);color:#a83d62;border-color:rgba(190,86,122,.38);box-shadow:0 8px 18px rgba(168,61,98,.12)}
+
+    .section-title{display:flex;justify-content:space-between;align-items:end;gap:18px;margin:10px 0 2px}.section-title h2{font-size:clamp(30px,3.4vw,50px);line-height:1.1}.section-title p{margin-top:10px;color:var(--muted);line-height:1.65;font-size:15px}
+    .comments{display:grid;gap:14px}.comment{position:relative;overflow:hidden;padding:18px 20px;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:start;border-radius:24px;transition:.18s}.comment:hover{transform:translateY(-2px);background:rgba(250,243,232,.96);box-shadow:0 16px 30px rgba(38,24,13,.12)}.comment:before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--accent)}
+    .avatar{width:54px;height:54px;border-radius:17px;display:grid;place-items:center;background:var(--bg);border:1px solid rgba(255,255,255,.45);box-shadow:0 10px 18px rgba(34,20,9,.12)}.avatar img{width:42px;height:42px;object-fit:contain}.user{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:7px}.name{font-size:16px;font-weight:900;color:var(--name)}.zone{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:3px 9px;background:var(--pill);color:var(--ptxt);font-size:12px;font-weight:900}.comment p{color:#6b5a51;line-height:1.75;font-size:14px}.like{display:flex;flex-direction:column;align-items:flex-end;gap:8px;min-width:84px;color:#876f61}.like button{border:1px solid rgba(151,112,70,.22);border-radius:999px;background:rgba(250,243,232,.78);padding:7px 12px;color:#8b4c5c;font-weight:900;cursor:pointer;transition:.18s}.like button:hover{background:#fff7eb;color:#c85173;transform:translateY(-1px)}.like button.liked{background:linear-gradient(180deg,#fff0f5,#f3d2df);color:#bd3f6d;border-color:rgba(190,86,122,.38);box-shadow:0 8px 18px rgba(168,61,98,.10)}.like small{font-size:12px;color:#9a8477}
+    .z1{--accent:#2c7fc0;--bg:linear-gradient(145deg,#071d3d,#5aa7da);--name:#2778b8;--pill:linear-gradient(145deg,#0b315e,#5aa7da);--ptxt:#f4fbff}.z2{--accent:#d7bd8c;--bg:linear-gradient(145deg,#fffdf8,#dcc39b);--name:#9a7a4f;--pill:linear-gradient(145deg,#fff8e8,#dcc39b);--ptxt:#6a5338}.z3{--accent:#a51f33;--bg:linear-gradient(145deg,#4d0812,#c84a58);--name:#ae263b;--pill:linear-gradient(145deg,#7b1221,#c84a58);--ptxt:#fff6f7}.z4{--accent:#9ebf91;--bg:linear-gradient(145deg,#edf5e8,#b8d0a9);--name:#5e8b55;--pill:linear-gradient(145deg,#edf5e8,#b8d0a9);--ptxt:#4f6a46}.z5{--accent:#b494da;--bg:linear-gradient(145deg,#efe7fb,#b494da);--name:#8360bb;--pill:linear-gradient(145deg,#efe7fb,#b494da);--ptxt:#604482}.z6{--accent:#ea9eb5;--bg:linear-gradient(145deg,#fdebf1,#ea9eb5);--name:#c76388;--pill:linear-gradient(145deg,#fdebf1,#ea9eb5);--ptxt:#934f67}.z7{--accent:#8ecbe8;--bg:linear-gradient(145deg,#f5fbff,#add5ea);--name:#4e9cc5;--pill:linear-gradient(145deg,#f5fbff,#add5ea);--ptxt:#4d7893}.z8{--accent:#c4963f;--bg:linear-gradient(145deg,#fff7e6,#c4963f);--name:#a97925;--pill:linear-gradient(145deg,#fff7e6,#c4963f);--ptxt:#6a4716}
+
+    .compose{padding:24px 26px}.compose h3{font-size:28px;margin-bottom:8px}.compose p{color:#7a675d;line-height:1.7;margin-bottom:16px}.form{display:grid;gap:12px}.form input,.form textarea{width:100%;border:1px solid rgba(151,112,70,.24);border-radius:18px;padding:13px 15px;background:rgba(255,249,239,.72);color:#6b5a51;outline:none}.form textarea{min-height:110px;resize:vertical}.formrow{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}.note{font-size:13px;color:#927b6d}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:11px 20px;border-radius:999px;border:0;cursor:pointer;font-size:14px;font-weight:900;transition:.18s}.btn:hover{transform:translateY(-2px)}.primary{color:#fff4dc;background:linear-gradient(180deg,#172d4c,#09182b);border:1px solid rgba(226,194,136,.72);box-shadow:0 10px 24px rgba(8,18,32,.20)}.soft{color:#62482f;background:rgba(246,236,222,.80);border:1px solid rgba(151,112,70,.30)}.disabled{opacity:.6;cursor:not-allowed}.disabled:hover{transform:none}
+    .related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.related{border-radius:24px;padding:16px;min-height:150px;transition:.18s}.related:hover{transform:translateY(-2px);background:rgba(250,243,232,.96)}.ricon{width:48px;height:48px;border-radius:16px;background:rgba(246,236,222,.68);display:grid;place-items:center;border:1px solid rgba(151,112,70,.20);margin-bottom:10px}.ricon img{width:38px;height:38px;object-fit:contain}.related h3{font-size:18px;line-height:1.35}.related p{font-size:13px;color:#7a675d;line-height:1.55;margin-top:6px}
+    .add{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;padding:24px 26px}.add h3{font-size:30px;margin-bottom:6px}.add p{color:#7a675d;line-height:1.7}.footer{text-align:center;margin-top:38px;color:#7e6a5d;font-size:13px;line-height:1.8}
+    @media(max-width:1180px){.header{grid-template-columns:1fr}.nav{justify-content:flex-start}.apply{width:max-content}.hero{grid-template-columns:1fr}.stats{min-width:0}.layout{grid-template-columns:1fr}.side{position:static}.zone-grid{grid-template-columns:repeat(4,1fr)}.related-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:720px){.wrap{width:min(100% - 24px,1440px)}.brand img{width:78px;height:72px}.brand h1{font-size:24px;white-space:normal}.panel,.article,.compose,.add{padding:22px}.stats{grid-template-columns:1fr}.zone-grid{grid-template-columns:repeat(2,1fr)}.article-head{display:block}.meta{text-align:left;margin-top:12px}.comment{grid-template-columns:auto 1fr}.like{grid-column:1/-1;align-items:flex-start;flex-direction:row}.related-grid{grid-template-columns:1fr}.add{grid-template-columns:1fr}}
+    /* EDEN BOARD 2.0: smart high-tech luxury redesign */
+    :root{
+      --void:#030914;
+      --void2:#06111f;
+      --panel-dark:rgba(7,18,33,.82);
+      --panel-soft:rgba(11,25,44,.72);
+      --glass:rgba(255,255,255,.065);
       --gold:#d9b36a;
-      --gold-2:#f0d08b;
-      --blue:#6ea8d9;
+      --gold2:#f1d58d;
+      --blue:#72b7e8;
+      --cyan:#8de7ff;
       --text:#f7f1e4;
-      --muted:rgba(247,241,228,.66);
-      --faint:rgba(247,241,228,.45);
-      --shadow:0 26px 74px rgba(0,0,0,.34);
-      --radius:26px;
+      --sub:rgba(247,241,228,.66);
+      --hair:rgba(217,179,106,.24);
+      --shadow2:0 28px 90px rgba(0,0,0,.38);
     }
 
-    *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
     body{
-      min-height:100vh;
-      font-family:"Noto Sans Thai",sans-serif;
       color:var(--text);
       background:
-        radial-gradient(circle at 18% -4%,rgba(110,168,217,.20),transparent 32%),
-        radial-gradient(circle at 88% 18%,rgba(217,179,106,.16),transparent 28%),
-        linear-gradient(180deg,rgba(3,9,20,.76),rgba(3,9,20,.96)),
-        url("./black.png") center top / cover fixed no-repeat;
-      overflow-x:hidden;
+        radial-gradient(circle at 18% -4%,rgba(114,183,232,.24),transparent 34%),
+        radial-gradient(circle at 82% 8%,rgba(217,179,106,.18),transparent 30%),
+        linear-gradient(180deg,rgba(3,9,20,.72),rgba(3,9,20,.95)),
+        url("./black.png") center top / cover fixed no-repeat !important;
     }
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      z-index:-1;
-      opacity:.72;
+    body:before{
       background:
-        linear-gradient(90deg,rgba(110,168,217,.075) 1px,transparent 1px),
-        linear-gradient(rgba(110,168,217,.052) 1px,transparent 1px),
-        linear-gradient(135deg,transparent 0 44%,rgba(217,179,106,.08) 44% 45%,transparent 45% 100%);
-      background-size:82px 82px,82px 82px,100% 100%;
-      mask-image:linear-gradient(to bottom,black,black 78%,transparent);
+        linear-gradient(90deg,rgba(114,183,232,.08) 1px,transparent 1px),
+        linear-gradient(rgba(114,183,232,.055) 1px,transparent 1px),
+        linear-gradient(135deg,transparent 0 48%,rgba(217,179,106,.08) 48% 49%,transparent 49% 100%) !important;
+      background-size:80px 80px,80px 80px,100% 100% !important;
+      opacity:.7 !important;
+      mask-image:linear-gradient(to bottom,black,black 72%,transparent);
     }
-    body::after{
+    .site:before{
       content:"";
       position:fixed;
       inset:0;
-      z-index:-1;
       pointer-events:none;
-      background:radial-gradient(circle at 50% -10%,rgba(255,255,255,.10),transparent 34%);
+      background:
+        radial-gradient(circle at 50% 0%,rgba(255,255,255,.08),transparent 32%),
+        linear-gradient(180deg,transparent,rgba(3,9,20,.42));
+      z-index:-1;
     }
 
-    a{text-decoration:none;color:inherit}
-    button,input,textarea{font:inherit}
-    img{max-width:100%;display:block}
-    .wrap{width:min(1220px,calc(100% - 36px));margin:auto}
-    .scan-line{position:fixed;left:0;top:0;z-index:100;width:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--gold));box-shadow:0 0 22px rgba(217,179,106,.55)}
-
+    .wrap{width:min(1240px,calc(100% - 34px))}
     .topbar{
-      position:sticky;
-      top:0;
-      z-index:50;
-      background:rgba(3,9,20,.78);
-      border-bottom:1px solid rgba(217,179,106,.18);
-      backdrop-filter:blur(18px);
-      box-shadow:0 18px 50px rgba(0,0,0,.26);
+      background:rgba(3,9,20,.78) !important;
+      border-bottom:1px solid rgba(217,179,106,.20) !important;
+      box-shadow:0 18px 55px rgba(0,0,0,.34) !important;
+      backdrop-filter:blur(20px);
     }
-    .header{
-      min-height:82px;
-      display:grid;
-      grid-template-columns:minmax(250px,1fr) auto auto;
-      gap:18px;
-      align-items:center;
-    }
-    .brand{display:flex;align-items:center;gap:14px}
+    .header{min-height:86px !important}
     .brand img{
-      width:64px;
-      height:64px;
-      object-fit:contain;
+      width:72px !important;
+      height:72px !important;
       border-radius:22px;
       padding:7px;
-      border:1px solid rgba(217,179,106,.22);
       background:rgba(255,255,255,.06);
-      filter:drop-shadow(0 12px 22px rgba(0,0,0,.28));
+      border:1px solid rgba(217,179,106,.20);
     }
-    .brand h1{
-      font-family:"Cinzel",serif;
-      font-size:clamp(24px,2.8vw,38px);
-      line-height:1;
-      color:#fff4dd;
-      letter-spacing:.02em;
-    }
-    .brand small{display:block;margin-top:6px;color:var(--faint);font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:11px}
-    .nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:7px;border-radius:999px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.08)}
-    .nav a{
-      min-height:38px;
-      display:inline-flex;
-      align-items:center;
+    .brand h1{color:#fff4dd !important;letter-spacing:.02em}
+    .brand small{color:rgba(247,241,228,.58) !important}
+    .nav{
+      padding:7px;
       border-radius:999px;
-      padding:8px 13px;
-      color:rgba(247,241,228,.74);
-      font-size:13px;
-      font-weight:900;
+      background:rgba(255,255,255,.055);
+      border:1px solid rgba(217,179,106,.16);
+    }
+    .nav a{
+      color:rgba(247,241,228,.72) !important;
+      border-radius:999px;
       transition:.2s ease;
     }
-    .nav a:hover,.nav a.active{color:#fff4dd;background:rgba(255,255,255,.10)}
-    .back{
-      min-height:42px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:10px 17px;
-      border-radius:999px;
-      color:#07101d;
-      background:linear-gradient(135deg,#e6c779,#a77831);
-      border:1px solid rgba(255,239,198,.36);
-      font-weight:900;
-      box-shadow:0 16px 36px rgba(166,119,49,.18);
+    .nav a:hover,.nav .active{
+      background:rgba(255,255,255,.10) !important;
+      outline:1px solid rgba(217,179,106,.26) !important;
+      color:#fff4dd !important;
+    }
+    .apply,.btn.primary{
+      background:linear-gradient(135deg,#e4c371,#9d6f2d) !important;
+      color:#07101d !important;
+      border:1px solid rgba(255,236,184,.42) !important;
+      box-shadow:0 14px 36px rgba(169,121,48,.22) !important;
     }
 
-    main{padding:28px 0 58px}
-    .hero{
-      display:grid;
-      grid-template-columns:minmax(0,1.2fr) minmax(320px,.8fr);
-      gap:18px;
-      align-items:stretch;
-      margin-bottom:18px;
+    main{padding-top:28px !important}
+    .panel,.article,.comment,.compose,.related,.sidebox{
+      background:linear-gradient(145deg,var(--panel-dark),rgba(5,13,25,.88)) !important;
+      border:1px solid var(--hair) !important;
+      box-shadow:var(--shadow2) !important;
+      backdrop-filter:blur(20px);
+      color:var(--text) !important;
     }
-    .hero-card,.console-card,.sidebox,.article,.comment,.compose,.related,.empty-card{
+    .panel,.article,.sidebox{border-radius:28px !important}
+    .dark{
+      background:
+        radial-gradient(circle at 8% 12%,rgba(114,183,232,.22),transparent 34%),
+        radial-gradient(circle at 94% 10%,rgba(217,179,106,.18),transparent 32%),
+        linear-gradient(145deg,rgba(10,24,42,.90),rgba(4,11,22,.94)) !important;
+    }
+
+    .hero{
       position:relative;
       overflow:hidden;
-      border-radius:var(--radius);
-      border:1px solid var(--line);
-      background:linear-gradient(145deg,rgba(10,24,42,.84),rgba(5,13,25,.90));
-      box-shadow:var(--shadow), inset 0 1px 0 rgba(255,255,255,.055);
+      grid-template-columns:minmax(0,1fr) minmax(320px,420px) !important;
+      margin-bottom:18px !important;
+    }
+    .hero:after{
+      content:"";
+      position:absolute;
+      inset:18px;
+      border-radius:22px;
+      border:1px solid rgba(217,179,106,.14);
+      pointer-events:none;
+    }
+    .hero h1{
+      color:#fff6df !important;
+      letter-spacing:-.01em;
+      text-shadow:0 20px 55px rgba(0,0,0,.38);
+    }
+    .hero p{color:var(--sub) !important}
+    .eyebrow{
+      background:rgba(217,179,106,.10) !important;
+      color:#f2d28a !important;
+      border:1px solid rgba(217,179,106,.30) !important;
+      letter-spacing:.10em;
+      box-shadow:none !important;
+    }
+    .stats{gap:12px !important}
+    .stat{
+      background:rgba(255,255,255,.065) !important;
+      border:1px solid rgba(255,255,255,.08) !important;
+      border-radius:20px !important;
+    }
+    .stat b{color:#f3d38a !important}
+    .stat span{color:rgba(247,241,228,.58) !important}
+
+    .board-command{
+      margin:0 0 20px;
+      display:grid;
+      grid-template-columns:minmax(0,1fr) auto auto;
+      gap:12px;
+      align-items:center;
+      padding:14px;
+      border-radius:24px;
+      background:rgba(255,255,255,.055);
+      border:1px solid rgba(217,179,106,.18);
+      box-shadow:0 18px 52px rgba(0,0,0,.22);
       backdrop-filter:blur(18px);
     }
-    .hero-card::before,.console-card::before,.sidebox::before,.article::before{
+    .board-search{
+      min-height:46px;
+      border:1px solid rgba(217,179,106,.18);
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      padding:0 18px;
+      outline:none;
+      font-weight:800;
+    }
+    .board-search::placeholder{color:rgba(247,241,228,.42)}
+    .board-search:focus{border-color:rgba(217,179,106,.44);box-shadow:0 0 0 4px rgba(217,179,106,.10)}
+    .board-chip{
+      min-height:46px;
+      display:grid;
+      place-items:center;
+      padding:0 16px;
+      border-radius:999px;
+      border:1px solid rgba(217,179,106,.18);
+      background:rgba(255,255,255,.06);
+      color:#f2d28a;
+      font-weight:900;
+      white-space:nowrap;
+    }
+
+    .layout{grid-template-columns:330px minmax(0,1fr) !important}
+    .side{top:112px !important}
+    .sidebox h3,.section-title h2,.title h2,.bodybox h3,.compose h3,.related h3{
+      color:#fff4dd !important;
+    }
+    .thread{
+      background:rgba(255,255,255,.055) !important;
+      border:1px solid rgba(255,255,255,.08) !important;
+      color:var(--text) !important;
+    }
+    .thread:hover,.thread.active{
+      background:rgba(255,255,255,.10) !important;
+      box-shadow:0 18px 46px rgba(0,0,0,.22) !important;
+      outline:1px solid rgba(217,179,106,.30) !important;
+    }
+    .thread span,.title p,.meta,.body,.comment p,.section-title p,.related p,.add p,.footer{
+      color:var(--sub) !important;
+    }
+    .thread b{color:#fff4dd}
+    .thread img,.zone-mini img,.ricon img,.avatar img,.official img{
+      filter:drop-shadow(0 12px 18px rgba(0,0,0,.26)) !important;
+    }
+    .zone-mini,.related,.bodybox{
+      background:rgba(255,255,255,.055) !important;
+      border:1px solid rgba(255,255,255,.08) !important;
+      color:var(--text) !important;
+    }
+    .zone-mini:hover,.related:hover{
+      background:rgba(255,255,255,.10) !important;
+      border-color:rgba(217,179,106,.28) !important;
+    }
+    .zone-mini b{color:#f5ead0 !important}
+
+    .article{
+      padding:30px !important;
+      overflow:hidden;
+      position:relative;
+    }
+    .article:before{
       content:"";
       position:absolute;
       inset:0;
-      pointer-events:none;
       background:
-        radial-gradient(circle at 12% 10%,rgba(110,168,217,.13),transparent 30%),
-        radial-gradient(circle at 88% 16%,rgba(217,179,106,.11),transparent 28%);
+        radial-gradient(circle at 0% 0%,rgba(114,183,232,.13),transparent 34%),
+        radial-gradient(circle at 100% 8%,rgba(217,179,106,.11),transparent 30%);
+      pointer-events:none;
     }
-    .hero-card > *,.console-card > *,.sidebox > *,.article > *{position:relative;z-index:1}
-    .hero-card{padding:clamp(30px,5vw,54px);min-height:380px;display:flex;flex-direction:column;justify-content:center}
-    .eyebrow{
-      width:max-content;
-      max-width:100%;
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 13px;
-      border-radius:999px;
-      color:#f4d79a;
-      background:rgba(217,179,106,.10);
-      border:1px solid rgba(217,179,106,.28);
-      font-size:12px;
-      font-weight:900;
-      letter-spacing:.12em;
-      text-transform:uppercase;
+    .article > *{position:relative;z-index:1}
+    .article-head{
+      border-bottom:1px solid rgba(217,179,106,.18) !important;
     }
-    .eyebrow img{width:21px;height:21px;object-fit:contain}
-    .hero h2{
-      margin-top:18px;
-      max-width:760px;
-      font-family:"Playfair Display","Noto Sans Thai",serif;
-      font-size:clamp(44px,6vw,82px);
-      line-height:.95;
-      letter-spacing:-.02em;
-      color:#fff4dd;
-      text-shadow:0 20px 56px rgba(0,0,0,.38);
+    .meta b{color:#f3d38a !important}
+    .cover{
+      border-radius:24px !important;
+      border:1px solid rgba(217,179,106,.22) !important;
+      background:rgba(0,0,0,.18) !important;
+      box-shadow:0 24px 65px rgba(0,0,0,.30) !important;
     }
-    .hero h2 span{color:var(--gold)}
-    .hero p{margin-top:18px;max-width:700px;color:var(--muted);line-height:1.85;font-weight:700}
-    .hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
-    .btn{
-      min-height:44px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      border-radius:999px;
-      padding:11px 18px;
-      border:1px solid rgba(217,179,106,.24);
-      background:rgba(255,255,255,.07);
-      color:#f5ead0;
-      font-weight:900;
-      cursor:pointer;
-      transition:transform .2s ease, background .2s ease, border-color .2s ease;
+    .cover img{
+      background:rgba(255,255,255,.03) !important;
+      width:100% !important;
+      height:auto !important;
+      object-fit:contain !important;
     }
-    .btn:hover{transform:translateY(-2px);background:rgba(255,255,255,.11);border-color:rgba(217,179,106,.42)}
-    .btn.primary{background:linear-gradient(135deg,#e6c779,#a77831);color:#07101d;border-color:rgba(255,239,198,.40)}
 
-    .console-card{padding:22px;display:grid;align-content:space-between;gap:16px}
-    .console-card h3,.sidebox h3{font-size:18px;color:#fff4dd;letter-spacing:.01em}
-    .status-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-    .status{
-      min-height:100px;
-      padding:14px;
-      border-radius:18px;
-      background:rgba(255,255,255,.06);
-      border:1px solid var(--line-2);
+    .react,.like button,.btn.soft{
+      background:rgba(255,255,255,.06) !important;
+      border:1px solid rgba(217,179,106,.18) !important;
+      color:#f5ead0 !important;
     }
-    .status b{display:block;color:#f3d38a;font-family:"Cinzel",serif;font-size:27px;line-height:1}
-    .status span{display:block;margin-top:9px;color:var(--muted);font-size:12px;font-weight:900;line-height:1.45}
-    .control-row{display:flex;gap:8px;flex-wrap:wrap}
-    .control{flex:1 1 120px;min-height:40px;border-radius:999px;border:1px solid rgba(217,179,106,.20);background:rgba(255,255,255,.06);color:#f5ead0;font-weight:900;cursor:pointer}
+    .react:hover,.like button:hover,.btn.soft:hover{
+      background:rgba(255,255,255,.11) !important;
+      border-color:rgba(217,179,106,.34) !important;
+    }
+    .react.liked,.like button.liked{
+      background:rgba(217,179,106,.16) !important;
+      color:#f3d38a !important;
+      border-color:rgba(217,179,106,.36) !important;
+    }
+    .comment{
+      border-radius:22px !important;
+      background:rgba(255,255,255,.055) !important;
+      border:1px solid rgba(255,255,255,.08) !important;
+      box-shadow:0 18px 50px rgba(0,0,0,.22) !important;
+    }
+    .comment:hover{background:rgba(255,255,255,.09) !important}
+    .comment:before{box-shadow:0 0 18px var(--accent)}
+    .avatar{box-shadow:0 16px 30px rgba(0,0,0,.24) !important}
+    .like small{color:rgba(247,241,228,.50) !important}
 
-    .tools{
+    .live-strip{
       display:grid;
-      grid-template-columns:minmax(0,1fr) auto;
-      gap:12px;
-      margin-bottom:18px;
+      gap:10px;
+      margin-top:14px;
     }
-    .search{
-      min-height:48px;
-      border-radius:999px;
-      border:1px solid rgba(217,179,106,.22);
-      background:rgba(255,255,255,.065);
-      color:var(--text);
-      outline:none;
-      padding:0 18px;
+    .live-line{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-height:40px;
+      padding:8px 10px;
+      border-radius:16px;
+      background:rgba(255,255,255,.055);
+      border:1px solid rgba(255,255,255,.08);
+      color:rgba(247,241,228,.68);
+      font-size:12px;
       font-weight:800;
     }
-    .search::placeholder{color:rgba(247,241,228,.42)}
-    .filter-group{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
-    .filter{
-      min-height:48px;
-      border-radius:999px;
-      border:1px solid rgba(217,179,106,.20);
-      background:rgba(255,255,255,.06);
-      color:#f5ead0;
-      padding:0 14px;
-      font-weight:900;
-      cursor:pointer;
+    .live-dot{
+      width:9px;
+      height:9px;
+      border-radius:50%;
+      background:#8de7ff;
+      box-shadow:0 0 0 0 rgba(141,231,255,.7);
+      animation:boardPulse 1.8s infinite;
     }
-    .filter.active{background:rgba(217,179,106,.18);color:#f3d38a;border-color:rgba(217,179,106,.38)}
-
-    .layout{display:grid;grid-template-columns:360px minmax(0,1fr);gap:20px;align-items:start}
-    .side{display:grid;gap:14px;position:sticky;top:104px}
-    .sidebox{padding:18px}
-    .side-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
-    .side-head span{color:var(--faint);font-size:12px;font-weight:900}
-    .thread-list{display:grid;gap:10px}
-    .thread{
-      display:grid;
-      grid-template-columns:46px minmax(0,1fr) auto;
-      gap:12px;
-      align-items:center;
-      width:100%;
-      min-height:76px;
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:20px;
-      padding:11px;
-      color:var(--text);
-      background:rgba(255,255,255,.055);
-      cursor:pointer;
-      text-align:left;
-      transition:.2s ease;
+    @keyframes boardPulse{70%{box-shadow:0 0 0 12px rgba(141,231,255,0)}100%{box-shadow:0 0 0 0 rgba(141,231,255,0)}}
+    .scanbar{
+      position:fixed;
+      inset:0 auto auto 0;
+      width:0;
+      height:3px;
+      z-index:120;
+      background:linear-gradient(90deg,var(--blue),var(--gold));
+      box-shadow:0 0 24px rgba(217,179,106,.52);
+      pointer-events:none;
     }
-    .thread:hover,.thread.active{transform:translateY(-2px);background:rgba(255,255,255,.09);border-color:rgba(217,179,106,.32)}
-    .thread.active{box-shadow:inset 3px 0 0 var(--gold),0 16px 36px rgba(0,0,0,.20)}
-    .thread img{width:42px;height:42px;object-fit:contain;border-radius:14px;background:rgba(255,255,255,.06);padding:5px;border:1px solid rgba(217,179,106,.18)}
-    .thread b{display:block;font-size:14px;line-height:1.35;color:#fff3d8}
-    .thread span{display:block;margin-top:4px;color:var(--faint);font-size:12px;font-weight:800}
-    .thread em{font-style:normal;color:#f3d38a;font-size:11px;font-weight:900}
-    .thread.hidden{display:none}
-    .zone-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-    .zone-mini{
-      min-height:84px;
-      display:grid;
-      place-items:center;
-      gap:6px;
+    .toast{
+      position:fixed;
+      right:18px;
+      bottom:22px;
+      z-index:130;
+      max-width:min(340px,calc(100% - 36px));
+      padding:14px 16px;
       border-radius:18px;
-      background:rgba(255,255,255,.055);
-      border:1px solid rgba(255,255,255,.08);
-      transition:.2s ease;
+      background:rgba(4,11,22,.92);
+      border:1px solid rgba(217,179,106,.26);
+      color:#f7f1e4;
+      box-shadow:0 22px 60px rgba(0,0,0,.38);
+      opacity:0;
+      transform:translateY(10px);
+      pointer-events:none;
+      transition:.24s ease;
+      font-weight:800;
     }
-    .zone-mini:hover{transform:translateY(-2px);border-color:rgba(217,179,106,.30);background:rgba(255,255,255,.09)}
-    .zone-mini img{width:42px;height:42px;object-fit:contain}
-    .zone-mini b{font-size:12px;color:#f5ead0}
-
-    .content{display:grid;gap:18px}
-    .article{padding:clamp(22px,4vw,36px)}
-    .article-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:start;border-bottom:1px solid rgba(217,179,106,.18);padding-bottom:20px;margin-bottom:22px}
-    .title h2{margin-top:12px;font-family:"Playfair Display","Noto Sans Thai",serif;font-size:clamp(32px,4.2vw,56px);line-height:1.04;color:#fff4dd;letter-spacing:-.02em}
-    .title p{margin-top:10px;color:var(--muted);font-weight:700;line-height:1.75}
-    .meta-card{
-      min-width:160px;
-      border-radius:20px;
-      padding:15px;
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.09);
-      text-align:right;
-    }
-    .meta-card b{display:block;color:#f3d38a;font-family:"Cinzel",serif;font-size:28px}
-    .meta-card span{color:var(--faint);font-size:12px;font-weight:900}
-    .cover{margin:20px 0;border-radius:24px;overflow:hidden;border:1px solid rgba(217,179,106,.20);background:rgba(255,255,255,.05)}
-    .cover img{width:100%;height:auto;object-fit:contain;background:rgba(3,9,20,.55)}
-    .body-grid{display:grid;gap:12px}
-    .bodybox{
-      padding:18px;
-      border-radius:20px;
-      background:rgba(255,255,255,.055);
-      border:1px solid rgba(255,255,255,.08);
-    }
-    .bodybox h3{font-size:20px;color:#f3d38a;margin-bottom:8px}
-    .bodybox p{color:var(--muted);line-height:1.9;font-weight:650}
-    .article-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}
-    .react{
-      min-height:40px;
-      border-radius:999px;
-      padding:8px 13px;
-      border:1px solid rgba(217,179,106,.20);
-      background:rgba(255,255,255,.065);
-      color:#f5ead0;
-      font-weight:900;
-      cursor:pointer;
-      transition:.2s ease;
-    }
-    .react:hover,.react.liked{transform:translateY(-2px);background:rgba(217,179,106,.18);color:#f3d38a;border-color:rgba(217,179,106,.38)}
-
-    .section-title{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-top:8px}
-    .section-title h2{font-family:"Playfair Display","Noto Sans Thai",serif;font-size:clamp(30px,4vw,48px);line-height:1;color:#fff4dd}
-    .section-title p{margin-top:10px;color:var(--muted);line-height:1.7;font-weight:700}
-    .comments{display:grid;gap:12px}
-    .comment{
-      display:grid;
-      grid-template-columns:54px minmax(0,1fr) auto;
-      gap:14px;
-      align-items:start;
-      padding:16px;
-      border-color:rgba(255,255,255,.08);
-      background:linear-gradient(145deg,rgba(10,24,42,.72),rgba(5,13,25,.80));
-      transition:.2s ease;
-    }
-    .comment:hover{transform:translateY(-2px);border-color:rgba(217,179,106,.26)}
-    .comment::before{content:"";position:absolute;left:0;top:16px;bottom:16px;width:3px;border-radius:999px;background:var(--accent)}
-    .avatar{width:54px;height:54px;border-radius:18px;display:grid;place-items:center;background:rgba(255,255,255,.065);border:1px solid rgba(255,255,255,.10)}
-    .avatar img{width:40px;height:40px;object-fit:contain}
-    .user{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:7px}
-    .name{font-weight:900;color:#fff3d8}
-    .zone{display:inline-flex;align-items:center;min-height:25px;padding:3px 9px;border-radius:999px;background:rgba(217,179,106,.14);color:#f3d38a;font-size:12px;font-weight:900}
-    .comment p{color:var(--muted);line-height:1.75;font-weight:650;font-size:14px}
-    .like{display:grid;justify-items:end;gap:8px;min-width:86px}
-    .like button{border-radius:999px;border:1px solid rgba(217,179,106,.20);background:rgba(255,255,255,.06);color:#f5ead0;padding:7px 11px;font-weight:900;cursor:pointer}
-    .like button.liked{background:rgba(217,179,106,.18);color:#f3d38a;border-color:rgba(217,179,106,.38)}
-    .like small{color:var(--faint);font-size:12px;font-weight:800}
-    .z1{--accent:#4da9e8}.z2{--accent:#d7bd8c}.z3{--accent:#d74c5c}.z4{--accent:#9ec88f}.z5{--accent:#b494da}.z6{--accent:#ea9eb5}.z7{--accent:#8ecbe8}.z8{--accent:#d4a344}
-
-    .compose{padding:22px}
-    .compose h3{font-size:24px;color:#fff4dd;margin-bottom:8px}
-    .compose p{color:var(--muted);line-height:1.7;font-weight:700;margin-bottom:14px}
-    .form{display:grid;gap:10px}
-    .form input,.form textarea{
-      width:100%;
-      border-radius:18px;
-      border:1px solid rgba(217,179,106,.18);
-      background:rgba(255,255,255,.06);
-      color:var(--text);
-      padding:13px 15px;
-      outline:none;
-    }
-    .form textarea{min-height:108px;resize:vertical}
-    .formrow{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-    .note{color:var(--faint);font-size:13px;font-weight:800}
-    .disabled{opacity:.58;cursor:not-allowed}
-    .related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-    .related{min-height:152px;padding:16px;border-color:rgba(255,255,255,.08);background:linear-gradient(145deg,rgba(10,24,42,.72),rgba(5,13,25,.80));transition:.2s ease}
-    .related:hover{transform:translateY(-3px);border-color:rgba(217,179,106,.28)}
-    .ricon{width:46px;height:46px;border-radius:16px;display:grid;place-items:center;background:rgba(255,255,255,.065);border:1px solid rgba(255,255,255,.10);margin-bottom:10px}
-    .ricon img{width:34px;height:34px;object-fit:contain}
-    .related h3{font-size:17px;line-height:1.35;color:#fff3d8}
-    .related p{margin-top:7px;color:var(--muted);font-size:13px;line-height:1.6;font-weight:650}
-    .add{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center}
-    .footer{text-align:center;color:var(--faint);font-size:13px;line-height:1.8;margin-top:34px}
-    .toast{position:fixed;right:18px;bottom:22px;z-index:120;max-width:min(340px,calc(100% - 36px));padding:14px 16px;border-radius:18px;background:rgba(6,15,28,.94);border:1px solid rgba(217,179,106,.28);box-shadow:0 22px 60px rgba(0,0,0,.35);color:#f7f1e4;font-weight:800;line-height:1.55;opacity:0;transform:translateY(10px);pointer-events:none;transition:.25s ease}
     .toast.show{opacity:1;transform:none}
+    .compose,.add{display:none !important}
 
-    @media(max-width:1080px){
-      .header{grid-template-columns:1fr}.nav{justify-content:flex-start;width:max-content;max-width:100%}.hero{grid-template-columns:1fr}.layout{grid-template-columns:1fr}.side{position:static}.zone-grid{grid-template-columns:repeat(8,1fr)}
+    @media(max-width:1180px){
+      .hero{grid-template-columns:1fr !important}
+      .layout{grid-template-columns:1fr !important}
+      .board-command{grid-template-columns:1fr 1fr}
+      .board-search{grid-column:1/-1}
     }
-    @media(max-width:740px){
-      .wrap{width:min(100% - 24px,1220px)}.header{padding:14px 0}.brand h1{font-size:24px}.nav{border-radius:22px}.hero-card{min-height:auto}.status-grid,.tools{grid-template-columns:1fr}.filter-group{justify-content:flex-start}.zone-grid{grid-template-columns:repeat(4,1fr)}.article-head{grid-template-columns:1fr}.meta-card{text-align:left}.comment{grid-template-columns:48px minmax(0,1fr)}.like{grid-column:2;justify-items:start}.related-grid{grid-template-columns:1fr}.add{grid-template-columns:1fr}.back{width:max-content}
-    }
-    @media(max-width:480px){
-      .zone-grid{grid-template-columns:repeat(2,1fr)}.hero h2{font-size:42px}.article,.hero-card,.console-card,.sidebox,.compose{border-radius:22px}.thread{grid-template-columns:42px minmax(0,1fr)}
+    @media(max-width:720px){
+      .wrap{width:min(100% - 24px,1240px)}
+      .nav{border-radius:22px;justify-content:flex-start}
+      .board-command{grid-template-columns:1fr}
+      .board-chip{justify-content:start}
+      .article{padding:22px !important}
+      .hero:after{display:none}
     }
   </style>
 </head>
 <body>
-  <div class="scan-line" id="scanLine"></div>
-  <div class="toast" id="toast"></div>
+  <div class="site">
+    <header class="topbar"><div class="wrap header">
+      <a class="brand" href="./index.html"><img src="./eden.png" alt="E8’s Eden Academy"><div><h1>E8’s Eden Academy</h1><small>กระดานนักเรียน ✦ School Board</small></div></a>
+      <nav class="nav"><a href="./index.html">หน้าหลัก</a><a class="active" href="./board.html">ข่าวสาร</a><a href="#threads">กระทู้ทั้งหมด</a><a href="./index.html#zones">โซนทั้ง 8</a><a href="./index.html#member">สมัครสมาชิก</a></nav>
+      <a class="apply" href="./index.html">← กลับหน้าแรก</a>
+    </div></header>
 
-  <header class="topbar">
-    <div class="wrap header">
-      <a class="brand" href="./index.html" aria-label="กลับหน้าแรก">
-        <img src="./eden.png" alt="E8's Eden Academy">
-        <div>
-          <h1>E8's Eden Academy</h1>
-          <small>Student Board System</small>
-        </div>
-      </a>
-      <nav class="nav" aria-label="เมนูหลัก">
-        <a href="./index.html">หน้าหลัก</a>
-        <a class="active" href="./board.html">กระดาน</a>
-        <a href="#threads">กระทู้ทั้งหมด</a>
-        <a href="./index.html#zones">โซนทั้ง 8</a>
-        <a href="./register.html">สมัครบัตร</a>
-      </nav>
-      <a class="back" href="./index.html">กลับหน้าแรก</a>
-    </div>
-  </header>
+    <main class="wrap">
+      <section class="panel dark hero">
+        <div><div class="eyebrow">E8 STUDENT BOARD</div><h1>กระดานนักเรียน</h1><p>พื้นที่รวมประกาศจากสถาบัน ข่าวสารประจำโซน และหัวข้อพูดคุยของนักเรียนใน E8’s Eden Academy</p></div>
+        <div class="stats"><div class="stat"><b id="onlineBoard">96</b><span>กำลังอ่านบอร์ด</span></div><div class="stat"><b>8</b><span>โซนที่เปิดอยู่</span></div><div class="stat"><b>24</b><span>กระทู้วันนี้</span></div></div>
+      </section>
 
-  <main class="wrap">
-    <section class="hero">
-      <article class="hero-card">
-        <span class="eyebrow">E8 Student Board</span>
-        <h2>กระดานนักเรียน<br><span>ระบบประกาศอัจฉริยะ</span></h2>
-        <p>พื้นที่รวมประกาศจากสถาบัน ข่าวสารประจำโซน และหัวข้อพูดคุยของนักเรียนใน E8's Eden Academy ออกแบบใหม่ให้เป็นศูนย์กลางข้อมูลแบบ smart console</p>
-        <div class="hero-actions">
-          <button class="btn primary" type="button" data-scroll="#threads">เปิดกระทู้ล่าสุด</button>
-          <button class="btn" type="button" data-scroll="#commentsStart">ดูความคิดเห็น</button>
-        </div>
-      </article>
+      <section class="board-command" aria-label="ระบบควบคุมกระดานนักเรียน">
+        <input class="board-search" id="boardSearch" type="search" placeholder="ค้นหากระทู้ ประกาศ โซน หรือคอมเมนต์..." aria-label="ค้นหากระทู้">
+        <div class="board-chip"><span id="threadMatchCount">5</span>&nbsp;กระทู้ที่พบ</div>
+        <div class="board-chip">SYNC <span id="syncClock">--:--</span></div>
+      </section>
 
-      <aside class="console-card">
-        <h3>Board Intelligence</h3>
-        <div class="status-grid">
-          <div class="status"><b id="onlineBoard">096</b><span>กำลังอ่านบอร์ดตอนนี้</span></div>
-          <div class="status"><b id="smartClock">--:--</b><span>เวลาระบบสถาบัน</span></div>
-          <div class="status"><b>08</b><span>โซนที่เปิดใช้งาน</span></div>
-          <div class="status"><b id="savedCount">0</b><span>กระทู้ที่บันทึกไว้</span></div>
-        </div>
-        <div class="control-row">
-          <button class="control" type="button" id="copyBoard">คัดลอกลิงก์</button>
-          <button class="control" type="button" id="focusSearch">ค้นหากระทู้</button>
-        </div>
-      </aside>
-    </section>
-
-    <section class="tools" aria-label="เครื่องมือกระดาน">
-      <input class="search" id="threadSearch" type="search" placeholder="ค้นหากระทู้ เช่น สมัคร ตารางเรียน กิจกรรม โซน..." aria-label="ค้นหากระทู้">
-      <div class="filter-group" id="filterGroup">
-        <button class="filter active" type="button" data-filter="all">ทั้งหมด</button>
-        <button class="filter" type="button" data-filter="news">ประกาศ</button>
-        <button class="filter" type="button" data-filter="zone">โซน</button>
-        <button class="filter" type="button" data-filter="social">พูดคุย</button>
-      </div>
-    </section>
-
-    <section class="layout" id="threads">
-      <aside class="side">
-        <div class="sidebox">
-          <div class="side-head"><h3>กระทู้แนะนำ</h3><span id="threadCount">5 รายการ</span></div>
-          <div class="thread-list" id="threadList"></div>
-        </div>
-        <div class="sidebox">
-          <div class="side-head"><h3>สัญลักษณ์โซน</h3><span>E1-E8</span></div>
-          <div class="zone-grid">
-            <a class="zone-mini" href="./index.html#zones"><img src="./e1m.png" alt="E1"><b>E1</b></a>
-            <a class="zone-mini" href="./index.html#zones"><img src="./e2m.png" alt="E2"><b>E2</b></a>
-            <a class="zone-mini" href="./index.html#zones"><img src="./e3m.png" alt="E3"><b>E3</b></a>
-            <a class="zone-mini" href="./index.html#zones"><img src="./e4m.png" alt="E4"><b>E4</b></a>
-            <a class="zone-mini" href="./index.html#zones"><img src="./e5m.png" alt="E5"><b>E5</b></a>
-            <a class="zone-mini" href="./index.html#zones"><img src="./e6m.png" alt="E6"><b>E6</b></a>
-            <a class="zone-mini" href="./index.html#zones"><img src="./e7m.png" alt="E7"><b>E7</b></a>
-            <a class="zone-mini" href="./index.html#zones"><img src="./e8m.png" alt="E8"><b>E8</b></a>
-          </div>
-        </div>
-      </aside>
-      <section class="content" id="boardContent" aria-live="polite"></section>
-    </section>
-
-    <footer class="footer">
-      E8's Eden Academy Student Board<br>
-      School News · Zone Talk · Smart Institute System
-    </footer>
-  </main>
+      <section class="layout" id="threads">
+        <aside class="side">
+          <div class="sidebox"><h3>กระทู้แนะนำ</h3><div class="thread-list" id="threadList"></div></div>
+          <div class="sidebox"><h3>Live Activity</h3><div class="live-strip" id="liveStrip"></div></div>
+          <div class="sidebox"><h3>สัญลักษณ์โซน</h3><div class="zone-grid">
+            <a class="zone-mini" href="#e1"><img src="./e1m.png" alt="E1"><b>E1</b></a><a class="zone-mini" href="#e2"><img src="./e2m.png" alt="E2"><b>E2</b></a><a class="zone-mini" href="#e3"><img src="./e3m.png" alt="E3"><b>E3</b></a><a class="zone-mini" href="#e4"><img src="./e4m.png" alt="E4"><b>E4</b></a>
+            <a class="zone-mini" href="#e5"><img src="./e5m.png" alt="E5"><b>E5</b></a><a class="zone-mini" href="#e6"><img src="./e6m.png" alt="E6"><b>E6</b></a><a class="zone-mini" href="#e7"><img src="./e7m.png" alt="E7"><b>E7</b></a><a class="zone-mini" href="#e8"><img src="./e8m.png" alt="E8"><b>E8</b></a>
+          </div></div>
+        </aside>
+        <section class="content" id="boardContent"></section>
+      </section>
+      <footer class="footer">E8’s Eden Academy © Student Board<br>School News • Zone Talk • Student Community</footer>
+    </main>
+  </div>
 
   <script>
-    const threads = {
-      owners:{
-        id:"owners", type:"news", icon:"./b1.png", label:"ข่าวสารสำคัญ", status:"PIN",
-        title:"โฉมหน้าของเจ้าของปราสาททั้ง 7 โซน",
-        subtitle:"ประกาศทางการจากสถาบัน", author:"Eden Administrative Office", views:"1,284", cover:"./head.png",
-        body:[
-          ["ประกาศต้อนรับเข้าสู่ E8's Eden Academy","ยินดีต้อนรับนักเรียนทุกท่านเข้าสู่พื้นที่กระดานนักเรียนของสถาบัน ประกาศฉบับนี้จัดทำขึ้นเพื่อรวบรวมข้อมูลสำคัญเกี่ยวกับเจ้าของปราสาททั้ง 7 โซน และใช้เป็นจุดเริ่มต้นสำหรับติดตามข่าวสารจากโรงเรียน"],
-          ["รายละเอียดการติดตามข่าวสาร","หลังจากสมัครสมาชิกเรียบร้อยแล้ว กรุณาตรวจสอบประกาศประจำโซน ตารางเรียน และรายละเอียดกิจกรรมอย่างสม่ำเสมอ เนื่องจากกำหนดการบางส่วนอาจมีการปรับตามรอบประกาศของสถาบัน"],
-          ["แนวทางการใช้งานกระดาน","ขอให้นักเรียนทุกคนใช้พื้นที่นี้อย่างสุภาพ เคารพผู้อื่น และติดตามประกาศจากทางสถาบันเป็นหลัก เพื่อให้การสื่อสารระหว่างโรงเรียนและนักเรียนเป็นไปอย่างเรียบร้อย"]
-        ],
-        reacts:[96,42,18,11],
-        comments:[
-          c("Aurelia.vv","E1","z1","./e1m.png","ประกาศรอบนี้อ่านง่ายขึ้นมากค่ะ เห็นภาพรวมของแต่ละโซนชัดเจนดี",24),
-          c("Celestine.q","E2","z2","./e2m.png","ชอบที่มีรูปเจ้าของปราสาทรวมไว้ในกระทู้เดียว เวลากลับมาเช็คจะสะดวกมาก",31),
-          c("Valentina.m","E3","z3","./e3m.png","ถ้ามีอัปเดตเรื่องตารางเรียน อยากให้ปักลิงก์ไว้ใต้กระทู้นี้ด้วยค่ะ",18),
-          c("Elowen.ivy","E4","z4","./e4m.png","ภาพรวมโซนดูเป็นทางการดีค่ะ เหมาะสำหรับคนที่เพิ่งเข้ามาอ่านครั้งแรก",15)
-        ]
-      },
-      register:{
-        id:"register", type:"news", icon:"./b4.png", label:"สมัครนักเรียน", status:"NEW",
-        title:"ประกาศเปิดรับสมัครสมาชิกนักเรียนประจำภาคเรียน",
-        subtitle:"ฝ่ายทะเบียน · วันนี้ 09:00", author:"Student Registry", views:"864", cover:null,
-        body:[
-          ["ระบบสมัครสมาชิกนักเรียน","ฝ่ายทะเบียนเปิดให้บันทึกข้อมูลสมาชิกนักเรียนเพื่อเตรียมเชื่อมระบบตารางเรียน ประกาศรายโซน และการยืนยันตัวตนในอนาคต"],
-          ["สิ่งที่นักเรียนควรเตรียม","โปรดเตรียมชื่อที่ต้องการใช้ในระบบ รูปโปรไฟล์ และเลือกโซนที่ตรงกับตัวตนของคุณ เมื่อระบบยืนยันข้อมูลพร้อมใช้งานจะแสดงข้อมูลบนหน้าบัตรนักเรียน"],
-          ["หมายเหตุ","ระบบนี้อยู่ระหว่างเตรียมเปิดใช้งานเต็มรูปแบบ ข้อมูลบางส่วนอาจมีการปรับตามประกาศของฝ่ายทะเบียน"]
-        ],
-        reacts:[74,33,16,9],
-        comments:[
-          c("Arabella.n","E2","z2","./e2m.png","รอระบบสมัครสมาชิกเลยค่ะ อยากเลือกโซนและเช็คตารางเรียนในหน้าเดียว",28),
-          c("Rosalind.elle","E6","z6","./e6m.png","ถ้ามีตัวอย่างรูปที่ใช้ทำบัตรนักเรียนจะดีมากค่ะ จะได้เตรียมรูปให้ถูก",17),
-          c("Mirabelle.x","E4","z4","./e4m.png","อยากให้มีปุ่มแก้ไขข้อมูลหลังสมัครด้วย เผื่อพิมพ์ชื่อผิดค่ะ",21)
-        ]
-      },
-      schedule:{
-        id:"schedule", type:"zone", icon:"./b5.png", label:"ตารางเรียน", status:"E1-E8",
-        title:"คู่มือการตรวจสอบตารางเรียนของแต่ละโซน",
-        subtitle:"Academic Office", author:"Academic Office", views:"642", cover:null,
-        body:[
-          ["การตรวจสอบตารางเรียน","นักเรียนสามารถตรวจสอบตารางเรียนตามโซนของตนเองได้จากหน้าสมาชิก เมื่อระบบเปิดใช้งาน ตารางจะจัดแยกตาม E1-E8 เพื่อให้ค้นหาได้ง่าย"],
-          ["การอัปเดตข้อมูล","หากมีการเปลี่ยนแปลงเวลาเรียน ห้องเรียน หรือกิจกรรมพิเศษ ระบบจะแสดงประกาศเพิ่มเติมในกระดานนักเรียนและหน้าแรกของเว็บไซต์"],
-          ["คำแนะนำ","กรุณาตรวจสอบตารางเรียนของตนเองอย่างสม่ำเสมอ โดยเฉพาะในช่วงเปิดภาคเรียนและช่วงกิจกรรมประจำโซน"]
-        ],
-        reacts:[58,26,12,7],
-        comments:[
-          c("Evangeline.8","E7","z7","./e7m.png","ขอให้ตารางเรียนแยกสีตามโซนด้วยค่ะ จะได้ดูง่ายเวลาเปิดจากมือถือ",19),
-          c("Juliette.v","E3","z3","./e3m.png","ถ้าเปลี่ยนตารางแบบกะทันหัน อยากให้ขึ้นแจ้งเตือนหน้าแรกด้วยนะคะ",23),
-          c("Ophelia.rose","E4","z4","./e4m.png","อยากให้มีปุ่มบันทึกตารางเป็นรูปภาพค่ะ สะดวกมากเวลาเอาไว้เช็คเร็ว ๆ",16)
-        ]
-      },
-      activity:{
-        id:"activity", type:"zone", icon:"./b6.png", label:"กิจกรรม", status:"08",
-        title:"กิจกรรมต้อนรับนักเรียนใหม่: Eden Welcome Week",
-        subtitle:"Eden Council · พรุ่งนี้", author:"Eden Council", views:"918", cover:null,
-        body:[
-          ["ภาพรวมกิจกรรม","Eden Welcome Week เป็นกิจกรรมสำหรับต้อนรับนักเรียนใหม่และแนะนำระบบโซนของสถาบัน โดยจะมีหัวข้อแนะนำกระดานนักเรียน ตารางเรียน และแนวทางการใช้งานระบบสมาชิก"],
-          ["การเข้าร่วม","นักเรียนทุกโซนสามารถเข้าร่วมได้ รายละเอียดรอบเวลาและพื้นที่จัดกิจกรรมจะประกาศเพิ่มเติมในกระดานของแต่ละโซน"],
-          ["สิ่งที่ควรติดตาม","โปรดติดตามประกาศจาก Eden Council เพื่อรับข้อมูลกิจกรรมย่อยและการลงทะเบียนเข้าร่วมในแต่ละรอบ"]
-        ],
-        reacts:[88,39,22,15],
-        comments:[
-          c("Serena.belle","E6","z6","./e6m.png","อยากให้มีกิจกรรมแนะนำเพื่อนใหม่แยกตามโซนด้วยค่ะ จะได้เริ่มคุยง่ายขึ้น",34),
-          c("Claudia.rei","E5","z5","./e5m.png","ถ้ามีตารางกิจกรรมแบบสรุปในรูปเดียวจะดีมากค่ะ แชร์ต่อได้ง่าย",18),
-          c("Estelle.m","E8","z8","./e8m.png","รอติดตามรายละเอียดสถานที่จัดกิจกรรมค่ะ อยากรู้ว่าต้องลงทะเบียนก่อนหรือเปล่า",14)
-        ]
-      },
-      social:{
-        id:"social", type:"social", icon:"./b3.png", label:"พูดคุยทั่วไป", status:"CHAT",
-        title:"กระทู้พูดคุยทั่วไป: แชร์มุมโปรดในโรงเรียน",
-        subtitle:"Student Board", author:"Student Board", views:"503", cover:null,
-        body:[
-          ["พื้นที่พูดคุยของนักเรียน","กระทู้นี้เปิดไว้สำหรับพูดคุยทั่วไป แชร์มุมโปรดในโรงเรียน หรือแนะนำจุดถ่ายรูปที่น่าสนใจสำหรับนักเรียนใหม่"],
-          ["ขอบเขตการใช้งาน","สามารถพูดคุยได้ตามปกติ แต่ขอให้ใช้ถ้อยคำสุภาพ ไม่พาดพิงหรือเปิดเผยข้อมูลส่วนตัวของผู้อื่น"],
-          ["หัวข้อแนะนำ","ลองแชร์มุมที่ชอบ คาเฟ่ใกล้โรงเรียน จุดนั่งอ่านหนังสือ หรือประสบการณ์วันแรกในสถาบันได้ที่นี่"]
-        ],
-        reacts:[46,21,13,8],
-        comments:[
-          c("Amelie.noir","E1","z1","./e1m.png","ชอบมุมโถงกระจกช่วงเย็นค่ะ แสงสวยมาก ถ่ายรูปออกมาดีทุกครั้ง",20),
-          c("Odette.v","E4","z4","./e4m.png","มุมสวนด้านหลังอาคารเรียนเงียบดีค่ะ เหมาะกับนั่งอ่านหนังสือ",15),
-          c("Marceline.q","E3","z3","./e3m.png","ใครมีพิกัดเครื่องดื่มอร่อยใกล้โรงเรียน แนะนำหน่อยค่ะ",10)
-        ]
-      }
+    const threads={
+      owners:{id:"owners",icon:"./b1.png",label:"ข่าวสารสำคัญ",status:"PIN",title:"โฉมหน้าของเจ้าของปราสาททั้ง 7 โซน",subtitle:"ประกาศทางการจากสถาบัน",author:"Eden Administrative Office",views:"1,284",official:true,cover:"./head.png",body:[
+        ["ประกาศต้อนรับเข้าสู่ E8’s Eden Academy","ยินดีต้อนรับนักเรียนทุกท่านเข้าสู่พื้นที่กระดานนักเรียนของสถาบัน ประกาศฉบับนี้จัดทำขึ้นเพื่อรวบรวมข้อมูลสำคัญเกี่ยวกับเจ้าของปราสาททั้ง 7 โซน และใช้เป็นจุดเริ่มต้นสำหรับติดตามข่าวสารจากโรงเรียน"],
+        ["รายละเอียดการติดตามข่าวสาร","หลังจากสมัครสมาชิกเรียบร้อยแล้ว กรุณาตรวจสอบประกาศประจำโซน ตารางเรียน และรายละเอียดกิจกรรมอย่างสม่ำเสมอ เนื่องจากกำหนดการบางส่วนอาจมีการปรับตามรอบประกาศของสถาบัน"],
+        ["แนวทางการใช้งานกระดาน","ขอให้นักเรียนทุกคนใช้พื้นที่นี้อย่างสุภาพ เคารพผู้อื่น และติดตามประกาศจากทางสถาบันเป็นหลัก เพื่อให้การสื่อสารระหว่างโรงเรียนและนักเรียนเป็นไปอย่างเรียบร้อย"]],reacts:[96,42,18,11],comments:[
+        c("Aurelia.vv","E1","z1","./e1m.png","ประกาศรอบนี้อ่านง่ายขึ้นมากค่ะ เห็นภาพรวมของแต่ละโซนชัดเจนดี",24),c("Celestine.q","E2","z2","./e2m.png","ชอบที่มีรูปเจ้าของปราสาทรวมไว้ในกระทู้เดียว เวลากลับมาเช็คจะสะดวกมาก",31),c("Valentina.m","E3","z3","./e3m.png","ถ้ามีอัปเดตเรื่องตารางเรียน อยากให้ปักลิงก์ไว้ใต้กระทู้นี้ด้วยค่ะ",18),c("Elowen.ivy","E4","z4","./e4m.png","ภาพรวมโซนดูเป็นทางการดีค่ะ เหมาะสำหรับคนที่เพิ่งเข้ามาอ่านครั้งแรก",15),c("Livia.rose","E5","z5","./e5m.png","โทนหน้ากระทู้ดูสบายตากว่าเดิมมากค่ะ อ่านนาน ๆ แล้วไม่ล้า",27),c("Seraphina.lux","E6","z6","./e6m.png","อยากให้มีแจ้งเตือนเวลาโรงเรียนเพิ่มประกาศใหม่ในหน้าหลักด้วยค่ะ",22),c("Vivienne.lo","E7","z7","./e7m.png","ถ้าระบบสมาชิกเปิดแล้ว อยากให้คอมเมนต์แสดงโซนของนักเรียนแบบนี้เลยค่ะ",19)]},
+      register:{id:"register",icon:"./b4.png",label:"สมัครนักเรียน",status:"NEW",title:"ประกาศเปิดรับสมัครสมาชิกนักเรียนประจำภาคเรียน",subtitle:"ฝ่ายทะเบียน · วันนี้ 09:00",author:"Student Registry",views:"864",official:false,cover:null,body:[["ระบบสมัครสมาชิกนักเรียน","ฝ่ายทะเบียนเปิดให้บันทึกข้อมูลสมาชิกนักเรียนเพื่อเตรียมเชื่อมระบบตารางเรียน ประกาศรายโซน และการยืนยันตัวตนในอนาคต"],["สิ่งที่นักเรียนควรเตรียม","โปรดเตรียมชื่อที่ต้องการใช้ในระบบ รูปโปรไฟล์ และเลือกโซนที่ตรงกับตัวตนของคุณ เมื่อระบบยืนยันข้อมูลพร้อมใช้งานจะแสดงข้อมูลบนหน้าบัตรนักเรียน"],["หมายเหตุ","ระบบนี้อยู่ระหว่างเตรียมเปิดใช้งานเต็มรูปแบบ ข้อมูลบางส่วนอาจมีการปรับตามประกาศของฝ่ายทะเบียน"]],reacts:[74,33,16,9],comments:[c("Arabella.n","E2","z2","./e2m.png","รอระบบสมัครสมาชิกเลยค่ะ อยากเลือกโซนและเช็คตารางเรียนในหน้าเดียว",28),c("Rosalind.elle","E6","z6","./e6m.png","ถ้ามีตัวอย่างรูปที่ใช้ทำบัตรนักเรียนจะดีมากค่ะ จะได้เตรียมรูปให้ถูก",17),c("Mirabelle.x","E4","z4","./e4m.png","อยากให้มีปุ่มแก้ไขข้อมูลหลังสมัครด้วย เผื่อพิมพ์ชื่อผิดค่ะ",21),c("Isadora.ln","E8","z8","./e8m.png","ส่วนเลือกโซนขอให้มีคำอธิบายสั้น ๆ ของแต่ละโซนด้วยนะคะ",13)]},
+      schedule:{id:"schedule",icon:"./b5.png",label:"ตารางเรียน",status:"E1-E8",title:"คู่มือการตรวจสอบตารางเรียนของแต่ละโซน",subtitle:"Academic Office",author:"Academic Office",views:"642",official:false,cover:null,body:[["การตรวจสอบตารางเรียน","นักเรียนสามารถตรวจสอบตารางเรียนตามโซนของตนเองได้จากหน้าสมาชิก เมื่อระบบเปิดใช้งาน ตารางจะจัดแยกตาม E1-E8 เพื่อให้ค้นหาได้ง่าย"],["การอัปเดตข้อมูล","หากมีการเปลี่ยนแปลงเวลาเรียน ห้องเรียน หรือกิจกรรมพิเศษ ระบบจะแสดงประกาศเพิ่มเติมในกระดานนักเรียนและหน้าแรกของเว็บไซต์"],["คำแนะนำ","กรุณาตรวจสอบตารางเรียนของตนเองอย่างสม่ำเสมอ โดยเฉพาะในช่วงเปิดภาคเรียนและช่วงกิจกรรมประจำโซน"]],reacts:[58,26,12,7],comments:[c("Evangeline.8","E7","z7","./e7m.png","ขอให้ตารางเรียนแยกสีตามโซนด้วยค่ะ จะได้ดูง่ายเวลาเปิดจากมือถือ",19),c("Juliette.v","E3","z3","./e3m.png","ถ้าเปลี่ยนตารางแบบกะทันหัน อยากให้ขึ้นแจ้งเตือนหน้าแรกด้วยนะคะ",23),c("Ophelia.rose","E4","z4","./e4m.png","อยากให้มีปุ่มบันทึกตารางเป็นรูปภาพค่ะ สะดวกมากเวลาเอาไว้เช็คเร็ว ๆ",16),c("Noelle.c","E1","z1","./e1m.png","ถ้ามีตารางรายสัปดาห์กับรายเดือนแยกกันจะดีมากค่ะ",12)]},
+      activity:{id:"activity",icon:"./b6.png",label:"กิจกรรม",status:"08",title:"กิจกรรมต้อนรับนักเรียนใหม่: Eden Welcome Week",subtitle:"Eden Council · พรุ่งนี้",author:"Eden Council",views:"918",official:false,cover:null,body:[["ภาพรวมกิจกรรม","Eden Welcome Week เป็นกิจกรรมสำหรับต้อนรับนักเรียนใหม่และแนะนำระบบโซนของสถาบัน โดยจะมีหัวข้อแนะนำกระดานนักเรียน ตารางเรียน และแนวทางการใช้งานระบบสมาชิก"],["การเข้าร่วม","นักเรียนทุกโซนสามารถเข้าร่วมได้ รายละเอียดรอบเวลาและพื้นที่จัดกิจกรรมจะประกาศเพิ่มเติมในกระดานของแต่ละโซน"],["สิ่งที่ควรติดตาม","โปรดติดตามประกาศจาก Eden Council เพื่อรับข้อมูลกิจกรรมย่อยและการลงทะเบียนเข้าร่วมในแต่ละรอบ"]],reacts:[88,39,22,15],comments:[c("Serena.belle","E6","z6","./e6m.png","อยากให้มีกิจกรรมแนะนำเพื่อนใหม่แยกตามโซนด้วยค่ะ จะได้เริ่มคุยง่ายขึ้น",34),c("Claudia.rei","E5","z5","./e5m.png","ถ้ามีตารางกิจกรรมแบบสรุปในรูปเดียวจะดีมากค่ะ แชร์ต่อได้ง่าย",18),c("Estelle.m","E8","z8","./e8m.png","รอติดตามรายละเอียดสถานที่จัดกิจกรรมค่ะ อยากรู้ว่าต้องลงทะเบียนก่อนหรือเปล่า",14),c("Daphne.lu","E2","z2","./e2m.png","ถ้าเข้าร่วมไม่ครบทุกกิจกรรม จะยังรับของที่ระลึกได้ไหมคะ",11)]},
+      social:{id:"social",icon:"./b3.png",label:"พูดคุยทั่วไป",status:"CHAT",title:"กระทู้พูดคุยทั่วไป: แชร์มุมโปรดในโรงเรียน",subtitle:"Student Board",author:"Student Board",views:"503",official:false,cover:null,body:[["พื้นที่พูดคุยของนักเรียน","กระทู้นี้เปิดไว้สำหรับพูดคุยทั่วไป แชร์มุมโปรดในโรงเรียน หรือแนะนำจุดถ่ายรูปที่น่าสนใจสำหรับนักเรียนใหม่"],["ขอบเขตการใช้งาน","สามารถพูดคุยได้ตามปกติ แต่ขอให้ใช้ถ้อยคำสุภาพ ไม่พาดพิงหรือเปิดเผยข้อมูลส่วนตัวของผู้อื่น"],["หัวข้อแนะนำ","ลองแชร์มุมที่ชอบ คาเฟ่ใกล้โรงเรียน จุดนั่งอ่านหนังสือ หรือประสบการณ์วันแรกในสถาบันได้ที่นี่"]],reacts:[46,21,13,8],comments:[c("Amelie.noir","E1","z1","./e1m.png","ชอบมุมโถงกระจกช่วงเย็นค่ะ แสงสวยมาก ถ่ายรูปออกมาดีทุกครั้ง",20),c("Odette.v","E4","z4","./e4m.png","มุมสวนด้านหลังอาคารเรียนเงียบดีค่ะ เหมาะกับนั่งอ่านหนังสือ",15),c("Marceline.q","E3","z3","./e3m.png","ใครมีพิกัดเครื่องดื่มอร่อยใกล้โรงเรียน แนะนำหน่อยค่ะ",10),c("Florence.y","E7","z7","./e7m.png","อยากให้มีกระทู้รวมรูปถ่ายของแต่ละโซนด้วย น่าจะดูสนุกดีค่ะ",17)]}
     };
-
-    const related = [
-      {id:"register", icon:"./b4.png", title:"วิธีเตรียมข้อมูลก่อนสมัครสมาชิก", desc:"เช็กลิสต์ก่อนเริ่มกรอกข้อมูลนักเรียน"},
-      {id:"schedule", icon:"./b5.png", title:"สรุปตารางเรียนรายโซน", desc:"ข้อมูลตารางเรียนของ E1-E8"},
-      {id:"activity", icon:"./b6.png", title:"ประกาศกิจกรรมสัปดาห์นี้", desc:"รวมกิจกรรมและกำหนดการจากสภานักเรียน"}
-    ];
-
-    const threadList = document.getElementById("threadList");
-    const boardContent = document.getElementById("boardContent");
-    const searchInput = document.getElementById("threadSearch");
-    const threadCount = document.getElementById("threadCount");
-    const toast = document.getElementById("toast");
-    const likeKey = "edenBoardLikes";
-    const savedKey = "edenBoardSaved";
-    let activeFilter = "all";
-    let activeThread = location.hash.replace("#","") || "owners";
-    let likes = readStore(likeKey, {});
-    let saved = readStore(savedKey, []);
-
-    function c(name, zone, cls, icon, text, likes){ return { name, zone, cls, icon, text, likes }; }
-    function readStore(key, fallback){
-      try{ return JSON.parse(localStorage.getItem(key) || JSON.stringify(fallback)); }
-      catch(error){ return fallback; }
+    function c(name,zone,cls,icon,text,likes){return{name,zone,cls,icon,text,likes}}
+    const related=[{id:"register",icon:"./b4.png",title:"วิธีเตรียมข้อมูลก่อนสมัครสมาชิก",desc:"เช็กลิสต์ก่อนเริ่มกรอกข้อมูลนักเรียน"},{id:"schedule",icon:"./b5.png",title:"สรุปตารางเรียนรายโซน",desc:"ข้อมูลตารางเรียนของ E1-E8"},{id:"activity",icon:"./b6.png",title:"ประกาศกิจกรรมสัปดาห์นี้",desc:"รวมกิจกรรมและกำหนดการจากสภานักเรียน"}];
+    const likeStorageKey="e8BoardLikedItems";
+    const likeStore=JSON.parse(localStorage.getItem(likeStorageKey)||"{}");
+    function isLiked(key){return !!likeStore[key]}
+    function likeCount(key,base){return Number(base)+(isLiked(key)?1:0)}
+    function saveLikes(){localStorage.setItem(likeStorageKey,JSON.stringify(likeStore))}
+    function toggleLike(button){
+      const key=button.dataset.likeKey;
+      const base=Number(button.dataset.baseCount||0);
+      if(!key)return;
+      likeStore[key]=!likeStore[key];
+      if(!likeStore[key])delete likeStore[key];
+      saveLikes();
+      const count=button.querySelector(".like-count");
+      if(count)count.textContent=likeCount(key,base);
+      button.classList.toggle("liked",isLiked(key));
     }
-    function saveStore(key, value){ localStorage.setItem(key, JSON.stringify(value)); }
-    function isLiked(key){ return Boolean(likes[key]); }
-    function likeCount(key, base){ return Number(base) + (isLiked(key) ? 1 : 0); }
-    function showToast(message){
-      toast.textContent = message;
-      toast.classList.add("show");
-      clearTimeout(showToast.timer);
-      showToast.timer = setTimeout(() => toast.classList.remove("show"), 2300);
+    const list=document.getElementById("threadList"),content=document.getElementById("boardContent");
+    const threadEntries=Object.values(threads);
+    let currentFilter="";
+    function threadText(t){return [t.title,t.subtitle,t.label,t.status,t.author,t.body.map(x=>x.join(" ")).join(" "),t.comments.map(x=>x.text).join(" ")].join(" ").toLowerCase()}
+    function visibleThreads(){return threadEntries.filter(t=>!currentFilter||threadText(t).includes(currentFilter))}
+    function drawList(active){
+      const shown=visibleThreads();
+      const count=document.getElementById("threadMatchCount");
+      if(count)count.textContent=shown.length;
+      list.innerHTML=shown.length?shown.map(t=>`<button class="thread ${t.id===active?'active':''}" data-id="${t.id}"><img src="${t.icon}" alt="${t.label}"><span><b>${t.title}</b><span>${t.label} · ${t.status}</span></span></button>`).join(""):`<div class="live-line"><span class="live-dot"></span><span>ไม่พบกระทู้ที่ตรงกับคำค้นหา</span></div>`;
+      document.querySelectorAll(".thread").forEach(b=>b.onclick=()=>openThread(b.dataset.id))
     }
-
-    function filteredThreads(){
-      const query = searchInput.value.trim().toLowerCase();
-      return Object.values(threads).filter(thread => {
-        const byFilter = activeFilter === "all" || thread.type === activeFilter;
-        const haystack = [thread.title, thread.label, thread.status, thread.subtitle, thread.author].join(" ").toLowerCase();
-        return byFilter && (!query || haystack.includes(query));
-      });
-    }
-
-    function drawThreadList(){
-      const items = filteredThreads();
-      threadCount.textContent = items.length + " รายการ";
-      threadList.innerHTML = items.length ? items.map(thread => `
-        <button class="thread ${thread.id === activeThread ? "active" : ""}" type="button" data-id="${thread.id}">
-          <img src="${thread.icon}" alt="${thread.label}">
-          <span><b>${thread.title}</b><span>${thread.label} · ${thread.subtitle}</span></span>
-          <em>${thread.status}</em>
-        </button>
-      `).join("") : `<div class="empty-card" style="padding:18px;color:var(--muted);font-weight:800">ไม่พบกระทู้ที่ตรงกับคำค้นค่ะ</div>`;
-
-      threadList.querySelectorAll(".thread").forEach(button => {
-        button.addEventListener("click", () => openThread(button.dataset.id, true));
-      });
-    }
-
-    function article(thread){
-      const reactLabels = ["ถูกใจ", "ติดตาม", "สำคัญ", "บันทึก"];
-      const isSaved = saved.includes(thread.id);
-      return `
-        <article class="article">
-          <div class="article-head">
-            <div class="title">
-              <span class="eyebrow"><img src="${thread.icon}" alt="">${thread.label}</span>
-              <h2>${thread.title}</h2>
-              <p>${thread.subtitle} · โดย ${thread.author}</p>
-            </div>
-            <div class="meta-card"><b>${thread.status}</b><span>${thread.views} views</span></div>
-          </div>
-          ${thread.cover ? `<div class="cover"><img src="${thread.cover}" alt="${thread.title}"></div>` : ""}
-          <div class="body-grid">
-            ${thread.body.map(item => `<section class="bodybox"><h3>${item[0]}</h3><p>${item[1]}</p></section>`).join("")}
-          </div>
-          <div class="article-actions">
-            ${thread.reacts.map((num,index) => {
-              const key = `thread-${thread.id}-${index}`;
-              return `<button class="react ${isLiked(key) ? "liked" : ""}" type="button" data-like-key="${key}" data-base-count="${num}">${reactLabels[index]} <span class="like-count">${likeCount(key,num)}</span></button>`;
-            }).join("")}
-            <button class="react ${isSaved ? "liked" : ""}" type="button" data-save-thread="${thread.id}">${isSaved ? "บันทึกแล้ว" : "บันทึกกระทู้"}</button>
-          </div>
-        </article>
-      `;
-    }
-
-    function comments(thread){
-      return `
-        <section id="commentsStart">
-          <div class="section-title">
-            <div>
-              <h2>ความคิดเห็น</h2>
-              <p>ความคิดเห็นตัวอย่างจะเปลี่ยนตามกระทู้ปัจจุบัน พร้อมสัญลักษณ์ประจำโซนของนักเรียน</p>
-            </div>
-            <button class="btn" type="button" data-scroll="#threads">กลับขึ้นบน</button>
-          </div>
-          <div class="comments">
-            ${thread.comments.map((item,index) => {
-              const key = `comment-${thread.id}-${index}`;
-              return `
-                <article class="comment ${item.cls}">
-                  <div class="avatar"><img src="${item.icon}" alt="${item.zone}"></div>
-                  <div>
-                    <div class="user"><span class="name">${item.name}</span><span class="zone">${item.zone}</span></div>
-                    <p>${item.text}</p>
-                  </div>
-                  <div class="like">
-                    <button class="${isLiked(key) ? "liked" : ""}" type="button" data-like-key="${key}" data-base-count="${item.likes}">ถูกใจ <span class="like-count">${likeCount(key,item.likes)}</span></button>
-                    <small>ความคิดเห็นที่ ${index + 1}</small>
-                  </div>
-                </article>
-              `;
-            }).join("")}
-          </div>
-        </section>
-      `;
-    }
-
-    function compose(){
-      return `
-        <section class="compose">
-          <h3>แสดงความคิดเห็น</h3>
-          <p>กล่องนี้เตรียมไว้สำหรับระบบสมาชิกในอนาคต เมื่อเข้าสู่ระบบแล้วนักเรียนจะสามารถแสดงความคิดเห็นได้</p>
-          <div class="form">
-            <input placeholder="ชื่อผู้ใช้ของนักเรียน" disabled>
-            <textarea placeholder="กรุณาเข้าสู่ระบบก่อนแสดงความคิดเห็น" disabled></textarea>
-            <div class="formrow"><span class="note">เฉพาะนักเรียนที่ login แล้วเท่านั้น</span><button class="btn primary disabled" disabled>ส่งความคิดเห็น</button></div>
-          </div>
-        </section>
-      `;
-    }
-
-    function relatedBox(){
-      return `
-        <section>
-          <div class="section-title"><div><h2>กระทู้อื่น ๆ</h2><p>หัวข้อที่เกี่ยวข้องในกระดานนักเรียน</p></div></div>
-          <div class="related-grid">
-            ${related.map(item => `
-              <a class="related" href="#${item.id}" data-related="${item.id}">
-                <div class="ricon"><img src="${item.icon}" alt=""></div>
-                <h3>${item.title}</h3>
-                <p>${item.desc}</p>
-              </a>
-            `).join("")}
-          </div>
-        </section>
-        <section class="compose add">
-          <div><h3>เพิ่มกระทู้ใหม่</h3><p>พื้นที่สำหรับสร้างกระทู้จะเชื่อมกับระบบสมาชิกในอนาคต</p></div>
-          <a class="btn primary" href="./create-thread.html">ไปหน้าสร้างกระทู้</a>
-        </section>
-      `;
-    }
-
-    function openThread(id = "owners", scroll){
-      activeThread = threads[id] ? id : "owners";
-      const thread = threads[activeThread];
-      boardContent.innerHTML = article(thread) + comments(thread) + compose() + relatedBox();
-      drawThreadList();
-      updateSavedCount();
-      history.replaceState(null, "", "#" + activeThread);
-      bindDynamic();
-      if(scroll) document.querySelector("#threads").scrollIntoView({behavior:"smooth", block:"start"});
-    }
-
-    function bindDynamic(){
-      document.querySelectorAll("[data-related]").forEach(link => {
-        link.addEventListener("click", event => {
-          event.preventDefault();
-          openThread(link.dataset.related, true);
-        });
-      });
-    }
-
-    function updateSavedCount(){
-      document.getElementById("savedCount").textContent = String(saved.length);
-    }
-
-    document.addEventListener("click", event => {
-      const likeButton = event.target.closest("[data-like-key]");
-      if(likeButton){
-        const key = likeButton.dataset.likeKey;
-        const base = Number(likeButton.dataset.baseCount || 0);
-        likes[key] = !likes[key];
-        if(!likes[key]) delete likes[key];
-        saveStore(likeKey, likes);
-        likeButton.classList.toggle("liked", isLiked(key));
-        const count = likeButton.querySelector(".like-count");
-        if(count) count.textContent = likeCount(key, base);
-      }
-
-      const saveButton = event.target.closest("[data-save-thread]");
-      if(saveButton){
-        const id = saveButton.dataset.saveThread;
-        if(saved.includes(id)){
-          saved = saved.filter(item => item !== id);
-          saveButton.textContent = "บันทึกกระทู้";
-          saveButton.classList.remove("liked");
-          showToast("นำกระทู้ออกจากรายการบันทึกแล้วค่ะ");
-        }else{
-          saved.push(id);
-          saveButton.textContent = "บันทึกแล้ว";
-          saveButton.classList.add("liked");
-          showToast("บันทึกกระทู้นี้ไว้แล้วค่ะ");
-        }
-        saveStore(savedKey, saved);
-        updateSavedCount();
-      }
-
-      const scrollButton = event.target.closest("[data-scroll]");
-      if(scrollButton){
-        const target = document.querySelector(scrollButton.dataset.scroll);
-        if(target) target.scrollIntoView({behavior:"smooth", block:"start"});
-      }
+    function article(t){const icons=["💗","✨","🎀","🌙"];return`<article class="article">${t.official?`<div class="official"><img src="./eden.png" alt="Eden"></div>`:""}<div class="article-head"><div class="title"><div class="eyebrow"><img src="${t.icon}" alt="">${t.label}</div><h2>${t.title}</h2><p>${t.subtitle} · โดย ${t.author}</p></div><div class="meta"><b>${t.status}</b><span>${t.views} views</span></div></div>${t.cover?`<div class="cover"><img src="${t.cover}" alt="${t.title}"></div>`:""}<div class="body">${t.body.map(x=>`<section class="bodybox"><h3>${x[0]}</h3><p>${x[1]}</p></section>`).join("")}</div><div class="reacts">${t.reacts.map((num,i)=>{const key=`thread-${t.id}-react-${i}`;return`<button class="react ${isLiked(key)?"liked":""}" type="button" data-like-key="${key}" data-base-count="${num}">${icons[i]} <span class="like-count">${likeCount(key,num)}</span></button>`}).join("")}</div></article>`}
+    function comments(t){return`<section><div class="section-title"><div><h2>ความคิดเห็น</h2><p>ความคิดเห็นตัวอย่างจะตรงกับหัวข้อกระทู้ปัจจุบัน และใช้สัญลักษณ์ e1m-e8m ประจำโซน</p></div><a class="btn soft" href="#threads">กลับขึ้นบน</a></div><div class="comments">${t.comments.map((m,i)=>{const key=`comment-${t.id}-${i}`;return`<article class="comment ${m.cls}"><div class="avatar"><img src="${m.icon}" alt="${m.zone}"></div><div><div class="user"><span class="name">${m.name}</span><span class="zone">${m.zone}</span></div><p>${m.text}</p></div><div class="like"><button class="${isLiked(key)?"liked":""}" type="button" data-like-key="${key}" data-base-count="${m.likes}">♡ <span class="like-count">${likeCount(key,m.likes)}</span></button><small>ความคิดเห็นที่ ${i+1}</small></div></article>`}).join("")}</div></section>`}
+    function compose(){return`<section class="compose"><h3>แสดงความคิดเห็น</h3><p>กล่องนี้เตรียมไว้สำหรับระบบสมาชิกในอนาคต เมื่อเข้าสู่ระบบแล้วนักเรียนจะสามารถแสดงความคิดเห็นได้</p><div class="form"><input placeholder="ชื่อผู้ใช้ของนักเรียน" disabled><textarea placeholder="กรุณาเข้าสู่ระบบก่อนแสดงความคิดเห็น" disabled></textarea><div class="formrow"><span class="note">เฉพาะนักเรียนที่ login แล้วเท่านั้น</span><button class="btn primary disabled" disabled>ส่งความคิดเห็น</button></div></div></section>`}
+    function relatedBox(){return`<section><div class="section-title"><div><h2>กระทู้อื่น ๆ</h2><p>หัวข้อที่เกี่ยวข้องในกระดานนักเรียน</p></div></div><div class="related-grid">${related.map(r=>`<a class="related" href="#${r.id}" onclick="openThread('${r.id}')"><div class="ricon"><img src="${r.icon}" alt=""></div><h3>${r.title}</h3><p>${r.desc}</p></a>`).join("")}</div></section>`}
+    function openThread(id="owners"){const t=threads[id]||threads.owners;drawList(t.id);content.innerHTML=article(t)+comments(t)+relatedBox();history.replaceState(null,"","#"+t.id);window.scrollTo({top:0,behavior:"smooth"});toast(`เปิดกระทู้: ${t.label}`)}
+    document.addEventListener("click",function(event){
+      const likeButton=event.target.closest("[data-like-key]");
+      if(likeButton)toggleLike(likeButton);
     });
-
-    document.querySelectorAll(".filter").forEach(button => {
-      button.addEventListener("click", () => {
-        activeFilter = button.dataset.filter;
-        document.querySelectorAll(".filter").forEach(item => item.classList.toggle("active", item === button));
-        drawThreadList();
-      });
-    });
-
-    searchInput.addEventListener("input", drawThreadList);
-    document.getElementById("focusSearch").addEventListener("click", () => searchInput.focus());
-    document.getElementById("copyBoard").addEventListener("click", () => {
-      const link = window.location.href;
-      if(navigator.clipboard && navigator.clipboard.writeText){
-        navigator.clipboard.writeText(link).then(() => showToast("คัดลอกลิงก์กระดานแล้วค่ะ")).catch(() => showToast("คัดลอกไม่ได้ กรุณาคัดลอกจากแถบที่อยู่ค่ะ"));
-      }else{
-        showToast("คัดลอกลิงก์จากแถบที่อยู่ของเบราว์เซอร์ได้ค่ะ");
-      }
-    });
-
-    function updateClock(){
-      document.getElementById("smartClock").textContent = new Date().toLocaleTimeString("th-TH", {hour:"2-digit", minute:"2-digit"});
+    function toast(text){
+      let box=document.querySelector(".toast");
+      if(!box){box=document.createElement("div");box.className="toast";document.body.appendChild(box)}
+      box.textContent=text;box.classList.add("show");clearTimeout(toast.timer);toast.timer=setTimeout(()=>box.classList.remove("show"),1800);
     }
-    function updateScroll(){
-      const max = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
-      document.getElementById("scanLine").style.width = Math.min(window.scrollY / max, 1) * 100 + "%";
+    const liveStrip=document.getElementById("liveStrip");
+    const liveItems=["E1 กำลังอ่านประกาศหลัก","E6 กดถูกใจกิจกรรมใหม่","E3 เปิดคู่มือตารางเรียน","E7 แสดงความคิดเห็นในกระทู้พูดคุย","E2 บันทึกกระทู้สมัครสมาชิก"];
+    function drawLive(){
+      if(!liveStrip)return;
+      const picked=[...liveItems].sort(()=>Math.random()-.5).slice(0,3);
+      liveStrip.innerHTML=picked.map(x=>`<div class="live-line"><span class="live-dot"></span><span>${x}</span></div>`).join("");
     }
-
-    let online = 96;
-    setInterval(() => {
-      online += Math.floor(Math.random() * 5) - 2;
-      online = Math.max(88, Math.min(118, online));
-      document.getElementById("onlineBoard").textContent = String(online).padStart(3,"0");
-    }, 2400);
-    setInterval(updateClock, 30000);
-    window.addEventListener("scroll", updateScroll, {passive:true});
-    updateClock();
-    updateScroll();
-    openThread(activeThread, false);
+    drawLive();setInterval(drawLive,4200);
+    const search=document.getElementById("boardSearch");
+    if(search){
+      search.addEventListener("input",()=>{currentFilter=search.value.trim().toLowerCase();drawList((location.hash||"#owners").replace("#",""));const shown=visibleThreads();if(shown.length&&currentFilter)openThread(shown[0].id)});
+    }
+    function updateClock(){const clock=document.getElementById("syncClock");if(clock)clock.textContent=new Date().toLocaleTimeString("th-TH",{hour:"2-digit",minute:"2-digit"})}
+    updateClock();setInterval(updateClock,30000);
+    const scan=document.createElement("div");scan.className="scanbar";document.body.appendChild(scan);
+    function updateScan(){const max=Math.max(document.documentElement.scrollHeight-innerHeight,1);scan.style.width=Math.min(scrollY/max*100,100).toFixed(2)+"%"}
+    addEventListener("scroll",updateScan,{passive:true});updateScan();
+    let online=96;setInterval(()=>{online+=Math.floor(Math.random()*5)-2;online=Math.max(88,Math.min(112,online));document.getElementById("onlineBoard").textContent=online},2500);
+    openThread(location.hash.replace("#","")||"owners");
   </script>
 </body>
 </html>
